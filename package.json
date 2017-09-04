@@ -1,0 +1,33 @@
+{
+  "name": "subfont",
+  "version": "0.0.0",
+  "description": "Command line tool to inject Google font subsets of glyphs in use on your pages",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "bin": "bin/subfont",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Munter/subfont.git"
+  },
+  "keywords": [
+    "google",
+    "font",
+    "webfont",
+    "subset",
+    "commandline",
+    "cli",
+    "automation"
+  ],
+  "author": "Peter Müller <munter@fumle.dk>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Munter/subfont/issues"
+  },
+  "homepage": "https://github.com/Munter/subfont#readme",
+  "dependencies": {
+    "assetgraph": "^v3.8.0",
+    "optimist": "^0.6.1",
+    "urltools": "^0.3.5"
+  }
+}
