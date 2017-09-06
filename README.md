@@ -12,6 +12,8 @@ Subfont will:
 - Give the subsetted fonts new names and prepend them in front of the original fonts in your `font-family` definitions (enables missing glyph fallback)
 - Async load your original `@font-face` declaring CSS at the bottom of your page, moving it off the critical path
 
+![A site before and after running subfont](https://raw.githubusercontent.com/Munter/subfont/master/images/before-after.png)
+
 Currently supported font services:
 - Google fonts
 
