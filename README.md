@@ -66,6 +66,11 @@ Options:
                                                         [default: false]
 ```
 
+Other great font tools
+----------------------
+https://meowni.ca/font-style-matcher/
+
+
 License
 -------
 
