@@ -60,6 +60,11 @@ Options:
                     artifacts                           [default: false]
   --inline-subsets  Inline fonts as data-URIs inside the @font-face
                     declaration                         [default: false]
+  --inline-css      Inline CSS that declares the @font-face for the
+                    subset fonts                        [default: false]
+  --font-display    Injects a font-display value into the @font-face
+                    CSS. Valid values: auto, block, swap, fallback,
+                    optional                           [default: "auto"]
   --format          Webfont format. Available options are `woff` and
                     `woff2`                            [default: "woff"]
   -d, --debug       Verbose insigts into font glyph detection
