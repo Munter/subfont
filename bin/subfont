@@ -32,6 +32,16 @@ var commandLineOptions = optimist
     type: 'boolean',
     default: false
   })
+  .options('inline-css', {
+    describe: 'Inline CSS that declares the @font-face for the subset fonts',
+    type: 'boolean',
+    default: false
+  })
+  .options('font-display', {
+    describe: 'Injects a font-display value into the @font-face CSS. Valid values: auto, block, swap, fallback, optional',
+    type: 'string',
+    default: 'auto'
+  })
   .options('format', {
     describe: 'Webfont format. Available options are `woff` and `woff2`',
     type: 'string',
@@ -52,11 +62,26 @@ if (commandLineOptions.h) {
     process.exit(1);
 }
 
+var validFontDisplayValues = [
+  'auto',
+  'block',
+  'swap',
+  'fallback',
+  'optional'
+];
+
+if (validFontDisplayValues.indexOf(commandLineOptions['font-display']) === -1) {
+  console.error('Error: Option --font-display must be one of: auto, block, swap, fallback, optional');
+  process.exit(1);
+}
+
 var urlTools = require('urltools');
 var rootUrl = commandLineOptions.root && urlTools.urlOrFsPathToUrl(commandLineOptions.root, true);
 var outRoot = commandLineOptions.output && urlTools.urlOrFsPathToUrl(commandLineOptions.output, true);
 var inPlace = commandLineOptions['in-place'];
 var inlineSubsets = commandLineOptions['inline-subsets'];
+var inlineCss = commandLineOptions['inline-css'];
+var fontDisplay = commandLineOptions['font-display'];
 var format = commandLineOptions.format;
 var debug = commandLineOptions.debug;
 var inputUrls;
@@ -117,9 +142,10 @@ new AssetGraph({ root: rootUrl })
   .subsetGoogleFonts({
     debug: debug,
     inlineSubsets: inlineSubsets,
+    inlineCss: inlineCss,
+    fontDisplay: fontDisplay,
     format: format
   })
-
   .if(rootUrl.indexOf('file:') === -1)
     .queue(function rootRelativeRelations(assetGraph) {
       assetGraph.findRelations().forEach(function (relation) {
