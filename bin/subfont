@@ -128,7 +128,7 @@ var assetGraphConfig = {
 };
 
 if (rootUrl.indexOf('file:') === -1) {
-  assetGraphConfig.canonicalRoot = rootUrl + '/';
+  assetGraphConfig.canonicalRoot = rootUrl.replace(/\/?$/, '/'); // Ensure trailing slash
 }
 
 new AssetGraph({ root: rootUrl })
