@@ -131,7 +131,8 @@ if (rootUrl.indexOf('file:') === -1) {
   assetGraphConfig.canonicalRoot = rootUrl.replace(/\/?$/, '/'); // Ensure trailing slash
 }
 
-new AssetGraph({ root: rootUrl })
+var assetGraph = new AssetGraph(assetGraphConfig);
+assetGraph
   .logEvents()
   .loadAssets(inputUrls)
   .populate({
@@ -166,7 +167,7 @@ new AssetGraph({ root: rootUrl })
     })
   .endif()
 
-  .writeAssetsToDisc({ isLoaded: true }, outRoot, rootUrl)
+  .writeAssetsToDisc({ isLoaded: true, url: AssetGraph.query.createPrefixMatcher(assetGraph.root) }, outRoot, assetGraph.root)
   .run(function (assetGraph) {
     console.log('Output written to', outRoot);
   });
