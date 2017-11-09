@@ -7,7 +7,7 @@ var commandLineOptions = optimist
   .options('h', {
     alias: 'help',
     describe: 'Show this help',
-   type: 'boolean',
+    type: 'boolean',
     default: false
   })
   .options('root', {
