@@ -48,6 +48,12 @@ var commandLineOptions = optimist
     default: 'woff',
     demand: false
   })
+  .options('recursive', {
+    alias: 'r',
+    describe: 'Crawl all HTML-pages linked with relative and root relative links. This stays inside your domain',
+    type: 'boolean',
+    default: true
+  })
   .options('d', {
     alias: 'debug',
     describe: 'Verbose insigts into font glyph detection',
@@ -131,14 +137,20 @@ if (rootUrl.indexOf('file:') === -1) {
   assetGraphConfig.canonicalRoot = rootUrl.replace(/\/?$/, '/'); // Ensure trailing slash
 }
 
+var followRelationsQuery = {
+  crossorigin: false
+};
+
+if (!commandLineOptions.recursive) {
+  followRelationsQuery.type = AssetGraph.query.not(/Anchor$/);
+}
+
 var assetGraph = new AssetGraph(assetGraphConfig);
 assetGraph
   .logEvents()
   .loadAssets(inputUrls)
   .populate({
-    followRelations: {
-      crossorigin: false
-    }
+    followRelations: followRelationsQuery
   })
   .subsetGoogleFonts({
     debug: debug,
