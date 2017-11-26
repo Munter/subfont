@@ -145,11 +145,11 @@ assetGraph
   .populate({
     followRelations: followRelationsQuery
   })
-  .subsetGoogleFonts({
+  .subsetFonts({
     debug: debug,
     inlineSubsets: inlineSubsets,
     inlineCss: inlineCss,
-    fontDisplay: fontDisplay,
+    fontDisplay: fontDisplay
   })
   .if(rootUrl.indexOf('file:') === -1)
     .queue(function rootRelativeRelations(assetGraph) {
