@@ -40,7 +40,7 @@ var commandLineOptions = optimist
   .options('font-display', {
     describe: 'Injects a font-display value into the @font-face CSS. Valid values: auto, block, swap, fallback, optional',
     type: 'string',
-    default: 'auto'
+    default: 'swap'
   })
   .options('recursive', {
     alias: 'r',
