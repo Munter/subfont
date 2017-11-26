@@ -42,12 +42,6 @@ var commandLineOptions = optimist
     type: 'string',
     default: 'auto'
   })
-  .options('format', {
-    describe: 'Webfont format. Available options are `woff` and `woff2`',
-    type: 'string',
-    default: 'woff',
-    demand: false
-  })
   .options('recursive', {
     alias: 'r',
     describe: 'Crawl all HTML-pages linked with relative and root relative links. This stays inside your domain',
@@ -88,7 +82,6 @@ var inPlace = commandLineOptions['in-place'];
 var inlineSubsets = commandLineOptions['inline-subsets'];
 var inlineCss = commandLineOptions['inline-css'];
 var fontDisplay = commandLineOptions['font-display'];
-var format = commandLineOptions.format;
 var debug = commandLineOptions.debug;
 var inputUrls;
 
@@ -157,7 +150,6 @@ assetGraph
     inlineSubsets: inlineSubsets,
     inlineCss: inlineCss,
     fontDisplay: fontDisplay,
-    format: format
   })
   .if(rootUrl.indexOf('file:') === -1)
     .queue(function rootRelativeRelations(assetGraph) {
