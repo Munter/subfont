@@ -151,6 +151,11 @@ assetGraph
     inlineCss: inlineCss,
     fontDisplay: fontDisplay
   })
+  .queue(function omitFunctionCalls(assetGraph) {
+      assetGraph.findRelations({type: 'JavaScriptStaticUrl', to: {isLoaded: true}}).forEach(function (relation) {
+          relation.omitFunctionCall();
+      });
+  })
   .if(rootUrl.indexOf('file:') === -1)
     .queue(function rootRelativeRelations(assetGraph) {
       assetGraph.findRelations().forEach(function (relation) {
