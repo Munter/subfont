@@ -27,7 +27,7 @@ var commandLineOptions = optimist
     type: 'boolean',
     default: false
   })
-  .options('inline-subsets', {
+  .options('inline-fonts', {
     describe: 'Inline fonts as data-URIs inside the @font-face declaration',
     type: 'boolean',
     default: false
@@ -79,7 +79,7 @@ var urlTools = require('urltools');
 var rootUrl = commandLineOptions.root && urlTools.urlOrFsPathToUrl(commandLineOptions.root, true);
 var outRoot = commandLineOptions.output && urlTools.urlOrFsPathToUrl(commandLineOptions.output, true);
 var inPlace = commandLineOptions['in-place'];
-var inlineSubsets = commandLineOptions['inline-subsets'];
+var inlineSubsets = commandLineOptions['inline-fonts'];
 var inlineCss = commandLineOptions['inline-css'];
 var fontDisplay = commandLineOptions['font-display'];
 var debug = commandLineOptions.debug;
