@@ -68,7 +68,7 @@ Here's how that looks:
 
 ```html
 <link rel="preload"
-  href="https://fonts.gstatic.com/s/notoserif/v6/HQ...Vs.woff2"
+  href="https://fonts.gstatic.com/s/opensans/v6/HQ...Vs.woff2"
   as="font"
   type="font/woff2"
   crossorigin="anonymous">
@@ -156,6 +156,24 @@ try {
 </style>
 ```
 
+The above will work regardless of your CSS `@font-family` declaration being inlined or external. If you have it inlined as the above example, this script could be inserted right under the inlined styles as an alternative JS preloader:
+
+```js
+try {
+  document.fonts.forEach(function (font) {
+    font.load();
+  });
+} catch (e) {}
+```
+
+### font-display
+
+TODO
+
+### Monicas font style matcher
+
+TODO
+
 ### Reducing Latency
 
 When you serve your fonts yourself you'll need to take control of the latency that is induced by your server possibly being physically very far away from your visitors browser. In order to do this it's a good idea to put your site on a CDN.
@@ -168,3 +186,22 @@ Choose whichever one you prefer, they will almost inevitably make your page fast
 ### Use HTTP2
 
 If you're not on a CDN that provides HTTP2, or have HTTP2 enabled in your own server, you are missing out. When many requests are queued at once, which might happen quick if you preload 4 variations of each of your 2 web fonts, you might block your own critical CSS request if you are limited to the amount of parallel requests that can happen at once on HTTP in most browsers.
+
+
+
+
+But in the title of this post I promised to pull out all steps, so lets go there...
+
+## Font Subsetting
+
+TODO
+
+
+## Automating it all
+
+TODO: Subfont
+
+
+## The future
+
+- Variable fonts
