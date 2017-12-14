@@ -1,6 +1,6 @@
 {
   "name": "subfont",
-  "version": "2.0.0",
+  "version": "2.0.1",
   "description": "Command line tool to inject Google font subsets of glyphs in use on your pages",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
