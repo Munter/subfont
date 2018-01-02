@@ -26,7 +26,7 @@
   },
   "homepage": "https://github.com/Munter/subfont#readme",
   "dependencies": {
-    "assetgraph": "github:assetgraph/assetgraph#da16654af8408e9035e44f019f5503daf77ae563",
+    "assetgraph": "github:assetgraph/assetgraph#8d81b6b49e86aed886a4b415aefe77a968b532b1",
     "optimist": "^0.6.1",
     "urltools": "^0.3.5"
   }
