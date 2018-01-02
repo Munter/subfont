@@ -145,8 +145,7 @@ var assetGraph = new AssetGraph(assetGraphConfig);
   await assetGraph.populate({
     followRelations: followRelationsQuery
   });
-  await assetGraph.subsetFonts({
-    debug,
+  const { fontInfo } = await assetGraph.subsetFonts({
     inlineSubsets,
     inlineCss,
     fontDisplay
@@ -180,5 +179,8 @@ var assetGraph = new AssetGraph(assetGraphConfig);
 
   await assetGraph.writeAssetsToDisc({ isLoaded: true, url: AssetGraph.query.createPrefixMatcher(assetGraph.root) }, outRoot, assetGraph.root);
 
+  if (debug) {
+    console.log(require('util').inspect(fontInfo, false, 99));
+  }
   console.log('Output written to', outRoot);
 })();
