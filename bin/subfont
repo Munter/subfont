@@ -120,7 +120,6 @@ if (!inPlace && !outRoot) {
 }
 
 const AssetGraph = require('assetgraph');
-const query = AssetGraph.query;
 
 const assetGraphConfig = {
   root: rootUrl
@@ -135,7 +134,7 @@ const followRelationsQuery = {
 };
 
 if (!commandLineOptions.recursive) {
-  followRelationsQuery.type = AssetGraph.query.not(/Anchor$/);
+  followRelationsQuery.type = { $not: { $regex: /Anchor$/ } };
 }
 
 var assetGraph = new AssetGraph(assetGraphConfig);
@@ -165,7 +164,7 @@ var assetGraph = new AssetGraph(assetGraphConfig);
       }
     }
 
-    await assetGraph.moveAssets({ type: 'Html', isLoaded: true, isInline: false, fileName: query.or('', undefined) }, function (asset, assetGraph) {
+    await assetGraph.moveAssets({ type: 'Html', isLoaded: true, isInline: false, fileName: { $or: ['', undefined] } }, function (asset, assetGraph) {
       let nextSuffixToTry = 0;
       let url;
       do {
@@ -177,7 +176,7 @@ var assetGraph = new AssetGraph(assetGraphConfig);
     });
   }
 
-  await assetGraph.writeAssetsToDisc({ isLoaded: true, url: AssetGraph.query.createPrefixMatcher(assetGraph.root) }, outRoot, assetGraph.root);
+  await assetGraph.writeAssetsToDisc({ isLoaded: true, url: url => url.startsWith(assetGraph.root) }, outRoot, assetGraph.root);
 
   if (debug) {
     console.log(require('util').inspect(fontInfo, false, 99));
