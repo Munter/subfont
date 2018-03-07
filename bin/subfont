@@ -139,47 +139,52 @@ if (!commandLineOptions.recursive) {
 
 var assetGraph = new AssetGraph(assetGraphConfig);
 (async () => {
-  await assetGraph.logEvents();
-  await assetGraph.loadAssets(inputUrls);
-  await assetGraph.populate({
-    followRelations: followRelationsQuery
-  });
-  const { fontInfo } = await assetGraph.subsetFonts({
-    inlineSubsets,
-    inlineCss,
-    fontDisplay
-  });
+  try {
+    await assetGraph.logEvents();
+    await assetGraph.loadAssets(inputUrls);
+    await assetGraph.populate({
+      followRelations: followRelationsQuery
+    });
+    const { fontInfo } = await assetGraph.subsetFonts({
+      inlineSubsets,
+      inlineCss,
+      fontDisplay
+    });
 
-  // Omit function calls:
-  assetGraph.findRelations({type: 'JavaScriptStaticUrl', to: {isLoaded: true}}).forEach(function (relation) {
-      relation.omitFunctionCall();
-  });
+    // Omit function calls:
+    assetGraph.findRelations({type: 'JavaScriptStaticUrl', to: {isLoaded: true}}).forEach(function (relation) {
+        relation.omitFunctionCall();
+    });
 
-  if (!rootUrl.startsWith('file:')) {
-    // Root-relative relations:
+    if (!rootUrl.startsWith('file:')) {
+      // Root-relative relations:
 
-    for (const relation of assetGraph.findRelations()) {
-      if (relation.hrefType === 'protocolRelative' || relation.hrefType === 'absolute') {
-        relation.hrefType = 'rootRelative';
+      for (const relation of assetGraph.findRelations()) {
+        if (relation.hrefType === 'protocolRelative' || relation.hrefType === 'absolute') {
+          relation.hrefType = 'rootRelative';
+        }
       }
+
+      await assetGraph.moveAssets({ type: 'Html', isLoaded: true, isInline: false, fileName: { $or: ['', undefined] } }, function (asset, assetGraph) {
+        let nextSuffixToTry = 0;
+        let url;
+        do {
+          url = asset.url.replace(rootUrl, outRoot).replace(/\/?$/, '/') + 'index' + (nextSuffixToTry ? '-' + nextSuffixToTry : '') + asset.defaultExtension;
+          nextSuffixToTry += 1;
+        } while (assetGraph.findAssets({ url }).length > 0);
+
+        return url;
+      });
     }
 
-    await assetGraph.moveAssets({ type: 'Html', isLoaded: true, isInline: false, fileName: { $or: ['', undefined] } }, function (asset, assetGraph) {
-      let nextSuffixToTry = 0;
-      let url;
-      do {
-        url = asset.url.replace(rootUrl, outRoot).replace(/\/?$/, '/') + 'index' + (nextSuffixToTry ? '-' + nextSuffixToTry : '') + asset.defaultExtension;
-        nextSuffixToTry += 1;
-      } while (assetGraph.findAssets({ url }).length > 0);
+    await assetGraph.writeAssetsToDisc({ isLoaded: true, url: url => url.startsWith(assetGraph.root) }, outRoot, assetGraph.root);
 
-      return url;
-    });
+    if (debug) {
+      console.log(require('util').inspect(fontInfo, false, 99));
+    }
+    console.log('Output written to', outRoot);
+  } catch (err) {
+    console.log(err.stack);
+    process.exit(1);
   }
-
-  await assetGraph.writeAssetsToDisc({ isLoaded: true, url: url => url.startsWith(assetGraph.root) }, outRoot, assetGraph.root);
-
-  if (debug) {
-    console.log(require('util').inspect(fontInfo, false, 99));
-  }
-  console.log('Output written to', outRoot);
 })();
