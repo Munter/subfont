@@ -166,18 +166,14 @@ var assetGraph = new AssetGraph(assetGraphConfig);
       }
 
       await assetGraph.moveAssets({ type: 'Html', isLoaded: true, isInline: false, fileName: { $or: ['', undefined] } }, function (asset, assetGraph) {
-        let nextSuffixToTry = 0;
-        let url;
-        do {
-          url = asset.url.replace(rootUrl, outRoot).replace(/\/?$/, '/') + 'index' + (nextSuffixToTry ? '-' + nextSuffixToTry : '') + asset.defaultExtension;
-          nextSuffixToTry += 1;
-        } while (assetGraph.findAssets({ url }).length > 0);
-
-        return url;
+        return asset.url.replace(/\/?$/, '/') + 'index' + asset.defaultExtension;
       });
     }
 
-    await assetGraph.writeAssetsToDisc({ isLoaded: true, url: url => url.startsWith(assetGraph.root) }, outRoot, assetGraph.root);
+    await assetGraph.writeAssetsToDisc({
+      isLoaded: true,
+      url: url => url.startsWith(assetGraph.root)
+    }, outRoot, assetGraph.root);
 
     if (debug) {
       console.log(require('util').inspect(fontInfo, false, 99));
