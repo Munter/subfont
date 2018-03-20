@@ -153,7 +153,7 @@ var assetGraph = new AssetGraph(assetGraphConfig);
 
     // Omit function calls:
     assetGraph.findRelations({type: 'JavaScriptStaticUrl', to: {isLoaded: true}}).forEach(function (relation) {
-        relation.omitFunctionCall();
+      relation.omitFunctionCall();
     });
 
     if (!rootUrl.startsWith('file:')) {
