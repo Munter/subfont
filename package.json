@@ -8,7 +8,9 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "bin": "bin/subfont",
+  "bin": {
+    "subfont": "lib/cli.js"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/Munter/subfont.git"
