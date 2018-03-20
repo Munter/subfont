@@ -38,8 +38,8 @@
   "homepage": "https://github.com/Munter/subfont#readme",
   "dependencies": {
     "assetgraph": "^4.0.0",
-    "optimist": "^0.6.1",
-    "urltools": "^0.3.5"
+    "urltools": "^0.3.5",
+    "yargs": "^11.0.0"
   },
   "devDependencies": {
     "eslint": "^4.19.0",
