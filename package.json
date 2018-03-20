@@ -11,6 +11,7 @@
   "bin": {
     "subfont": "lib/cli.js"
   },
+  "main": "lib/index.js",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/Munter/subfont.git"
