@@ -1,0 +1,22 @@
+services:
+  - docker
+language: node_js
+cache:
+  directories:
+  - node_modules
+node_js:
+  - "8"
+  - "9"
+
+addons:
+  apt:
+    packages:
+      - gcc-4.8
+      - g++-4.8
+env: CXX="g++-4.8" CC="gcc-4.8"
+
+before_script:
+    - sudo pip install fonttools brotli zopfli
+
+script: "npm install && npm run-script travis"
+after_success: "<coverage/lcov.info ./node_modules/coveralls/bin/coveralls.js"
