@@ -63,8 +63,14 @@ describe('subfont', function() {
         rootUrl,
         inputUrls: [`${rootUrl}/index.html`]
       });
-      const cssAsset = assetGraph.findAssets({ fileName: 'styles.css' })[0];
-      expect(cssAsset.url, 'to equal', assetGraph.root + 'styles.css');
+      const cssAsset = assetGraph.findAssets({
+        fileName: 'styles-a6e67d6d9d.css'
+      })[0];
+      expect(
+        cssAsset.url,
+        'to equal',
+        assetGraph.root + 'subfont/styles-a6e67d6d9d.css'
+      );
     });
   });
 
