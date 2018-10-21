@@ -1,6 +1,7 @@
 /*global describe, it*/
+const sinon = require('sinon');
 const expect = require('unexpected').clone();
-const subfont = require('../lib/subfont');
+const main = require('../lib/main');
 const httpception = require('httpception');
 const pathModule = require('path');
 const openSansBold = require('fs').readFileSync(
@@ -13,6 +14,11 @@ const openSansBold = require('fs').readFileSync(
 );
 
 describe('subfont', function() {
+  let mockConsole;
+  beforeEach(async function() {
+    mockConsole = { log: sinon.spy() };
+  });
+
   describe('when a font is referenced by a stylesheet hosted outside the root', function() {
     it('should move the CSS into the root', async function() {
       httpception([
@@ -59,10 +65,11 @@ describe('subfont', function() {
           )
       );
 
-      const [assetGraph] = await subfont({
-        rootUrl,
-        inputUrls: [`${rootUrl}/index.html`]
-      });
+      const assetGraph = await main(
+        ['--silent', '--dryrun', '--root', rootUrl, `${rootUrl}/index.html`],
+        mockConsole
+      );
+
       const cssAsset = assetGraph.findAssets({
         fileName: 'styles-a6e67d6d9d.css'
       })[0];
@@ -116,10 +123,11 @@ describe('subfont', function() {
           )
       );
 
-      const [assetGraph] = await subfont({
-        rootUrl,
-        inputUrls: [`${rootUrl}/index.html`]
-      });
+      const assetGraph = await main(
+        ['--silent', '--dryrun', '--root', rootUrl, `${rootUrl}/index.html`],
+        mockConsole
+      );
+
       const cssAsset = assetGraph.findAssets({ fileName: 'styles.css' })[0];
       expect(cssAsset.url, 'to equal', 'https://mycdn.com/styles.css');
     });

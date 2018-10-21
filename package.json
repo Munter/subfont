@@ -41,6 +41,7 @@
   },
   "homepage": "https://github.com/Munter/subfont#readme",
   "dependencies": {
+    "@gustavnikolaj/async-main-wrap": "^2.0.0",
     "assetgraph": "^5.3.1",
     "lodash.groupby": "^4.6.0",
     "pretty-bytes": "^5.1.0",
@@ -56,6 +57,7 @@
     "mocha": "^5.2.0",
     "nyc": "^13.0.1",
     "prettier": "^1.14.3",
+    "sinon": "^6.1.5",
     "unexpected": "^10.39.1"
   }
 }
