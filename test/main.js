@@ -1,6 +1,8 @@
 /*global describe, it*/
 const sinon = require('sinon');
-const expect = require('unexpected').clone();
+const expect = require('unexpected')
+  .clone()
+  .use(require('unexpected-sinon'));
 const main = require('../lib/main');
 const httpception = require('httpception');
 const pathModule = require('path');
@@ -211,5 +213,37 @@ describe('subfont', function() {
       assetGraph.findRelations({ type: 'HtmlIFrame' })[0].to.isLoaded,
       'to be false'
     );
+  });
+
+  describe('with --dynamic', function() {
+    it('should find glyphs added to the page via JavaScript', async function() {
+      const rootUrl = encodeURI(
+        'file://' +
+          pathModule.resolve(
+            __dirname,
+            '..',
+            'testdata',
+            'dynamicallyInjectedText'
+          )
+      );
+
+      await main(
+        [
+          '--silent',
+          '--dryrun',
+          '--dynamic',
+          '--debug',
+          '--root',
+          rootUrl,
+          `${rootUrl}/index.html`
+        ],
+        mockConsole
+      );
+      expect(mockConsole.log, 'to have a call satisfying', () => {
+        mockConsole.log(
+          expect.it('to contain', '400 : 14/214 codepoints used')
+        );
+      });
+    });
   });
 });
