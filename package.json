@@ -42,7 +42,7 @@
   "homepage": "https://github.com/Munter/subfont#readme",
   "dependencies": {
     "@gustavnikolaj/async-main-wrap": "^2.0.0",
-    "assetgraph": "^5.3.1",
+    "assetgraph": "^5.8.2",
     "lodash.groupby": "^4.6.0",
     "pretty-bytes": "^5.1.0",
     "urltools": "^0.4.1",
