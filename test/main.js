@@ -132,4 +132,20 @@ describe('subfont', function() {
       expect(cssAsset.url, 'to equal', 'https://mycdn.com/styles.css');
     });
   });
+
+  it('should not dive into iframes', async function() {
+    const rootUrl = encodeURI(
+      'file://' + pathModule.resolve(__dirname, '..', 'testdata', 'iframe')
+    );
+
+    const assetGraph = await main(
+      ['--silent', '--dryrun', '--root', rootUrl, `${rootUrl}/index.html`],
+      mockConsole
+    );
+
+    expect(
+      assetGraph.findRelations({ type: 'HtmlIFrame' })[0].to.isLoaded,
+      'to be false'
+    );
+  });
 });
