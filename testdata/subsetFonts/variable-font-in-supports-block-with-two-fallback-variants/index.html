@@ -1,0 +1,38 @@
+<html>
+  <head>
+    <meta charset=utf-8>
+    <style>
+      body {
+        font-family: 'Venn VF', 'Venn', sans-serif;
+      }
+
+      @supports (font-variation-settings: normal) {
+        @font-face {
+          font-family: 'Venn VF';
+          src: url('Venn_VF.woff2') format('woff2-variations'), /* for Safari */
+                url('Venn_VF.woff2') format('woff2'); /* for all other supporting browsers */
+          font-display: fallback;
+          font-weight: 300 800;
+        }
+      }
+
+      /* Load the static fonts as a fallback */
+      @font-face {
+        font-family: 'Venn';
+        src: url('Venn_Regular.woff2') format('woff2');
+        font-display: fallback; /* has nothing to do with the fact that this is the fallback font */
+        font-weight: 400;
+      }
+
+      @font-face {
+        font-family: 'Venn';
+        src: url('Venn_Bold.woff2') format('woff2');
+        font-display: fallback; /* has nothing to do with the fact that this is the fallback font */
+        font-weight: 700;
+      }
+    </style>
+  </head>
+  <body>
+    <p>Hello, <strong>world</strong>!</p>
+  </body>
+</html>

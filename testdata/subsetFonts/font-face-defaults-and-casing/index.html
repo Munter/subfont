@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <style>
+    @font-face {
+      font-family: Foo; /* should come out as-is (but be matched case insensitively) */
+      /* no font-style, should come out as 'normal' in the info object */
+      font-weight: boLD; /* should normalize to 700 in the info object */
+      font-STRETCH: conDENSED; /* should come out as 'condensed' */
+      srC: url(OpenSans.ttf) format('truetype');
+    }
+
+    @font-face {
+      font-family: BAR; /* should come out as-is (but be matched case insensitively) */
+      FONT-style: ITAlic; /* should normalize to 'italic' in the info object */
+      /* no font-style, should come out as 'normal' in the info object */
+      /* no font-weight, should come out as 400 in the info object */
+      /* no font-stretch, should come out as 'normal' in the info object */
+      sRc: url(OpenSans2.ttf) format('truetype');
+    }
+
+    h1 {
+      font-family: foo;
+    }
+
+    h2 {
+      font-family: bar;
+    }
+</style>
+</head>
+<body>
+  <h1>Hello, world!</h1>
+  <h2>Hello, yourself!</h2>
+</body>
+</html>
