@@ -1,7 +1,7 @@
 var expect = require('unexpected');
 var getRules = require('../lib/getCssRulesByProperty');
 
-describe('util/fonts/getCssRulesByProperty', function() {
+describe('getCssRulesByProperty', function() {
   it('should throw when not passing an array of properties as first argument', function() {
     expect(getRules, 'to throw', 'properties argument must be an array');
   });

@@ -145,7 +145,7 @@ const defaultLocalSubsetMock = [
   }
 ];
 
-describe('transforms/subsetFonts', function() {
+describe('subsetFonts', function() {
   describe('without fonttools installed', function() {
     const subsetFontsWithoutFontTools = proxyquire('../lib/subsetFonts', {
       './subsetLocalFont': null
