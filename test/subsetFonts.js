@@ -3305,11 +3305,7 @@ describe('subsetFonts', function() {
       expect(
         htmlAsset.text,
         'to contain',
-        `<script>(function(){var el=document.createElement('link');el.href='/subfont/${
-          fallbackCss.fileName
-        }'.toString('url');el.rel='stylesheet';document.body.appendChild(el)}())</script><noscript><link rel="stylesheet" href="/subfont/${
-          fallbackCss.fileName
-        }"></noscript></body></html>`
+        `<script>(function(){var el=document.createElement('link');el.href='/subfont/${fallbackCss.fileName}'.toString('url');el.rel='stylesheet';document.body.appendChild(el)}())</script><noscript><link rel="stylesheet" href="/subfont/${fallbackCss.fileName}"></noscript></body></html>`
       );
       expect(
         fallbackCss.text,
