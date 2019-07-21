@@ -1,4 +1,8 @@
-const expect = require('assetgraph/test/unexpected-with-plugins');
+const expect = require('unexpected')
+  .clone()
+  .use(require('unexpected-sinon'))
+  .use(require('assetgraph/test/unexpectedAssetGraph'));
+
 const AssetGraph = require('assetgraph');
 const pathModule = require('path');
 
