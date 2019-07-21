@@ -143,12 +143,9 @@ const defaultLocalSubsetMock = [
 
 describe('transforms/subsetFonts', function() {
   describe('without fonttools installed', function() {
-    const subsetFontsWithoutFontTools = proxyquire(
-      '../../lib/transforms/subsetFonts',
-      {
-        '../util/fonts/subsetLocalFont': null
-      }
-    );
+    const subsetFontsWithoutFontTools = proxyquire('../lib/subsetFonts', {
+      './subsetLocalFont': null
+    });
 
     it('should emit an info about font subsetting tool not being available', async function() {
       httpception();
