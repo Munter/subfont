@@ -43,7 +43,15 @@
   "dependencies": {
     "@gustavnikolaj/async-main-wrap": "^2.0.0",
     "assetgraph": "^5.8.2",
+    "css-font-parser-papandreou": "^0.2.3-patch1",
+    "css-font-weight-names": "^0.2.1",
+    "css-list-helpers": "^2.0.0",
+    "font-family-papandreou": "^0.2.0-patch1",
+    "font-snapper": "^1.0.0",
+    "font-tracer": "^1.1.0",
+    "fontkit": "^1.8.0",
     "lodash.groupby": "^4.6.0",
+    "postcss-values-parser": "^2.0.1",
     "pretty-bytes": "^5.1.0",
     "urltools": "^0.4.1",
     "yargs": "^12.0.2"
@@ -59,6 +67,8 @@
     "prettier": "~1.18.2",
     "proxyquire": "^2.1.1",
     "sinon": "^6.1.5",
-    "unexpected": "^10.39.1"
+    "unexpected": "^10.39.1",
+    "unexpected-set": "^2.0.0",
+    "unexpected-sinon": "^10.11.2"
   }
 }
