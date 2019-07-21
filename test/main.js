@@ -71,12 +71,12 @@ describe('subfont', function() {
       );
 
       const cssAsset = assetGraph.findAssets({
-        fileName: 'styles-a6e67d6d9d.css'
+        type: 'Css'
       })[0];
       expect(
         cssAsset.url,
         'to equal',
-        assetGraph.root + 'subfont/styles-a6e67d6d9d.css'
+        assetGraph.root + 'subfont/styles-38ce4ca68c.css'
       );
     });
   });
