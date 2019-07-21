@@ -39,7 +39,7 @@ describe('downloadGoogleFonts', () => {
           body: fs.readFileSync(
             pathModule.resolve(
               __dirname,
-              '../../../testdata/transforms/subsetFonts/Roboto-500.woff2'
+              '../testdata/subsetFonts/Roboto-500.woff2'
             )
           )
         }
