@@ -36,7 +36,7 @@ const defaultGoogleFontSubsetMock = [
       body: fs.readFileSync(
         pathModule.resolve(
           __dirname,
-          '../../testdata/transforms/subsetFonts/OpenSans-400.woff'
+          '../testdata/subsetFonts/OpenSans-400.woff'
         )
       )
     }
@@ -85,7 +85,7 @@ const defaultGoogleFontSubsetMock = [
       body: fs.readFileSync(
         pathModule.resolve(
           __dirname,
-          '../../testdata/transforms/subsetFonts/OpenSans-400.woff2'
+          '../testdata/subsetFonts/OpenSans-400.woff2'
         )
       )
     }
@@ -100,7 +100,7 @@ const defaultGoogleFontSubsetMock = [
       body: fs.readFileSync(
         pathModule.resolve(
           __dirname,
-          '../../testdata/transforms/subsetFonts/OpenSans-400.woff'
+          '../testdata/subsetFonts/OpenSans-400.woff'
         )
       )
     }
@@ -134,7 +134,7 @@ const defaultLocalSubsetMock = [
       body: fs.readFileSync(
         pathModule.resolve(
           __dirname,
-          '../../testdata/transforms/subsetFonts/OpenSans-400.ttf'
+          '../testdata/subsetFonts/OpenSans-400.ttf'
         )
       )
     }
@@ -158,7 +158,7 @@ describe('transforms/subsetFonts', function() {
       const assetGraph = new AssetGraph({
         root: pathModule.resolve(
           __dirname,
-          '../../testdata/transforms/subsetFonts/local-single/'
+          '../testdata/subsetFonts/local-single/'
         )
       });
       assetGraph.on('info', function(warning) {
@@ -187,7 +187,7 @@ describe('transforms/subsetFonts', function() {
       const assetGraph = new AssetGraph({
         root: pathModule.resolve(
           __dirname,
-          '../../testdata/transforms/subsetFonts/existing-preload/'
+          '../testdata/subsetFonts/existing-preload/'
         )
       });
       assetGraph.on('warn', warn =>
@@ -212,7 +212,7 @@ describe('transforms/subsetFonts', function() {
       const assetGraph = new AssetGraph({
         root: pathModule.resolve(
           __dirname,
-          '../../testdata/transforms/subsetFonts/existing-prefetch/'
+          '../testdata/subsetFonts/existing-prefetch/'
         )
       });
       assetGraph.on('warn', warn =>
@@ -254,7 +254,7 @@ describe('transforms/subsetFonts', function() {
       const assetGraph = new AssetGraph({
         root: pathModule.resolve(
           __dirname,
-          '../../testdata/transforms/subsetFonts/local-single/'
+          '../testdata/subsetFonts/local-single/'
         )
       });
       assetGraph.on('warn', warn =>
@@ -324,7 +324,7 @@ describe('transforms/subsetFonts', function() {
       const assetGraph = new AssetGraph({
         root: pathModule.resolve(
           __dirname,
-          '../../testdata/transforms/subsetFonts/html-link/'
+          '../testdata/subsetFonts/html-link/'
         )
       });
       assetGraph.on('warn', warn =>
@@ -467,7 +467,7 @@ describe('transforms/subsetFonts', function() {
         const assetGraph = new AssetGraph({
           root: pathModule.resolve(
             __dirname,
-            '../../testdata/transforms/subsetFonts/html-link/'
+            '../testdata/subsetFonts/html-link/'
           )
         });
         assetGraph.on('warn', warn =>
@@ -589,7 +589,7 @@ describe('transforms/subsetFonts', function() {
       const assetGraph = new AssetGraph({
         root: pathModule.resolve(
           __dirname,
-          '../../testdata/transforms/subsetFonts/css-import/'
+          '../testdata/subsetFonts/css-import/'
         )
       });
       assetGraph.on('warn', warn =>
@@ -731,7 +731,7 @@ describe('transforms/subsetFonts', function() {
       const assetGraph = new AssetGraph({
         root: pathModule.resolve(
           __dirname,
-          '../../testdata/transforms/subsetFonts/font-shorthand/'
+          '../testdata/subsetFonts/font-shorthand/'
         )
       });
       assetGraph.on('warn', warn =>
@@ -775,7 +775,7 @@ describe('transforms/subsetFonts', function() {
       const assetGraph = new AssetGraph({
         root: pathModule.resolve(
           __dirname,
-          '../../testdata/transforms/subsetFonts/font-shorthand-with-custom-property/'
+          '../testdata/subsetFonts/font-shorthand-with-custom-property/'
         )
       });
       assetGraph.on('warn', warn =>
@@ -827,7 +827,7 @@ describe('transforms/subsetFonts', function() {
       const assetGraph = new AssetGraph({
         root: pathModule.resolve(
           __dirname,
-          '../../testdata/transforms/subsetFonts/google-webfont-ref-in-javascript/'
+          '../testdata/subsetFonts/google-webfont-ref-in-javascript/'
         )
       });
       assetGraph.on('warn', console.log);
@@ -848,7 +848,7 @@ describe('transforms/subsetFonts', function() {
         const assetGraph = new AssetGraph({
           root: pathModule.resolve(
             __dirname,
-            '../../testdata/transforms/subsetFonts/inline-subsets/'
+            '../testdata/subsetFonts/inline-subsets/'
           )
         });
         await assetGraph.loadAssets('index.html');
@@ -897,7 +897,7 @@ describe('transforms/subsetFonts', function() {
         const assetGraph = new AssetGraph({
           root: pathModule.resolve(
             __dirname,
-            '../../testdata/transforms/subsetFonts/css-import-twice/'
+            '../testdata/subsetFonts/css-import-twice/'
           )
         });
 
@@ -923,7 +923,7 @@ describe('transforms/subsetFonts', function() {
         const assetGraph = new AssetGraph({
           root: pathModule.resolve(
             __dirname,
-            '../../testdata/transforms/subsetFonts/css-import-twice-different-css/'
+            '../testdata/subsetFonts/css-import-twice-different-css/'
           )
         });
 
@@ -983,7 +983,7 @@ describe('transforms/subsetFonts', function() {
             body: fs.readFileSync(
               pathModule.resolve(
                 __dirname,
-                '../../testdata/transforms/subsetFonts/JimNightshade-400.woff'
+                '../testdata/subsetFonts/JimNightshade-400.woff'
               )
             )
           }
@@ -994,7 +994,7 @@ describe('transforms/subsetFonts', function() {
             body: fs.readFileSync(
               pathModule.resolve(
                 __dirname,
-                '../../testdata/transforms/subsetFonts/Montserrat-400.woff'
+                '../testdata/subsetFonts/Montserrat-400.woff'
               )
             )
           }
@@ -1005,7 +1005,7 @@ describe('transforms/subsetFonts', function() {
             body: fs.readFileSync(
               pathModule.resolve(
                 __dirname,
-                '../../testdata/transforms/subsetFonts/SpaceMono-400.woff'
+                '../testdata/subsetFonts/SpaceMono-400.woff'
               )
             )
           }
@@ -1122,7 +1122,7 @@ describe('transforms/subsetFonts', function() {
             body: fs.readFileSync(
               pathModule.resolve(
                 __dirname,
-                '../../testdata/transforms/subsetFonts/JimNightshade-400.woff2'
+                '../testdata/subsetFonts/JimNightshade-400.woff2'
               )
             )
           }
@@ -1137,7 +1137,7 @@ describe('transforms/subsetFonts', function() {
             body: fs.readFileSync(
               pathModule.resolve(
                 __dirname,
-                '../../testdata/transforms/subsetFonts/Montserrat-400.woff2'
+                '../testdata/subsetFonts/Montserrat-400.woff2'
               )
             )
           }
@@ -1152,7 +1152,7 @@ describe('transforms/subsetFonts', function() {
             body: fs.readFileSync(
               pathModule.resolve(
                 __dirname,
-                '../../testdata/transforms/subsetFonts/SpaceMono-400.woff2'
+                '../testdata/subsetFonts/SpaceMono-400.woff2'
               )
             )
           }
@@ -1167,7 +1167,7 @@ describe('transforms/subsetFonts', function() {
             body: fs.readFileSync(
               pathModule.resolve(
                 __dirname,
-                '../../testdata/transforms/subsetFonts/JimNightshade-400.woff'
+                '../testdata/subsetFonts/JimNightshade-400.woff'
               )
             )
           }
@@ -1182,7 +1182,7 @@ describe('transforms/subsetFonts', function() {
             body: fs.readFileSync(
               pathModule.resolve(
                 __dirname,
-                '../../testdata/transforms/subsetFonts/Montserrat-400.woff'
+                '../testdata/subsetFonts/Montserrat-400.woff'
               )
             )
           }
@@ -1197,7 +1197,7 @@ describe('transforms/subsetFonts', function() {
             body: fs.readFileSync(
               pathModule.resolve(
                 __dirname,
-                '../../testdata/transforms/subsetFonts/SpaceMono-400.woff'
+                '../testdata/subsetFonts/SpaceMono-400.woff'
               )
             )
           }
@@ -1207,7 +1207,7 @@ describe('transforms/subsetFonts', function() {
       const assetGraph = new AssetGraph({
         root: pathModule.resolve(
           __dirname,
-          '../../testdata/transforms/subsetFonts/multi-family/'
+          '../testdata/subsetFonts/multi-family/'
         )
       });
       assetGraph.on('warn', warn =>
@@ -1493,7 +1493,7 @@ describe('transforms/subsetFonts', function() {
             body: fs.readFileSync(
               pathModule.resolve(
                 __dirname,
-                '../../testdata/transforms/subsetFonts/Roboto-300i.woff'
+                '../testdata/subsetFonts/Roboto-300i.woff'
               )
             )
           }
@@ -1504,7 +1504,7 @@ describe('transforms/subsetFonts', function() {
             body: fs.readFileSync(
               pathModule.resolve(
                 __dirname,
-                '../../testdata/transforms/subsetFonts/Roboto-400.woff'
+                '../testdata/subsetFonts/Roboto-400.woff'
               )
             )
           }
@@ -1515,7 +1515,7 @@ describe('transforms/subsetFonts', function() {
             body: fs.readFileSync(
               pathModule.resolve(
                 __dirname,
-                '../../testdata/transforms/subsetFonts/Roboto-500.woff'
+                '../testdata/subsetFonts/Roboto-500.woff'
               )
             )
           }
@@ -1639,7 +1639,7 @@ describe('transforms/subsetFonts', function() {
             body: fs.readFileSync(
               pathModule.resolve(
                 __dirname,
-                '../../testdata/transforms/subsetFonts/Roboto-500.woff2'
+                '../testdata/subsetFonts/Roboto-500.woff2'
               )
             )
           }
@@ -1655,7 +1655,7 @@ describe('transforms/subsetFonts', function() {
             body: fs.readFileSync(
               pathModule.resolve(
                 __dirname,
-                '../../testdata/transforms/subsetFonts/Roboto-400.woff2'
+                '../testdata/subsetFonts/Roboto-400.woff2'
               )
             )
           }
@@ -1671,7 +1671,7 @@ describe('transforms/subsetFonts', function() {
             body: fs.readFileSync(
               pathModule.resolve(
                 __dirname,
-                '../../testdata/transforms/subsetFonts/Roboto-300.woff2'
+                '../testdata/subsetFonts/Roboto-300.woff2'
               )
             )
           }
@@ -1687,7 +1687,7 @@ describe('transforms/subsetFonts', function() {
             body: fs.readFileSync(
               pathModule.resolve(
                 __dirname,
-                '../../testdata/transforms/subsetFonts/Roboto-500.woff'
+                '../testdata/subsetFonts/Roboto-500.woff'
               )
             )
           }
@@ -1703,7 +1703,7 @@ describe('transforms/subsetFonts', function() {
             body: fs.readFileSync(
               pathModule.resolve(
                 __dirname,
-                '../../testdata/transforms/subsetFonts/Roboto-400.woff'
+                '../testdata/subsetFonts/Roboto-400.woff'
               )
             )
           }
@@ -1719,7 +1719,7 @@ describe('transforms/subsetFonts', function() {
             body: fs.readFileSync(
               pathModule.resolve(
                 __dirname,
-                '../../testdata/transforms/subsetFonts/Roboto-300.woff'
+                '../testdata/subsetFonts/Roboto-300.woff'
               )
             )
           }
@@ -1729,7 +1729,7 @@ describe('transforms/subsetFonts', function() {
       const assetGraph = new AssetGraph({
         root: pathModule.resolve(
           __dirname,
-          '../../testdata/transforms/subsetFonts/multi-weight/'
+          '../testdata/subsetFonts/multi-weight/'
         )
       });
       assetGraph.on('warn', warn =>
@@ -1999,7 +1999,7 @@ describe('transforms/subsetFonts', function() {
               body: fs.readFileSync(
                 pathModule.resolve(
                   __dirname,
-                  '../../testdata/transforms/subsetFonts/OpenSans-400.woff'
+                  '../testdata/subsetFonts/OpenSans-400.woff'
                 )
               )
             }
@@ -2130,7 +2130,7 @@ describe('transforms/subsetFonts', function() {
         const assetGraph = new AssetGraph({
           root: pathModule.resolve(
             __dirname,
-            '../../testdata/transforms/subsetFonts/multi-page/'
+            '../testdata/subsetFonts/multi-page/'
           )
         });
         assetGraph.on('warn', warn =>
@@ -2449,7 +2449,7 @@ describe('transforms/subsetFonts', function() {
               body: fs.readFileSync(
                 pathModule.resolve(
                   __dirname,
-                  '../../testdata/transforms/subsetFonts/OpenSans-400.woff'
+                  '../testdata/subsetFonts/OpenSans-400.woff'
                 )
               )
             }
@@ -2521,7 +2521,7 @@ describe('transforms/subsetFonts', function() {
         const assetGraph = new AssetGraph({
           root: pathModule.resolve(
             __dirname,
-            '../../testdata/transforms/subsetFonts/multi-page/'
+            '../testdata/subsetFonts/multi-page/'
           )
         });
         assetGraph.on('warn', warn =>
@@ -2742,7 +2742,7 @@ describe('transforms/subsetFonts', function() {
         const assetGraph = new AssetGraph({
           root: pathModule.resolve(
             __dirname,
-            '../../testdata/transforms/subsetFonts/html-link/'
+            '../testdata/subsetFonts/html-link/'
           )
         });
         assetGraph.on('warn', warn =>
@@ -2773,7 +2773,7 @@ describe('transforms/subsetFonts', function() {
         const assetGraph = new AssetGraph({
           root: pathModule.resolve(
             __dirname,
-            '../../testdata/transforms/subsetFonts/html-link/'
+            '../testdata/subsetFonts/html-link/'
           )
         });
         assetGraph.on('warn', warn =>
@@ -2805,7 +2805,7 @@ describe('transforms/subsetFonts', function() {
         const assetGraph = new AssetGraph({
           root: pathModule.resolve(
             __dirname,
-            '../../testdata/transforms/subsetFonts/html-link/'
+            '../testdata/subsetFonts/html-link/'
           )
         });
         assetGraph.on('warn', warn =>
@@ -2860,7 +2860,7 @@ describe('transforms/subsetFonts', function() {
               body: fs.readFileSync(
                 pathModule.resolve(
                   __dirname,
-                  '../../testdata/transforms/subsetFonts/OpenSans-400.woff'
+                  '../testdata/subsetFonts/OpenSans-400.woff'
                 )
               )
             }
@@ -2913,7 +2913,7 @@ describe('transforms/subsetFonts', function() {
               body: fs.readFileSync(
                 pathModule.resolve(
                   __dirname,
-                  '../../testdata/transforms/subsetFonts/OpenSans-400.woff'
+                  '../testdata/subsetFonts/OpenSans-400.woff'
                 )
               )
             }
@@ -2928,7 +2928,7 @@ describe('transforms/subsetFonts', function() {
               body: fs.readFileSync(
                 pathModule.resolve(
                   __dirname,
-                  '../../testdata/transforms/subsetFonts/OpenSans-400.woff'
+                  '../testdata/subsetFonts/OpenSans-400.woff'
                 )
               )
             }
@@ -2938,7 +2938,7 @@ describe('transforms/subsetFonts', function() {
         const assetGraph = new AssetGraph({
           root: pathModule.resolve(
             __dirname,
-            '../../testdata/transforms/subsetFonts/html-link/'
+            '../testdata/subsetFonts/html-link/'
           )
         });
         assetGraph.on('warn', warn =>
@@ -2975,7 +2975,7 @@ describe('transforms/subsetFonts', function() {
       const assetGraph = new AssetGraph({
         root: pathModule.resolve(
           __dirname,
-          '../../testdata/transforms/subsetFonts/local-single/'
+          '../testdata/subsetFonts/local-single/'
         )
       });
       assetGraph.on('warn', function(warning) {
@@ -3000,7 +3000,7 @@ describe('transforms/subsetFonts', function() {
       const assetGraph = new AssetGraph({
         root: pathModule.resolve(
           __dirname,
-          '../../testdata/transforms/subsetFonts/woff2-original/'
+          '../testdata/subsetFonts/woff2-original/'
         )
       });
       await assetGraph.loadAssets('index.html');
@@ -3024,7 +3024,7 @@ describe('transforms/subsetFonts', function() {
       const assetGraph = new AssetGraph({
         root: pathModule.resolve(
           __dirname,
-          '../../testdata/transforms/subsetFonts/local-invalid/'
+          '../testdata/subsetFonts/local-invalid/'
         )
       });
       assetGraph.on('warn', function(warning) {
@@ -3108,7 +3108,7 @@ describe('transforms/subsetFonts', function() {
       const assetGraph = new AssetGraph({
         root: pathModule.resolve(
           __dirname,
-          '../../testdata/transforms/subsetFonts/missing-glyphs/'
+          '../testdata/subsetFonts/missing-glyphs/'
         )
       });
       assetGraph.on('warn', warnSpy);
@@ -3139,7 +3139,7 @@ describe('transforms/subsetFonts', function() {
       const assetGraph = new AssetGraph({
         root: pathModule.resolve(
           __dirname,
-          '../../testdata/transforms/subsetFonts/missing-glyphs/'
+          '../testdata/subsetFonts/missing-glyphs/'
         )
       });
       assetGraph.on('warn', warnSpy);
@@ -3172,7 +3172,7 @@ describe('transforms/subsetFonts', function() {
       const assetGraph = new AssetGraph({
         root: pathModule.resolve(
           __dirname,
-          '../../testdata/transforms/subsetFonts/missing-tab-and-newline-glyphs/'
+          '../testdata/subsetFonts/missing-tab-and-newline-glyphs/'
         )
       });
       assetGraph.on('warn', warnSpy);
@@ -3195,7 +3195,7 @@ describe('transforms/subsetFonts', function() {
       const assetGraph = new AssetGraph({
         root: pathModule.resolve(
           __dirname,
-          '../../testdata/transforms/subsetFonts/local-single/'
+          '../testdata/subsetFonts/local-single/'
         )
       });
       await assetGraph.loadAssets('index.html');
@@ -3312,7 +3312,7 @@ describe('transforms/subsetFonts', function() {
       const assetGraph = new AssetGraph({
         root: pathModule.resolve(
           __dirname,
-          '../../testdata/transforms/subsetFonts/local-single/'
+          '../testdata/subsetFonts/local-single/'
         )
       });
       const [htmlAsset] = await assetGraph.loadAssets('index.html');
@@ -3364,7 +3364,7 @@ describe('transforms/subsetFonts', function() {
         const assetGraph = new AssetGraph({
           root: pathModule.resolve(
             __dirname,
-            '../../testdata/transforms/subsetFonts/local-with-no-css-rules-in-font-face-stylesheet/'
+            '../testdata/subsetFonts/local-with-no-css-rules-in-font-face-stylesheet/'
           )
         });
         const [htmlAsset] = await assetGraph.loadAssets('index.html');
@@ -3383,7 +3383,7 @@ describe('transforms/subsetFonts', function() {
         const assetGraph = new AssetGraph({
           root: pathModule.resolve(
             __dirname,
-            '../../testdata/transforms/subsetFonts/unused-variant/'
+            '../testdata/subsetFonts/unused-variant/'
           )
         });
         await assetGraph.loadAssets('index.html');
@@ -3418,7 +3418,7 @@ describe('transforms/subsetFonts', function() {
           const assetGraph = new AssetGraph({
             root: pathModule.resolve(
               __dirname,
-              '../../testdata/transforms/subsetFonts/unused-variant/'
+              '../testdata/subsetFonts/unused-variant/'
             )
           });
           await assetGraph.loadAssets('index.html');
@@ -3455,7 +3455,7 @@ describe('transforms/subsetFonts', function() {
         const assetGraph = new AssetGraph({
           root: pathModule.resolve(
             __dirname,
-            '../../testdata/transforms/subsetFonts/unused-font/'
+            '../testdata/subsetFonts/unused-font/'
           )
         });
         await assetGraph.loadAssets('index.html');
@@ -3482,7 +3482,7 @@ describe('transforms/subsetFonts', function() {
         const assetGraph = new AssetGraph({
           root: pathModule.resolve(
             __dirname,
-            '../../testdata/transforms/subsetFonts/unused-variant-on-one-page/'
+            '../testdata/subsetFonts/unused-variant-on-one-page/'
           )
         });
         await assetGraph.loadAssets('index*.html');
@@ -3505,7 +3505,7 @@ describe('transforms/subsetFonts', function() {
       const assetGraph = new AssetGraph({
         root: pathModule.resolve(
           __dirname,
-          '../../testdata/transforms/subsetFonts/font-face-defaults-and-casing/'
+          '../testdata/subsetFonts/font-face-defaults-and-casing/'
         )
       });
       await assetGraph.loadAssets('index.html');
@@ -3548,7 +3548,7 @@ describe('transforms/subsetFonts', function() {
       const assetGraph = new AssetGraph({
         root: pathModule.resolve(
           __dirname,
-          '../../testdata/transforms/subsetFonts/multiple-font-face-with-same-src/'
+          '../testdata/subsetFonts/multiple-font-face-with-same-src/'
         )
       });
       await assetGraph.loadAssets('index.html');
@@ -3588,7 +3588,7 @@ describe('transforms/subsetFonts', function() {
       const assetGraph = new AssetGraph({
         root: pathModule.resolve(
           __dirname,
-          '../../testdata/transforms/subsetFonts/local-font-family-case-difference/'
+          '../testdata/subsetFonts/local-font-family-case-difference/'
         )
       });
       await assetGraph.loadAssets('index.html');
@@ -3620,7 +3620,7 @@ describe('transforms/subsetFonts', function() {
       const assetGraph = new AssetGraph({
         root: pathModule.resolve(
           __dirname,
-          '../../testdata/transforms/subsetFonts/html-link/'
+          '../testdata/subsetFonts/html-link/'
         )
       });
       // FIXME: Maybe use a font that's not missing any chars?
@@ -3766,7 +3766,7 @@ describe('transforms/subsetFonts', function() {
       const assetGraph = new AssetGraph({
         root: pathModule.resolve(
           __dirname,
-          '../../testdata/transforms/subsetFonts/font-weight-and-style-omitted/'
+          '../testdata/subsetFonts/font-weight-and-style-omitted/'
         )
       });
       await assetGraph.loadAssets('index.html');
@@ -3797,7 +3797,7 @@ describe('transforms/subsetFonts', function() {
         const assetGraph = new AssetGraph({
           root: pathModule.resolve(
             __dirname,
-            '../../testdata/transforms/subsetFonts/multi-page-same-subset/'
+            '../testdata/subsetFonts/multi-page-same-subset/'
           )
         });
         const [htmlAsset1, htmlAsset2] = await assetGraph.loadAssets(
@@ -3838,7 +3838,7 @@ describe('transforms/subsetFonts', function() {
       const assetGraph = new AssetGraph({
         root: pathModule.resolve(
           __dirname,
-          '../../testdata/transforms/subsetFonts/local-mixed/'
+          '../testdata/subsetFonts/local-mixed/'
         )
       });
       // FIXME: Maybe use a font that's not missing any chars?
@@ -4065,7 +4065,7 @@ describe('transforms/subsetFonts', function() {
         const assetGraph = new AssetGraph({
           root: pathModule.resolve(
             __dirname,
-            '../../testdata/transforms/subsetFonts/variable-font-in-supports-block-with-fallback/'
+            '../testdata/subsetFonts/variable-font-in-supports-block-with-fallback/'
           )
         });
         await assetGraph.loadAssets('index.html');
@@ -4111,7 +4111,7 @@ describe('transforms/subsetFonts', function() {
         const assetGraph = new AssetGraph({
           root: pathModule.resolve(
             __dirname,
-            '../../testdata/transforms/subsetFonts/variable-font-in-supports-block-with-two-fallback-variants/'
+            '../testdata/subsetFonts/variable-font-in-supports-block-with-two-fallback-variants/'
           )
         });
         await assetGraph.loadAssets('index.html');
@@ -4173,7 +4173,7 @@ describe('transforms/subsetFonts', function() {
         const assetGraph = new AssetGraph({
           root: pathModule.resolve(
             __dirname,
-            '../../testdata/transforms/subsetFonts/two-variable-fonts-animated/'
+            '../testdata/subsetFonts/two-variable-fonts-animated/'
           )
         });
         await assetGraph.loadAssets('index.html');
@@ -4215,7 +4215,7 @@ describe('transforms/subsetFonts', function() {
         const assetGraph = new AssetGraph({
           root: pathModule.resolve(
             __dirname,
-            '../../testdata/transforms/subsetFonts/no-fallbacks/'
+            '../testdata/subsetFonts/no-fallbacks/'
           )
         });
         const [htmlAsset] = await assetGraph.loadAssets('index.html');
@@ -4246,7 +4246,7 @@ describe('transforms/subsetFonts', function() {
       const assetGraph = new AssetGraph({
         root: pathModule.resolve(
           __dirname,
-          '../../testdata/transforms/subsetFonts/local-single/'
+          '../testdata/subsetFonts/local-single/'
         )
       });
       const [htmlAsset] = await assetGraph.loadAssets('index.html');
@@ -4293,7 +4293,7 @@ describe('transforms/subsetFonts', function() {
       const assetGraph = new AssetGraph({
         root: pathModule.resolve(
           __dirname,
-          '../../testdata/transforms/subsetFonts/non-truetype-font/'
+          '../testdata/subsetFonts/non-truetype-font/'
         )
       });
       await assetGraph.loadAssets('index.html');
@@ -4334,7 +4334,7 @@ describe('transforms/subsetFonts', function() {
       const assetGraph = new AssetGraph({
         root: pathModule.resolve(
           __dirname,
-          '../../testdata/transforms/subsetFonts/non-truetype-and-truetype/'
+          '../testdata/subsetFonts/non-truetype-and-truetype/'
         )
       });
       await assetGraph.loadAssets('index.html');
