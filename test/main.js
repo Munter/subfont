@@ -181,7 +181,7 @@ describe('subfont', function() {
 
       const rootUrl = 'https://example.com/';
       const assetGraph = await main(
-        ['--silent', '--dryrun', '--no-fallbacks', '--root', rootUrl, rootUrl],
+        ['--silent', '--dryrun', '--no-fallbacks', rootUrl],
         mockConsole
       );
 
