@@ -1,0 +1,36 @@
+<html>
+  <head>
+    <meta charset=utf-8>
+    <style>
+      body {
+        font-size: 200px;
+        font-family: Venn VF, sans-serif;
+        animation: 3s ease-in infinite alternate foo;
+      }
+
+      @keyframes foo {
+        0% {
+          font-weight: 400;
+        }
+        100% {
+          font-weight: 800;
+        }
+      }
+
+      @font-face {
+        font-family: Venn VF;
+        src: url('Venn_VF_1-500.woff2') format('woff2-variations');
+        font-weight: 1 500;
+      }
+
+      @font-face {
+        font-family: Venn VF;
+        src: url('Venn_VF_501-900.woff2') format('woff2-variations');
+        font-weight: 501 900;
+      }
+    </style>
+  </head>
+  <body>
+    <p>Hello, world!</p>
+  </body>
+</html>
