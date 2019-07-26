@@ -3,57 +3,34 @@ const subsetFonts = require('../lib/subsetFonts');
 const AssetGraph = require('assetgraph');
 const pathModule = require('path');
 
-function startHttpServer(assetGraph) {
-  const server = require('http').createServer((req, res) => {
-    let foundAsset;
-    if (/\/$/.test(req.url)) {
-      const prefixUrl = assetGraph.root + req.url.substr(1);
-      foundAsset = assetGraph.findAssets({
-        url: `${prefixUrl}index.html`
-      })[0];
-      if (!foundAsset) {
-        res.writeHead(404);
-        res.end();
-      }
-    }
-    foundAsset =
-      foundAsset ||
-      assetGraph.findAssets({
-        isLoaded: true,
-        url: assetGraph.root + req.url.substr(1)
-      })[0];
-    if (foundAsset) {
-      const etag = `"${foundAsset.md5Hex}"`;
-      res.setHeader('ETag', etag);
-      res.setHeader('Content-Type', foundAsset.contentType);
-      const rawSrc = foundAsset.rawSrc;
-      res.setHeader('Content-Length', String(foundAsset.rawSrc.length));
-      if (
-        req.headers['if-none-match'] &&
-        req.headers['if-none-match'].includes(etag)
-      ) {
-        res.writeHead(304);
-        res.end();
-      } else {
-        res.end(rawSrc);
-      }
-    } else {
-      res.writeHead(404);
-      res.end();
-    }
-  });
-  return new Promise(resolve =>
-    server.listen(0, () =>
-      resolve([server, `http://localhost:${server.address().port}/`])
-    )
-  );
-}
-
-async function screenshotUrl(browser, url, bannedUrls) {
+async function screenshot(browser, assetGraph, bannedUrls) {
   const page = await browser.newPage();
+  await page.setRequestInterception(true);
   const loadedUrls = [];
-  page.on('request', request => loadedUrls.push(request.url()));
-  await page.goto(url);
+  page.on('request', request => {
+    const url = request.url();
+    loadedUrls.push(url);
+    if (url.startsWith('https://example.com/')) {
+      let agUrl = url.replace('https://example.com/', assetGraph.root);
+      if (/\/$/.test(agUrl)) {
+        agUrl += 'index.html';
+      }
+      const asset = assetGraph.findAssets({
+        isLoaded: true,
+        url: agUrl
+      })[0];
+      if (asset) {
+        request.respond({
+          status: 200,
+          contentType: asset.contentType,
+          body: asset.rawSrc
+        });
+        return;
+      }
+    }
+    request.continue();
+  });
+  await page.goto('https://example.com/');
   if (bannedUrls) {
     const loadedBannedUrls = loadedUrls.filter(url => bannedUrls.includes(url));
     if (loadedBannedUrls.length > 0) {
@@ -91,21 +68,21 @@ describe('reference images', function() {
       });
       await assetGraph.loadAssets('index.html');
       await assetGraph.populate();
-      // Consider using https://github.com/GoogleChrome/puppeteer/blob/master/docs/api.md#pagesetrequestinterceptionvalue instead of starting a server
-      const [server, url] = await startHttpServer(assetGraph);
       const fontsBefore = assetGraph
         .findAssets({ type: { $in: ['Ttf', 'Woff', 'Woff2', 'Eot'] } })
-        .map(asset => asset.url.replace(assetGraph.root, url));
-      try {
-        const screenshotBefore = await screenshotUrl(browser, url);
-        await subsetFonts(assetGraph);
-        const screenshotAfter = await screenshotUrl(browser, url, fontsBefore);
-        await expect(screenshotAfter, 'to resemble', screenshotBefore, {
-          mismatchPercentage: 0
-        });
-      } finally {
-        server.close();
-      }
+        .map(asset =>
+          asset.url.replace(assetGraph.root, 'https://example.com/')
+        );
+      const screenshotBefore = await screenshot(browser, assetGraph);
+      await subsetFonts(assetGraph);
+      const screenshotAfter = await screenshot(
+        browser,
+        assetGraph,
+        fontsBefore
+      );
+      await expect(screenshotAfter, 'to resemble', screenshotBefore, {
+        mismatchPercentage: 0
+      });
     }
   );
 
