@@ -66,6 +66,7 @@
     "nyc": "^13.0.1",
     "prettier": "~1.18.2",
     "proxyquire": "^2.1.1",
+    "puppeteer": "^1.19.0",
     "sinon": "^6.1.5",
     "unexpected": "^10.39.1",
     "unexpected-set": "^2.0.0",
