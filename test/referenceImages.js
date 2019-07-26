@@ -49,11 +49,22 @@ function startHttpServer(assetGraph) {
   );
 }
 
-async function screenshotUrl(browser, url) {
+async function screenshotUrl(browser, url, bannedUrls) {
   const page = await browser.newPage();
-
+  const loadedUrls = [];
+  page.on('request', request => loadedUrls.push(request.url()));
   await page.goto(url);
-  return await page.screenshot();
+  if (bannedUrls) {
+    const loadedBannedUrls = loadedUrls.filter(url => bannedUrls.includes(url));
+    if (loadedBannedUrls.length > 0) {
+      throw new Error(
+        `One or more of the original fonts were loaded:\n  ${loadedBannedUrls.join(
+          '\n  '
+        )}`
+      );
+    }
+  }
+  return page.screenshot();
 }
 
 describe('reference images', function() {
@@ -82,10 +93,13 @@ describe('reference images', function() {
       await assetGraph.populate();
       // Consider using https://github.com/GoogleChrome/puppeteer/blob/master/docs/api.md#pagesetrequestinterceptionvalue instead of starting a server
       const [server, url] = await startHttpServer(assetGraph);
+      const fontsBefore = assetGraph
+        .findAssets({ type: { $in: ['Ttf', 'Woff', 'Woff2', 'Eot'] } })
+        .map(asset => asset.url.replace(assetGraph.root, url));
       try {
         const screenshotBefore = await screenshotUrl(browser, url);
         await subsetFonts(assetGraph);
-        const screenshotAfter = await screenshotUrl(browser, url);
+        const screenshotAfter = await screenshotUrl(browser, url, fontsBefore);
         await expect(screenshotAfter, 'to resemble', screenshotBefore, {
           mismatchPercentage: 0
         });
