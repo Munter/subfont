@@ -89,9 +89,9 @@ describe('reference images', function() {
   for (const inlineCss of [true, false]) {
     describe(`with inlineCss:${inlineCss}`, function() {
       for (const inlineSubsets of [true, false]) {
-        describe(`with inlineSubsets:${inlineCss}`, function() {
+        describe(`with inlineSubsets:${inlineSubsets}`, function() {
           for (const omitFallbacks of [true, false]) {
-            describe(`with omitFallbacks:${inlineCss}`, function() {
+            describe(`with omitFallbacks:${omitFallbacks}`, function() {
               it('should render ligatures correctly', async function() {
                 await expect(
                   'ligatures',
