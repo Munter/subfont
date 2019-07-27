@@ -55,8 +55,8 @@ describe('reference images', function() {
   });
 
   expect.addAssertion(
-    '<string> to render the same after subsetting',
-    async (expect, path) => {
+    '<string> to render the same after subsetting <object?>',
+    async (expect, path, options = {}) => {
       const assetGraph = new AssetGraph({
         root: pathModule.resolve(
           __dirname,
@@ -74,7 +74,7 @@ describe('reference images', function() {
           asset.url.replace(assetGraph.root, 'https://example.com/')
         );
       const screenshotBefore = await screenshot(browser, assetGraph);
-      await subsetFonts(assetGraph);
+      await subsetFonts(assetGraph, options);
       const screenshotAfter = await screenshot(
         browser,
         assetGraph,
