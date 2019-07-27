@@ -86,7 +86,27 @@ describe('reference images', function() {
     }
   );
 
-  it('should include ligatures in the subset', async function() {
-    await expect('ligatures', 'to render the same after subsetting');
-  });
+  for (const inlineCss of [true, false]) {
+    describe(`with inlineCss:${inlineCss}`, function() {
+      for (const inlineSubsets of [true, false]) {
+        describe(`with inlineSubsets:${inlineCss}`, function() {
+          for (const omitFallbacks of [true, false]) {
+            describe(`with omitFallbacks:${inlineCss}`, function() {
+              it('should render ligatures correctly', async function() {
+                await expect(
+                  'ligatures',
+                  'to render the same after subsetting',
+                  {
+                    inlineCss,
+                    inlineSubsets,
+                    omitFallbacks
+                  }
+                );
+              });
+            });
+          }
+        });
+      }
+    });
+  }
 });
