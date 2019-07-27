@@ -92,29 +92,35 @@ describe('reference images', function() {
         describe(`with inlineSubsets:${inlineSubsets}`, function() {
           for (const omitFallbacks of [true, false]) {
             describe(`with omitFallbacks:${omitFallbacks}`, function() {
-              it('should render a simple test case without ligatures', async function() {
-                await expect(
-                  'withoutLigatures',
-                  'to render the same after subsetting',
-                  {
-                    inlineCss,
-                    inlineSubsets,
-                    omitFallbacks
-                  }
-                );
-              });
+              for (const harfbuzz of [true, false]) {
+                describe(`with harfbuzz:${harfbuzz}`, function() {
+                  it('should render a simple test case without ligatures', async function() {
+                    await expect(
+                      'withoutLigatures',
+                      'to render the same after subsetting',
+                      {
+                        inlineCss,
+                        inlineSubsets,
+                        omitFallbacks,
+                        harfbuzz
+                      }
+                    );
+                  });
 
-              it('should render ligatures correctly', async function() {
-                await expect(
-                  'ligatures',
-                  'to render the same after subsetting',
-                  {
-                    inlineCss,
-                    inlineSubsets,
-                    omitFallbacks
-                  }
-                );
-              });
+                  it('should render ligatures correctly', async function() {
+                    await expect(
+                      'ligatures',
+                      'to render the same after subsetting',
+                      {
+                        inlineCss,
+                        inlineSubsets,
+                        omitFallbacks,
+                        harfbuzz
+                      }
+                    );
+                  });
+                });
+              }
             });
           }
         });
