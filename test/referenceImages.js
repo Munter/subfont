@@ -102,7 +102,8 @@ describe('reference images', function() {
                         inlineCss,
                         inlineSubsets,
                         omitFallbacks,
-                        harfbuzz
+                        harfbuzz,
+                        formats: harfbuzz ? ['truetype'] : undefined // FIXME
                       }
                     );
                   });
@@ -115,7 +116,8 @@ describe('reference images', function() {
                         inlineCss,
                         inlineSubsets,
                         omitFallbacks,
-                        harfbuzz
+                        harfbuzz,
+                        formats: harfbuzz ? ['truetype'] : undefined // FIXME
                       }
                     );
                   });
