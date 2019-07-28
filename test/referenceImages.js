@@ -86,13 +86,13 @@ describe('reference images', function() {
     }
   );
 
-  for (const inlineCss of [true, false]) {
+  for (const inlineCss of [false, true]) {
     describe(`with inlineCss:${inlineCss}`, function() {
-      for (const inlineSubsets of [true, false]) {
+      for (const inlineSubsets of [false, true]) {
         describe(`with inlineSubsets:${inlineSubsets}`, function() {
-          for (const omitFallbacks of [true, false]) {
+          for (const omitFallbacks of [false, true]) {
             describe(`with omitFallbacks:${omitFallbacks}`, function() {
-              for (const harfbuzz of [true, false]) {
+              for (const harfbuzz of [false, true]) {
                 describe(`with harfbuzz:${harfbuzz}`, function() {
                   it('should render a simple test case without ligatures', async function() {
                     await expect(
