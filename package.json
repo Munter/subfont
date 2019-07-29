@@ -54,7 +54,10 @@
     "lodash.once": "^4.1.1",
     "postcss-values-parser": "^2.0.1",
     "pretty-bytes": "^5.1.0",
+    "ttf2woff": "^2.0.1",
+    "ttf2woff2": "^3.0.0",
     "urltools": "^0.4.1",
+    "woff2": "^0.2.2",
     "yargs": "^12.0.2"
   },
   "devDependencies": {
