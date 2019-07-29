@@ -245,5 +245,69 @@ describe('subfont', function() {
         );
       });
     });
+
+    it('should work with an absolute url that matches canonicalUrl (without a path component)', async function() {
+      const rootUrl = encodeURI(
+        'file://' +
+          pathModule.resolve(
+            __dirname,
+            '..',
+            'testdata',
+            'canonicalUrlWithoutPathComponent'
+          )
+      );
+
+      await main(
+        [
+          '--silent',
+          '--dryrun',
+          '--dynamic',
+          '--debug',
+          '--canonicalroot',
+          'https://gofish.dk/',
+          '--root',
+          rootUrl,
+          `${rootUrl}/index.html`
+        ],
+        mockConsole
+      );
+      expect(mockConsole.log, 'to have a call satisfying', () => {
+        mockConsole.log(
+          expect.it('to contain', '400 : 14/214 codepoints used')
+        );
+      });
+    });
+
+    it('should work with an absolute url that matches canonicalUrl (with a path component)', async function() {
+      const rootUrl = encodeURI(
+        'file://' +
+          pathModule.resolve(
+            __dirname,
+            '..',
+            'testdata',
+            'canonicalUrlWithPathComponent'
+          )
+      );
+
+      await main(
+        [
+          '--silent',
+          '--dryrun',
+          '--dynamic',
+          '--debug',
+          '--canonicalroot',
+          'https://gofish.dk/the/magic/path/',
+          '--root',
+          rootUrl,
+          `${rootUrl}/index.html`
+        ],
+        mockConsole
+      );
+      expect(mockConsole.log, 'to have a call satisfying', () => {
+        mockConsole.log(
+          expect.it('to contain', '400 : 14/214 codepoints used')
+        );
+      });
+    });
   });
 });
