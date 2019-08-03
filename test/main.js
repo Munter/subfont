@@ -340,5 +340,26 @@ describe('subfont', function() {
         );
       });
     });
+
+    it('should not fail to inject the font-tracer script on a page that has a strict CSP', async function() {
+      const rootUrl = encodeURI(
+        'file://' +
+          pathModule.resolve(__dirname, '..', 'testdata', 'pageWithStrictCsp')
+      );
+
+      await main(
+        [
+          '--silent',
+          '--dryrun',
+          '--dynamic',
+          '--debug',
+          '--root',
+          rootUrl,
+          `${rootUrl}/index.html`
+        ],
+        mockConsole
+      );
+      expect(mockConsole.error, 'was not called');
+    });
   });
 });
