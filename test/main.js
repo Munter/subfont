@@ -18,7 +18,7 @@ const openSansBold = require('fs').readFileSync(
 describe('subfont', function() {
   let mockConsole;
   beforeEach(async function() {
-    mockConsole = { log: sinon.spy(), error: console.error };
+    mockConsole = { log: sinon.spy(), error: sinon.spy() };
   });
 
   describe('when a font is referenced by a stylesheet hosted outside the root', function() {
@@ -306,6 +306,37 @@ describe('subfont', function() {
       expect(mockConsole.log, 'to have a call satisfying', () => {
         mockConsole.log(
           expect.it('to contain', '400 : 14/214 codepoints used')
+        );
+      });
+    });
+
+    it('should echo errors occuring in the headless browser to the console', async function() {
+      const rootUrl = encodeURI(
+        'file://' +
+          pathModule.resolve(__dirname, '..', 'testdata', 'pageWithErrors')
+      );
+
+      await main(
+        [
+          '--silent',
+          '--dryrun',
+          '--dynamic',
+          '--debug',
+          '--root',
+          rootUrl,
+          `${rootUrl}/index.html`
+        ],
+        mockConsole
+      );
+      expect(mockConsole.error, 'to have calls satisfying', () => {
+        mockConsole.error(
+          'GET https://domainthatdoesnotexist12873621321312.com/blablabla.js failed: net::ERR_NAME_NOT_RESOLVED'
+        );
+        mockConsole.error(
+          'ReferenceError: iAmNotAFunction is not defined\n    at https://example.com/index.html:20:7'
+        );
+        mockConsole.error(
+          'GET https://assetgraph.org/nonexistent12345.js returned 404'
         );
       });
     });
