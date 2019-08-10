@@ -246,6 +246,36 @@ describe('subfont', function() {
       });
     });
 
+    it('should find glyphs in the original HTML that get removed by JavaScript', async function() {
+      const rootUrl = encodeURI(
+        'file://' +
+          pathModule.resolve(
+            __dirname,
+            '..',
+            'testdata',
+            'dynamicallyRemovedText'
+          )
+      );
+
+      await main(
+        [
+          '--silent',
+          '--dryrun',
+          '--dynamic',
+          '--debug',
+          '--root',
+          rootUrl,
+          `${rootUrl}/index.html`
+        ],
+        mockConsole
+      );
+      expect(mockConsole.log, 'to have a call satisfying', () => {
+        mockConsole.log(
+          expect.it('to contain', '400 : 16/214 codepoints used,')
+        );
+      });
+    });
+
     it('should work with an absolute url that matches canonicalUrl (without a path component)', async function() {
       const rootUrl = encodeURI(
         'file://' +
