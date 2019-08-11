@@ -86,45 +86,31 @@ describe('reference images', function() {
     }
   );
 
-  for (const inlineCss of [false, true]) {
-    describe(`with inlineCss:${inlineCss}`, function() {
-      for (const inlineSubsets of [false, true]) {
-        describe(`with inlineSubsets:${inlineSubsets}`, function() {
-          for (const omitFallbacks of [false, true]) {
-            describe(`with omitFallbacks:${omitFallbacks}`, function() {
-              for (const harfbuzz of [false, true]) {
-                describe(`with harfbuzz:${harfbuzz}`, function() {
-                  it('should render a simple test case without ligatures', async function() {
-                    await expect(
-                      'withoutLigatures',
-                      'to render the same after subsetting',
-                      {
-                        inlineCss,
-                        inlineSubsets,
-                        omitFallbacks,
-                        harfbuzz
-                      }
-                    );
-                  });
+  const expandPermutations = require('font-tracer/lib/expandPermutations');
+  for (const options of expandPermutations({
+    inlineCss: [false, true],
+    inlineSubsets: [false, true],
+    omitFallbacks: [false, true],
+    harfbuzz: [false, true]
+  })) {
+    describe(`with ${Object.keys(options)
+      .map(key => `${key}: ${options[key]}`)
+      .join(', ')}`, function() {
+      it('should render a simple test case without ligatures', async function() {
+        await expect(
+          'withoutLigatures',
+          'to render the same after subsetting',
+          options
+        );
+      });
 
-                  it('should render ligatures correctly', async function() {
-                    await expect(
-                      'ligatures',
-                      'to render the same after subsetting',
-                      {
-                        inlineCss,
-                        inlineSubsets,
-                        omitFallbacks,
-                        harfbuzz
-                      }
-                    );
-                  });
-                });
-              }
-            });
-          }
-        });
-      }
+      it('should render ligatures correctly', async function() {
+        await expect(
+          'ligatures',
+          'to render the same after subsetting',
+          options
+        );
+      });
     });
   }
 });
