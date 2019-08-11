@@ -2,6 +2,7 @@ const expect = require('unexpected').use(require('unexpected-resemble'));
 const subsetFonts = require('../lib/subsetFonts');
 const AssetGraph = require('assetgraph');
 const pathModule = require('path');
+const combos = require('combos');
 
 async function screenshot(browser, assetGraph, bannedUrls) {
   const page = await browser.newPage();
@@ -86,8 +87,7 @@ describe('reference images', function() {
     }
   );
 
-  const expandPermutations = require('font-tracer/lib/expandPermutations');
-  for (const options of expandPermutations({
+  for (const options of combos({
     inlineCss: [false, true],
     inlineSubsets: [false, true],
     omitFallbacks: [false, true],

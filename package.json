@@ -60,6 +60,7 @@
     "yargs": "^12.0.2"
   },
   "devDependencies": {
+    "combos": "^0.2.0",
     "coveralls": "^3.0.2",
     "eslint": "^5.6.1",
     "eslint-config-pretty-standard": "^2.0.0",
