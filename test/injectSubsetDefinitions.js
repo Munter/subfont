@@ -42,7 +42,7 @@ describe('injectSubsetDefinitions', function() {
     expect(
       injectSubsetDefinitions('times   new   roman', webfontNameMap),
       'to equal',
-      "'times new roman__subset', times   new   roman"
+      "'times new roman__subset', times new roman"
     );
   });
 
