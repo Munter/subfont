@@ -70,7 +70,7 @@
     "sinon": "^6.1.5",
     "unexpected": "^10.39.1",
     "unexpected-resemble": "^4.1.0",
-    "unexpected-set": "^2.0.0",
+    "unexpected-set": "^2.0.1",
     "unexpected-sinon": "^10.11.2"
   }
 }
