@@ -51,7 +51,7 @@
     "font-tracer": "^1.1.0",
     "fontkit": "^1.8.0",
     "lodash.groupby": "^4.6.0",
-    "postcss-values-parser": "^2.0.1",
+    "postcss-value-parser": "^4.0.2",
     "pretty-bytes": "^5.1.0",
     "urltools": "^0.4.1",
     "yargs": "^12.0.2"

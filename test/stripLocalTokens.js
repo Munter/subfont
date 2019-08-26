@@ -61,7 +61,7 @@ describe('stripLocalTokens', function() {
     expect(
       `url('foo') , local(bar) , local(quux) , url('baz')`,
       'to come out as',
-      "url('foo'), url('baz')"
+      "url('foo') , url('baz')"
     );
   });
 
