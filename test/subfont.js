@@ -54,7 +54,7 @@ describe('subfont', function() {
         }
       ]);
 
-      const rootUrl = encodeURI(
+      const root = encodeURI(
         `file://${pathModule.resolve(
           __dirname,
           '..',
@@ -66,10 +66,10 @@ describe('subfont', function() {
 
       const assetGraph = await subfont(
         {
+          root,
+          inputFiles: [`${root}/index.html`],
           silent: true,
-          dryRun: true,
-          root: rootUrl,
-          inputFiles: [`${rootUrl}/index.html`]
+          dryRun: true
         },
         mockConsole
       );
@@ -116,7 +116,7 @@ describe('subfont', function() {
         }
       ]);
 
-      const rootUrl = encodeURI(
+      const root = encodeURI(
         `file://${pathModule.resolve(
           __dirname,
           '..',
@@ -128,10 +128,10 @@ describe('subfont', function() {
 
       const assetGraph = await subfont(
         {
+          root,
+          inputFiles: [`${root}/index.html`],
           silent: true,
-          dryRun: true,
-          root: rootUrl,
-          inputFiles: [`${rootUrl}/index.html`]
+          dryRun: true
         },
         mockConsole
       );
@@ -187,14 +187,14 @@ describe('subfont', function() {
         }
       ]);
 
-      const rootUrl = 'https://example.com/';
+      const root = 'https://example.com/';
       const assetGraph = await subfont(
         {
-          silent: true,
-          dryRun: true,
-          root: rootUrl,
+          root,
+          inputFiles: [root],
           fallbacks: false,
-          inputFiles: [`${rootUrl}`]
+          silent: true,
+          dryRun: true
         },
         mockConsole
       );
@@ -212,16 +212,16 @@ describe('subfont', function() {
   });
 
   it('should not dive into iframes', async function() {
-    const rootUrl = encodeURI(
+    const root = encodeURI(
       `file://${pathModule.resolve(__dirname, '..', 'testdata', 'iframe')}`
     );
 
     const assetGraph = await subfont(
       {
+        root,
+        inputFiles: [`${root}/index.html`],
         silent: true,
-        dryRun: true,
-        root: rootUrl,
-        inputFiles: [`${rootUrl}/index.html`]
+        dryRun: true
       },
       mockConsole
     );
