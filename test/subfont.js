@@ -1,7 +1,7 @@
 /* global describe, it */
 const sinon = require('sinon');
 const expect = require('unexpected').clone();
-const main = require('../lib/main');
+const subfont = require('../lib/subfont');
 const httpception = require('httpception');
 const pathModule = require('path');
 const openSansBold = require('fs').readFileSync(
@@ -64,8 +64,13 @@ describe('subfont', function() {
         )}`
       );
 
-      const assetGraph = await main(
-        ['--silent', '--dryrun', '--root', rootUrl, `${rootUrl}/index.html`],
+      const assetGraph = await subfont(
+        {
+          silent: true,
+          dryRun: true,
+          root: rootUrl,
+          inputFiles: [`${rootUrl}/index.html`]
+        },
         mockConsole
       );
 
@@ -121,8 +126,13 @@ describe('subfont', function() {
         )}`
       );
 
-      const assetGraph = await main(
-        ['--silent', '--dryrun', '--root', rootUrl, `${rootUrl}/index.html`],
+      const assetGraph = await subfont(
+        {
+          silent: true,
+          dryRun: true,
+          root: rootUrl,
+          inputFiles: [`${rootUrl}/index.html`]
+        },
         mockConsole
       );
 
@@ -178,8 +188,14 @@ describe('subfont', function() {
       ]);
 
       const rootUrl = 'https://example.com/';
-      const assetGraph = await main(
-        ['--silent', '--dryrun', '--no-fallbacks', rootUrl],
+      const assetGraph = await subfont(
+        {
+          silent: true,
+          dryRun: true,
+          root: rootUrl,
+          fallbacks: false,
+          inputFiles: [`${rootUrl}`]
+        },
         mockConsole
       );
 
@@ -200,8 +216,13 @@ describe('subfont', function() {
       `file://${pathModule.resolve(__dirname, '..', 'testdata', 'iframe')}`
     );
 
-    const assetGraph = await main(
-      ['--silent', '--dryrun', '--root', rootUrl, `${rootUrl}/index.html`],
+    const assetGraph = await subfont(
+      {
+        silent: true,
+        dryRun: true,
+        root: rootUrl,
+        inputFiles: [`${rootUrl}/index.html`]
+      },
       mockConsole
     );
 
