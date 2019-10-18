@@ -18,7 +18,7 @@ describe('parseCommandLineOptions', function() {
         debug: false,
         dryRun: true,
         silent: false,
-        inlineSubsets: true,
+        inlineFonts: true,
         inlineCss: false,
         fontDisplay: 'swap',
         inPlace: false,
