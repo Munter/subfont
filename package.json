@@ -58,7 +58,7 @@
   },
   "devDependencies": {
     "coveralls": "^3.0.2",
-    "eslint": "^6.0.0",
+    "eslint": "^6.5.1",
     "eslint-config-prettier": "^6.0.0",
     "eslint-config-standard": "^14.0.0",
     "eslint-plugin-import": "^2.17.3",
