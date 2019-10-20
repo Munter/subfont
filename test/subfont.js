@@ -1,7 +1,7 @@
 /* global describe, it */
 const sinon = require('sinon');
 const expect = require('unexpected').clone();
-const main = require('../lib/main');
+const subfont = require('../lib/subfont');
 const httpception = require('httpception');
 const pathModule = require('path');
 const openSansBold = require('fs').readFileSync(
@@ -54,7 +54,7 @@ describe('subfont', function() {
         }
       ]);
 
-      const rootUrl = encodeURI(
+      const root = encodeURI(
         `file://${pathModule.resolve(
           __dirname,
           '..',
@@ -64,8 +64,13 @@ describe('subfont', function() {
         )}`
       );
 
-      const assetGraph = await main(
-        ['--silent', '--dryrun', '--root', rootUrl, `${rootUrl}/index.html`],
+      const assetGraph = await subfont(
+        {
+          root,
+          inputFiles: [`${root}/index.html`],
+          silent: true,
+          dryRun: true
+        },
         mockConsole
       );
 
@@ -111,7 +116,7 @@ describe('subfont', function() {
         }
       ]);
 
-      const rootUrl = encodeURI(
+      const root = encodeURI(
         `file://${pathModule.resolve(
           __dirname,
           '..',
@@ -121,8 +126,13 @@ describe('subfont', function() {
         )}`
       );
 
-      const assetGraph = await main(
-        ['--silent', '--dryrun', '--root', rootUrl, `${rootUrl}/index.html`],
+      const assetGraph = await subfont(
+        {
+          root,
+          inputFiles: [`${root}/index.html`],
+          silent: true,
+          dryRun: true
+        },
         mockConsole
       );
 
@@ -177,9 +187,15 @@ describe('subfont', function() {
         }
       ]);
 
-      const rootUrl = 'https://example.com/';
-      const assetGraph = await main(
-        ['--silent', '--dryrun', '--no-fallbacks', rootUrl],
+      const root = 'https://example.com/';
+      const assetGraph = await subfont(
+        {
+          root,
+          inputFiles: [root],
+          fallbacks: false,
+          silent: true,
+          dryRun: true
+        },
         mockConsole
       );
 
@@ -196,12 +212,17 @@ describe('subfont', function() {
   });
 
   it('should not dive into iframes', async function() {
-    const rootUrl = encodeURI(
+    const root = encodeURI(
       `file://${pathModule.resolve(__dirname, '..', 'testdata', 'iframe')}`
     );
 
-    const assetGraph = await main(
-      ['--silent', '--dryrun', '--root', rootUrl, `${rootUrl}/index.html`],
+    const assetGraph = await subfont(
+      {
+        root,
+        inputFiles: [`${root}/index.html`],
+        silent: true,
+        dryRun: true
+      },
       mockConsole
     );
 

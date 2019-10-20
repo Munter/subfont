@@ -90,8 +90,8 @@ describe('reference images', function() {
 
   for (const inlineCss of [true, false]) {
     describe(`with inlineCss:${inlineCss}`, function() {
-      for (const inlineSubsets of [true, false]) {
-        describe(`with inlineSubsets:${inlineSubsets}`, function() {
+      for (const inlineFonts of [true, false]) {
+        describe(`with inlineFonts:${inlineFonts}`, function() {
           for (const omitFallbacks of [true, false]) {
             describe(`with omitFallbacks:${omitFallbacks}`, function() {
               it('should render a simple test case without ligatures', async function() {
@@ -100,7 +100,7 @@ describe('reference images', function() {
                   'to render the same after subsetting',
                   {
                     inlineCss,
-                    inlineSubsets,
+                    inlineFonts,
                     omitFallbacks
                   }
                 );
@@ -112,7 +112,7 @@ describe('reference images', function() {
                   'to render the same after subsetting',
                   {
                     inlineCss,
-                    inlineSubsets,
+                    inlineFonts,
                     omitFallbacks
                   }
                 );
