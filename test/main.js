@@ -1,4 +1,4 @@
-/*global describe, it*/
+/* global describe, it */
 const sinon = require('sinon');
 const expect = require('unexpected').clone();
 const main = require('../lib/main');
@@ -55,14 +55,13 @@ describe('subfont', function() {
       ]);
 
       const rootUrl = encodeURI(
-        'file://' +
-          pathModule.resolve(
-            __dirname,
-            '..',
-            'testdata',
-            'stylesheetAtOtherOrigin',
-            'referencesFont'
-          )
+        `file://${pathModule.resolve(
+          __dirname,
+          '..',
+          'testdata',
+          'stylesheetAtOtherOrigin',
+          'referencesFont'
+        )}`
       );
 
       const assetGraph = await main(
@@ -76,7 +75,7 @@ describe('subfont', function() {
       expect(
         cssAsset.url,
         'to equal',
-        assetGraph.root + 'subfont/styles-38ce4ca68c.css'
+        `${assetGraph.root}subfont/styles-38ce4ca68c.css`
       );
     });
   });
@@ -113,14 +112,13 @@ describe('subfont', function() {
       ]);
 
       const rootUrl = encodeURI(
-        'file://' +
-          pathModule.resolve(
-            __dirname,
-            '..',
-            'testdata',
-            'stylesheetAtOtherOrigin',
-            'referencesFont'
-          )
+        `file://${pathModule.resolve(
+          __dirname,
+          '..',
+          'testdata',
+          'stylesheetAtOtherOrigin',
+          'referencesFont'
+        )}`
       );
 
       const assetGraph = await main(
@@ -199,7 +197,7 @@ describe('subfont', function() {
 
   it('should not dive into iframes', async function() {
     const rootUrl = encodeURI(
-      'file://' + pathModule.resolve(__dirname, '..', 'testdata', 'iframe')
+      `file://${pathModule.resolve(__dirname, '..', 'testdata', 'iframe')}`
     );
 
     const assetGraph = await main(
