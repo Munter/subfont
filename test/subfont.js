@@ -1,9 +1,9 @@
-/*global describe, it*/
+/* global describe, it */
 const sinon = require('sinon');
 const expect = require('unexpected')
   .clone()
   .use(require('unexpected-sinon'));
-const main = require('../lib/main');
+const subfont = require('../lib/subfont');
 const httpception = require('httpception');
 const pathModule = require('path');
 const openSansBold = require('fs').readFileSync(
@@ -56,19 +56,23 @@ describe('subfont', function() {
         }
       ]);
 
-      const rootUrl = encodeURI(
-        'file://' +
-          pathModule.resolve(
-            __dirname,
-            '..',
-            'testdata',
-            'stylesheetAtOtherOrigin',
-            'referencesFont'
-          )
+      const root = encodeURI(
+        `file://${pathModule.resolve(
+          __dirname,
+          '..',
+          'testdata',
+          'stylesheetAtOtherOrigin',
+          'referencesFont'
+        )}`
       );
 
-      const assetGraph = await main(
-        ['--silent', '--dryrun', '--root', rootUrl, `${rootUrl}/index.html`],
+      const assetGraph = await subfont(
+        {
+          root,
+          inputFiles: [`${root}/index.html`],
+          silent: true,
+          dryRun: true
+        },
         mockConsole
       );
 
@@ -78,7 +82,7 @@ describe('subfont', function() {
       expect(
         cssAsset.url,
         'to equal',
-        assetGraph.root + 'subfont/styles-38ce4ca68c.css'
+        `${assetGraph.root}subfont/styles-38ce4ca68c.css`
       );
     });
   });
@@ -114,19 +118,23 @@ describe('subfont', function() {
         }
       ]);
 
-      const rootUrl = encodeURI(
-        'file://' +
-          pathModule.resolve(
-            __dirname,
-            '..',
-            'testdata',
-            'stylesheetAtOtherOrigin',
-            'referencesFont'
-          )
+      const root = encodeURI(
+        `file://${pathModule.resolve(
+          __dirname,
+          '..',
+          'testdata',
+          'stylesheetAtOtherOrigin',
+          'referencesFont'
+        )}`
       );
 
-      const assetGraph = await main(
-        ['--silent', '--dryrun', '--root', rootUrl, `${rootUrl}/index.html`],
+      const assetGraph = await subfont(
+        {
+          root,
+          inputFiles: [`${root}/index.html`],
+          silent: true,
+          dryRun: true
+        },
         mockConsole
       );
 
@@ -181,9 +189,15 @@ describe('subfont', function() {
         }
       ]);
 
-      const rootUrl = 'https://example.com/';
-      const assetGraph = await main(
-        ['--silent', '--dryrun', '--no-fallbacks', rootUrl],
+      const root = 'https://example.com/';
+      const assetGraph = await subfont(
+        {
+          root,
+          inputFiles: [root],
+          fallbacks: false,
+          silent: true,
+          dryRun: true
+        },
         mockConsole
       );
 
@@ -200,12 +214,17 @@ describe('subfont', function() {
   });
 
   it('should not dive into iframes', async function() {
-    const rootUrl = encodeURI(
-      'file://' + pathModule.resolve(__dirname, '..', 'testdata', 'iframe')
+    const root = encodeURI(
+      `file://${pathModule.resolve(__dirname, '..', 'testdata', 'iframe')}`
     );
 
-    const assetGraph = await main(
-      ['--silent', '--dryrun', '--root', rootUrl, `${rootUrl}/index.html`],
+    const assetGraph = await subfont(
+      {
+        root,
+        inputFiles: [`${root}/index.html`],
+        silent: true,
+        dryRun: true
+      },
       mockConsole
     );
 
@@ -217,26 +236,24 @@ describe('subfont', function() {
 
   describe('with --dynamic', function() {
     it('should find glyphs added to the page via JavaScript', async function() {
-      const rootUrl = encodeURI(
-        'file://' +
-          pathModule.resolve(
-            __dirname,
-            '..',
-            'testdata',
-            'dynamicallyInjectedText'
-          )
+      const root = encodeURI(
+        `file://${pathModule.resolve(
+          __dirname,
+          '..',
+          'testdata',
+          'dynamicallyInjectedText'
+        )}`
       );
 
-      await main(
-        [
-          '--silent',
-          '--dryrun',
-          '--dynamic',
-          '--debug',
-          '--root',
-          rootUrl,
-          `${rootUrl}/index.html`
-        ],
+      await subfont(
+        {
+          silent: true,
+          dryRun: true,
+          dynamic: true,
+          debug: true,
+          root,
+          inputFiles: [`${root}/index.html`]
+        },
         mockConsole
       );
       expect(mockConsole.log, 'to have a call satisfying', () => {
@@ -247,26 +264,24 @@ describe('subfont', function() {
     });
 
     it('should find glyphs in the original HTML that get removed by JavaScript', async function() {
-      const rootUrl = encodeURI(
-        'file://' +
-          pathModule.resolve(
-            __dirname,
-            '..',
-            'testdata',
-            'dynamicallyRemovedText'
-          )
+      const root = encodeURI(
+        `file://${pathModule.resolve(
+          __dirname,
+          '..',
+          'testdata',
+          'dynamicallyRemovedText'
+        )}`
       );
 
-      await main(
-        [
-          '--silent',
-          '--dryrun',
-          '--dynamic',
-          '--debug',
-          '--root',
-          rootUrl,
-          `${rootUrl}/index.html`
-        ],
+      await subfont(
+        {
+          silent: true,
+          dryRun: true,
+          dynamic: true,
+          debug: true,
+          root,
+          inputFiles: [`${root}/index.html`]
+        },
         mockConsole
       );
       expect(mockConsole.log, 'to have a call satisfying', () => {
@@ -277,28 +292,25 @@ describe('subfont', function() {
     });
 
     it('should work with an absolute url that matches canonicalUrl (without a path component)', async function() {
-      const rootUrl = encodeURI(
-        'file://' +
-          pathModule.resolve(
-            __dirname,
-            '..',
-            'testdata',
-            'canonicalUrlWithoutPathComponent'
-          )
+      const root = encodeURI(
+        `file://${pathModule.resolve(
+          __dirname,
+          '..',
+          'testdata',
+          'canonicalUrlWithoutPathComponent'
+        )}`
       );
 
-      await main(
-        [
-          '--silent',
-          '--dryrun',
-          '--dynamic',
-          '--debug',
-          '--canonicalroot',
-          'https://gofish.dk/',
-          '--root',
-          rootUrl,
-          `${rootUrl}/index.html`
-        ],
+      await subfont(
+        {
+          silent: true,
+          dryRun: true,
+          dynamic: true,
+          debug: true,
+          canonicalRoot: 'https://gofish.dk/',
+          root,
+          inputFiles: [`${root}/index.html`]
+        },
         mockConsole
       );
       expect(mockConsole.log, 'to have a call satisfying', () => {
@@ -309,28 +321,25 @@ describe('subfont', function() {
     });
 
     it('should work with an absolute url that matches canonicalUrl (with a path component)', async function() {
-      const rootUrl = encodeURI(
-        'file://' +
-          pathModule.resolve(
-            __dirname,
-            '..',
-            'testdata',
-            'canonicalUrlWithPathComponent'
-          )
+      const root = encodeURI(
+        `file://${pathModule.resolve(
+          __dirname,
+          '..',
+          'testdata',
+          'canonicalUrlWithPathComponent'
+        )}`
       );
 
-      await main(
-        [
-          '--silent',
-          '--dryrun',
-          '--dynamic',
-          '--debug',
-          '--canonicalroot',
-          'https://gofish.dk/the/magic/path/',
-          '--root',
-          rootUrl,
-          `${rootUrl}/index.html`
-        ],
+      await subfont(
+        {
+          silent: true,
+          dryRun: true,
+          dynamic: true,
+          debug: true,
+          canonicalRoot: 'https://gofish.dk/the/magic/path/',
+          root,
+          inputFiles: [`${root}/index.html`]
+        },
         mockConsole
       );
       expect(mockConsole.log, 'to have a call satisfying', () => {
@@ -341,21 +350,24 @@ describe('subfont', function() {
     });
 
     it('should echo errors occuring in the headless browser to the console', async function() {
-      const rootUrl = encodeURI(
-        'file://' +
-          pathModule.resolve(__dirname, '..', 'testdata', 'pageWithErrors')
+      const root = encodeURI(
+        `file://${pathModule.resolve(
+          __dirname,
+          '..',
+          'testdata',
+          'pageWithErrors'
+        )}`
       );
 
-      await main(
-        [
-          '--silent',
-          '--dryrun',
-          '--dynamic',
-          '--debug',
-          '--root',
-          rootUrl,
-          `${rootUrl}/index.html`
-        ],
+      await subfont(
+        {
+          silent: true,
+          dryRun: true,
+          dynamic: true,
+          debug: true,
+          root,
+          inputFiles: [`${root}/index.html`]
+        },
         mockConsole
       );
       expect(mockConsole.error, 'to have calls satisfying', () => {
@@ -372,21 +384,24 @@ describe('subfont', function() {
     });
 
     it('should not fail to inject the font-tracer script on a page that has a strict CSP', async function() {
-      const rootUrl = encodeURI(
-        'file://' +
-          pathModule.resolve(__dirname, '..', 'testdata', 'pageWithStrictCsp')
+      const root = encodeURI(
+        `file://${pathModule.resolve(
+          __dirname,
+          '..',
+          'testdata',
+          'pageWithStrictCsp'
+        )}`
       );
 
-      await main(
-        [
-          '--silent',
-          '--dryrun',
-          '--dynamic',
-          '--debug',
-          '--root',
-          rootUrl,
-          `${rootUrl}/index.html`
-        ],
+      await subfont(
+        {
+          silent: true,
+          dryRun: true,
+          dynamic: true,
+          debug: true,
+          root,
+          inputFiles: [`${root}/index.html`]
+        },
         mockConsole
       );
       expect(mockConsole.error, 'was not called');
