@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <style>
+    @font-face {
+      font-family: 'Open Sans';
+      font-style: normal;
+      font-weight: 400;
+      src: local('Open Sans Regular'), local('OpenSans-Regular'), url(https://gofish.dk/OpenSans.ttf) format('truetype');
+    }
+
+    h1 {
+      font-family: 'Open Sans';
+    }
+  </style>
+  <script>
+    window.onload = function() {
+      const h1 = document.createElement('h1');
+      document.body
+        .appendChild(h1)
+        .appendChild(document.createTextNode('Dynamically injected text'));
+    };
+  </script>
+</head>
+<body></body>
+</html>

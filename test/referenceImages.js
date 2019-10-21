@@ -1,4 +1,6 @@
-const expect = require('unexpected').use(require('unexpected-resemble'));
+const expect = require('unexpected')
+  .clone()
+  .use(require('unexpected-resemble'));
 const subsetFonts = require('../lib/subsetFonts');
 const AssetGraph = require('assetgraph');
 const pathModule = require('path');
