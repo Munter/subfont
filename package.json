@@ -53,6 +53,7 @@
     "lodash.groupby": "^4.6.0",
     "postcss-value-parser": "^4.0.2",
     "pretty-bytes": "^5.1.0",
+    "puppeteer-core": "^1.19.0",
     "urltools": "^0.4.1",
     "yargs": "^14.2.0"
   },

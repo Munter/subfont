@@ -24,7 +24,8 @@ describe('parseCommandLineOptions', function() {
         inPlace: false,
         inputFiles: [],
         recursive: true,
-        fallbacks: false
+        fallbacks: false,
+        dynamic: false
       }
     );
   });

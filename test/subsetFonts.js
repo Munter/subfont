@@ -4210,51 +4210,6 @@ describe('subsetFonts', function() {
         expect(cssAsset.text, 'not to contain', 'font-style:italic');
       });
     });
-
-    it('should accept a Map of existing traces', async function() {
-      const assetGraph = new AssetGraph({
-        root: pathModule.resolve(
-          __dirname,
-          '../testdata/subsetFonts/local-single/'
-        )
-      });
-      const [htmlAsset] = await assetGraph.loadAssets('index.html');
-      const tracesByAsset = new Map();
-      tracesByAsset.set(htmlAsset, [
-        {
-          text: 'Something that it does not actually say on the page',
-          props: {
-            'font-family': "'Open Sans'",
-            'font-style': 'normal',
-            'font-weight': 'bold'
-          }
-        }
-      ]);
-      await assetGraph.populate();
-      const { fontInfo } = await subsetFonts(assetGraph, {
-        inlineFonts: false,
-        tracesByAsset
-      });
-      expect(fontInfo, 'to satisfy', [
-        {
-          fontUsages: [
-            {
-              texts: ['Something that it does not actually say on the page'],
-              pageText: ' Sacdeghilmnopstuy',
-              text: ' Sacdeghilmnopstuy',
-              props: {
-                'font-stretch': 'normal',
-                'font-weight': '400',
-                'font-style': 'normal',
-                'font-family': 'Open Sans',
-                src:
-                  "local('Open Sans Regular'), local('OpenSans-Regular'), url(OpenSans.ttf) format('truetype')"
-              }
-            }
-          ]
-        }
-      ]);
-    });
   });
 
   describe('with non-truetype fonts in the mix', function() {
