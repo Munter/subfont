@@ -7,8 +7,8 @@
   },
   "scripts": {
     "lint": "eslint .",
-    "test": "npm run lint && mocha",
-    "travis": "npm run lint && npm run coverage",
+    "test": "mocha && npm run lint",
+    "travis": "npm run coverage && npm run lint",
     "coverage": "nyc --reporter=lcov --reporter=text -- mocha --reporter dot"
   },
   "bin": {
