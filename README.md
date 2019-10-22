@@ -68,29 +68,39 @@ Command line options
 --------------------
 
 ```
-$ bin/subfont -h
+$ subfont --help
 Create optimal font subsets from your actual font usage.
 subfont [options] <htmlFile(s) | url(s)>
 
 Options:
-  -h, --help       Show this help                       [default: false]
-  --root           Path to your web root (will be deduced from your
-                   input files if not specified)
-  -o, --output     Directory where results should be written to
-  -i, --in-place   Modify HTML-files in-place. Only use on build
-                   artifacts                            [default: false]
-  --inline-fonts   Inline fonts as data-URIs inside the @font-face
-                   declaration                          [default: false]
-  --inline-css     Inline CSS that declares the @font-face for the
-                   subset fonts                         [default: false]
-  --font-display   Injects a font-display value into the @font-face
-                   CSS. Valid values: auto, block, swap, fallback,
-                   optional                            [default: "swap"]
-  --recursive, -r  Crawl all HTML-pages linked with relative and root
-                   relative links. This stays inside your domain
-                                                         [default: true]
-  -d, --debug      Verbose insigts into font glyph detection
-                                                        [default: false]
+  --help                             Show help                                           [boolean]
+  --version                          Show version number                                 [boolean]
+  --root                             Path to your web root (will be deduced from your input files
+                                     if not specified)                                    [string]
+  --canonical-root, --canonicalroot  URI root where the site will be deployed. Must be either an
+                                     absolute, a protocol-relative, or a root-relative url[string]
+  --output, -o                       Directory where results should be written to         [string]
+  --fallbacks                        Include fallbacks so the original font will be loaded when
+                                     dynamic content gets injected at runtime. Disable with
+                                     --no-fallbacks                      [boolean] [default: true]
+  --dynamic                          Also trace the usage of fonts in a headless browser with
+                                     JavaScript enabled                 [boolean] [default: false]
+  --in-place, -i                     Modify HTML-files in-place. Only use on build artifacts
+                                                                        [boolean] [default: false]
+  --inline-fonts                     Inline fonts as data-URIs inside the @font-face declaration
+                                                                        [boolean] [default: false]
+  --inline-css                       Inline CSS that declares the @font-face for the subset fonts
+                                                                        [boolean] [default: false]
+  --font-display                     Injects a font-display value into the @font-face CSS. Valid
+                                     values: auto, block, swap, fallback, optional
+             [string] [choices: "auto", "block", "swap", "fallback", "optional"] [default: "swap"]
+  --recursive, -r                    Crawl all HTML-pages linked with relative and root relative
+                                     links. This stays inside your domain
+                                                                        [boolean] [default: false]
+  --silent, -s                       Do not write anything to stdout    [boolean] [default: false]
+  --debug, -d                        Verbose insights into font glyph detection
+                                                                        [boolean] [default: false]
+  --dry-run, --dry, --dryrun         Don't write anything to disk       [boolean] [default: false]
 ```
 
 Other great font tools
