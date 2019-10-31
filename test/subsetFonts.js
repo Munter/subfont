@@ -483,7 +483,6 @@ describe('subsetFonts', function() {
         expect(assetGraph, 'to contain asset', { fileName: 'index.html' });
 
         const index = assetGraph.findAssets({ fileName: 'index.html' })[0];
-
         expect(index.outgoingRelations, 'to satisfy', [
           {
             type: 'HtmlPreloadLink',
@@ -493,6 +492,16 @@ describe('subsetFonts', function() {
               isLoaded: true
             },
             as: 'font'
+          },
+          {
+            type: 'HtmlScript',
+            to: {
+              type: 'JavaScript',
+              isInline: true,
+              text: expect
+                .it('to contain', "new FontFace('Open Sans__subset','url(")
+                .and('to contain', '__subset')
+            }
           },
           {
             type: 'HtmlStyle',
@@ -529,16 +538,6 @@ describe('subsetFonts', function() {
             type: 'HtmlPreconnectLink',
             hrefType: 'absolute',
             href: 'https://fonts.gstatic.com'
-          },
-          {
-            type: 'HtmlScript',
-            to: {
-              type: 'JavaScript',
-              isInline: true,
-              text: expect
-                .it('to contain', 'document.fonts.forEach')
-                .and('to contain', '__subset')
-            }
           },
           {
             type: 'HtmlStyle',
