@@ -4210,6 +4210,36 @@ describe('subsetFonts', function() {
         expect(cssAsset.text, 'not to contain', 'font-style:italic');
       });
     });
+
+    describe('with a page that does need subsetting and one that does', function() {
+      // https://gitter.im/assetgraph/assetgraph?at=5dbb6438a3f0b17849c488cf
+      it('should not short circuit because the first page does not need any subset fonts', async function() {
+        const assetGraph = new AssetGraph({
+          root: pathModule.resolve(
+            __dirname,
+            '../testdata/subsetFonts/firstPageNoSubset/'
+          )
+        });
+        await assetGraph.loadAssets(['index-1.html', 'index-2.html']);
+        await assetGraph.populate();
+        const { fontInfo } = await subsetFonts(assetGraph, {
+          inlineFonts: false,
+          omitFallbacks: true
+        });
+
+        expect(fontInfo, 'to satisfy', [
+          { htmlAsset: /\/index-1\.html$/, fontUsages: [] },
+          {
+            htmlAsset: /\/index-2\.html$/,
+            fontUsages: [
+              {
+                text: ' ABCDEFGHIJKLM'
+              }
+            ]
+          }
+        ]);
+      });
+    });
   });
 
   describe('with non-truetype fonts in the mix', function() {
