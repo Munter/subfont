@@ -5,6 +5,7 @@ const expect = require('unexpected')
   .use(require('unexpected-sinon'));
 const subfont = require('../lib/subfont');
 const httpception = require('httpception');
+const proxyquire = require('proxyquire');
 const pathModule = require('path');
 const openSansBold = require('fs').readFileSync(
   pathModule.resolve(
@@ -405,6 +406,37 @@ describe('subfont', function() {
         mockConsole
       );
       expect(mockConsole.error, 'was not called');
+    });
+  });
+
+  describe('without fonttools available', function() {
+    const subfontWithoutFontTools = proxyquire('../lib/subfont', {
+      '../lib/subsetFonts': proxyquire('../lib/subsetFonts', {
+        './subsetLocalFont': null
+      })
+    });
+
+    // Regression test for pretty-bytes(NaN) error
+    it('should not fail', async function() {
+      const root = encodeURI(
+        `file://${pathModule.resolve(
+          __dirname,
+          '..',
+          'testdata',
+          'subsetFonts',
+          'local-mixed'
+        )}`
+      );
+
+      await subfontWithoutFontTools(
+        {
+          root,
+          inputFiles: [`${root}/index.html`],
+          silent: true,
+          dryRun: true
+        },
+        console
+      );
     });
   });
 });

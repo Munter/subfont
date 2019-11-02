@@ -10,7 +10,7 @@ describe('parseCommandLineOptions', function() {
         '--no-fallbacks',
         '--recursive'
       ]),
-      'to equal',
+      'to satisfy',
       {
         root: undefined,
         canonicalRoot: undefined,
