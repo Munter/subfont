@@ -435,8 +435,16 @@ describe('subfont', function() {
           silent: true,
           dryRun: true
         },
-        console
+        mockConsole
       );
+      expect(mockConsole.log, 'to have a call satisfying', () => {
+        mockConsole.log(
+          expect.it(
+            'to contain',
+            '400 : 9/214 codepoints used, no subset font created'
+          )
+        );
+      });
     });
   });
 });
