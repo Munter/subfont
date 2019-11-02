@@ -1,9 +1,57 @@
 const expect = require('unexpected')
   .clone()
-  .use(require('unexpected-resemble'));
+  .use(require('unexpected-resemble'))
+  .use(require('unexpected-check'));
+const { html } = require('html-generators/src/');
 const subsetFonts = require('../lib/subsetFonts');
 const AssetGraph = require('assetgraph');
 const pathModule = require('path');
+
+function escapeHtml(str) {
+  return str
+    .replace(/&/g, '&amp;')
+    .replace(/"/g, '&quot;')
+    .replace(/</g, '&lt;');
+}
+
+function stringify({ type, tag, value, attributes, children }) {
+  if (type === 'tag') {
+    const stringifiedAttributes = Object.keys(attributes)
+      .map(
+        attributeName =>
+          ` ${attributeName}="${escapeHtml(attributes[attributeName])}"`
+      )
+      .join('');
+    return `<${tag}${stringifiedAttributes}>${children
+      .map(stringify)
+      .join('')}</${tag}>`;
+  } else {
+    // type === 'text'
+    return escapeHtml(value);
+  }
+}
+
+function fixupUnsupportedHtmlConstructs(obj) {
+  if (obj.type === 'tag') {
+    if (
+      obj.tag === 'svg' ||
+      obj.tag === 'script' ||
+      obj.tag === 'style' ||
+      obj.tag === 'progress'
+    ) {
+      obj.tag = 'div';
+    }
+    if (obj.tag === 'object') {
+      delete obj.attributes.data;
+    }
+    if ('src' in obj.attributes) {
+      delete obj.attributes.src;
+    }
+    for (const child of obj.children) {
+      fixupUnsupportedHtmlConstructs(child);
+    }
+  }
+}
 
 async function screenshot(browser, assetGraph, bannedUrls) {
   const page = await browser.newPage();
@@ -60,7 +108,7 @@ describe('reference images', function() {
 
   expect.addAssertion(
     '<string> to render the same after subsetting <object?>',
-    async (expect, path, options = {}) => {
+    (expect, path, ...rest) => {
       const assetGraph = new AssetGraph({
         root: pathModule.resolve(
           __dirname,
@@ -70,6 +118,13 @@ describe('reference images', function() {
           path
         )
       });
+      return expect(assetGraph, 'to render the same after subsetting', ...rest);
+    }
+  );
+
+  expect.addAssertion(
+    '<object> to render the same after subsetting <object?>',
+    async (expect, assetGraph, options = {}) => {
       await assetGraph.loadAssets('index.html');
       await assetGraph.populate();
       const fontsBefore = assetGraph
@@ -78,15 +133,17 @@ describe('reference images', function() {
           asset.url.replace(assetGraph.root, 'https://example.com/')
         );
       const screenshotBefore = await screenshot(browser, assetGraph);
-      await subsetFonts(assetGraph, options);
-      const screenshotAfter = await screenshot(
-        browser,
-        assetGraph,
-        fontsBefore
-      );
-      await expect(screenshotAfter, 'to resemble', screenshotBefore, {
-        mismatchPercentage: 0
-      });
+      const { fontInfo } = await subsetFonts(assetGraph, options);
+      if (fontInfo.length > 0) {
+        const screenshotAfter = await screenshot(
+          browser,
+          assetGraph,
+          fontsBefore
+        );
+        await expect(screenshotAfter, 'to resemble', screenshotBefore, {
+          mismatchPercentage: 0
+        });
+      }
     }
   );
 
@@ -125,4 +182,66 @@ describe('reference images', function() {
       }
     });
   }
+
+  describe('generated html', function() {
+    it('should render the same before and after subsetting', async function() {
+      return expect(
+        async htmlObjectTree => {
+          fixupUnsupportedHtmlConstructs(htmlObjectTree);
+          htmlObjectTree.children[0].children.push({
+            type: 'tag',
+            tag: 'style',
+            attributes: [],
+            children: [
+              {
+                type: 'text',
+                value: `
+                @font-face {
+                  font-family: 'IBM Plex Sans';
+                  font-style: normal;
+                  font-weight: 400;
+                  src: url('IBMPlexSans-Regular.woff') format('woff');
+                }
+
+                @font-face {
+                  font-family: 'IBM Plex Sans';
+                  font-style: italic;
+                  font-weight: 400;
+                  src: url('IBMPlexSans-Italic.woff') format('woff');
+                }
+                body {
+                  font-family: 'IBM Plex Sans', sans-serif;
+                  font-style: normal;
+                  font-weight: 400;
+                }
+              `
+              }
+            ]
+          });
+
+          const assetGraph = new AssetGraph({
+            root: pathModule.resolve(
+              __dirname,
+              '..',
+              'testdata',
+              'subsetFonts',
+              'unused-variant-on-one-page'
+            )
+          });
+          const text = stringify(htmlObjectTree);
+          assetGraph.addAsset({
+            url: `${assetGraph.root}index.html`,
+            type: 'Html',
+            text
+          });
+          await assetGraph.populate();
+          return expect(assetGraph, 'to render the same after subsetting', {
+            omitFallbacks: true
+          });
+        },
+        'to be valid for all',
+        html
+      );
+    });
+  });
 });
