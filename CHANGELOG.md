@@ -1,3 +1,15 @@
+### v4.0.3 (2019-11-02)
+
+#### Pull requests
+
+- [#67](https://github.com/Munter/subfont/pull/67) Only warn about missing fonttools install if we are actually trying t… ([Peter Müller](mailto:munter@fumle.dk))
+
+#### Commits to master
+
+- [Fix accidental console.log during test](https://github.com/Munter/subfont/commit/2378e0c2da6aedbdcfc88d566e55829cc1da9b6d) ([Andreas Lind](mailto:andreaslindpetersen@gmail.com))
+- [Avoid failing in the code that counts the savings when fonttools isn't available](https://github.com/Munter/subfont/commit/8bb72e175fec3f53b1cd88a829caac3d03ddc75d) ([Andreas Lind](mailto:andreaslindpetersen@gmail.com))
+- [Add auto generated changelog on release](https://github.com/Munter/subfont/commit/5afe8b802d7bcda75adfc59652da891f216b4526) ([Peter Müller](mailto:munter@fumle.dk))
+
 ### v4.0.2 (2019-11-02)
 
 #### Pull requests
