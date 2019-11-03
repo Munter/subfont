@@ -68,7 +68,7 @@
     "eslint-plugin-node": "^10.0.0",
     "eslint-plugin-promise": "^4.0.1",
     "eslint-plugin-standard": "^4.0.0",
-    "html-generators": "github:sunesimonsen/html-generators",
+    "html-generators": "github:papandreou/html-generators#fix/excludedDescendants",
     "httpception": "^3.0.0",
     "mocha": "^6.2.2",
     "nyc": "^14.1.1",

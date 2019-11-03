@@ -2,7 +2,7 @@ const expect = require('unexpected')
   .clone()
   .use(require('unexpected-resemble'))
   .use(require('unexpected-check'));
-const { html } = require('html-generators/src/');
+const { html } = require('html-generators');
 const subsetFonts = require('../lib/subsetFonts');
 const AssetGraph = require('assetgraph');
 const pathModule = require('path');
@@ -33,14 +33,6 @@ function stringify({ type, tag, value, attributes, children }) {
 
 function fixupUnsupportedHtmlConstructs(obj) {
   if (obj.type === 'tag') {
-    if (
-      obj.tag === 'svg' ||
-      obj.tag === 'script' ||
-      obj.tag === 'style' ||
-      obj.tag === 'progress'
-    ) {
-      obj.tag = 'div';
-    }
     if (obj.tag === 'object') {
       delete obj.attributes.data;
     }
@@ -240,7 +232,9 @@ describe('reference images', function() {
           });
         },
         'to be valid for all',
-        html
+        html({
+          excludedDescendants: new Set(['svg', 'script', 'style', 'progress'])
+        })
       );
     });
   });
