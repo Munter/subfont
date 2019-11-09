@@ -2,7 +2,9 @@ const expect = require('unexpected')
   .clone()
   .use(require('unexpected-resemble'))
   .use(require('unexpected-check'));
+const fs = require('fs');
 const { html } = require('html-generators');
+const { stylesheet } = require('css-generators');
 const subsetFonts = require('../lib/subsetFonts');
 const AssetGraph = require('assetgraph');
 const pathModule = require('path');
@@ -176,11 +178,27 @@ describe('reference images', function() {
   }
 
   describe('generated html', function() {
+    let smileySvgBase64;
+
+    before(async function() {
+      smileySvgBase64 = `data:image/svg+xml;base64,${fs
+        .readFileSync(
+          pathModule.resolve(__dirname, '..', 'testdata', 'smiley.svg')
+        )
+        .toString('base64')}`;
+    });
+
     it('should render the same before and after subsetting', async function() {
       return expect(
-        async htmlObjectTree => {
+        async (htmlObjectTree, stylesheet) => {
           fixupUnsupportedHtmlConstructs(htmlObjectTree);
-          htmlObjectTree.children[0].children.push({
+
+          stylesheet = stylesheet.replace(
+            /url\([^\)]*\)/g,
+            `url(${smileySvgBase64})`
+          );
+          const head = htmlObjectTree.children[0];
+          head.children.push({
             type: 'tag',
             tag: 'style',
             attributes: [],
@@ -206,6 +224,8 @@ describe('reference images', function() {
                   font-style: normal;
                   font-weight: 400;
                 }
+
+                ${stylesheet}
               `
               }
             ]
@@ -234,7 +254,8 @@ describe('reference images', function() {
         'to be valid for all',
         html({
           excludedDescendants: new Set(['svg', 'script', 'style', 'progress'])
-        })
+        }),
+        stylesheet
       );
     });
   });

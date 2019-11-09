@@ -60,6 +60,7 @@
   },
   "devDependencies": {
     "coveralls": "^3.0.2",
+    "css-generators": "github:papandreou/css-generators",
     "eslint": "^6.5.1",
     "eslint-config-prettier": "^6.0.0",
     "eslint-config-standard": "^14.0.0",
