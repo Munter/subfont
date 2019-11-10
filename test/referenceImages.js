@@ -19,9 +19,10 @@ function escapeHtml(str) {
 function stringify({ type, tag, value, attributes, children }) {
   if (type === 'tag') {
     const stringifiedAttributes = Object.keys(attributes)
-      .map(
-        attributeName =>
-          ` ${attributeName}="${escapeHtml(attributes[attributeName])}"`
+      .map(attributeName =>
+        attributes[attributeName] === null
+          ? ` ${attributeName}`
+          : ` ${attributeName}="${escapeHtml(attributes[attributeName])}"`
       )
       .join('');
     return `<${tag}${stringifiedAttributes}>${children
