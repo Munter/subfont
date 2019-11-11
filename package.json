@@ -71,6 +71,7 @@
     "eslint-plugin-standard": "^4.0.0",
     "html-generators": "github:sunesimonsen/html-generators",
     "httpception": "^3.0.0",
+    "magicpen-prism": "^3.0.2",
     "mocha": "^6.2.2",
     "nyc": "^14.1.1",
     "offline-github-changelog": "^1.6.1",

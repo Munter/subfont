@@ -1,7 +1,8 @@
 const expect = require('unexpected')
   .clone()
   .use(require('unexpected-resemble'))
-  .use(require('unexpected-check'));
+  .use(require('unexpected-check'))
+  .use(require('magicpen-prism'));
 const fs = require('fs');
 const { html } = require('html-generators');
 const { stylesheet } = require('css-generators');
@@ -120,7 +121,11 @@ describe('reference images', function() {
   expect.addAssertion(
     '<object> to render the same after subsetting <object?>',
     async (expect, assetGraph, options = {}) => {
-      await assetGraph.loadAssets('index.html');
+      const [htmlAsset] = await assetGraph.loadAssets('index.html');
+      expect.subjectOutput = output => {
+        output.code(htmlAsset.text, 'html');
+      };
+
       await assetGraph.populate();
       const fontsBefore = assetGraph
         .findAssets({ type: { $in: ['Ttf', 'Woff', 'Woff2', 'Eot'] } })
