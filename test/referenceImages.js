@@ -200,10 +200,9 @@ describe('reference images', function() {
         async (htmlObjectTree, stylesheet) => {
           fixupUnsupportedHtmlConstructs(htmlObjectTree);
 
-          stylesheet = stylesheet.replace(
-            /url\([^\)]*\)/g,
-            `url(${smileySvgBase64})`
-          );
+          stylesheet = stylesheet
+            .replace(/url\([^\)]*\)/g, `url(${smileySvgBase64})`)
+            .replace(/all: initial;/g, ''); // Makes the contents of stylesheets visible
           const head = htmlObjectTree.children[0];
           head.children.push({
             type: 'tag',
