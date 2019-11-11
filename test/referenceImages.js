@@ -122,8 +122,9 @@ describe('reference images', function() {
     '<object> to render the same after subsetting <object?>',
     async (expect, assetGraph, options = {}) => {
       const [htmlAsset] = await assetGraph.loadAssets('index.html');
+      const originalText = htmlAsset.text;
       expect.subjectOutput = output => {
-        output.code(htmlAsset.text, 'html');
+        output.code(originalText, 'html');
       };
 
       await assetGraph.populate();
