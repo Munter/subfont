@@ -266,4 +266,66 @@ describe('getCssRulesByProperty', function() {
       });
     });
   });
+
+  describe('with a different default namespace', function() {
+    describe('given as a quoted string', function() {
+      it('should annotate the style rules with the default namespace', function() {
+        const result = getRules(
+          ['font-size'],
+          '@namespace "foo"; h1 { font-size: 20px }',
+          []
+        );
+
+        expect(result, 'to satisfy', {
+          'font-size': [
+            {
+              selector: 'h1',
+              namespaceURI: 'foo',
+              value: '20px'
+            }
+          ]
+        });
+      });
+    });
+
+    describe('given as a url(...)', function() {
+      it('should annotate the style rules with the default namespace', function() {
+        const result = getRules(
+          ['font-size'],
+          '@namespace url(foo); h1 { font-size: 20px }',
+          []
+        );
+
+        expect(result, 'to satisfy', {
+          'font-size': [
+            {
+              selector: 'h1',
+              namespaceURI: 'foo',
+              value: '20px'
+            }
+          ]
+        });
+      });
+    });
+
+    describe('given as a url("...")', function() {
+      it('should annotate the style rules with the default namespace', function() {
+        const result = getRules(
+          ['font-size'],
+          '@namespace url("foo"); h1 { font-size: 20px }',
+          []
+        );
+
+        expect(result, 'to satisfy', {
+          'font-size': [
+            {
+              selector: 'h1',
+              namespaceURI: 'foo',
+              value: '20px'
+            }
+          ]
+        });
+      });
+    });
+  });
 });
