@@ -1,3 +1,19 @@
+### v4.0.4 (2019-11-15)
+
+#### Pull requests
+
+- [#70](https://github.com/Munter/subfont/pull/70) getCssRules...: Add support for default XML namespaces in stylesheets ([Andreas Lind](mailto:andreaslindpetersen@gmail.com))
+- [#67](https://github.com/Munter/subfont/pull/67) Only warn about missing fonttools install if we are actually trying t… ([Peter Müller](mailto:munter@fumle.dk))
+
+#### Commits to master
+
+- [Update font-snapper to ^1.0.1](https://github.com/Munter/subfont/commit/e90ea786ead4a803a68d5d442b1d1a98474afd16) ([Andreas Lind](mailto:andreaslindpetersen@gmail.com))
+- [Reference image tests: Close pages after screenshotting them](https://github.com/Munter/subfont/commit/7ae9494535c9fbcde4328aa43d98de43eddc0d01) ([Andreas Lind](mailto:andreaslindpetersen@gmail.com))
+- [Add vscode debugger launch configuration for the test suite](https://github.com/Munter/subfont/commit/f8f9abc42909c556765555cc49f44eb40a9194db) ([Andreas Lind](mailto:andreaslindpetersen@gmail.com))
+- [Guard against an already detached relation when cleaning up](https://github.com/Munter/subfont/commit/6392fc359222772c9033a58a9020e3b35487d019) ([Andreas Lind](mailto:andreaslindpetersen@gmail.com))
+- [Fix accidental console.log during test](https://github.com/Munter/subfont/commit/2378e0c2da6aedbdcfc88d566e55829cc1da9b6d) ([Andreas Lind](mailto:andreaslindpetersen@gmail.com))
+- [+2 more](https://github.com/Munter/subfont/compare/v4.0.2...v4.0.4)
+
 ### v4.0.2 (2019-11-02)
 
 #### Pull requests
