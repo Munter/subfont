@@ -80,7 +80,7 @@
     "puppeteer": "^1.19.0",
     "sinon": "^7.5.0",
     "unexpected": "^11.8.0",
-    "unexpected-check": "^2.2.0",
+    "unexpected-check": "^2.3.1",
     "unexpected-resemble": "^4.1.0",
     "unexpected-set": "^2.0.1",
     "unexpected-sinon": "^10.11.2"
