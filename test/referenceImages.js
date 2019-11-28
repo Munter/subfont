@@ -223,6 +223,8 @@ describe('reference images', function() {
             )
           });
           const text = stringify(htmlObjectTree);
+          // FIXME: Remove this (useful for debugging right now)
+          console.log(text);
           assetGraph.addAsset({
             url: `${assetGraph.root}index.html`,
             type: 'Html',
