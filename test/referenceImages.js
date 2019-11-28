@@ -9,31 +9,7 @@ const { stylesheet } = require('css-generators');
 const subsetFonts = require('../lib/subsetFonts');
 const AssetGraph = require('assetgraph');
 const pathModule = require('path');
-
-function escapeHtml(str) {
-  return str
-    .replace(/&/g, '&amp;')
-    .replace(/"/g, '&quot;')
-    .replace(/</g, '&lt;');
-}
-
-function stringify({ type, tag, value, attributes, children }) {
-  if (type === 'tag') {
-    const stringifiedAttributes = Object.keys(attributes)
-      .map(attributeName =>
-        attributes[attributeName] === null
-          ? ` ${attributeName}`
-          : ` ${attributeName}="${escapeHtml(attributes[attributeName])}"`
-      )
-      .join('');
-    return `<${tag}${stringifiedAttributes}>${children
-      .map(stringify)
-      .join('')}</${tag}>`;
-  } else {
-    // type === 'text'
-    return escapeHtml(value);
-  }
-}
+const stringify = require('html-generators/src/stringify');
 
 function fixupUnsupportedHtmlConstructs(obj) {
   if (obj.type === 'tag') {
