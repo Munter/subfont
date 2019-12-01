@@ -179,6 +179,7 @@ describe('reference images', function() {
           stylesheet = stylesheet
             .replace(/url\([^\)]*\)/g, `url(${smileySvgBase64})`)
             .replace(/all: (?:initial|unset);/g, '') // Makes the contents of stylesheets visible
+            .replace(/font-variant-caps: [^;]+;/, '') // See build #260.3 failure
             .replace(/oblique [0-9.]+\w+/, 'oblique'); // oblique with an angle is not yet fully standardized or implemented in font-snapper
           const head = htmlObjectTree.children[0];
           head.children.push({
