@@ -177,7 +177,7 @@ describe('reference images', function() {
           fixupUnsupportedHtmlConstructs(htmlObjectTree);
 
           stylesheet = stylesheet
-            .replace(/url\([^\)]*\)/g, `url(${smileySvgBase64})`)
+            .replace(/url\([^)]*\)/g, `url(${smileySvgBase64})`)
             .replace(/all: (?:initial|unset);/g, '') // Makes the contents of stylesheets visible
             .replace(/font-variant-caps: [^;]+;/, '') // See build #260.3 failure
             .replace(/oblique [0-9.]+\w+/, 'oblique'); // oblique with an angle is not yet fully standardized or implemented in font-snapper
