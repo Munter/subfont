@@ -59,12 +59,12 @@
     "yargs": "^14.2.0"
   },
   "devDependencies": {
-    "coveralls": "^3.0.2",
-    "eslint": "^6.5.1",
-    "eslint-config-prettier": "^6.0.0",
+    "coveralls": "^3.0.9",
+    "eslint": "^6.7.2",
+    "eslint-config-prettier": "^6.7.0",
     "eslint-config-standard": "^14.0.0",
-    "eslint-plugin-import": "^2.17.3",
-    "eslint-plugin-mocha": "^6.0.0",
+    "eslint-plugin-import": "^2.19.1",
+    "eslint-plugin-mocha": "^6.2.2",
     "eslint-plugin-node": "^10.0.0",
     "eslint-plugin-promise": "^4.0.1",
     "eslint-plugin-standard": "^4.0.0",
@@ -72,12 +72,12 @@
     "mocha": "^6.2.2",
     "nyc": "^14.1.1",
     "offline-github-changelog": "^1.6.1",
-    "prettier": "~1.18.2",
+    "prettier": "^1.19.1",
     "proxyquire": "^2.1.1",
     "puppeteer": "^1.19.0",
     "sinon": "^7.5.0",
-    "unexpected": "^11.8.0",
-    "unexpected-resemble": "^4.1.0",
+    "unexpected": "^11.8.1",
+    "unexpected-resemble": "^4.3.0",
     "unexpected-set": "^2.0.1",
     "unexpected-sinon": "^10.11.2"
   }
