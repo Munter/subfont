@@ -1,3 +1,36 @@
+### v4.0.5 (2019-12-11)
+
+- [Update dev dependencies](https://github.com/Munter/subfont/commit/c6ed229b05a39c5dfe21278b0b51f44050ab6efd) ([Peter Müller](mailto:munter@fumle.dk))
+- [Update to assetgraph 6.0.4](https://github.com/Munter/subfont/commit/d49a23a3347c1370410c17cc44283c130c108bc3) ([Peter Müller](mailto:munter@fumle.dk))
+- [Add missing end paren in status message](https://github.com/Munter/subfont/commit/ff4e87cafac535fb7bdf38cd41b811bd20cc5566) ([Andreas Lind](mailto:andreaslindpetersen@gmail.com))
+- [Update font-tracer to ^1.3.1](https://github.com/Munter/subfont/commit/e5652edcc5ecaa2ab9f0c13a7f6de703ec0b806e) ([Andreas Lind](mailto:andreaslindpetersen@gmail.com))
+- [Update font-tracer to ^1.3.0](https://github.com/Munter/subfont/commit/70f8292a3eba429973475b745bfd41d5f8b9b19d) ([Andreas Lind](mailto:andreaslindpetersen@gmail.com))
+
+### v4.0.4 (2019-11-16)
+
+#### Pull requests
+
+- [#70](https://github.com/Munter/subfont/pull/70) getCssRules...: Add support for default XML namespaces in stylesheets ([Andreas Lind](mailto:andreaslindpetersen@gmail.com))
+
+#### Commits to master
+
+- [Update font-snapper to ^1.0.1](https://github.com/Munter/subfont/commit/e90ea786ead4a803a68d5d442b1d1a98474afd16) ([Andreas Lind](mailto:andreaslindpetersen@gmail.com))
+- [Reference image tests: Close pages after screenshotting them](https://github.com/Munter/subfont/commit/7ae9494535c9fbcde4328aa43d98de43eddc0d01) ([Andreas Lind](mailto:andreaslindpetersen@gmail.com))
+- [Add vscode debugger launch configuration for the test suite](https://github.com/Munter/subfont/commit/f8f9abc42909c556765555cc49f44eb40a9194db) ([Andreas Lind](mailto:andreaslindpetersen@gmail.com))
+- [Guard against an already detached relation when cleaning up](https://github.com/Munter/subfont/commit/6392fc359222772c9033a58a9020e3b35487d019) ([Andreas Lind](mailto:andreaslindpetersen@gmail.com))
+
+### v4.0.3 (2019-11-02)
+
+#### Pull requests
+
+- [#67](https://github.com/Munter/subfont/pull/67) Only warn about missing fonttools install if we are actually trying t… ([Peter Müller](mailto:munter@fumle.dk))
+
+#### Commits to master
+
+- [Fix accidental console.log during test](https://github.com/Munter/subfont/commit/2378e0c2da6aedbdcfc88d566e55829cc1da9b6d) ([Andreas Lind](mailto:andreaslindpetersen@gmail.com))
+- [Avoid failing in the code that counts the savings when fonttools isn't available](https://github.com/Munter/subfont/commit/8bb72e175fec3f53b1cd88a829caac3d03ddc75d) ([Andreas Lind](mailto:andreaslindpetersen@gmail.com))
+- [Add auto generated changelog on release](https://github.com/Munter/subfont/commit/5afe8b802d7bcda75adfc59652da891f216b4526) ([Peter Müller](mailto:munter@fumle.dk))
+
 ### v4.0.2 (2019-11-02)
 
 #### Pull requests

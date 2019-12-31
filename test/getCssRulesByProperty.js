@@ -45,6 +45,7 @@ describe('getCssRulesByProperty', function() {
           {
             selector: 'h1',
             predicates: {},
+            namespaceURI: 'http://www.w3.org/1999/xhtml',
             specificityArray: [0, 0, 0, 1],
             prop: 'color',
             value: 'red',
@@ -53,6 +54,7 @@ describe('getCssRulesByProperty', function() {
           {
             selector: 'h2',
             predicates: {},
+            namespaceURI: 'http://www.w3.org/1999/xhtml',
             specificityArray: [0, 0, 0, 1],
             prop: 'color',
             value: 'blue',
@@ -74,6 +76,7 @@ describe('getCssRulesByProperty', function() {
           {
             selector: undefined,
             predicates: {},
+            namespaceURI: 'http://www.w3.org/1999/xhtml',
             specificityArray: [1, 0, 0, 0],
             prop: 'color',
             value: 'red',
@@ -96,6 +99,7 @@ describe('getCssRulesByProperty', function() {
             {
               selector: 'h1',
               predicates: {},
+              namespaceURI: 'http://www.w3.org/1999/xhtml',
               specificityArray: [0, 0, 0, 1],
               prop: 'color',
               value: 'red',
@@ -104,6 +108,7 @@ describe('getCssRulesByProperty', function() {
             {
               selector: 'h1',
               predicates: {},
+              namespaceURI: 'http://www.w3.org/1999/xhtml',
               specificityArray: [0, 0, 0, 1],
               prop: 'color',
               value: 'blue',
@@ -130,6 +135,7 @@ describe('getCssRulesByProperty', function() {
           {
             selector: 'h1',
             predicates: {},
+            namespaceURI: 'http://www.w3.org/1999/xhtml',
             specificityArray: [0, 0, 0, 1],
             prop: 'font',
             value: '15px serif',
@@ -140,6 +146,7 @@ describe('getCssRulesByProperty', function() {
           {
             selector: 'h1',
             predicates: {},
+            namespaceURI: 'http://www.w3.org/1999/xhtml',
             specificityArray: [0, 0, 0, 1],
             prop: 'font',
             value: '15px serif',
@@ -163,6 +170,7 @@ describe('getCssRulesByProperty', function() {
           {
             selector: 'h1',
             predicates: {},
+            namespaceURI: 'http://www.w3.org/1999/xhtml',
             specificityArray: [0, 0, 0, 1],
             prop: 'font',
             value: '15px serif',
@@ -173,6 +181,7 @@ describe('getCssRulesByProperty', function() {
           {
             selector: 'h1',
             predicates: {},
+            namespaceURI: 'http://www.w3.org/1999/xhtml',
             specificityArray: [0, 0, 0, 1],
             prop: 'font',
             value: '15px serif',
@@ -183,6 +192,7 @@ describe('getCssRulesByProperty', function() {
           {
             selector: 'h1',
             predicates: {},
+            namespaceURI: 'http://www.w3.org/1999/xhtml',
             specificityArray: [0, 0, 0, 1],
             prop: 'font',
             value: '15px serif',
@@ -193,6 +203,7 @@ describe('getCssRulesByProperty', function() {
           {
             selector: 'h1',
             predicates: {},
+            namespaceURI: 'http://www.w3.org/1999/xhtml',
             specificityArray: [0, 0, 0, 1],
             prop: 'font',
             value: '15px serif',
@@ -216,6 +227,7 @@ describe('getCssRulesByProperty', function() {
           {
             selector: 'h1',
             predicates: {},
+            namespaceURI: 'http://www.w3.org/1999/xhtml',
             specificityArray: [0, 0, 0, 1],
             prop: 'font',
             value: '15px serif',
@@ -226,6 +238,7 @@ describe('getCssRulesByProperty', function() {
           {
             selector: 'h1',
             predicates: {},
+            namespaceURI: 'http://www.w3.org/1999/xhtml',
             specificityArray: [0, 0, 0, 1],
             prop: 'font-size',
             value: '10px',
@@ -234,6 +247,7 @@ describe('getCssRulesByProperty', function() {
           {
             selector: 'h1',
             predicates: {},
+            namespaceURI: 'http://www.w3.org/1999/xhtml',
             specificityArray: [0, 0, 0, 1],
             prop: 'font',
             value: '15px serif',
@@ -242,12 +256,75 @@ describe('getCssRulesByProperty', function() {
           {
             selector: 'h1',
             predicates: {},
+            namespaceURI: 'http://www.w3.org/1999/xhtml',
             specificityArray: [0, 0, 0, 1],
             prop: 'font-size',
             value: '20px',
             important: false
           }
         ]
+      });
+    });
+  });
+
+  describe('with a different default namespace', function() {
+    describe('given as a quoted string', function() {
+      it('should annotate the style rules with the default namespace', function() {
+        const result = getRules(
+          ['font-size'],
+          '@namespace "foo"; h1 { font-size: 20px }',
+          []
+        );
+
+        expect(result, 'to satisfy', {
+          'font-size': [
+            {
+              selector: 'h1',
+              namespaceURI: 'foo',
+              value: '20px'
+            }
+          ]
+        });
+      });
+    });
+
+    describe('given as a url(...)', function() {
+      it('should annotate the style rules with the default namespace', function() {
+        const result = getRules(
+          ['font-size'],
+          '@namespace url(foo); h1 { font-size: 20px }',
+          []
+        );
+
+        expect(result, 'to satisfy', {
+          'font-size': [
+            {
+              selector: 'h1',
+              namespaceURI: 'foo',
+              value: '20px'
+            }
+          ]
+        });
+      });
+    });
+
+    describe('given as a url("...")', function() {
+      it('should annotate the style rules with the default namespace', function() {
+        const result = getRules(
+          ['font-size'],
+          '@namespace url("foo"); h1 { font-size: 20px }',
+          []
+        );
+
+        expect(result, 'to satisfy', {
+          'font-size': [
+            {
+              selector: 'h1',
+              namespaceURI: 'foo',
+              value: '20px'
+            }
+          ]
+        });
       });
     });
   });

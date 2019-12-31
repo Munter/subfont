@@ -177,7 +177,14 @@ describe('subsetFonts', function() {
       });
 
       expect(infos, 'to satisfy', [
-        expect.it('to be an', Error) // Can't get the right type of error due to limited mocking abilities
+        expect.it(
+          'to have message',
+          'Local subsetting is not possible because fonttools are not installed. Falling back to only subsetting Google Fonts. Run `pip install fonttools brotli zopfli` to enable local font subsetting'
+        ),
+        expect.it(
+          'to have message',
+          'Unoptimised fonts:\n - testdata/subsetFonts/local-single/OpenSans.ttf'
+        )
       ]);
     });
 
@@ -236,6 +243,10 @@ describe('subsetFonts', function() {
         {
           message:
             'Local subsetting is not possible because fonttools are not installed. Falling back to only subsetting Google Fonts. Run `pip install fonttools brotli zopfli` to enable local font subsetting'
+        },
+        {
+          message:
+            'Unoptimised fonts:\n - testdata/subsetFonts/existing-prefetch/OpenSans.ttf'
         },
         {
           message:

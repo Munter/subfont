@@ -44,7 +44,9 @@ async function screenshot(browser, assetGraph, bannedUrls) {
       );
     }
   }
-  return page.screenshot();
+  const screenshot = await page.screenshot();
+  await page.close();
+  return screenshot;
 }
 
 describe('reference images', function() {
