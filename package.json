@@ -1,6 +1,6 @@
 {
   "name": "subfont",
-  "version": "4.0.4",
+  "version": "4.0.5",
   "description": "Speeds up your pages initial paint by automatically subsetting local or Google fonts and loading them optimally",
   "engines": {
     "node": ">=8.0.0"
@@ -43,13 +43,13 @@
   "homepage": "https://github.com/Munter/subfont#readme",
   "dependencies": {
     "@gustavnikolaj/async-main-wrap": "^3.0.1",
-    "assetgraph": "^6.0.3",
+    "assetgraph": "^6.0.4",
     "css-font-parser-papandreou": "^0.2.3-patch1",
     "css-font-weight-names": "^0.2.1",
     "css-list-helpers": "^2.0.0",
     "font-family-papandreou": "^0.2.0-patch1",
     "font-snapper": "^1.0.1",
-    "font-tracer": "^1.3.0",
+    "font-tracer": "^1.3.1",
     "fontkit": "^1.8.0",
     "lodash.groupby": "^4.6.0",
     "postcss-value-parser": "^4.0.2",
@@ -59,13 +59,13 @@
     "yargs": "^14.2.0"
   },
   "devDependencies": {
-    "coveralls": "^3.0.2",
+    "coveralls": "^3.0.9",
     "css-generators": "github:papandreou/css-generators#a8fc73b216ab7861d13ef70cd8554010a22b1d79",
-    "eslint": "^6.5.1",
-    "eslint-config-prettier": "^6.0.0",
+    "eslint": "^6.7.2",
+    "eslint-config-prettier": "^6.7.0",
     "eslint-config-standard": "^14.0.0",
-    "eslint-plugin-import": "^2.17.3",
-    "eslint-plugin-mocha": "^6.0.0",
+    "eslint-plugin-import": "^2.19.1",
+    "eslint-plugin-mocha": "^6.2.2",
     "eslint-plugin-node": "^10.0.0",
     "eslint-plugin-promise": "^4.0.1",
     "eslint-plugin-standard": "^4.0.0",
@@ -75,13 +75,13 @@
     "mocha": "^6.2.2",
     "nyc": "^14.1.1",
     "offline-github-changelog": "^1.6.1",
-    "prettier": "~1.18.2",
+    "prettier": "^1.19.1",
     "proxyquire": "^2.1.1",
     "puppeteer": "^1.19.0",
     "sinon": "^7.5.0",
-    "unexpected": "^11.8.0",
+    "unexpected": "^11.8.1",
     "unexpected-check": "^2.3.1",
-    "unexpected-resemble": "^4.1.0",
+    "unexpected-resemble": "^4.3.0",
     "unexpected-set": "^2.0.1",
     "unexpected-sinon": "^10.11.2"
   }
