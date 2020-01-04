@@ -849,7 +849,7 @@ describe('subsetFonts', function() {
             '../testdata/subsetFonts/inline-subsets/'
           )
         });
-        await assetGraph.loadAssets('index.html');
+        const [htmlAsset] = await assetGraph.loadAssets('index.html');
         await assetGraph.populate({
           followRelations: {
             crossorigin: false
@@ -884,6 +884,8 @@ describe('subsetFonts', function() {
             }
           }
         ]);
+        // Regression test for https://github.com/Munter/subfont/pull/73
+        expect(htmlAsset.text, 'not to contain', '<script>try{new FontFace');
       });
     });
 
