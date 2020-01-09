@@ -6,7 +6,7 @@
     "node": ">=8.0.0"
   },
   "scripts": {
-    "lint": "eslint .",
+    "lint": "eslint . && prettier --check '**/*.js'",
     "test": "mocha && npm run lint",
     "travis": "npm run coverage && npm run lint",
     "coverage": "nyc --reporter=lcov --reporter=text -- mocha --reporter dot",
