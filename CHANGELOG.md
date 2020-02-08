@@ -1,4 +1,13 @@
-### v4.0.5 (2019-12-11)
+### v4.1.1 (2020-01-04)
+
+- [Add regression test](https://github.com/Munter/subfont/commit/46eddce9c09268dbde459b1f98fe5cec9e4c98f5) ([Andreas Lind](mailto:andreaslindpetersen@gmail.com))
+- [Don't attempt to prefetch inlined fonts](https://github.com/Munter/subfont/commit/844e21e53b72ac7c7efe2f4c0549a71ade5d823c) ([Jesse Farebrother](mailto:jessefarebro@gmail.com))
+
+### v4.1.0 (2020-01-03)
+
+- [#72](https://github.com/Munter/subfont/pull/72) Add subsetPerPage & format options ([Jesse Farebrother](mailto:jessefarebro@gmail.com))
+
+### v4.0.5 (2019-12-12)
 
 - [Update dev dependencies](https://github.com/Munter/subfont/commit/c6ed229b05a39c5dfe21278b0b51f44050ab6efd) ([Peter Müller](mailto:munter@fumle.dk))
 - [Update to assetgraph 6.0.4](https://github.com/Munter/subfont/commit/d49a23a3347c1370410c17cc44283c130c108bc3) ([Peter Müller](mailto:munter@fumle.dk))
@@ -19,8 +28,7 @@
 - [Add vscode debugger launch configuration for the test suite](https://github.com/Munter/subfont/commit/f8f9abc42909c556765555cc49f44eb40a9194db) ([Andreas Lind](mailto:andreaslindpetersen@gmail.com))
 - [Guard against an already detached relation when cleaning up](https://github.com/Munter/subfont/commit/6392fc359222772c9033a58a9020e3b35487d019) ([Andreas Lind](mailto:andreaslindpetersen@gmail.com))
 
-### v4.0.3 (2019-11-02)
-
+### v4.0.3
 #### Pull requests
 
 - [#67](https://github.com/Munter/subfont/pull/67) Only warn about missing fonttools install if we are actually trying t… ([Peter Müller](mailto:munter@fumle.dk))

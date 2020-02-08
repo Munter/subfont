@@ -849,7 +849,7 @@ describe('subsetFonts', function() {
             '../testdata/subsetFonts/inline-subsets/'
           )
         });
-        await assetGraph.loadAssets('index.html');
+        const [htmlAsset] = await assetGraph.loadAssets('index.html');
         await assetGraph.populate({
           followRelations: {
             crossorigin: false
@@ -884,6 +884,8 @@ describe('subsetFonts', function() {
             }
           }
         ]);
+        // Regression test for https://github.com/Munter/subfont/pull/73
+        expect(htmlAsset.text, 'not to contain', '<script>try{new FontFace');
       });
     });
 
@@ -2946,6 +2948,33 @@ describe('subsetFonts', function() {
         })[0];
         expect(cssAsset.text, 'to contain', 'font-display:fallback;');
       });
+    });
+
+    // Regression test for https://github.com/Munter/subfont/issues/74
+    it('should work with omitFallbacks:true and Google Web Fonts', async function() {
+      httpception(defaultGoogleFontSubsetMock);
+
+      const assetGraph = new AssetGraph({
+        root: pathModule.resolve(
+          __dirname,
+          '../testdata/subsetFonts/html-link/'
+        )
+      });
+      const [htmlAsset] = await assetGraph.loadAssets('index.html');
+      await assetGraph.populate({
+        followRelations: {
+          crossorigin: false
+        }
+      });
+      await subsetFontsWithoutFontTools(assetGraph, {
+        inlineCss: true,
+        omitFallbacks: true
+      });
+      expect(
+        htmlAsset.text,
+        'not to contain',
+        '<link href="https://fonts.googleapis.com'
+      );
     });
   });
 
