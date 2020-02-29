@@ -4250,9 +4250,9 @@ describe('subsetFonts', function() {
       });
     });
 
-    describe('with a page that does need subsetting and one that does', function() {
+    describe('with a page that does NOT need subsetting and one that does', function() {
       // https://gitter.im/assetgraph/assetgraph?at=5dbb6438a3f0b17849c488cf
-      it('should not short circuit because the first page does not need any subset fonts', async function() {
+      it('should not short circuit with explicit subsetPerPage:true option because the first page does not need any subset fonts', async function() {
         const assetGraph = new AssetGraph({
           root: pathModule.resolve(
             __dirname,
