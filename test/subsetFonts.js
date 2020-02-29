@@ -4263,11 +4263,15 @@ describe('subsetFonts', function() {
         await assetGraph.populate();
         const { fontInfo } = await subsetFonts(assetGraph, {
           inlineFonts: false,
-          omitFallbacks: true
+          omitFallbacks: true,
+          subsetPerPage: true
         });
 
         expect(fontInfo, 'to satisfy', [
-          { htmlAsset: /\/index-1\.html$/, fontUsages: [] },
+          {
+            htmlAsset: /\/index-1\.html$/,
+            fontUsages: []
+          },
           {
             htmlAsset: /\/index-2\.html$/,
             fontUsages: [
