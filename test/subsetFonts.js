@@ -4279,6 +4279,34 @@ describe('subsetFonts', function() {
         ]);
       });
     });
+
+    // From https://github.com/Munter/subfont/pull/84
+    describe('with two pages that share the same CSS', function() {
+      it('should discover subsets on both pages', async function() {
+        const assetGraph = new AssetGraph({
+          root: pathModule.resolve(
+            __dirname,
+            '../testdata/subsetFonts/multi-page-with-same-local-style-file/'
+          )
+        });
+        await assetGraph.loadAssets(['index.html', 'subindex.html']);
+        await assetGraph.populate();
+        const { fontInfo } = await subsetFonts(assetGraph, {
+          omitFallbacks: true
+        });
+        expect(fontInfo, 'to have length', 2);
+        expect(fontInfo, 'to satisfy', [
+          {
+            htmlAsset: /\/index\.html$/,
+            fontUsages: [{ text: 'Wdlor' }, { text: ' ,Hbdehilmnosux' }]
+          },
+          {
+            htmlAsset: /\/subindex\.html$/,
+            fontUsages: [{ text: ' abcgko' }, { text: ' ,Hbdehilmnosux' }]
+          }
+        ]);
+      });
+    });
   });
 
   describe('with non-truetype fonts in the mix', function() {

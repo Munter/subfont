@@ -1,0 +1,26 @@
+@font-face {
+  font-family: 'jetbrain';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url(../fonts/JetBrainsMono-Regular.ttf) format('truetype');
+}
+@font-face {
+  font-family: 'jetbrain';
+  font-style: italic;
+  font-weight: 400;
+  font-display: swap;
+  src: url(../fonts/JetBrainsMono-Italic.ttf) format('truetype');
+}
+@font-face {
+  font-family: 'jetbrain';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url(../fonts/JetBrainsMono-Bold.ttf) format('truetype');
+}
+
+
+body{
+    font-family: 'jetbrain', serif;
+}
