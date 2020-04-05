@@ -1,3 +1,7 @@
+### v4.2.1 (2020-04-05)
+
+- [#85](https://github.com/Munter/subfont/pull/85) Don't break in --no-fallbacks mode when multiple pages share the same CSS ([Andreas Lind](mailto:andreas.lind@peakon.com), [suziwen](mailto:suziwen1@gmail.com))
+
 ### v4.2.0 (2020-02-19)
 
 #### Pull requests
