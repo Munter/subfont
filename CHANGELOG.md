@@ -1,3 +1,7 @@
+### v4.2.2 (2020-04-11)
+
+- [#87](https://github.com/Munter/subfont/pull/87) Fix uniq-ification of strings that might contain non-UTF-16 chars ([Andreas Lind](mailto:andreas.lind@peakon.com))
+
 ### v4.2.1 (2020-04-05)
 
 - [#85](https://github.com/Munter/subfont/pull/85) Don't break in --no-fallbacks mode when multiple pages share the same CSS ([Andreas Lind](mailto:andreas.lind@peakon.com), [suziwen](mailto:suziwen1@gmail.com))
@@ -7,15 +11,12 @@
 #### Pull requests
 
 - [#76](https://github.com/Munter/subfont/pull/76) Fix the prettier setup ([Andreas Lind](mailto:andreas.lind@peakon.com))
+- [#75](https://github.com/Munter/subfont/pull/75) Fix omitFallbacks with Google Web Fonts ([Andreas Lind](mailto:andreas.lind@peakon.com))
 
 #### Commits to master
 
 - [Switch to the official css-font-parser now that bramstein\/css-font-parser\#7 has been merged and released](https://github.com/Munter/subfont/commit/457c7f0e4cef0a8c1bd8f816c23ace64c9987424) ([Andreas Lind](mailto:andreaslindpetersen@gmail.com))
 - [Don't populate source map relations](https://github.com/Munter/subfont/commit/5c07218b6f1dcc6fad88702a3bcb7b33bf9df54e) ([Andreas Lind](mailto:andreaslindpetersen@gmail.com))
-
-### v4.1.2 (2020-01-09)
-
-- [#75](https://github.com/Munter/subfont/pull/75) Fix omitFallbacks with Google Web Fonts ([Andreas Lind](mailto:andreas.lind@peakon.com))
 
 ### v4.1.1 (2020-01-04)
 
@@ -39,7 +40,6 @@
 #### Pull requests
 
 - [#70](https://github.com/Munter/subfont/pull/70) getCssRules...: Add support for default XML namespaces in stylesheets ([Andreas Lind](mailto:andreaslindpetersen@gmail.com))
-- [#67](https://github.com/Munter/subfont/pull/67) Only warn about missing fonttools install if we are actually trying t… ([Peter Müller](mailto:munter@fumle.dk))
 
 #### Commits to master
 
@@ -47,8 +47,17 @@
 - [Reference image tests: Close pages after screenshotting them](https://github.com/Munter/subfont/commit/7ae9494535c9fbcde4328aa43d98de43eddc0d01) ([Andreas Lind](mailto:andreaslindpetersen@gmail.com))
 - [Add vscode debugger launch configuration for the test suite](https://github.com/Munter/subfont/commit/f8f9abc42909c556765555cc49f44eb40a9194db) ([Andreas Lind](mailto:andreaslindpetersen@gmail.com))
 - [Guard against an already detached relation when cleaning up](https://github.com/Munter/subfont/commit/6392fc359222772c9033a58a9020e3b35487d019) ([Andreas Lind](mailto:andreaslindpetersen@gmail.com))
+
+### v4.0.3
+#### Pull requests
+
+- [#67](https://github.com/Munter/subfont/pull/67) Only warn about missing fonttools install if we are actually trying t… ([Peter Müller](mailto:munter@fumle.dk))
+
+#### Commits to master
+
 - [Fix accidental console.log during test](https://github.com/Munter/subfont/commit/2378e0c2da6aedbdcfc88d566e55829cc1da9b6d) ([Andreas Lind](mailto:andreaslindpetersen@gmail.com))
-- [+2 more](https://github.com/Munter/subfont/compare/v4.0.2...v4.0.4)
+- [Avoid failing in the code that counts the savings when fonttools isn't available](https://github.com/Munter/subfont/commit/8bb72e175fec3f53b1cd88a829caac3d03ddc75d) ([Andreas Lind](mailto:andreaslindpetersen@gmail.com))
+- [Add auto generated changelog on release](https://github.com/Munter/subfont/commit/5afe8b802d7bcda75adfc59652da891f216b4526) ([Peter Müller](mailto:munter@fumle.dk))
 
 ### v4.0.2 (2019-11-02)
 
