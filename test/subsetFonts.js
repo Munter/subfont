@@ -4307,6 +4307,29 @@ describe('subsetFonts', function() {
         ]);
       });
     });
+
+    describe('with two pages that have different non-UTF-16 characters', function() {
+      it('should not break when combining the characters', async function() {
+        const assetGraph = new AssetGraph({
+          root: pathModule.resolve(__dirname, '../testdata/subsetFonts/emojis/')
+        });
+        await assetGraph.loadAssets(['index-1.html', 'index-2.html']);
+        await assetGraph.populate();
+        assetGraph.on('warn', () => {}); // Ignore warning about IBMPlexSans-Regular.woff not containing the emojis
+        const { fontInfo } = await subsetFonts(assetGraph);
+        expect(fontInfo, 'to have length', 2);
+        expect(fontInfo, 'to satisfy', [
+          {
+            htmlAsset: /\/index-1.html$/,
+            fontUsages: [{ pageText: ' 🤗🤞', text: ' 👊🤗🤞' }]
+          },
+          {
+            htmlAsset: /\/index-2\.html$/,
+            fontUsages: [{ pageText: ' 👊🤗', text: ' 👊🤗🤞' }]
+          }
+        ]);
+      });
+    });
   });
 
   describe('with non-truetype fonts in the mix', function() {
