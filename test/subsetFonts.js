@@ -467,6 +467,64 @@ describe('subsetFonts', function() {
       ]);
     });
 
+    it('should return relevant font subsetting information', async function() {
+      httpception(defaultGoogleFontSubsetMock);
+
+      const assetGraph = new AssetGraph({
+        root: pathModule.resolve(
+          __dirname,
+          '../testdata/subsetFonts/html-link/'
+        )
+      });
+      assetGraph.on('warn', warn =>
+        expect(warn, 'to satisfy', /Cannot find module/)
+      );
+      await assetGraph.loadAssets('index.html');
+      await assetGraph.populate({
+        followRelations: {
+          crossorigin: false
+        }
+      });
+      const result = await subsetFontsWithoutFontTools(assetGraph, {
+        inlineFonts: false
+      });
+
+      expect(result, 'to exhaustively satisfy', {
+        fontInfo: [
+          {
+            htmlAsset: 'testdata/subsetFonts/html-link/index.html',
+            fontUsages: [
+              {
+                smallestOriginalSize: 17704,
+                smallestOriginalFormat: 'woff',
+                smallestSubsetSize: 14048,
+                smallestSubsetFormat: 'woff2',
+                texts: ['Hello'],
+                pageText: 'Helo',
+                text: 'Helo',
+                props: {
+                  'font-stretch': 'normal',
+                  'font-weight': '400',
+                  'font-style': 'normal',
+                  'font-family': 'Open Sans',
+                  src:
+                    "local('Open Sans'), local('OpenSans'), url(https://fonts.gstatic.com/s/opensans/v15/mem8YaGs126MiZpBA-UFVZ0d.woff) format('woff')"
+                },
+                fontUrl:
+                  'https://fonts.gstatic.com/s/opensans/v15/mem8YaGs126MiZpBA-UFVZ0d.woff',
+                fontFamilies: expect.it('to be a', Set),
+                codepoints: {
+                  original: expect.it('to be an array'),
+                  used: [101, 108, 111, 72],
+                  unused: expect.it('to be an array')
+                }
+              }
+            ]
+          }
+        ]
+      });
+    });
+
     describe('with `inlineCss: true`', function() {
       it('should inline the font Css and change outgoing relations to rootRelative', async function() {
         httpception(defaultGoogleFontSubsetMock);
