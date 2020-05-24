@@ -1,14 +1,14 @@
 var expect = require('unexpected');
 var getRules = require('../lib/getCssRulesByProperty');
 
-describe('getCssRulesByProperty', function() {
-  it('should throw when not passing an array of properties as first argument', function() {
+describe('getCssRulesByProperty', function () {
+  it('should throw when not passing an array of properties as first argument', function () {
     expect(getRules, 'to throw', 'properties argument must be an array');
   });
 
-  it('should throw when not passing a cssSource as second argument', function() {
+  it('should throw when not passing a cssSource as second argument', function () {
     expect(
-      function() {
+      function () {
         getRules(['padding']);
       },
       'to throw',
@@ -16,25 +16,25 @@ describe('getCssRulesByProperty', function() {
     );
   });
 
-  it('should throw when not passing a valid CSS document in cssSource', function() {
-    expect(function() {
+  it('should throw when not passing a valid CSS document in cssSource', function () {
+    expect(function () {
       getRules(['padding'], 'sdkjlasjdlk');
     }, 'to throw');
   });
 
-  it('should return empty arrays when no properties apply', function() {
+  it('should return empty arrays when no properties apply', function () {
     expect(
       getRules(['padding'], 'h1 { color: red; }', []),
       'to exhaustively satisfy',
       {
         counterStyles: [],
         keyframes: [],
-        padding: []
+        padding: [],
       }
     );
   });
 
-  it('should return an array of matching property values', function() {
+  it('should return an array of matching property values', function () {
     expect(
       getRules(['color'], 'h1 { color: red; } h2 { color: blue; }', []),
       'to exhaustively satisfy',
@@ -49,7 +49,7 @@ describe('getCssRulesByProperty', function() {
             specificityArray: [0, 0, 0, 1],
             prop: 'color',
             value: 'red',
-            important: false
+            important: false,
           },
           {
             selector: 'h2',
@@ -58,14 +58,14 @@ describe('getCssRulesByProperty', function() {
             specificityArray: [0, 0, 0, 1],
             prop: 'color',
             value: 'blue',
-            important: false
-          }
-        ]
+            important: false,
+          },
+        ],
       }
     );
   });
 
-  it('should handle inline styles through `bogusselector`-selector', function() {
+  it('should handle inline styles through `bogusselector`-selector', function () {
     expect(
       getRules(['color'], 'bogusselector { color: red; }', []),
       'to exhaustively satisfy',
@@ -80,15 +80,15 @@ describe('getCssRulesByProperty', function() {
             specificityArray: [1, 0, 0, 0],
             prop: 'color',
             value: 'red',
-            important: false
-          }
-        ]
+            important: false,
+          },
+        ],
       }
     );
   });
 
-  describe('overridden values', function() {
-    it('should return the last defined value', function() {
+  describe('overridden values', function () {
+    it('should return the last defined value', function () {
       expect(
         getRules(['color'], 'h1 { color: red; color: blue; }', []),
         'to exhaustively satisfy',
@@ -103,7 +103,7 @@ describe('getCssRulesByProperty', function() {
               specificityArray: [0, 0, 0, 1],
               prop: 'color',
               value: 'red',
-              important: false
+              important: false,
             },
             {
               selector: 'h1',
@@ -112,16 +112,16 @@ describe('getCssRulesByProperty', function() {
               specificityArray: [0, 0, 0, 1],
               prop: 'color',
               value: 'blue',
-              important: false
-            }
-          ]
+              important: false,
+            },
+          ],
         }
       );
     });
   });
 
-  describe('shorthand font-property', function() {
-    it('register the longhand value from a valid shorthand', function() {
+  describe('shorthand font-property', function () {
+    it('register the longhand value from a valid shorthand', function () {
       var result = getRules(
         ['font-family', 'font-size'],
         'h1 { font: 15px serif; }',
@@ -139,8 +139,8 @@ describe('getCssRulesByProperty', function() {
             specificityArray: [0, 0, 0, 1],
             prop: 'font',
             value: '15px serif',
-            important: false
-          }
+            important: false,
+          },
         ],
         'font-size': [
           {
@@ -150,13 +150,13 @@ describe('getCssRulesByProperty', function() {
             specificityArray: [0, 0, 0, 1],
             prop: 'font',
             value: '15px serif',
-            important: false
-          }
-        ]
+            important: false,
+          },
+        ],
       });
     });
 
-    it('should set initial values for requested properties which are not defined in shorthand', function() {
+    it('should set initial values for requested properties which are not defined in shorthand', function () {
       var result = getRules(
         ['font-family', 'font-size', 'font-style', 'font-weight'],
         'h1 { font: 15px serif; }',
@@ -174,8 +174,8 @@ describe('getCssRulesByProperty', function() {
             specificityArray: [0, 0, 0, 1],
             prop: 'font',
             value: '15px serif',
-            important: false
-          }
+            important: false,
+          },
         ],
         'font-size': [
           {
@@ -185,8 +185,8 @@ describe('getCssRulesByProperty', function() {
             specificityArray: [0, 0, 0, 1],
             prop: 'font',
             value: '15px serif',
-            important: false
-          }
+            important: false,
+          },
         ],
         'font-style': [
           {
@@ -196,8 +196,8 @@ describe('getCssRulesByProperty', function() {
             specificityArray: [0, 0, 0, 1],
             prop: 'font',
             value: '15px serif',
-            important: false
-          }
+            important: false,
+          },
         ],
         'font-weight': [
           {
@@ -207,13 +207,13 @@ describe('getCssRulesByProperty', function() {
             specificityArray: [0, 0, 0, 1],
             prop: 'font',
             value: '15px serif',
-            important: false
-          }
-        ]
+            important: false,
+          },
+        ],
       });
     });
 
-    it('register the longhand value from a shorthand', function() {
+    it('register the longhand value from a shorthand', function () {
       var result = getRules(
         ['font-family', 'font-size'],
         'h1 { font-size: 10px; font: 15px serif; font-size: 20px }',
@@ -231,8 +231,8 @@ describe('getCssRulesByProperty', function() {
             specificityArray: [0, 0, 0, 1],
             prop: 'font',
             value: '15px serif',
-            important: false
-          }
+            important: false,
+          },
         ],
         'font-size': [
           {
@@ -242,7 +242,7 @@ describe('getCssRulesByProperty', function() {
             specificityArray: [0, 0, 0, 1],
             prop: 'font-size',
             value: '10px',
-            important: false
+            important: false,
           },
           {
             selector: 'h1',
@@ -251,7 +251,7 @@ describe('getCssRulesByProperty', function() {
             specificityArray: [0, 0, 0, 1],
             prop: 'font',
             value: '15px serif',
-            important: false
+            important: false,
           },
           {
             selector: 'h1',
@@ -260,16 +260,16 @@ describe('getCssRulesByProperty', function() {
             specificityArray: [0, 0, 0, 1],
             prop: 'font-size',
             value: '20px',
-            important: false
-          }
-        ]
+            important: false,
+          },
+        ],
       });
     });
   });
 
-  describe('with a different default namespace', function() {
-    describe('given as a quoted string', function() {
-      it('should annotate the style rules with the default namespace', function() {
+  describe('with a different default namespace', function () {
+    describe('given as a quoted string', function () {
+      it('should annotate the style rules with the default namespace', function () {
         const result = getRules(
           ['font-size'],
           '@namespace "foo"; h1 { font-size: 20px }',
@@ -281,15 +281,15 @@ describe('getCssRulesByProperty', function() {
             {
               selector: 'h1',
               namespaceURI: 'foo',
-              value: '20px'
-            }
-          ]
+              value: '20px',
+            },
+          ],
         });
       });
     });
 
-    describe('given as a url(...)', function() {
-      it('should annotate the style rules with the default namespace', function() {
+    describe('given as a url(...)', function () {
+      it('should annotate the style rules with the default namespace', function () {
         const result = getRules(
           ['font-size'],
           '@namespace url(foo); h1 { font-size: 20px }',
@@ -301,15 +301,15 @@ describe('getCssRulesByProperty', function() {
             {
               selector: 'h1',
               namespaceURI: 'foo',
-              value: '20px'
-            }
-          ]
+              value: '20px',
+            },
+          ],
         });
       });
     });
 
-    describe('given as a url("...")', function() {
-      it('should annotate the style rules with the default namespace', function() {
+    describe('given as a url("...")', function () {
+      it('should annotate the style rules with the default namespace', function () {
         const result = getRules(
           ['font-size'],
           '@namespace url("foo"); h1 { font-size: 20px }',
@@ -321,9 +321,9 @@ describe('getCssRulesByProperty', function() {
             {
               selector: 'h1',
               namespaceURI: 'foo',
-              value: '20px'
-            }
-          ]
+              value: '20px',
+            },
+          ],
         });
       });
     });

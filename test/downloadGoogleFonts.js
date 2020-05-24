@@ -10,7 +10,7 @@ const reponses = {
   font-weight: 400;
   font-style: normal;
   src: local(foo), local(bar), url('https://fonts.gstatic.com/l/font?kit=Roboto:400') format('woff2');
-}`
+}`,
 };
 
 describe('downloadGoogleFonts', () => {
@@ -24,34 +24,34 @@ describe('downloadGoogleFonts', () => {
         request: 'GET https://fonts.googleapis.com/css?family=Roboto:400',
         response: {
           headers: {
-            'Content-Type': 'text/css'
+            'Content-Type': 'text/css',
           },
-          body: reponses['Roboto:400']
-        }
+          body: reponses['Roboto:400'],
+        },
       },
 
       {
         request: 'GET https://fonts.gstatic.com/l/font?kit=Roboto:400',
         response: {
           headers: {
-            'Content-Type': 'font/woff2'
+            'Content-Type': 'font/woff2',
           },
           body: fs.readFileSync(
             pathModule.resolve(
               __dirname,
               '../testdata/subsetFonts/Roboto-500.woff2'
             )
-          )
-        }
-      }
+          ),
+        },
+      },
     ]);
 
     const result = await downloadGoogleFonts(
       {
-        'font-family': 'Roboto'
+        'font-family': 'Roboto',
       },
       {
-        formats: ['woff2']
+        formats: ['woff2'],
       }
     );
 
@@ -66,7 +66,7 @@ describe('downloadGoogleFonts', () => {
       expect
         .it('to begin with', `       url('data:font/woff2;base64,`)
         .and('to end with', `') format('woff2');`),
-      `}`
+      `}`,
     ]);
   });
 });
