@@ -54,7 +54,7 @@
     "lodash.groupby": "^4.6.0",
     "postcss-value-parser": "^4.0.2",
     "pretty-bytes": "^5.1.0",
-    "puppeteer-core": "^1.19.0",
+    "puppeteer-core": "^3.1.0",
     "urltools": "^0.4.1",
     "yargs": "^14.2.0"
   },
@@ -74,7 +74,7 @@
     "offline-github-changelog": "^1.6.1",
     "prettier": "~1.19.1",
     "proxyquire": "^2.1.1",
-    "puppeteer": "^1.19.0",
+    "puppeteer": "^3.1.0",
     "sinon": "^7.5.0",
     "unexpected": "^11.8.1",
     "unexpected-resemble": "^4.3.0",
