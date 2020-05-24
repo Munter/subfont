@@ -16,6 +16,10 @@
     "subfont": "lib/cli.js"
   },
   "main": "lib/subfont.js",
+  "files": [
+    "lib",
+    "*.md"
+  ],
   "repository": {
     "type": "git",
     "url": "git+https://github.com/Munter/subfont.git"
