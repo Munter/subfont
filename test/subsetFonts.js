@@ -4388,6 +4388,37 @@ describe('subsetFonts', function() {
         ]);
       });
     });
+
+    describe('when a subset is created, but an unused variant points at a file that does not exist', function() {
+      it('should leave the url of the unused variant as-is', async function() {
+        const assetGraph = new AssetGraph({
+          root: pathModule.resolve(
+            __dirname,
+            '../testdata/subsetFonts/nonExistentFont/'
+          )
+        });
+        await assetGraph.loadAssets(['index.html']);
+        assetGraph.on('warn', () => {}); // Don't halt on ENOENT Roboto-400-not-found-italic.woff2
+        await assetGraph.populate();
+        assetGraph.removeAllListeners('warn'); // Defensively don't suppress any further warnings
+        const { fontInfo } = await subsetFonts(assetGraph);
+        expect(fontInfo, 'to satisfy', [
+          {
+            htmlAsset: /\/index.html$/,
+            fontUsages: [{ pageText: 'Helo', text: 'Helo' }]
+          }
+        ]);
+        const subfontCss = assetGraph.findAssets({
+          type: 'Css',
+          path: '/subfont/'
+        })[0];
+        expect(
+          subfontCss.text,
+          'to contain',
+          'src:url(/Roboto-400-not-found-italic.woff2) format("woff2")'
+        );
+      });
+    });
   });
 
   describe('with non-truetype fonts in the mix', function() {
