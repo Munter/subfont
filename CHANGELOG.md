@@ -1,3 +1,14 @@
+### v5.0.1 (2020-05-25)
+
+#### Pull requests
+
+- [#86](https://github.com/munter/subfont/pull/86) Configure Renovate ([Renovate Bot](mailto:bot@renovateapp.com))
+
+#### Commits to master
+
+- [Update to font-snapper 1.0.2](https://github.com/munter/subfont/commit/516e7e35a6a900b087f3fb07b602bac84176dcdc) ([Peter Müller](mailto:munter@fumle.dk))
+- [Only distribute relevant files in npm package](https://github.com/munter/subfont/commit/a49be6d575dd9e2be4fa0f6f730dd7e174d98f55) ([Peter Müller](mailto:munter@fumle.dk))
+
 ### v5.0.0 (2020-05-24)
 
 #### Pull requests
