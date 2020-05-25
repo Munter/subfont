@@ -52,7 +52,7 @@
     "css-font-weight-names": "^0.2.1",
     "css-list-helpers": "^2.0.0",
     "font-family-papandreou": "^0.2.0-patch1",
-    "font-snapper": "^1.0.1",
+    "font-snapper": "^1.0.2",
     "font-tracer": "^2.0.0",
     "fontkit": "^1.8.0",
     "lodash.groupby": "^4.6.0",
