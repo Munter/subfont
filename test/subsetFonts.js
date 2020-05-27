@@ -4422,6 +4422,28 @@ describe('subsetFonts', function () {
         );
       });
     });
+
+    describe('when two pages @import the same CSS file which in turn imports a Google font', function () {
+      // Regression test for https://github.com/Munter/netlify-plugin-subfont/issues/32
+      it('should not break', async function () {
+        const assetGraph = new AssetGraph({
+          root: pathModule.resolve(__dirname, '../testdata/subsetFonts/foo/'),
+        });
+        await assetGraph.loadAssets(['index1.html', 'index2.html']);
+        await assetGraph.populate();
+        const { fontInfo } = await subsetFonts(assetGraph);
+        expect(fontInfo, 'to satisfy', [
+          {
+            htmlAsset: /\/index1.html$/,
+            fontUsages: [{ pageText: 'fo', text: 'fo' }],
+          },
+          {
+            htmlAsset: /\/index2.html$/,
+            fontUsages: [{ pageText: 'fo', text: 'fo' }],
+          },
+        ]);
+      });
+    });
   });
 
   describe('with non-truetype fonts in the mix', function () {
