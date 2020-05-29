@@ -1,3 +1,7 @@
+### v5.0.2 (2020-05-29)
+
+- [#93](https://github.com/munter/subfont/pull/93) Fix: Cannot read property 'removeChild' of undefined ([Andreas Lind](mailto:andreas.lind@peakon.com))
+
 ### v5.0.1 (2020-05-25)
 
 #### Pull requests
