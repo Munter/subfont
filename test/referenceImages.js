@@ -10,7 +10,7 @@ async function screenshot(browser, assetGraph, bannedUrls) {
   const page = await browser.newPage();
   await page.setRequestInterception(true);
   const loadedUrls = [];
-  page.on('request', request => {
+  page.on('request', (request) => {
     const url = request.url();
     loadedUrls.push(url);
     if (url.startsWith('https://example.com/')) {
@@ -20,13 +20,13 @@ async function screenshot(browser, assetGraph, bannedUrls) {
       }
       const asset = assetGraph.findAssets({
         isLoaded: true,
-        url: agUrl
+        url: agUrl,
       })[0];
       if (asset) {
         request.respond({
           status: 200,
           contentType: asset.contentType,
-          body: asset.rawSrc
+          body: asset.rawSrc,
         });
         return;
       }
@@ -35,7 +35,9 @@ async function screenshot(browser, assetGraph, bannedUrls) {
   });
   await page.goto('https://example.com/');
   if (bannedUrls) {
-    const loadedBannedUrls = loadedUrls.filter(url => bannedUrls.includes(url));
+    const loadedBannedUrls = loadedUrls.filter((url) =>
+      bannedUrls.includes(url)
+    );
     if (loadedBannedUrls.length > 0) {
       throw new Error(
         `One or more of the original fonts were loaded:\n  ${loadedBannedUrls.join(
@@ -49,13 +51,13 @@ async function screenshot(browser, assetGraph, bannedUrls) {
   return screenshot;
 }
 
-describe('reference images', function() {
+describe('reference images', function () {
   let browser;
-  before(async function() {
+  before(async function () {
     browser = await require('puppeteer').launch();
   });
 
-  after(async function() {
+  after(async function () {
     await browser.close();
   });
 
@@ -69,13 +71,13 @@ describe('reference images', function() {
           'testdata',
           'referenceImages',
           path
-        )
+        ),
       });
       await assetGraph.loadAssets('index.html');
       await assetGraph.populate();
       const fontsBefore = assetGraph
         .findAssets({ type: { $in: ['Ttf', 'Woff', 'Woff2', 'Eot'] } })
-        .map(asset =>
+        .map((asset) =>
           asset.url.replace(assetGraph.root, 'https://example.com/')
         );
       const screenshotBefore = await screenshot(browser, assetGraph);
@@ -86,7 +88,7 @@ describe('reference images', function() {
         fontsBefore
       );
       await expect(screenshotAfter, 'to resemble', screenshotBefore, {
-        mismatchPercentage: 0
+        mismatchPercentage: 0,
       });
     }
   );
@@ -95,12 +97,12 @@ describe('reference images', function() {
     inlineCss: [false, true],
     inlineSubsets: [false, true],
     omitFallbacks: [false, true],
-    harfbuzz: [false, true]
+    harfbuzz: [false, true],
   })) {
     describe(`with ${Object.keys(options)
-      .map(key => `${key}: ${options[key]}`)
-      .join(', ')}`, function() {
-      it('should render a simple test case without ligatures', async function() {
+      .map((key) => `${key}: ${options[key]}`)
+      .join(', ')}`, function () {
+      it('should render a simple test case without ligatures', async function () {
         await expect(
           'withoutLigatures',
           'to render the same after subsetting',
@@ -108,7 +110,7 @@ describe('reference images', function() {
         );
       });
 
-      it('should render ligatures correctly', async function() {
+      it('should render ligatures correctly', async function () {
         await expect(
           'ligatures',
           'to render the same after subsetting',

@@ -1,8 +1,6 @@
 /* global describe, it */
 const sinon = require('sinon');
-const expect = require('unexpected')
-  .clone()
-  .use(require('unexpected-sinon'));
+const expect = require('unexpected').clone().use(require('unexpected-sinon'));
 const subfont = require('../lib/subfont');
 const httpception = require('httpception');
 const proxyquire = require('proxyquire');
@@ -16,20 +14,20 @@ const openSansBold = require('fs').readFileSync(
   )
 );
 
-describe('subfont', function() {
+describe('subfont', function () {
   let mockConsole;
-  beforeEach(async function() {
+  beforeEach(async function () {
     mockConsole = { log: sinon.spy(), error: sinon.spy() };
   });
 
-  describe('when a font is referenced by a stylesheet hosted outside the root', function() {
-    it('should move the CSS into the root', async function() {
+  describe('when a font is referenced by a stylesheet hosted outside the root', function () {
+    it('should move the CSS into the root', async function () {
       httpception([
         {
           request: 'GET https://mycdn.com/styles.css',
           response: {
             headers: {
-              'Content-Type': 'text/css'
+              'Content-Type': 'text/css',
             },
             body: `
               @font-face {
@@ -42,19 +40,19 @@ describe('subfont', function() {
               div {
                 font-family: Open Sans;
               }
-            `
-          }
+            `,
+          },
         },
         {
           request:
             'GET http://themes.googleusercontent.com/static/fonts/opensans/v8/k3k702ZOKiLJc3WVjuplzHhCUOGz7vYGh680lGh-uXM.woff',
           response: {
             headers: {
-              'Content-Type': 'font/woff'
+              'Content-Type': 'font/woff',
             },
-            body: openSansBold
-          }
-        }
+            body: openSansBold,
+          },
+        },
       ]);
 
       const root = encodeURI(
@@ -72,13 +70,13 @@ describe('subfont', function() {
           root,
           inputFiles: [`${root}/index.html`],
           silent: true,
-          dryRun: true
+          dryRun: true,
         },
         mockConsole
       );
 
       const cssAsset = assetGraph.findAssets({
-        type: 'Css'
+        type: 'Css',
       })[0];
       expect(
         cssAsset.url,
@@ -88,14 +86,14 @@ describe('subfont', function() {
     });
   });
 
-  describe('when there is an external stylesheet that does not reference a font', function() {
-    it('should not move the CSS into the root', async function() {
+  describe('when there is an external stylesheet that does not reference a font', function () {
+    it('should not move the CSS into the root', async function () {
       httpception([
         {
           request: 'GET https://mycdn.com/styles.css',
           response: {
             headers: {
-              'Content-Type': 'text/css'
+              'Content-Type': 'text/css',
             },
             body: `
               @font-face {
@@ -104,19 +102,19 @@ describe('subfont', function() {
                 font-weight: 700;
                 src: url(http://themes.googleusercontent.com/static/fonts/opensans/v8/k3k702ZOKiLJc3WVjuplzHhCUOGz7vYGh680lGh-uXM.woff) format('woff');
               }
-            `
-          }
+            `,
+          },
         },
         {
           request:
             'GET http://themes.googleusercontent.com/static/fonts/opensans/v8/k3k702ZOKiLJc3WVjuplzHhCUOGz7vYGh680lGh-uXM.woff',
           response: {
             headers: {
-              'Content-Type': 'font/woff'
+              'Content-Type': 'font/woff',
             },
-            body: openSansBold
-          }
-        }
+            body: openSansBold,
+          },
+        },
       ]);
 
       const root = encodeURI(
@@ -134,7 +132,7 @@ describe('subfont', function() {
           root,
           inputFiles: [`${root}/index.html`],
           silent: true,
-          dryRun: true
+          dryRun: true,
         },
         mockConsole
       );
@@ -144,14 +142,14 @@ describe('subfont', function() {
     });
   });
 
-  describe('with --no-fallbacks', function() {
-    it('should leave out the fallbacks', async function() {
+  describe('with --no-fallbacks', function () {
+    it('should leave out the fallbacks', async function () {
       httpception([
         {
           request: 'GET https://example.com/',
           response: {
             headers: {
-              'Content-Type': 'text/html'
+              'Content-Type': 'text/html',
             },
             body: `
               <!DOCTYPE html>
@@ -175,19 +173,19 @@ describe('subfont', function() {
                 <div>Hello</div>
               </body>
               </html>
-            `
-          }
+            `,
+          },
         },
         {
           request:
             'GET http://themes.googleusercontent.com/static/fonts/opensans/v8/k3k702ZOKiLJc3WVjuplzHhCUOGz7vYGh680lGh-uXM.woff',
           response: {
             headers: {
-              'Content-Type': 'font/woff'
+              'Content-Type': 'font/woff',
             },
-            body: openSansBold
-          }
-        }
+            body: openSansBold,
+          },
+        },
       ]);
 
       const root = 'https://example.com/';
@@ -197,14 +195,14 @@ describe('subfont', function() {
           inputFiles: [root],
           fallbacks: false,
           silent: true,
-          dryRun: true
+          dryRun: true,
         },
         mockConsole
       );
 
       const inlineCssAsset = assetGraph.findAssets({
         type: 'Css',
-        isInline: true
+        isInline: true,
       })[0];
       expect(
         inlineCssAsset.text,
@@ -214,7 +212,7 @@ describe('subfont', function() {
     });
   });
 
-  it('should not dive into iframes', async function() {
+  it('should not dive into iframes', async function () {
     const root = encodeURI(
       `file://${pathModule.resolve(__dirname, '..', 'testdata', 'iframe')}`
     );
@@ -224,7 +222,7 @@ describe('subfont', function() {
         root,
         inputFiles: [`${root}/index.html`],
         silent: true,
-        dryRun: true
+        dryRun: true,
       },
       mockConsole
     );
@@ -235,8 +233,8 @@ describe('subfont', function() {
     );
   });
 
-  describe('with --dynamic', function() {
-    it('should find glyphs added to the page via JavaScript', async function() {
+  describe('with --dynamic', function () {
+    it('should find glyphs added to the page via JavaScript', async function () {
       const root = encodeURI(
         `file://${pathModule.resolve(
           __dirname,
@@ -253,7 +251,7 @@ describe('subfont', function() {
           dynamic: true,
           debug: true,
           root,
-          inputFiles: [`${root}/index.html`]
+          inputFiles: [`${root}/index.html`],
         },
         mockConsole
       );
@@ -264,7 +262,7 @@ describe('subfont', function() {
       });
     });
 
-    it('should find glyphs in the original HTML that get removed by JavaScript', async function() {
+    it('should find glyphs in the original HTML that get removed by JavaScript', async function () {
       const root = encodeURI(
         `file://${pathModule.resolve(
           __dirname,
@@ -281,7 +279,7 @@ describe('subfont', function() {
           dynamic: true,
           debug: true,
           root,
-          inputFiles: [`${root}/index.html`]
+          inputFiles: [`${root}/index.html`],
         },
         mockConsole
       );
@@ -292,7 +290,7 @@ describe('subfont', function() {
       });
     });
 
-    it('should work with an absolute url that matches canonicalUrl (without a path component)', async function() {
+    it('should work with an absolute url that matches canonicalUrl (without a path component)', async function () {
       const root = encodeURI(
         `file://${pathModule.resolve(
           __dirname,
@@ -310,7 +308,7 @@ describe('subfont', function() {
           debug: true,
           canonicalRoot: 'https://gofish.dk/',
           root,
-          inputFiles: [`${root}/index.html`]
+          inputFiles: [`${root}/index.html`],
         },
         mockConsole
       );
@@ -321,7 +319,7 @@ describe('subfont', function() {
       });
     });
 
-    it('should work with an absolute url that matches canonicalUrl (with a path component)', async function() {
+    it('should work with an absolute url that matches canonicalUrl (with a path component)', async function () {
       const root = encodeURI(
         `file://${pathModule.resolve(
           __dirname,
@@ -339,7 +337,7 @@ describe('subfont', function() {
           debug: true,
           canonicalRoot: 'https://gofish.dk/the/magic/path/',
           root,
-          inputFiles: [`${root}/index.html`]
+          inputFiles: [`${root}/index.html`],
         },
         mockConsole
       );
@@ -350,7 +348,7 @@ describe('subfont', function() {
       });
     });
 
-    it('should echo errors occuring in the headless browser to the console', async function() {
+    it('should echo errors occuring in the headless browser to the console', async function () {
       const root = encodeURI(
         `file://${pathModule.resolve(
           __dirname,
@@ -367,7 +365,7 @@ describe('subfont', function() {
           dynamic: true,
           debug: true,
           root,
-          inputFiles: [`${root}/index.html`]
+          inputFiles: [`${root}/index.html`],
         },
         mockConsole
       );
@@ -384,7 +382,7 @@ describe('subfont', function() {
       });
     });
 
-    it('should not fail to inject the font-tracer script on a page that has a strict CSP', async function() {
+    it('should not fail to inject the font-tracer script on a page that has a strict CSP', async function () {
       const root = encodeURI(
         `file://${pathModule.resolve(
           __dirname,
@@ -401,7 +399,7 @@ describe('subfont', function() {
           dynamic: true,
           debug: true,
           root,
-          inputFiles: [`${root}/index.html`]
+          inputFiles: [`${root}/index.html`],
         },
         mockConsole
       );
@@ -409,15 +407,15 @@ describe('subfont', function() {
     });
   });
 
-  describe('without fonttools available', function() {
+  describe('without fonttools available', function () {
     const subfontWithoutFontTools = proxyquire('../lib/subfont', {
       '../lib/subsetFonts': proxyquire('../lib/subsetFonts', {
-        './subsetLocalFont': null
-      })
+        './subsetLocalFont': null,
+      }),
     });
 
     // Regression test for pretty-bytes(NaN) error
-    it('should not fail', async function() {
+    it('should not fail', async function () {
       const root = encodeURI(
         `file://${pathModule.resolve(
           __dirname,
@@ -433,7 +431,7 @@ describe('subfont', function() {
           root,
           inputFiles: [`${root}/index.html`],
           silent: true,
-          dryRun: true
+          dryRun: true,
         },
         mockConsole
       );
