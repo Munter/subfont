@@ -17,7 +17,7 @@ const openSansBold = require('fs').readFileSync(
 describe('subfont', function () {
   let mockConsole;
   beforeEach(async function () {
-    mockConsole = { log: sinon.spy(), error: sinon.spy() };
+    mockConsole = { log: sinon.spy(), warn: sinon.spy(), error: sinon.spy() };
   });
 
   describe('when a font is referenced by a stylesheet hosted outside the root', function () {
@@ -209,6 +209,88 @@ describe('subfont', function () {
         'to contain',
         "font-family: 'Open Sans__subset';"
       );
+    });
+  });
+
+  describe('when fetching an entry point results in an HTTP redirect', function () {
+    it('should issue a warning', async function () {
+      httpception([
+        {
+          request: 'GET http://example.com/',
+          response: {
+            statusCode: 301,
+            headers: {
+              Location: 'https://somewhereelse.com/',
+            },
+          },
+        },
+        {
+          request: 'GET https://somewhereelse.com/',
+          response: {
+            headers: {
+              'Content-Type': 'text/html; charset=utf-8',
+            },
+            body: `
+              <!DOCTYPE html>
+              <html>
+
+              <head>
+                <style>
+                  @font-face {
+                    font-family: Open Sans;
+                    src: url(OpenSans.woff) format('woff');
+                  }
+
+                  div {
+                    font-family: Open Sans;
+                  }
+                </style>
+              </head>
+              <body>
+                <div>Hello</div>
+              </body>
+              </html>
+            `,
+          },
+        },
+        {
+          request: 'GET http://somewhereelse.com/OpenSans.woff',
+          response: {
+            headers: {
+              'Content-Type': 'font/woff',
+            },
+            body: openSansBold,
+          },
+        },
+      ]);
+
+      const root = 'http://example.com/';
+      const assetGraph = await subfont(
+        {
+          root,
+          inputFiles: [root],
+          fallbacks: false,
+          silent: true,
+          dryRun: true,
+        },
+        mockConsole
+      );
+
+      const htmlAssets = assetGraph.findAssets({
+        isInitial: true,
+        type: 'Html',
+      });
+      expect(htmlAssets, 'to have length', 1);
+      expect(
+        htmlAssets[0].url,
+        'to equal',
+        'https://somewhereelse.com/index.html'
+      );
+      expect(mockConsole.warn, 'to have a call satisfying', () => {
+        mockConsole.warn(
+          'http://example.com/ redirected to https://somewhereelse.com/'
+        );
+      });
     });
   });
 
