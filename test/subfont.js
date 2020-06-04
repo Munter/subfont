@@ -407,6 +407,62 @@ describe('subfont', function () {
     });
   });
 
+  describe('with a canonical root and loading the page from a remote server', function () {
+    // Regression test for https://gitter.im/assetgraph/assetgraph?at=5ece5da89da05a060a3417fc
+    it('should refer to the fallback CSS with a root-relative url', async function () {
+      httpception([
+        {
+          request: 'GET https://www.netlify.com/index.html',
+          response: {
+            headers: {
+              'Content-Type': 'text/html',
+            },
+            body: `<!DOCTYPE html>
+            <html>
+              <head>
+                <style>
+                  @font-face{font-family: Open Sans; src:url(OpenSans.woff) format("woff")}
+                </style>
+              </head>
+              <body>
+                <div style="font-family: Open Sans">Hello</div>
+              </body>
+            </html>
+          `,
+          },
+        },
+        {
+          request: 'GET https://www.netlify.com/OpenSans.woff',
+          response: {
+            headers: {
+              'Content-Type': 'font/woff',
+            },
+            body: openSansBold,
+          },
+        },
+      ]);
+
+      const assetGraph = await subfont(
+        {
+          silent: true,
+          dryRun: true,
+          debug: true,
+          canonicalRoot: 'https://www.netlify.com/',
+          inputFiles: ['https://www.netlify.com/index.html'],
+        },
+        mockConsole
+      );
+      const [, asyncLoadJavaScriptAsset] = assetGraph.findAssets({
+        type: 'JavaScript',
+      });
+      expect(
+        asyncLoadJavaScriptAsset.text,
+        'to contain',
+        `el.href='/subfont/fallback-`
+      );
+    });
+  });
+
   describe('without fonttools available', function () {
     const subfontWithoutFontTools = proxyquire('../lib/subfont', {
       '../lib/subsetFonts': proxyquire('../lib/subsetFonts', {
