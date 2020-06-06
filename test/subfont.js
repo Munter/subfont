@@ -3,6 +3,7 @@ const sinon = require('sinon');
 const expect = require('unexpected').clone().use(require('unexpected-sinon'));
 const subfont = require('../lib/subfont');
 const httpception = require('httpception');
+const AssetGraph = require('assetgraph');
 const proxyquire = require('proxyquire');
 const pathModule = require('path');
 const openSansBold = require('fs').readFileSync(
@@ -18,6 +19,10 @@ describe('subfont', function () {
   let mockConsole;
   beforeEach(async function () {
     mockConsole = { log: sinon.spy(), warn: sinon.spy(), error: sinon.spy() };
+  });
+
+  afterEach(function () {
+    sinon.restore();
   });
 
   describe('when a font is referenced by a stylesheet hosted outside the root', function () {
@@ -265,6 +270,8 @@ describe('subfont', function () {
       ]);
 
       const root = 'http://example.com/';
+      sinon.stub(AssetGraph.prototype, 'info');
+
       const assetGraph = await subfont(
         {
           root,
@@ -286,9 +293,11 @@ describe('subfont', function () {
         'to equal',
         'https://somewhereelse.com/index.html'
       );
-      expect(mockConsole.warn, 'to have a call satisfying', () => {
-        mockConsole.warn(
-          'http://example.com/ redirected to https://somewhereelse.com/'
+      expect(assetGraph.info, 'to have a call satisfying', () => {
+        assetGraph.info(
+          new Error(
+            'http://example.com/ redirected to https://somewhereelse.com/'
+          )
         );
       });
     });
