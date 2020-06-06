@@ -218,25 +218,25 @@ describe('subfont', function () {
   });
 
   describe('when fetching an entry point results in an HTTP redirect', function () {
-    it('should issue a warning', async function () {
-      httpception([
-        {
-          request: 'GET http://example.com/',
-          response: {
-            statusCode: 301,
-            headers: {
-              Location: 'https://somewhereelse.com/',
+    describe('with a single entry point', function () {
+      beforeEach(function () {
+        httpception([
+          {
+            request: 'GET http://example.com/',
+            response: {
+              statusCode: 301,
+              headers: {
+                Location: 'https://somewhereelse.com/',
+              },
             },
           },
-        },
-        {
-          request: 'GET https://somewhereelse.com/',
-          response: {
-            headers: {
-              'Content-Type': 'text/html; charset=utf-8',
-            },
-            body: `
-              <!DOCTYPE html>
+          {
+            request: 'GET https://somewhereelse.com/',
+            response: {
+              headers: {
+                'Content-Type': 'text/html; charset=utf-8',
+              },
+              body: `<!DOCTYPE html>
               <html>
 
               <head>
@@ -256,49 +256,156 @@ describe('subfont', function () {
               </body>
               </html>
             `,
-          },
-        },
-        {
-          request: 'GET http://somewhereelse.com/OpenSans.woff',
-          response: {
-            headers: {
-              'Content-Type': 'font/woff',
             },
-            body: openSansBold,
           },
-        },
-      ]);
-
-      const root = 'http://example.com/';
-      sinon.stub(AssetGraph.prototype, 'info');
-
-      const assetGraph = await subfont(
-        {
-          root,
-          inputFiles: [root],
-          fallbacks: false,
-          silent: true,
-          dryRun: true,
-        },
-        mockConsole
-      );
-
-      const htmlAssets = assetGraph.findAssets({
-        isInitial: true,
-        type: 'Html',
+          {
+            request: 'GET http://somewhereelse.com/OpenSans.woff',
+            response: {
+              headers: {
+                'Content-Type': 'font/woff',
+              },
+              body: openSansBold,
+            },
+          },
+        ]);
       });
-      expect(htmlAssets, 'to have length', 1);
-      expect(
-        htmlAssets[0].url,
-        'to equal',
-        'https://somewhereelse.com/index.html'
-      );
-      expect(assetGraph.info, 'to have a call satisfying', () => {
-        assetGraph.info(
-          new Error(
-            'http://example.com/ redirected to https://somewhereelse.com/'
-          )
+
+      it('should issue a warning', async function () {
+        const root = 'http://example.com/';
+        sinon.stub(AssetGraph.prototype, 'info');
+
+        const assetGraph = await subfont(
+          {
+            root,
+            inputFiles: [root],
+            fallbacks: false,
+            silent: true,
+            dryRun: true,
+          },
+          mockConsole
         );
+
+        const htmlAssets = assetGraph.findAssets({
+          isInitial: true,
+          type: 'Html',
+        });
+        expect(htmlAssets, 'to have length', 1);
+        expect(
+          htmlAssets[0].url,
+          'to equal',
+          'https://somewhereelse.com/index.html'
+        );
+        expect(assetGraph.info, 'to have a call satisfying', () => {
+          assetGraph.info(
+            new Error(
+              'http://example.com/ redirected to https://somewhereelse.com/'
+            )
+          );
+        });
+      });
+
+      it('should change the root of the graph so that files get written to disc', async function () {
+        const root = 'http://example.com/';
+
+        sinon.stub(AssetGraph.prototype, 'info');
+        const assetGraph = await subfont(
+          {
+            root,
+            inputFiles: [root],
+            fallbacks: false,
+            silent: true,
+            dryRun: true,
+          },
+          mockConsole
+        );
+
+        expect(assetGraph.root, 'to equal', 'https://somewhereelse.com/');
+
+        expect(assetGraph.info, 'to have a call satisfying', () => {
+          assetGraph.info(
+            new Error(
+              'All entrypoints redirected, changing root from http://example.com/ to https://somewhereelse.com/'
+            )
+          );
+        });
+      });
+    });
+
+    describe('but other entry points do not get redirected', function () {
+      beforeEach(function () {
+        httpception([
+          {
+            request: 'GET http://example.com/',
+            response: {
+              statusCode: 301,
+              headers: {
+                Location: 'https://somewhereelse.com/',
+              },
+            },
+          },
+          {
+            request: 'GET http://example.com/page2',
+            response: {
+              headers: {
+                'Content-Type': 'text/html; charset=utf-8',
+              },
+              body: `<!DOCTYPE html><html></html>`,
+            },
+          },
+          {
+            request: 'GET https://somewhereelse.com/',
+            response: {
+              headers: {
+                'Content-Type': 'text/html; charset=utf-8',
+              },
+              body: `<!DOCTYPE html>
+              <html>
+                <head>
+                  <style>
+                    @font-face {
+                      font-family: Open Sans;
+                      src: url(OpenSans.woff) format('woff');
+                    }
+
+                    div {
+                      font-family: Open Sans;
+                    }
+                  </style>
+                </head>
+                <body>
+                  <div>Hello</div>
+                </body>
+              </html>
+            `,
+            },
+          },
+          {
+            request: 'GET http://somewhereelse.com/OpenSans.woff',
+            response: {
+              headers: {
+                'Content-Type': 'font/woff',
+              },
+              body: openSansBold,
+            },
+          },
+        ]);
+      });
+
+      it('should not change the root', async function () {
+        const root = 'http://example.com/';
+
+        const assetGraph = await subfont(
+          {
+            root,
+            inputFiles: [root, `${root}page2`],
+            fallbacks: false,
+            silent: true,
+            dryRun: true,
+          },
+          mockConsole
+        );
+
+        expect(assetGraph.root, 'to equal', 'http://example.com/');
       });
     });
   });
