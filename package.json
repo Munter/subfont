@@ -64,10 +64,7 @@
     "postcss-value-parser": "^4.0.2",
     "pretty-bytes": "^5.1.0",
     "puppeteer-core": "^3.1.0",
-    "qs": "^6.9.4",
-    "semver": "^7.3.2",
     "specificity": "^0.4.1",
-    "uglify-js": "^3.10.0",
     "urltools": "^0.4.1",
     "yargs": "^15.3.1"
   },
