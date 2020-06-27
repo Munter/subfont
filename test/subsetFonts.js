@@ -3203,35 +3203,70 @@ describe('subsetFonts', function () {
         });
       });
 
-      it('should add a unicode-range property to the original @font-face declaration', async function () {
-        httpception();
+      describe('when the original @font-face declaration does not contain a unicode-range property', function () {
+        it('should add a unicode-range property', async function () {
+          httpception();
 
-        const assetGraph = new AssetGraph({
-          root: pathModule.resolve(
-            __dirname,
-            '../testdata/subsetFonts/missing-glyphs/'
-          ),
-        });
-        assetGraph.on('warn', () => {}); // Don't fail due to the missing glyphs warning
-        await assetGraph.loadAssets('index.html');
-        await assetGraph.populate({
-          followRelations: {
-            crossorigin: false,
-          },
-        });
-        await subsetFonts(assetGraph, {
-          inlineFonts: false,
-        });
+          const assetGraph = new AssetGraph({
+            root: pathModule.resolve(
+              __dirname,
+              '../testdata/subsetFonts/missing-glyphs/'
+            ),
+          });
+          assetGraph.on('warn', () => {}); // Don't fail due to the missing glyphs warning
+          await assetGraph.loadAssets('index.html');
+          await assetGraph.populate({
+            followRelations: {
+              crossorigin: false,
+            },
+          });
+          await subsetFonts(assetGraph, {
+            inlineFonts: false,
+          });
 
-        const [originalFontFaceSrcRelation] = assetGraph.findRelations({
-          type: 'CssFontFaceSrc',
-          to: { fileName: 'OpenSans.ttf' },
+          const [originalFontFaceSrcRelation] = assetGraph.findRelations({
+            type: 'CssFontFaceSrc',
+            to: { fileName: 'OpenSans.ttf' },
+          });
+          expect(
+            originalFontFaceSrcRelation.from.text,
+            'to contain',
+            'unicode-range:U+64-7e,U+a0-ff,'
+          );
         });
-        expect(
-          originalFontFaceSrcRelation.from.text,
-          'to contain',
-          'unicode-range:U+64-7e,U+a0-ff,'
-        );
+      });
+
+      describe('when the original @font-face declaration already contains a unicode-range property', function () {
+        it('should leave the existing unicode-range alone', async function () {
+          httpception();
+
+          const assetGraph = new AssetGraph({
+            root: pathModule.resolve(
+              __dirname,
+              '../testdata/subsetFonts/missing-glyphs-unicode-range/'
+            ),
+          });
+          assetGraph.on('warn', () => {}); // Don't fail due to the missing glyphs warning
+          await assetGraph.loadAssets('index.html');
+          await assetGraph.populate({
+            followRelations: {
+              crossorigin: false,
+            },
+          });
+          await subsetFonts(assetGraph, {
+            inlineFonts: false,
+          });
+
+          const [originalFontFaceSrcRelation] = assetGraph.findRelations({
+            type: 'CssFontFaceSrc',
+            to: { fileName: 'OpenSans.ttf' },
+          });
+          expect(
+            originalFontFaceSrcRelation.from.text,
+            'to contain',
+            'unicode-range:foobar'
+          ).and('not to contain', 'unicode-range:U+64-7e,U+a0-ff,');
+        });
       });
 
       it('should check for missing glyphs in any subset format', async function () {
