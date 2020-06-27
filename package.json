@@ -48,7 +48,6 @@
   "dependencies": {
     "@gustavnikolaj/async-main-wrap": "^3.0.1",
     "assetgraph": "^6.0.7",
-    "bluebird": "^3.7.2",
     "css-font-parser": "^0.3.0",
     "css-font-weight-names": "^0.2.1",
     "css-list-helpers": "^2.0.0",
