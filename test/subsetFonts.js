@@ -3631,6 +3631,39 @@ describe('subsetFonts', function () {
           url: `${assetGraph.root}IBMPlexSans-Italic.woff`,
         });
       });
+
+      it('should not preload the unused variants', async function () {
+        const assetGraph = new AssetGraph({
+          root: pathModule.resolve(
+            __dirname,
+            '../testdata/subsetFonts/unused-variant-preload/'
+          ),
+        });
+        const [htmlAsset] = await assetGraph.loadAssets('index.html');
+        await assetGraph.populate({
+          followRelations: {
+            crossorigin: false,
+          },
+        });
+        await subsetFonts(assetGraph, {
+          inlineFonts: false,
+        });
+        const [preloadPolyfill] = assetGraph.findAssets({
+          type: 'JavaScript',
+          text: { $regex: /new FontFace/ },
+        });
+        expect(preloadPolyfill.text, 'to contain', ".woff2'")
+          .and('to contain', ".woff'")
+          .and('not to contain', ".ttf'")
+          .and('not to contain', 'fonts.gstatic.com');
+        const preloadLinks = assetGraph.findRelations({
+          from: htmlAsset,
+          type: 'HtmlPreloadLink',
+        });
+        expect(preloadLinks, 'to satisfy', [
+          { href: /^\/subfont\/Noto_Serif-400-[a-f0-9]{10}\.woff2$/ },
+        ]);
+      });
     });
 
     it('should return a fontInfo object with defaulted/normalized props', async function () {
