@@ -53,7 +53,7 @@
     "css-list-helpers": "^2.0.0",
     "font-family-papandreou": "^0.2.0-patch1",
     "font-snapper": "^1.0.2",
-    "font-tracer": "^2.0.0",
+    "font-tracer": "^2.0.1",
     "fontkit": "^1.8.0",
     "lines-and-columns": "^1.1.6",
     "lodash": "^4.17.15",
