@@ -3236,6 +3236,68 @@ describe('subsetFonts', function () {
         });
       });
 
+      describe('when one out of multiple variants of a font-family has missing glyphs', function () {
+        it('should add a unicode-range property to all of the @font-face declarations of the font-familys', async function () {
+          httpception();
+
+          const assetGraph = new AssetGraph({
+            root: pathModule.resolve(
+              __dirname,
+              '../testdata/subsetFonts/missing-glyphs-multiple-variants/'
+            ),
+          });
+          assetGraph.on('warn', () => {}); // Don't fail due to the missing glyphs warning
+
+          await assetGraph.loadAssets('index.html');
+          await assetGraph.populate({
+            followRelations: {
+              crossorigin: false,
+            },
+          });
+          await subsetFonts(assetGraph, {
+            inlineFonts: false,
+          });
+
+          const [outputSansRegularRelation] = assetGraph.findRelations({
+            type: 'CssFontFaceSrc',
+            to: { fileName: 'OutputSans-Regular.woff2' },
+          });
+          expect(
+            outputSansRegularRelation.node.toString(),
+            'not to contain',
+            'unicode-range:'
+          );
+          const [outputSansBoldRelation] = assetGraph.findRelations({
+            type: 'CssFontFaceSrc',
+            to: { fileName: 'OutputSans-Bold.woff2' },
+          });
+          expect(
+            outputSansBoldRelation.node.toString(),
+            'not to contain',
+            'unicode-range:'
+          );
+
+          const [inputMonoRegularRelation] = assetGraph.findRelations({
+            type: 'CssFontFaceSrc',
+            to: { fileName: 'InputMono-Regular.woff2' },
+          });
+          expect(
+            inputMonoRegularRelation.node.toString(),
+            'to contain',
+            'unicode-range:U+'
+          );
+          const [inputMonoBoldRelation] = assetGraph.findRelations({
+            type: 'CssFontFaceSrc',
+            to: { fileName: 'InputMono-Medium.woff2' },
+          });
+          expect(
+            inputMonoBoldRelation.node.toString(),
+            'to contain',
+            'unicode-range:U+'
+          );
+        });
+      });
+
       describe('when the original @font-face declaration already contains a unicode-range property', function () {
         it('should leave the existing unicode-range alone', async function () {
           httpception();
