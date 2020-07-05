@@ -97,7 +97,7 @@ describe('generated html', function () {
       },
       'to be valid for all',
       {
-        maxIterations: 10,
+        maxIterations: 1,
         generators: [
           html({
             excludedDescendants: new Set([
