@@ -30,6 +30,36 @@ describe('reference images', function () {
                   }
                 );
               });
+
+              for (const dynamic of [true, false]) {
+                describe(`with dynamic:${dynamic}`, function () {
+                  it('should render missing glyphs', async function () {
+                    await expect(
+                      'missingGlyphs',
+                      'to render the same after subsetting',
+                      {
+                        inlineCss,
+                        inlineFonts,
+                        omitFallbacks,
+                        dynamic,
+                      }
+                    );
+                  });
+
+                  it('should render unused variants', async function () {
+                    await expect(
+                      'unusedVariants',
+                      'to render the same after subsetting',
+                      {
+                        inlineCss,
+                        inlineFonts,
+                        omitFallbacks,
+                        dynamic,
+                      }
+                    );
+                  });
+                });
+              }
             });
           }
         });
