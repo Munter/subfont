@@ -515,7 +515,7 @@ describe('subsetFonts', function () {
                 fontFamilies: expect.it('to be a', Set),
                 codepoints: {
                   original: expect.it('to be an array'),
-                  used: [101, 108, 111, 72],
+                  used: [101, 108, 111, 32, 72],
                   unused: expect.it('to be an array'),
                 },
               },
