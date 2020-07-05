@@ -20,10 +20,10 @@ function fixupUnsupportedHtmlConstructs(obj) {
   }
 }
 
-describe('generated html', function() {
+describe('generated html', function () {
   let smileySvgBase64;
 
-  before(async function() {
+  before(async function () {
     smileySvgBase64 = `data:image/svg+xml;base64,${fs
       .readFileSync(
         pathModule.resolve(__dirname, '..', 'testdata', 'smiley.svg')
@@ -31,7 +31,7 @@ describe('generated html', function() {
       .toString('base64')}`;
   });
 
-  it('should render the same before and after subsetting', async function() {
+  it('should render the same before and after subsetting', async function () {
     return expect(
       async (htmlObjectTree, stylesheet) => {
         fixupUnsupportedHtmlConstructs(htmlObjectTree);
@@ -70,9 +70,9 @@ describe('generated html', function() {
                 }
 
                 ${stylesheet}
-              `
-            }
-          ]
+              `,
+            },
+          ],
         });
 
         const assetGraph = new AssetGraph({
@@ -82,7 +82,7 @@ describe('generated html', function() {
             'testdata',
             'subsetFonts',
             'unused-variant-on-one-page'
-          )
+          ),
         });
         const text = stringify(htmlObjectTree);
         // FIXME: Remove this (useful for debugging right now)
@@ -90,16 +90,16 @@ describe('generated html', function() {
         assetGraph.addAsset({
           url: `${assetGraph.root}index.html`,
           type: 'Html',
-          text
+          text,
         });
         await assetGraph.populate();
         return expect(assetGraph, 'to render the same after subsetting', {
-          omitFallbacks: true
+          omitFallbacks: true,
         });
       },
       'to be valid for all',
       html({
-        excludedDescendants: new Set(['svg', 'script', 'style', 'progress'])
+        excludedDescendants: new Set(['svg', 'script', 'style', 'progress']),
       }),
       stylesheet
     );
