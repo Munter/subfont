@@ -3172,17 +3172,17 @@ describe('subsetFonts', function () {
     });
 
     describe('when the highest prioritized font-family is missing glyphs', function () {
-      it('should emit a warning', async function () {
+      it('should emit an info event', async function () {
         httpception();
 
-        const warnSpy = sinon.spy().named('warn');
+        const infoSpy = sinon.spy().named('warn');
         const assetGraph = new AssetGraph({
           root: pathModule.resolve(
             __dirname,
             '../testdata/subsetFonts/missing-glyphs/'
           ),
         });
-        assetGraph.on('warn', warnSpy);
+        assetGraph.on('info', infoSpy);
         await assetGraph.loadAssets('index.html');
         await assetGraph.populate({
           followRelations: {
@@ -3193,8 +3193,8 @@ describe('subsetFonts', function () {
           inlineFonts: false,
         });
 
-        expect(warnSpy, 'to have calls satisfying', function () {
-          warnSpy({
+        expect(infoSpy, 'to have calls satisfying', function () {
+          infoSpy({
             message: expect
               .it('to contain', 'Missing glyph fallback detected')
               .and('to contain', '\\u{4e2d} (中)')
@@ -3334,14 +3334,14 @@ describe('subsetFonts', function () {
       it('should check for missing glyphs in any subset format', async function () {
         httpception();
 
-        const warnSpy = sinon.spy().named('warn');
+        const infoSpy = sinon.spy().named('info');
         const assetGraph = new AssetGraph({
           root: pathModule.resolve(
             __dirname,
             '../testdata/subsetFonts/missing-glyphs/'
           ),
         });
-        assetGraph.on('warn', warnSpy);
+        assetGraph.on('info', infoSpy);
         await assetGraph.loadAssets('index.html');
         await assetGraph.populate({
           followRelations: {
@@ -3353,8 +3353,8 @@ describe('subsetFonts', function () {
           formats: [`woff2`],
         });
 
-        expect(warnSpy, 'to have calls satisfying', function () {
-          warnSpy({
+        expect(infoSpy, 'to have calls satisfying', function () {
+          infoSpy({
             message: expect
               .it('to contain', 'Missing glyph fallback detected')
               .and('to contain', '\\u{4e2d} (中)')
@@ -3363,18 +3363,18 @@ describe('subsetFonts', function () {
         });
       });
 
-      // Some fonts don't contain these, but browsers don't seem to mind, so the warnings would just be noise
+      // Some fonts don't contain these, but browsers don't seem to mind, so the messages would just be noise
       it('should not warn about tab and newline missing from the font being subset', async function () {
         httpception();
 
-        const warnSpy = sinon.spy().named('warn');
+        const infoSpy = sinon.spy().named('info');
         const assetGraph = new AssetGraph({
           root: pathModule.resolve(
             __dirname,
             '../testdata/subsetFonts/missing-tab-and-newline-glyphs/'
           ),
         });
-        assetGraph.on('warn', warnSpy);
+        assetGraph.on('warn', infoSpy);
         await assetGraph.loadAssets('index.html');
         await assetGraph.populate({
           followRelations: {
@@ -3385,7 +3385,7 @@ describe('subsetFonts', function () {
           inlineFonts: false,
         });
 
-        expect(warnSpy, 'was not called');
+        expect(infoSpy, 'was not called');
       });
     });
 
