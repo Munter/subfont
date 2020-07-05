@@ -85,8 +85,6 @@ describe('generated html', function () {
           ),
         });
         const text = stringify(htmlObjectTree);
-        // FIXME: Remove this (useful for debugging right now)
-        console.log(text);
         assetGraph.addAsset({
           url: `${assetGraph.root}index.html`,
           type: 'Html',
@@ -98,10 +96,20 @@ describe('generated html', function () {
         });
       },
       'to be valid for all',
-      html({
-        excludedDescendants: new Set(['svg', 'script', 'style', 'progress']),
-      }),
-      stylesheet
+      {
+        iterations: 10,
+        generators: [
+          html({
+            excludedDescendants: new Set([
+              'svg',
+              'script',
+              'style',
+              'progress',
+            ]),
+          }),
+          stylesheet,
+        ],
+      }
     );
   });
 });
