@@ -68,7 +68,7 @@
   },
   "devDependencies": {
     "coveralls": "^3.0.9",
-    "css-generators": "github:papandreou/css-generators#a8fc73b216ab7861d13ef70cd8554010a22b1d79",
+    "css-generators": "^0.2.0",
     "eslint": "^7.4.0",
     "eslint-config-prettier": "^6.7.0",
     "eslint-config-standard": "^14.0.0",
@@ -77,7 +77,7 @@
     "eslint-plugin-node": "^11.1.0",
     "eslint-plugin-promise": "^4.0.1",
     "eslint-plugin-standard": "^4.0.0",
-    "html-generators": "github:sunesimonsen/html-generators#8e17838ac5aaa9e69a1e266a9ac013839c762207",
+    "html-generators": "^1.0.3",
     "httpception": "^3.0.0",
     "magicpen-prism": "^3.0.2",
     "mocha": "^8.0.1",
