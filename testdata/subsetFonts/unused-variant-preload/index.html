@@ -1,9 +1,24 @@
-<!DOCTYPE html>
-<html>
+<!doctype html>
+<html class="fonts-loaded">
   <head>
-    <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Noto+Serif:400,700,400i|Open+Sans:700,400">
+    <style>
+      @font-face {
+        font-family: Input Mono;
+        src: url(InputMono-Regular.woff2) format("woff2");
+      }
+
+      @font-face {
+        font-family: Input Mono;
+        src: url(InputMono-Medium.woff2) format("woff2");
+        font-weight: 700;
+      }
+
+      code {
+        font-family: Input Mono, monospace;
+      }
+    </style>
   </head>
   <body>
-    <div style="font-family: Noto Serif">Hello</div>
+    <code>foo</code>
   </body>
 </html>
