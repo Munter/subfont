@@ -1,4 +1,86 @@
-### v4.0.5 (2019-12-11)
+### v5.0.5 (2020-07-04)
+
+- [Update assetgraph to ^6.0.8](https://github.com/Munter/subfont/commit/5ad6794bc61b0c96b9fa1dea68631e78bfd1cd10) ([Andreas Lind](mailto:andreaslindpetersen@gmail.com))
+- [Update font-tracer to ^2.0.1](https://github.com/Munter/subfont/commit/b68be3c65b1931d9eeac456e7ea6a699975b50c7) ([Andreas Lind](mailto:andreaslindpetersen@gmail.com))
+
+### v5.0.4 (2020-06-30)
+
+- [#95](https://github.com/Munter/subfont/pull/95) Warn if fetching an entry point results in an HTTP redirect ([Andreas Lind](mailto:andreaslindpetersen@gmail.com))
+- [#97](https://github.com/Munter/subfont/pull/97) Do not preload unused variants in the JavaScript-based polyfill ([Andreas Lind](mailto:andreaslindpetersen@gmail.com))
+- [#100](https://github.com/Munter/subfont/pull/100) Inject unicode-range into the original @font-face declaration when it's missing some of the glyphs that are used ([Andreas Lind](mailto:andreaslindpetersen@gmail.com))
+- [#99](https://github.com/Munter/subfont/pull/99) Avoid using bluebird ([Andreas Lind](mailto:andreaslindpetersen@gmail.com))
+
+### v5.0.3 (2020-06-22)
+
+#### Pull requests
+
+- [#98](https://github.com/Munter/subfont/pull/98) Add directly used dependency ([Jang Whemoon](mailto:palindrom615@gmail.com))
+- [#94](https://github.com/Munter/subfont/pull/94) Don't refer to the fallback CSS with an absolute url when inside the canonical root ([Andreas Lind](mailto:andreaslindpetersen@gmail.com))
+
+#### Commits to master
+
+- [Remove lodash.groupby now that we have all of lodash](https://github.com/Munter/subfont/commit/3d300c718bbec111040fed1510cd4d4ae098627b) ([Andreas Lind](mailto:andreaslindpetersen@gmail.com))
+
+### v5.0.2 (2020-05-29)
+
+- [#93](https://github.com/Munter/subfont/pull/93) Fix: Cannot read property 'removeChild' of undefined ([Andreas Lind](mailto:andreas.lind@peakon.com))
+
+### v5.0.1 (2020-05-25)
+
+#### Pull requests
+
+- [#86](https://github.com/Munter/subfont/pull/86) Configure Renovate ([Renovate Bot](mailto:bot@renovateapp.com))
+
+#### Commits to master
+
+- [Update to font-snapper 1.0.2](https://github.com/Munter/subfont/commit/516e7e35a6a900b087f3fb07b602bac84176dcdc) ([Peter Müller](mailto:munter@fumle.dk))
+- [Only distribute relevant files in npm package](https://github.com/Munter/subfont/commit/a49be6d575dd9e2be4fa0f6f730dd7e174d98f55) ([Peter Müller](mailto:munter@fumle.dk))
+
+### v5.0.0 (2020-05-24)
+
+#### Pull requests
+
+- [#90](https://github.com/Munter/subfont/pull/90) Don't break when an unused variant points at a non-existent file ([Andreas Lind](mailto:andreas.lind@peakon.com))
+
+#### Commits to master
+
+- [Update to prettier 2 and reformat all files](https://github.com/Munter/subfont/commit/de6a482f31075245ed957aa8057a24e31addd612) ([Peter Müller](mailto:munter@fumle.dk))
+- [Update yargs to 15.3.1](https://github.com/Munter/subfont/commit/d10b5cbe289ae86f17b749fd05b75f68b708f88e) ([Peter Müller](mailto:munter@fumle.dk))
+- [Update sinon to 9.0.2](https://github.com/Munter/subfont/commit/694d30960dcc9e15b0c6b1b7a95da3459c1b4db9) ([Peter Müller](mailto:munter@fumle.dk))
+- [Update to nyc 15](https://github.com/Munter/subfont/commit/d5bb5e43c22471b863febeeafe00b2134acffff5) ([Peter Müller](mailto:munter@fumle.dk))
+- [Update to puppeteer 3.1.0](https://github.com/Munter/subfont/commit/c1109023ef26cd986800eb4e2d8063567de9492e) ([Peter Müller](mailto:munter@fumle.dk))
+- [+7 more](https://github.com/Munter/subfont/compare/v4.2.2...v5.0.0)
+
+### v4.2.2 (2020-04-11)
+
+- [#87](https://github.com/Munter/subfont/pull/87) Fix uniq-ification of strings that might contain non-UTF-16 chars ([Andreas Lind](mailto:andreas.lind@peakon.com))
+
+### v4.2.1 (2020-04-05)
+
+- [#85](https://github.com/Munter/subfont/pull/85) Don't break in --no-fallbacks mode when multiple pages share the same CSS ([Andreas Lind](mailto:andreas.lind@peakon.com), [suziwen](mailto:suziwen1@gmail.com))
+
+### v4.2.0 (2020-02-19)
+
+#### Pull requests
+
+- [#76](https://github.com/Munter/subfont/pull/76) Fix the prettier setup ([Andreas Lind](mailto:andreas.lind@peakon.com))
+- [#75](https://github.com/Munter/subfont/pull/75) Fix omitFallbacks with Google Web Fonts ([Andreas Lind](mailto:andreas.lind@peakon.com))
+
+#### Commits to master
+
+- [Switch to the official css-font-parser now that bramstein\/css-font-parser\#7 has been merged and released](https://github.com/Munter/subfont/commit/457c7f0e4cef0a8c1bd8f816c23ace64c9987424) ([Andreas Lind](mailto:andreaslindpetersen@gmail.com))
+- [Don't populate source map relations](https://github.com/Munter/subfont/commit/5c07218b6f1dcc6fad88702a3bcb7b33bf9df54e) ([Andreas Lind](mailto:andreaslindpetersen@gmail.com))
+
+### v4.1.1 (2020-01-04)
+
+- [Add regression test](https://github.com/Munter/subfont/commit/46eddce9c09268dbde459b1f98fe5cec9e4c98f5) ([Andreas Lind](mailto:andreaslindpetersen@gmail.com))
+- [Don't attempt to prefetch inlined fonts](https://github.com/Munter/subfont/commit/844e21e53b72ac7c7efe2f4c0549a71ade5d823c) ([Jesse Farebrother](mailto:jessefarebro@gmail.com))
+
+### v4.1.0 (2020-01-03)
+
+- [#72](https://github.com/Munter/subfont/pull/72) Add subsetPerPage & format options ([Jesse Farebrother](mailto:jessefarebro@gmail.com))
+
+### v4.0.5 (2019-12-12)
 
 - [Update dev dependencies](https://github.com/Munter/subfont/commit/c6ed229b05a39c5dfe21278b0b51f44050ab6efd) ([Peter Müller](mailto:munter@fumle.dk))
 - [Update to assetgraph 6.0.4](https://github.com/Munter/subfont/commit/d49a23a3347c1370410c17cc44283c130c108bc3) ([Peter Müller](mailto:munter@fumle.dk))
@@ -19,8 +101,7 @@
 - [Add vscode debugger launch configuration for the test suite](https://github.com/Munter/subfont/commit/f8f9abc42909c556765555cc49f44eb40a9194db) ([Andreas Lind](mailto:andreaslindpetersen@gmail.com))
 - [Guard against an already detached relation when cleaning up](https://github.com/Munter/subfont/commit/6392fc359222772c9033a58a9020e3b35487d019) ([Andreas Lind](mailto:andreaslindpetersen@gmail.com))
 
-### v4.0.3 (2019-11-02)
-
+### v4.0.3
 #### Pull requests
 
 - [#67](https://github.com/Munter/subfont/pull/67) Only warn about missing fonttools install if we are actually trying t… ([Peter Müller](mailto:munter@fumle.dk))

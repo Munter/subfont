@@ -1,14 +1,14 @@
 const expect = require('unexpected');
 const parseCommandLineOptions = require('../lib/parseCommandLineOptions');
 
-describe('parseCommandLineOptions', function() {
-  it('should return an object with the parsed options', function() {
+describe('parseCommandLineOptions', function () {
+  it('should return an object with the parsed options', function () {
     expect(
       parseCommandLineOptions([
         '--dryrun',
         '--inline-fonts',
         '--no-fallbacks',
-        '--recursive'
+        '--recursive',
       ]),
       'to satisfy',
       {
@@ -25,7 +25,7 @@ describe('parseCommandLineOptions', function() {
         inputFiles: [],
         recursive: true,
         fallbacks: false,
-        dynamic: false
+        dynamic: false,
       }
     );
   });

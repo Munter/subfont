@@ -12,7 +12,7 @@ async function getBrowser() {
   if (!browser) {
     browser = await require('puppeteer').launch();
 
-    after(async function() {
+    after(async function () {
       await browser.close();
     });
   }
@@ -23,7 +23,7 @@ async function screenshot(browser, assetGraph, bannedUrls) {
   const page = await browser.newPage();
   await page.setRequestInterception(true);
   const loadedUrls = [];
-  page.on('request', request => {
+  page.on('request', (request) => {
     const url = request.url();
     loadedUrls.push(url);
     if (url.startsWith('https://example.com/')) {
@@ -33,13 +33,13 @@ async function screenshot(browser, assetGraph, bannedUrls) {
       }
       const asset = assetGraph.findAssets({
         isLoaded: true,
-        url: agUrl
+        url: agUrl,
       })[0];
       if (asset) {
         request.respond({
           status: 200,
           contentType: asset.contentType,
-          body: asset.rawSrc
+          body: asset.rawSrc,
         });
         return;
       }
@@ -48,7 +48,9 @@ async function screenshot(browser, assetGraph, bannedUrls) {
   });
   await page.goto('https://example.com/');
   if (bannedUrls) {
-    const loadedBannedUrls = loadedUrls.filter(url => bannedUrls.includes(url));
+    const loadedBannedUrls = loadedUrls.filter((url) =>
+      bannedUrls.includes(url)
+    );
     if (loadedBannedUrls.length > 0) {
       throw new Error(
         `One or more of the original fonts were loaded:\n  ${loadedBannedUrls.join(
@@ -72,7 +74,7 @@ expect.addAssertion(
         'testdata',
         'referenceImages',
         path
-      )
+      ),
     });
     return expect(assetGraph, 'to render the same after subsetting', ...rest);
   }
@@ -83,7 +85,7 @@ expect.addAssertion(
   async (expect, assetGraph, options = {}) => {
     const [htmlAsset] = await assetGraph.loadAssets('index.html');
     const originalText = htmlAsset.text;
-    expect.subjectOutput = output => {
+    expect.subjectOutput = (output) => {
       output.code(originalText, 'html');
     };
 
@@ -91,7 +93,9 @@ expect.addAssertion(
     const browser = await getBrowser();
     const fontsBefore = assetGraph
       .findAssets({ type: { $in: ['Ttf', 'Woff', 'Woff2', 'Eot'] } })
-      .map(asset => asset.url.replace(assetGraph.root, 'https://example.com/'));
+      .map((asset) =>
+        asset.url.replace(assetGraph.root, 'https://example.com/')
+      );
     const screenshotBefore = await screenshot(browser, assetGraph);
     const { fontInfo } = await subsetFonts(assetGraph, options);
     if (fontInfo.length > 0) {
@@ -101,7 +105,7 @@ expect.addAssertion(
         fontsBefore
       );
       await expect(screenshotAfter, 'to resemble', screenshotBefore, {
-        mismatchPercentage: 0
+        mismatchPercentage: 0,
       });
     }
   }

@@ -5,9 +5,9 @@ cache:
   directories:
     - node_modules
 node_js:
-  - '8'
-  - '10'
-  - '12'
+  - 10
+  - 12
+  - 14
 
 addons:
   apt:
