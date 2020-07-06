@@ -4624,7 +4624,10 @@ describe('subsetFonts', function () {
       // Regression test for https://github.com/Munter/netlify-plugin-subfont/issues/32
       it('should not break', async function () {
         const assetGraph = new AssetGraph({
-          root: pathModule.resolve(__dirname, '../testdata/subsetFonts/foo/'),
+          root: pathModule.resolve(
+            __dirname,
+            '../testdata/subsetFonts/two-pages-import-css/'
+          ),
         });
         await assetGraph.loadAssets(['index1.html', 'index2.html']);
         await assetGraph.populate();
