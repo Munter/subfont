@@ -515,7 +515,7 @@ describe('subsetFonts', function () {
                 fontFamilies: expect.it('to be a', Set),
                 codepoints: {
                   original: expect.it('to be an array'),
-                  used: [101, 108, 111, 32, 72],
+                  used: [32, 72, 101, 108, 111],
                   unused: expect.it('to be an array'),
                 },
               },
@@ -3231,7 +3231,7 @@ describe('subsetFonts', function () {
           expect(
             originalFontFaceSrcRelation.from.text,
             'to contain',
-            'unicode-range:U+64-7e,U+a0-ff,'
+            'unicode-range:U+20-7e,U+a0-ff,'
           );
         });
       });
