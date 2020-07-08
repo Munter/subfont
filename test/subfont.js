@@ -3,6 +3,7 @@ const sinon = require('sinon');
 const expect = require('unexpected').clone().use(require('unexpected-sinon'));
 const subfont = require('../lib/subfont');
 const httpception = require('httpception');
+const AssetGraph = require('assetgraph');
 const proxyquire = require('proxyquire');
 const pathModule = require('path');
 const openSansBold = require('fs').readFileSync(
@@ -17,7 +18,11 @@ const openSansBold = require('fs').readFileSync(
 describe('subfont', function () {
   let mockConsole;
   beforeEach(async function () {
-    mockConsole = { log: sinon.spy(), error: sinon.spy() };
+    mockConsole = { log: sinon.spy(), warn: sinon.spy(), error: sinon.spy() };
+  });
+
+  afterEach(function () {
+    sinon.restore();
   });
 
   describe('when a font is referenced by a stylesheet hosted outside the root', function () {
@@ -209,6 +214,199 @@ describe('subfont', function () {
         'to contain',
         "font-family: 'Open Sans__subset';"
       );
+    });
+  });
+
+  describe('when fetching an entry point results in an HTTP redirect', function () {
+    describe('with a single entry point', function () {
+      beforeEach(function () {
+        httpception([
+          {
+            request: 'GET http://example.com/',
+            response: {
+              statusCode: 301,
+              headers: {
+                Location: 'https://somewhereelse.com/',
+              },
+            },
+          },
+          {
+            request: 'GET https://somewhereelse.com/',
+            response: {
+              headers: {
+                'Content-Type': 'text/html; charset=utf-8',
+              },
+              body: `<!DOCTYPE html>
+              <html>
+
+              <head>
+                <style>
+                  @font-face {
+                    font-family: Open Sans;
+                    src: url(OpenSans.woff) format('woff');
+                  }
+
+                  div {
+                    font-family: Open Sans;
+                  }
+                </style>
+              </head>
+              <body>
+                <div>Hello</div>
+              </body>
+              </html>
+            `,
+            },
+          },
+          {
+            request: 'GET http://somewhereelse.com/OpenSans.woff',
+            response: {
+              headers: {
+                'Content-Type': 'font/woff',
+              },
+              body: openSansBold,
+            },
+          },
+        ]);
+      });
+
+      it('should issue a warning', async function () {
+        const root = 'http://example.com/';
+        sinon.stub(AssetGraph.prototype, 'info');
+
+        const assetGraph = await subfont(
+          {
+            root,
+            inputFiles: [root],
+            fallbacks: false,
+            silent: true,
+            dryRun: true,
+          },
+          mockConsole
+        );
+
+        const htmlAssets = assetGraph.findAssets({
+          isInitial: true,
+          type: 'Html',
+        });
+        expect(htmlAssets, 'to have length', 1);
+        expect(
+          htmlAssets[0].url,
+          'to equal',
+          'https://somewhereelse.com/index.html'
+        );
+        expect(assetGraph.info, 'to have a call satisfying', () => {
+          assetGraph.info(
+            new Error(
+              'http://example.com/ redirected to https://somewhereelse.com/'
+            )
+          );
+        });
+      });
+
+      it('should change the root of the graph so that files get written to disc', async function () {
+        const root = 'http://example.com/';
+
+        sinon.stub(AssetGraph.prototype, 'info');
+        const assetGraph = await subfont(
+          {
+            root,
+            inputFiles: [root],
+            fallbacks: false,
+            silent: true,
+            dryRun: true,
+          },
+          mockConsole
+        );
+
+        expect(assetGraph.root, 'to equal', 'https://somewhereelse.com/');
+
+        expect(assetGraph.info, 'to have a call satisfying', () => {
+          assetGraph.info(
+            new Error(
+              'All entrypoints redirected, changing root from http://example.com/ to https://somewhereelse.com/'
+            )
+          );
+        });
+      });
+    });
+
+    describe('but other entry points do not get redirected', function () {
+      beforeEach(function () {
+        httpception([
+          {
+            request: 'GET http://example.com/',
+            response: {
+              statusCode: 301,
+              headers: {
+                Location: 'https://somewhereelse.com/',
+              },
+            },
+          },
+          {
+            request: 'GET http://example.com/page2',
+            response: {
+              headers: {
+                'Content-Type': 'text/html; charset=utf-8',
+              },
+              body: `<!DOCTYPE html><html></html>`,
+            },
+          },
+          {
+            request: 'GET https://somewhereelse.com/',
+            response: {
+              headers: {
+                'Content-Type': 'text/html; charset=utf-8',
+              },
+              body: `<!DOCTYPE html>
+              <html>
+                <head>
+                  <style>
+                    @font-face {
+                      font-family: Open Sans;
+                      src: url(OpenSans.woff) format('woff');
+                    }
+
+                    div {
+                      font-family: Open Sans;
+                    }
+                  </style>
+                </head>
+                <body>
+                  <div>Hello</div>
+                </body>
+              </html>
+            `,
+            },
+          },
+          {
+            request: 'GET http://somewhereelse.com/OpenSans.woff',
+            response: {
+              headers: {
+                'Content-Type': 'font/woff',
+              },
+              body: openSansBold,
+            },
+          },
+        ]);
+      });
+
+      it('should not change the root', async function () {
+        const root = 'http://example.com/';
+
+        const assetGraph = await subfont(
+          {
+            root,
+            inputFiles: [root, `${root}page2`],
+            fallbacks: false,
+            silent: true,
+            dryRun: true,
+          },
+          mockConsole
+        );
+
+        expect(assetGraph.root, 'to equal', 'http://example.com/');
+      });
     });
   });
 
@@ -404,6 +602,62 @@ describe('subfont', function () {
         mockConsole
       );
       expect(mockConsole.error, 'was not called');
+    });
+  });
+
+  describe('with a canonical root and loading the page from a remote server', function () {
+    // Regression test for https://gitter.im/assetgraph/assetgraph?at=5ece5da89da05a060a3417fc
+    it('should refer to the fallback CSS with a root-relative url', async function () {
+      httpception([
+        {
+          request: 'GET https://www.netlify.com/index.html',
+          response: {
+            headers: {
+              'Content-Type': 'text/html',
+            },
+            body: `<!DOCTYPE html>
+            <html>
+              <head>
+                <style>
+                  @font-face{font-family: Open Sans; src:url(OpenSans.woff) format("woff")}
+                </style>
+              </head>
+              <body>
+                <div style="font-family: Open Sans">Hello</div>
+              </body>
+            </html>
+          `,
+          },
+        },
+        {
+          request: 'GET https://www.netlify.com/OpenSans.woff',
+          response: {
+            headers: {
+              'Content-Type': 'font/woff',
+            },
+            body: openSansBold,
+          },
+        },
+      ]);
+
+      const assetGraph = await subfont(
+        {
+          silent: true,
+          dryRun: true,
+          debug: true,
+          canonicalRoot: 'https://www.netlify.com/',
+          inputFiles: ['https://www.netlify.com/index.html'],
+        },
+        mockConsole
+      );
+      const [, asyncLoadJavaScriptAsset] = assetGraph.findAssets({
+        type: 'JavaScript',
+      });
+      expect(
+        asyncLoadJavaScriptAsset.text,
+        'to contain',
+        `el.href='/subfont/fallback-`
+      );
     });
   });
 

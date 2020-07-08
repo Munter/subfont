@@ -60,7 +60,7 @@ describe('downloadGoogleFonts', () => {
       `  font-family: 'Roboto';`,
       `  font-weight: 400;`,
       `  font-style: normal;`,
-      `  unicode-range: U+0,U+64-7E,U+D,U+A0-FF,U+131,U+20-21,U+152-153,U+22-47,U+2C6,U+48-49,U+2DA,U+2DC,U+4A-52,U+2013-2014,U+2018-201A,U+201C-201E,U+2022,U+2026,U+2039-203A,U+2044,U+53,U+2074,U+20AC,U+54-57,U+2212,U+58-63;`,
+      `  unicode-range: U+0,U+D,U+20-7E,U+A0-FF,U+131,U+152-153,U+2C6,U+2DA,U+2DC,U+2013-2014,U+2018-201A,U+201C-201E,U+2022,U+2026,U+2039-203A,U+2044,U+2074,U+20AC,U+2212;`,
       `  font-display: swap;`,
       `  src: `,
       expect

@@ -1,3 +1,41 @@
+### v5.0.6 (2020-07-05)
+
+#### Pull requests
+
+- [#104](https://github.com/munter/subfont/pull/104) Always include the space character U+20 in subsets ([Andreas Lind](mailto:andreaslindpetersen@gmail.com))
+- [#103](https://github.com/munter/subfont/pull/103) Inject unicode-range into all the @font-face declarations for the given family when glyphs are missing ([Andreas Lind](mailto:andreaslindpetersen@gmail.com))
+- [#102](https://github.com/munter/subfont/pull/102) Do not preload unused variants in a self-hosting scenario ([Andreas Lind](mailto:andreaslindpetersen@gmail.com))
+
+#### Commits to master
+
+- [Test in node 14](https://github.com/munter/subfont/commit/a65d7037662a4a62e2ad4215389c2cd1dab8fa22) ([Peter Müller](mailto:munter@fumle.dk))
+- [Convert mocha config to mocha 8 compatible format](https://github.com/munter/subfont/commit/3b80329c605e47884fc797ff569e3470c6890a4e) ([Peter Müller](mailto:munter@fumle.dk))
+- [Update non-breaking development dependencies](https://github.com/munter/subfont/commit/7054f1f4e248ae57aae265f43e85f0134f88ced7) ([Peter Müller](mailto:munter@fumle.dk))
+- [Avoid unhandled promise rejection errors](https://github.com/munter/subfont/commit/8b1d0a153dbefcbb68f2441adc4aefff4b77ce20) ([Andreas Lind](mailto:andreaslindpetersen@gmail.com))
+
+### v5.0.5 (2020-07-04)
+
+- [Update assetgraph to ^6.0.8](https://github.com/munter/subfont/commit/5ad6794bc61b0c96b9fa1dea68631e78bfd1cd10) ([Andreas Lind](mailto:andreaslindpetersen@gmail.com))
+- [Update font-tracer to ^2.0.1](https://github.com/munter/subfont/commit/b68be3c65b1931d9eeac456e7ea6a699975b50c7) ([Andreas Lind](mailto:andreaslindpetersen@gmail.com))
+
+### v5.0.4 (2020-06-30)
+
+- [#95](https://github.com/munter/subfont/pull/95) Warn if fetching an entry point results in an HTTP redirect ([Andreas Lind](mailto:andreaslindpetersen@gmail.com))
+- [#97](https://github.com/munter/subfont/pull/97) Do not preload unused variants in the JavaScript-based polyfill ([Andreas Lind](mailto:andreaslindpetersen@gmail.com))
+- [#100](https://github.com/munter/subfont/pull/100) Inject unicode-range into the original @font-face declaration when it's missing some of the glyphs that are used ([Andreas Lind](mailto:andreaslindpetersen@gmail.com))
+- [#99](https://github.com/munter/subfont/pull/99) Avoid using bluebird ([Andreas Lind](mailto:andreaslindpetersen@gmail.com))
+
+### v5.0.3 (2020-06-22)
+
+#### Pull requests
+
+- [#98](https://github.com/munter/subfont/pull/98) Add directly used dependency ([Jang Whemoon](mailto:palindrom615@gmail.com))
+- [#94](https://github.com/munter/subfont/pull/94) Don't refer to the fallback CSS with an absolute url when inside the canonical root ([Andreas Lind](mailto:andreaslindpetersen@gmail.com))
+
+#### Commits to master
+
+- [Remove lodash.groupby now that we have all of lodash](https://github.com/munter/subfont/commit/3d300c718bbec111040fed1510cd4d4ae098627b) ([Andreas Lind](mailto:andreaslindpetersen@gmail.com))
+
 ### v5.0.2 (2020-05-29)
 
 - [#93](https://github.com/munter/subfont/pull/93) Fix: Cannot read property 'removeChild' of undefined ([Andreas Lind](mailto:andreas.lind@peakon.com))
