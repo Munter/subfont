@@ -3,9 +3,9 @@ const subsetLocalFontWithHarfbuzz = require('../lib/subsetLocalFontWithHarfbuzz'
 const readFileAsync = require('util').promisify(require('fs').readFile);
 const pathModule = require('path');
 
-describe('subsetLocalFontWithHarfbuzz', function() {
-  describe('with a truetype font', function() {
-    it('should produce a subset as ttf', async function() {
+describe('subsetLocalFontWithHarfbuzz', function () {
+  describe('with a truetype font', function () {
+    it('should produce a subset as ttf', async function () {
       const openSansTtf = await readFileAsync(
         pathModule.resolve(
           __dirname,
@@ -27,7 +27,7 @@ describe('subsetLocalFontWithHarfbuzz', function() {
       // TODO: Check for truetype signature/magic?
     });
 
-    it('should produce a subset as woff', async function() {
+    it('should produce a subset as woff', async function () {
       const openSansTtf = await readFileAsync(
         pathModule.resolve(
           __dirname,
@@ -49,7 +49,7 @@ describe('subsetLocalFontWithHarfbuzz', function() {
       expect(result.slice(0, 4).toString(), 'to equal', 'wOFF');
     });
 
-    it('should produce a subset as woff2', async function() {
+    it('should produce a subset as woff2', async function () {
       const openSansTtf = await readFileAsync(
         pathModule.resolve(
           __dirname,
@@ -72,8 +72,8 @@ describe('subsetLocalFontWithHarfbuzz', function() {
     });
   });
 
-  describe('with a woff font', function() {
-    it('should produce a subset as ttf', async function() {
+  describe('with a woff font', function () {
+    it('should produce a subset as ttf', async function () {
       const openSansWoff = await readFileAsync(
         pathModule.resolve(
           __dirname,
@@ -93,7 +93,7 @@ describe('subsetLocalFontWithHarfbuzz', function() {
       // TODO: Check for truetype signature/magic?
     });
 
-    it('should produce a subset as woff', async function() {
+    it('should produce a subset as woff', async function () {
       const openSansWoff = await readFileAsync(
         pathModule.resolve(
           __dirname,
@@ -113,7 +113,7 @@ describe('subsetLocalFontWithHarfbuzz', function() {
       expect(result.slice(0, 4).toString(), 'to equal', 'wOFF');
     });
 
-    it('should produce a subset as woff2', async function() {
+    it('should produce a subset as woff2', async function () {
       const openSansWoff = await readFileAsync(
         pathModule.resolve(
           __dirname,
@@ -134,8 +134,8 @@ describe('subsetLocalFontWithHarfbuzz', function() {
     });
   });
 
-  describe('with a woff2 font', function() {
-    it('should produce a subset as ttf', async function() {
+  describe('with a woff2 font', function () {
+    it('should produce a subset as ttf', async function () {
       const openSansWoff = await readFileAsync(
         pathModule.resolve(
           __dirname,
@@ -156,7 +156,7 @@ describe('subsetLocalFontWithHarfbuzz', function() {
       // TODO: Check for truetype signature/magic?
     });
 
-    it('should produce a subset as woff', async function() {
+    it('should produce a subset as woff', async function () {
       const openSansWoff = await readFileAsync(
         pathModule.resolve(
           __dirname,
@@ -177,7 +177,7 @@ describe('subsetLocalFontWithHarfbuzz', function() {
       expect(result.slice(0, 4).toString(), 'to equal', 'wOFF');
     });
 
-    it('should produce a subset as woff2', async function() {
+    it('should produce a subset as woff2', async function () {
       const openSansWoff = await readFileAsync(
         pathModule.resolve(
           __dirname,
