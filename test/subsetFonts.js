@@ -4661,6 +4661,11 @@ describe('subsetFonts', function () {
             await assetGraph.populate();
             function checkSourceMap() {
               const [sourceMap] = assetGraph.findAssets({ type: 'SourceMap' });
+              expect(sourceMap.parseTree.sources, 'to satisfy', {
+                0: expect
+                  .it('to equal', 'styles.less')
+                  .or('to equal', '/styles.less'),
+              });
               const cssAsset = sourceMap.incomingRelations[0].from;
               const generatedPosition = new LinesAndColumns(
                 cssAsset.text
