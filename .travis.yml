@@ -1,7 +1,12 @@
 services:
   - docker
 language: node_js
-cache: npm
+cache:
+  npm: true
+  apt: true
+  pip: true
+  directories:
+    - $HOME/Library/Caches/Homebrew
 
 node_js:
   - 10
@@ -32,3 +37,5 @@ jobs:
     - os: osx
       node_js: 14
       before_install: echo "no installation needed"
+      before_cache:
+        - brew cleanup
