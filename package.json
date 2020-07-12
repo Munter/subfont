@@ -68,6 +68,7 @@
   },
   "devDependencies": {
     "coveralls": "^3.0.9",
+    "css-generators": "^0.2.0",
     "eslint": "^7.4.0",
     "eslint-config-prettier": "^6.7.0",
     "eslint-config-standard": "^14.0.0",
@@ -76,7 +77,9 @@
     "eslint-plugin-node": "^11.1.0",
     "eslint-plugin-promise": "^4.0.1",
     "eslint-plugin-standard": "^4.0.0",
+    "html-generators": "^1.0.3",
     "httpception": "^3.0.0",
+    "magicpen-prism": "^3.0.2",
     "mocha": "^8.0.1",
     "nyc": "^15.1.0",
     "offline-github-changelog": "^1.6.1",
@@ -85,6 +88,7 @@
     "puppeteer": "^3.1.0",
     "sinon": "^9.0.2",
     "unexpected": "^11.8.1",
+    "unexpected-check": "^2.3.1",
     "unexpected-resemble": "^4.3.0",
     "unexpected-set": "^2.0.1",
     "unexpected-sinon": "^10.11.2"
