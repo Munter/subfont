@@ -5,6 +5,7 @@ const expect = require('unexpected')
 
 const AssetGraph = require('assetgraph');
 const pathModule = require('path');
+const LinesAndColumns = require('lines-and-columns').default;
 
 const proxyquire = require('proxyquire');
 const httpception = require('httpception');
@@ -4643,6 +4644,60 @@ describe('subsetFonts', function () {
           },
         ]);
       });
+    });
+
+    describe('with a CSS source map for a file that gets updated', function () {
+      for (const testCase of ['external', 'inline']) {
+        describe(testCase, function () {
+          it('should update the source map', async function () {
+            // lessc --source-map testdata/subsetFonts/css-source-map-${testCase}/styles.{less,css}
+            const assetGraph = new AssetGraph({
+              root: pathModule.resolve(
+                __dirname,
+                `../testdata/subsetFonts/css-source-map-${testCase}/`
+              ),
+            });
+            await assetGraph.loadAssets('index.html');
+            await assetGraph.populate();
+            function checkSourceMap() {
+              const [sourceMap] = assetGraph.findAssets({ type: 'SourceMap' });
+              expect(sourceMap.parseTree.sources, 'to satisfy', {
+                0: expect
+                  .it('to equal', 'styles.less')
+                  .or('to equal', '/styles.less'),
+              });
+              const cssAsset = sourceMap.incomingRelations[0].from;
+              const generatedPosition = new LinesAndColumns(
+                cssAsset.text
+              ).locationForIndex(
+                cssAsset.text.indexOf('border: 1px solid black')
+              );
+              const originalPosition = sourceMap.originalPositionFor({
+                line: generatedPosition.line + 1, // source-map's line numbers are 1-based, lines-and-column's are 0-based
+                column: generatedPosition.column,
+              });
+              const lessAsset = sourceMap.outgoingRelations.find(
+                (relation) => relation.type === 'SourceMapSource'
+              ).to;
+              const lessText = lessAsset.rawSrc.toString('utf-8');
+              const originalIndex = new LinesAndColumns(
+                lessText
+              ).indexForLocation({
+                line: originalPosition.line - 1,
+                column: originalPosition.column,
+              });
+              expect(
+                lessText.slice(originalIndex),
+                'to begin with',
+                'border: 1px solid black'
+              );
+            }
+            checkSourceMap();
+            await subsetFonts(assetGraph);
+            checkSourceMap();
+          });
+        });
+      }
     });
   });
 
