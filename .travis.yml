@@ -19,6 +19,7 @@ addons:
       - gcc-4.8
       - g++-4.8
   homebrew:
+    update: true
     packages:
       - fonttools
       - brotli
