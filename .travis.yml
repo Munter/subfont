@@ -5,8 +5,6 @@ cache:
   npm: true
   apt: true
   pip: true
-  directories:
-    - $HOME/Library/Caches/Homebrew
 
 node_js:
   - 10
@@ -18,12 +16,6 @@ addons:
     packages:
       - gcc-4.8
       - g++-4.8
-  homebrew:
-    update: true
-    packages:
-      - brotli
-      - zopfli
-      - fonttools
 
 env: CXX="g++-4.8" CC="gcc-4.8"
 
@@ -37,6 +29,5 @@ jobs:
   include:
     - os: osx
       node_js: 14
-      before_install: echo "no installation needed"
       before_cache:
         - brew cleanup
