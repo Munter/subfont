@@ -9,7 +9,7 @@
     "lint": "eslint . && prettier --check '**/*.js'",
     "test": "mocha && npm run lint",
     "travis": "npm run coverage && npm run lint",
-    "coverage": "nyc --reporter=lcov --reporter=text -- mocha --reporter dot",
+    "coverage": "nyc --reporter=lcov --reporter=text -- mocha",
     "preversion": "offline-github-changelog --next=${npm_package_version} > CHANGELOG.md && git add CHANGELOG.md"
   },
   "bin": {
