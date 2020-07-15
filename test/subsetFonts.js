@@ -2549,8 +2549,8 @@ describe('subsetFonts', function () {
         );
       });
 
-      describe('when one of the pages does not use any webfonts', function () {
-        it('should still include the @font-face declarations on that page', async function () {
+      describe('when one of the pages does not use any webfonts, but has the original @font-face declarations', function () {
+        it('should still include the __subset @font-face declarations on that page', async function () {
           const assetGraph = new AssetGraph({
             root: pathModule.resolve(
               __dirname,
@@ -2582,6 +2582,42 @@ describe('subsetFonts', function () {
             to: { path: '/subfont/' },
           })[0].to;
           expect(firstSubfontCss, 'to be', secondSubfontCss);
+        });
+      });
+
+      describe('when one of the pages does not use any webfonts and does not have the @font-face declarations in scope', function () {
+        it('should not include the __subset @font-face declarations on that page', async function () {
+          const assetGraph = new AssetGraph({
+            root: pathModule.resolve(
+              __dirname,
+              '../testdata/subsetFonts/one-page-with-no-font-face-ssr/'
+            ),
+          });
+          const [
+            firstHtmlAsset,
+            secondHtmlAsset,
+          ] = await assetGraph.loadAssets(['first.html', 'second.html']);
+          await assetGraph.populate();
+          await subsetFonts(assetGraph, {
+            inlineFonts: false,
+            subsetPerPage: 'ssr',
+          });
+          const firstSubfontCss = assetGraph.findRelations({
+            from: firstHtmlAsset,
+            type: 'HtmlStyle',
+            to: { path: '/subfont/' },
+          })[0].to;
+          expect(
+            firstSubfontCss.text,
+            'to contain',
+            'font-family:font1__subset'
+          );
+          const secondSubfontCss = assetGraph.findRelations({
+            from: secondHtmlAsset,
+            type: 'HtmlStyle',
+            to: { path: '/subfont/' },
+          })[0];
+          expect(secondSubfontCss, 'to be undefined');
         });
       });
     });
