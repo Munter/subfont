@@ -518,6 +518,7 @@ describe('subsetFonts', function () {
                   original: expect.it('to be an array'),
                   used: [32, 72, 101, 108, 111],
                   unused: expect.it('to be an array'),
+                  page: [72, 101, 108, 111, 32],
                 },
               },
             ],
