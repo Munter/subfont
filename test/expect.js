@@ -10,16 +10,7 @@ const AssetGraph = require('assetgraph');
 let browser;
 async function getBrowser() {
   if (!browser) {
-    browser = await require('puppeteer').launch({
-      defaultViewport: {
-        width: 800,
-        height: 600,
-        deviceScaleFactor: 1,
-        isMobile: false,
-        hasTouch: false,
-        isLandscape: false,
-      },
-    });
+    browser = await require('puppeteer').launch();
 
     after(async function () {
       await browser.close();
