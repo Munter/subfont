@@ -2486,7 +2486,7 @@ describe('subsetFonts', function () {
         await assetGraph.populate();
         await subsetFonts(assetGraph, {
           inlineFonts: false,
-          subsetPerPage: 'ssr',
+          ssr: true,
         });
         const firstJavaScriptPreloadPolyfill = assetGraph.findRelations({
           from: firstHtmlAsset,
@@ -2565,7 +2565,7 @@ describe('subsetFonts', function () {
           await assetGraph.populate();
           await subsetFonts(assetGraph, {
             inlineFonts: false,
-            subsetPerPage: 'ssr',
+            ssr: true,
           });
           const firstSubfontCss = assetGraph.findRelations({
             from: firstHtmlAsset,
@@ -2601,7 +2601,7 @@ describe('subsetFonts', function () {
           await assetGraph.populate();
           await subsetFonts(assetGraph, {
             inlineFonts: false,
-            subsetPerPage: 'ssr',
+            ssr: true,
           });
           const firstSubfontCss = assetGraph.findRelations({
             from: firstHtmlAsset,
