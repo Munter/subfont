@@ -251,7 +251,7 @@ describe('subsetFonts', function () {
         },
         {
           message:
-            'Detached <link rel="prefetch" as="font" type="application/x-font-ttf" href="OpenSans.ttf">. Will be replaced with preload with JS fallback.\nIf you feel this is wrong, open an issue at https://github.com/assetgraph/assetgraph/issues',
+            'Detached <link rel="prefetch" as="font" type="application/x-font-ttf" href="OpenSans.ttf">. Will be replaced with preload with JS fallback.\nIf you feel this is wrong, open an issue at https://github.com/Munter/subfont/issues',
           asset: {
             type: 'Html',
           },
@@ -519,6 +519,7 @@ describe('subsetFonts', function () {
                   used: [32, 72, 101, 108, 111],
                   unused: expect.it('to be an array'),
                 },
+                preload: true,
               },
             ],
           },
