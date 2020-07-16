@@ -65,6 +65,8 @@
     "puppeteer-core": "^3.1.0",
     "specificity": "^0.4.1",
     "urltools": "^0.4.1",
+    "wawoff2": "^1.0.2",
+    "woff2sfnt-sfnt2woff": "^1.0.0",
     "yargs": "^15.4.0"
   },
   "devDependencies": {
