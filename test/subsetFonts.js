@@ -59,13 +59,14 @@ const defaultGoogleFontSubsetMock = [
       headers: {
         'Content-Type': 'text/css',
       },
-      body: `@font-face {
-  font-family: 'Open Sans';
-  font-style: normal;
-  font-weight: 400;
-  src: local('Open Sans Regular'), local('OpenSans-Regular'), url(https://fonts.gstatic.com/l/font?kit=mem8YaGs126MiZpBA-U1Uo8aHa0AbQ&skey=62c1cbfccc78b4b2&v=v17) format('truetype');
-}
-`,
+      body: [
+        '@font-face {',
+        "  font-family: 'Open Sans';",
+        '  font-style: normal;',
+        '  font-weight: 400;',
+        "  src: local('Open Sans Regular'), local('OpenSans-Regular'), url(https://fonts.gstatic.com/l/font?kit=mem8YaGs126MiZpBA-U1Uo8aHa0AbQ&skey=62c1cbfccc78b4b2&v=v17) format('truetype');",
+        '}',
+      ].join('\n'),
     },
   },
   {
@@ -990,25 +991,26 @@ describe('subsetFonts', function () {
             headers: {
               'Content-Type': 'text/css',
             },
-            body: `@font-face {
-  font-family: 'Jim Nightshade';
-  font-style: normal;
-  font-weight: 400;
-  src: local('Jim Nightshade'), local('JimNightshade-Regular'), url(https://fonts.gstatic.com/s/jimnightshade/v7/PlIkFlu9Pb08Q8HLM1PxmB0g-NS_XX4.ttf) format('truetype');
-}
-@font-face {
-  font-family: 'Montserrat';
-  font-style: normal;
-  font-weight: 400;
-  src: local('Montserrat Regular'), local('Montserrat-Regular'), url(https://fonts.gstatic.com/s/montserrat/v14/JTUSjIg1_i6t8kCHKm459Wlhzg.ttf) format('truetype');
-}
-@font-face {
-  font-family: 'Space Mono';
-  font-style: normal;
-  font-weight: 400;
-  src: local('Space Mono'), local('SpaceMono-Regular'), url(https://fonts.gstatic.com/s/spacemono/v5/i7dPIFZifjKcF5UAWdDRYEF8QA.ttf) format('truetype');
-}
-`,
+            body: [
+              '@font-face {',
+              "  font-family: 'Jim Nightshade';",
+              '  font-style: normal;',
+              '  font-weight: 400;',
+              "  src: local('Jim Nightshade'), local('JimNightshade-Regular'), url(https://fonts.gstatic.com/s/jimnightshade/v7/PlIkFlu9Pb08Q8HLM1PxmB0g-NS_XX4.ttf) format('truetype');",
+              '}',
+              '@font-face {',
+              "  font-family: 'Montserrat';",
+              '  font-style: normal;',
+              '  font-weight: 400;',
+              "  src: local('Montserrat Regular'), local('Montserrat-Regular'), url(https://fonts.gstatic.com/s/montserrat/v14/JTUSjIg1_i6t8kCHKm459Wlhzg.ttf) format('truetype');",
+              '}',
+              '@font-face {',
+              "  font-family: 'Space Mono';",
+              '  font-style: normal;',
+              '  font-weight: 400;',
+              "  src: local('Space Mono'), local('SpaceMono-Regular'), url(https://fonts.gstatic.com/s/spacemono/v5/i7dPIFZifjKcF5UAWdDRYEF8QA.ttf) format('truetype');",
+              '}',
+            ].join('\n'),
           },
         },
         {
@@ -1054,13 +1056,14 @@ describe('subsetFonts', function () {
             headers: {
               'Content-Type': 'text/css',
             },
-            body: `@font-face {
-  font-family: 'Jim Nightshade';
-  font-style: normal;
-  font-weight: 400;
-  src: local('Jim Nightshade'), local('JimNightshade-Regular'), url(https://fonts.gstatic.com/l/font?kit=PlIkFlu9Pb08Q8HLM1PxmB0g-OS4T3rKDLgt&skey=a1cdb4741ac7b833&v=v7) format('truetype');
-}
-`,
+            body: [
+              '@font-face {',
+              "  font-family: 'Jim Nightshade';",
+              '  font-style: normal;',
+              '  font-weight: 400;',
+              "  src: local('Jim Nightshade'), local('JimNightshade-Regular'), url(https://fonts.gstatic.com/l/font?kit=PlIkFlu9Pb08Q8HLM1PxmB0g-OS4T3rKDLgt&skey=a1cdb4741ac7b833&v=v7) format('truetype');",
+              '}',
+            ].join('\n'),
           },
         },
         {
@@ -1070,13 +1073,14 @@ describe('subsetFonts', function () {
             headers: {
               'Content-Type': 'text/css',
             },
-            body: `@font-face {
-  font-family: 'Montserrat';
-  font-style: normal;
-  font-weight: 400;
-  src: local('Montserrat Regular'), local('Montserrat-Regular'), url(https://fonts.gstatic.com/l/font?kit=JTUSjIg1_i6t8kCHKm45xW5zykqCkKQ&skey=7bc19f711c0de8f&v=v14) format('truetype');
-}
-`,
+            body: [
+              '@font-face {',
+              "  font-family: 'Montserrat';",
+              '  font-style: normal;',
+              '  font-weight: 400;',
+              "  src: local('Montserrat Regular'), local('Montserrat-Regular'), url(https://fonts.gstatic.com/l/font?kit=JTUSjIg1_i6t8kCHKm45xW5zykqCkKQ&skey=7bc19f711c0de8f&v=v14) format('truetype');",
+              '}',
+            ].join('\n'),
           },
         },
         {
@@ -1086,13 +1090,14 @@ describe('subsetFonts', function () {
             headers: {
               'Content-Type': 'text/css',
             },
-            body: `@font-face {
-  font-family: 'Space Mono';
-  font-style: normal;
-  font-weight: 400;
-  src: local('Space Mono'), local('SpaceMono-Regular'), url(https://fonts.gstatic.com/l/font?kit=i7dPIFZifjKcF5UAWdDRUEZuRRHfd3bh&skey=5e801b58db657470&v=v5) format('truetype');
-}
-`,
+            body: [
+              '@font-face {',
+              "  font-family: 'Space Mono';",
+              '  font-style: normal;',
+              '  font-weight: 400;',
+              "  src: local('Space Mono'), local('SpaceMono-Regular'), url(https://fonts.gstatic.com/l/font?kit=i7dPIFZifjKcF5UAWdDRUEZuRRHfd3bh&skey=5e801b58db657470&v=v5) format('truetype');",
+              '}',
+            ].join('\n'),
           },
         },
         {
@@ -1403,25 +1408,26 @@ describe('subsetFonts', function () {
             headers: {
               'Content-Type': 'text/css',
             },
-            body: `@font-face {
-  font-family: 'Roboto';
-  font-style: italic;
-  font-weight: 300;
-  src: local('Roboto Light Italic'), local('Roboto-LightItalic'), url(https://fonts.gstatic.com/s/roboto/v20/KFOjCnqEu92Fr1Mu51TjASc6CsE.ttf) format('truetype');
-}
-@font-face {
-  font-family: 'Roboto';
-  font-style: normal;
-  font-weight: 400;
-  src: local('Roboto'), local('Roboto-Regular'), url(https://fonts.gstatic.com/s/roboto/v20/KFOmCnqEu92Fr1Mu4mxP.ttf) format('truetype');
-}
-@font-face {
-  font-family: 'Roboto';
-  font-style: normal;
-  font-weight: 500;
-  src: local('Roboto Medium'), local('Roboto-Medium'), url(https://fonts.gstatic.com/s/roboto/v20/KFOlCnqEu92Fr1MmEU9fBBc9.ttf) format('truetype');
-}
-`,
+            body: [
+              '@font-face {',
+              "  font-family: 'Roboto';",
+              '  font-style: italic;',
+              '  font-weight: 300;',
+              "  src: local('Roboto Light Italic'), local('Roboto-LightItalic'), url(https://fonts.gstatic.com/s/roboto/v20/KFOjCnqEu92Fr1Mu51TjASc6CsE.ttf) format('truetype');",
+              '}',
+              '@font-face {',
+              "  font-family: 'Roboto';",
+              '  font-style: normal;',
+              '  font-weight: 400;',
+              "  src: local('Roboto'), local('Roboto-Regular'), url(https://fonts.gstatic.com/s/roboto/v20/KFOmCnqEu92Fr1Mu4mxP.ttf) format('truetype');",
+              '}',
+              '@font-face {',
+              "  font-family: 'Roboto';",
+              '  font-style: normal;',
+              '  font-weight: 500;',
+              "  src: local('Roboto Medium'), local('Roboto-Medium'), url(https://fonts.gstatic.com/s/roboto/v20/KFOlCnqEu92Fr1MmEU9fBBc9.ttf) format('truetype');",
+              '}',
+            ].join('\n'),
           },
         },
 
@@ -1468,13 +1474,14 @@ describe('subsetFonts', function () {
             headers: {
               'Content-Type': 'text/css',
             },
-            body: `@font-face {
-  font-family: 'Roboto';
-  font-style: normal;
-  font-weight: 500;
-  src: local('Roboto Medium'), local('Roboto-Medium'), url(https://fonts.gstatic.com/l/font?kit=KFOlCnqEu92Fr1MmEU9vAwU5YqSe-g&skey=ee881451c540fdec&v=v20) format('truetype');
-}
-`,
+            body: [
+              '@font-face {',
+              "  font-family: 'Roboto';",
+              '  font-style: normal;',
+              '  font-weight: 500;',
+              "  src: local('Roboto Medium'), local('Roboto-Medium'), url(https://fonts.gstatic.com/l/font?kit=KFOlCnqEu92Fr1MmEU9vAwU5YqSe-g&skey=ee881451c540fdec&v=v20) format('truetype');",
+              '}',
+            ].join('\n'),
           },
         },
 
@@ -1485,13 +1492,14 @@ describe('subsetFonts', function () {
             headers: {
               'Content-Type': 'text/css',
             },
-            body: `@font-face {
-  font-family: 'Roboto';
-  font-style: normal;
-  font-weight: 400;
-  src: local('Roboto'), local('Roboto-Regular'), url(https://fonts.gstatic.com/l/font?kit=KFOmCnqEu92Fr1Me5X5LR1ZWWA&skey=a0a0114a1dcab3ac&v=v20) format('truetype');
-}
-`,
+            body: [
+              '@font-face {',
+              "  font-family: 'Roboto';",
+              '  font-style: normal;',
+              '  font-weight: 400;',
+              "  src: local('Roboto'), local('Roboto-Regular'), url(https://fonts.gstatic.com/l/font?kit=KFOmCnqEu92Fr1Me5X5LR1ZWWA&skey=a0a0114a1dcab3ac&v=v20) format('truetype');",
+              '}',
+            ].join('\n'),
           },
         },
 
@@ -1502,13 +1510,14 @@ describe('subsetFonts', function () {
             headers: {
               'Content-Type': 'text/css',
             },
-            body: `@font-face {
-  font-family: 'Roboto';
-  font-style: italic;
-  font-weight: 300;
-  src: local('Roboto Light Italic'), local('Roboto-LightItalic'), url(https://fonts.gstatic.com/l/font?kit=KFOjCnqEu92Fr1Mu51TjARc9GMSx8OQ8Dg&skey=8f644060176e1f7e&v=v20) format('truetype');
-}
-`,
+            body: [
+              '@font-face {',
+              "  font-family: 'Roboto';",
+              '  font-style: italic;',
+              '  font-weight: 300;',
+              "  src: local('Roboto Light Italic'), local('Roboto-LightItalic'), url(https://fonts.gstatic.com/l/font?kit=KFOjCnqEu92Fr1Mu51TjARc9GMSx8OQ8Dg&skey=8f644060176e1f7e&v=v20) format('truetype');",
+              '}',
+            ].join('\n'),
           },
         },
         {
@@ -1816,13 +1825,14 @@ describe('subsetFonts', function () {
               headers: {
                 'Content-Type': 'text/css',
               },
-              body: `@font-face {
-  font-family: 'Open Sans';
-  font-style: normal;
-  font-weight: 400;
-  src: local('Open Sans Regular'), local('OpenSans-Regular'), url(https://fonts.gstatic.com/s/opensans/v17/mem8YaGs126MiZpBA-UFVZ0e.ttf) format('truetype');
-}
-`,
+              body: [
+                '@font-face {',
+                "  font-family: 'Open Sans';",
+                '  font-style: normal;',
+                '  font-weight: 400;',
+                "  src: local('Open Sans Regular'), local('OpenSans-Regular'), url(https://fonts.gstatic.com/s/opensans/v17/mem8YaGs126MiZpBA-UFVZ0e.ttf) format('truetype');",
+                '}',
+              ].join('\n'),
             },
           },
 
@@ -1849,13 +1859,14 @@ describe('subsetFonts', function () {
               headers: {
                 'Content-Type': 'text/css',
               },
-              body: `@font-face {
-  font-family: 'Open Sans';
-  font-style: normal;
-  font-weight: 400;
-  src: local('Open Sans Regular'), local('OpenSans-Regular'), url(https://fonts.gstatic.com/l/font?kit=mem8YaGs126MiZpBA-U1Uo8YdakObdLu&skey=62c1cbfccc78b4b2&v=v17) format('truetype');
-}
-`,
+              body: [
+                '@font-face {',
+                "  font-family: 'Open Sans';",
+                '  font-style: normal;',
+                '  font-weight: 400;',
+                "  src: local('Open Sans Regular'), local('OpenSans-Regular'), url(https://fonts.gstatic.com/l/font?kit=mem8YaGs126MiZpBA-U1Uo8YdakObdLu&skey=62c1cbfccc78b4b2&v=v17) format('truetype');",
+                '}',
+              ].join('\n'),
             },
           },
           {
@@ -1865,13 +1876,14 @@ describe('subsetFonts', function () {
               headers: {
                 'Content-Type': 'text/css',
               },
-              body: `@font-face {
-  font-family: 'Open Sans';
-  font-style: normal;
-  font-weight: 400;
-  src: local('Open Sans Regular'), local('OpenSans-Regular'), url(https://fonts.gstatic.com/l/font?kit=mem8YaGs126MiZpBA-U1Uo8bda0Eb8k&skey=62c1cbfccc78b4b2&v=v17) format('truetype');
-}
-`,
+              body: [
+                '@font-face {',
+                "  font-family: 'Open Sans';",
+                '  font-style: normal;',
+                '  font-weight: 400;',
+                "  src: local('Open Sans Regular'), local('OpenSans-Regular'), url(https://fonts.gstatic.com/l/font?kit=mem8YaGs126MiZpBA-U1Uo8bda0Eb8k&skey=62c1cbfccc78b4b2&v=v17) format('truetype');",
+                '}',
+              ].join('\n'),
             },
           },
           {
@@ -2202,13 +2214,14 @@ describe('subsetFonts', function () {
               headers: {
                 'Content-Type': 'text/css',
               },
-              body: `@font-face {
-  font-family: 'Open Sans';
-  font-style: normal;
-  font-weight: 400;
-  src: local('Open Sans Regular'), local('OpenSans-Regular'), url(https://fonts.gstatic.com/s/opensans/v17/mem8YaGs126MiZpBA-UFVZ0e.ttf) format('truetype');
-}
-`,
+              body: [
+                '@font-face {',
+                "  font-family: 'Open Sans';",
+                '  font-style: normal;',
+                '  font-weight: 400;',
+                "  src: local('Open Sans Regular'), local('OpenSans-Regular'), url(https://fonts.gstatic.com/s/opensans/v17/mem8YaGs126MiZpBA-UFVZ0e.ttf) format('truetype');",
+                '}',
+              ].join('\n'),
             },
           },
 
@@ -2235,13 +2248,14 @@ describe('subsetFonts', function () {
               headers: {
                 'Content-Type': 'text/css',
               },
-              body: `@font-face {
-  font-family: 'Open Sans';
-  font-style: normal;
-  font-weight: 400;
-  src: local('Open Sans Regular'), local('OpenSans-Regular'), url(https://fonts.gstatic.com/l/font?kit=mem8YaGs126MiZpBA-U1Uo8XdakOZ8724N-i&skey=62c1cbfccc78b4b2&v=v17) format('truetype');
-}
-`,
+              body: [
+                '@font-face {',
+                "  font-family: 'Open Sans';",
+                '  font-style: normal;',
+                '  font-weight: 400;',
+                "  src: local('Open Sans Regular'), local('OpenSans-Regular'), url(https://fonts.gstatic.com/l/font?kit=mem8YaGs126MiZpBA-U1Uo8XdakOZ8724N-i&skey=62c1cbfccc78b4b2&v=v17) format('truetype');",
+                '}',
+              ].join('\n'),
             },
           },
           {
@@ -2576,14 +2590,15 @@ describe('subsetFonts', function () {
               headers: {
                 'Content-Type': 'text/css',
               },
-              body: `@font-face {
-  font-family: 'Open Sans';
-  font-style: normal;
-  font-weight: 400;
-  font-display: swap;
-  src: local('Open Sans Regular'), local('OpenSans-Regular'), url(https://fonts.gstatic.com/s/opensans/v17/mem8YaGs126MiZpBA-UFVZ0e.ttf) format('truetype');
-}
-`,
+              body: [
+                '@font-face {',
+                "  font-family: 'Open Sans';",
+                '  font-style: normal;',
+                '  font-weight: 400;',
+                '  font-display: swap;',
+                "  src: local('Open Sans Regular'), local('OpenSans-Regular'), url(https://fonts.gstatic.com/s/opensans/v17/mem8YaGs126MiZpBA-UFVZ0e.ttf) format('truetype');",
+                '}',
+              ].join('\n'),
             },
           },
 
@@ -2609,13 +2624,14 @@ describe('subsetFonts', function () {
               headers: {
                 'Content-Type': 'text/css',
               },
-              body: `@font-face {
-  font-family: 'Open Sans';
-  font-style: normal;
-  font-weight: 400;
-  src: local('Open Sans Regular'), local('OpenSans-Regular'), url(https://fonts.gstatic.com/l/font?kit=mem8YaGs126MiZpBA-U1Uo8aHa0AbQ&skey=62c1cbfccc78b4b2&v=v17) format('truetype');
-}
-`,
+              body: [
+                '@font-face {',
+                "  font-family: 'Open Sans';",
+                '  font-style: normal;',
+                '  font-weight: 400;',
+                "  src: local('Open Sans Regular'), local('OpenSans-Regular'), url(https://fonts.gstatic.com/l/font?kit=mem8YaGs126MiZpBA-U1Uo8aHa0AbQ&skey=62c1cbfccc78b4b2&v=v17) format('truetype');",
+                '}',
+              ].join('\n'),
             },
           },
           {
