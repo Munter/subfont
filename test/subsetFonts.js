@@ -401,16 +401,6 @@ describe('subsetFonts', function () {
           },
         },
         {
-          type: 'HtmlPreconnectLink',
-          hrefType: 'absolute',
-          href: 'https://fonts.googleapis.com',
-        },
-        {
-          type: 'HtmlPreconnectLink',
-          hrefType: 'absolute',
-          href: 'https://fonts.gstatic.com',
-        },
-        {
           type: 'HtmlStyle',
           to: {
             isInline: true,
@@ -424,7 +414,10 @@ describe('subsetFonts', function () {
             outgoingRelations: [
               {
                 type: 'JavaScriptStaticUrl',
-                href: 'https://fonts.googleapis.com/css?family=Open+Sans',
+                to: {
+                  path: '/subfont/',
+                  fileName: /^fallback-[a-f0-9]{10}\.css$/,
+                },
               },
             ],
           },
@@ -438,7 +431,10 @@ describe('subsetFonts', function () {
             outgoingRelations: [
               {
                 type: 'HtmlStyle',
-                href: 'https://fonts.googleapis.com/css?family=Open+Sans',
+                to: {
+                  path: '/subfont/',
+                  fileName: /^fallback-[a-f0-9]{10}\.css$/,
+                },
               },
             ],
           },
@@ -578,16 +574,6 @@ describe('subsetFonts', function () {
             },
           },
           {
-            type: 'HtmlPreconnectLink',
-            hrefType: 'absolute',
-            href: 'https://fonts.googleapis.com',
-          },
-          {
-            type: 'HtmlPreconnectLink',
-            hrefType: 'absolute',
-            href: 'https://fonts.gstatic.com',
-          },
-          {
             type: 'HtmlStyle',
             to: {
               isInline: true,
@@ -601,7 +587,10 @@ describe('subsetFonts', function () {
               outgoingRelations: [
                 {
                   type: 'JavaScriptStaticUrl',
-                  href: 'https://fonts.googleapis.com/css?family=Open+Sans',
+                  to: {
+                    path: '/subfont/',
+                    fileName: /^fallback-[a-f0-9]{10}\.css$/,
+                  },
                 },
               ],
             },
@@ -615,7 +604,10 @@ describe('subsetFonts', function () {
               outgoingRelations: [
                 {
                   type: 'HtmlStyle',
-                  href: 'https://fonts.googleapis.com/css?family=Open+Sans',
+                  to: {
+                    path: '/subfont/',
+                    fileName: /^fallback-[a-f0-9]{10}\.css$/,
+                  },
                 },
               ],
             },
@@ -719,16 +711,6 @@ describe('subsetFonts', function () {
           },
         },
         {
-          type: 'HtmlPreconnectLink',
-          hrefType: 'absolute',
-          href: 'https://fonts.googleapis.com',
-        },
-        {
-          type: 'HtmlPreconnectLink',
-          hrefType: 'absolute',
-          href: 'https://fonts.gstatic.com',
-        },
-        {
           type: 'HtmlStyle',
           to: {
             isInline: true,
@@ -742,7 +724,10 @@ describe('subsetFonts', function () {
             outgoingRelations: [
               {
                 type: 'JavaScriptStaticUrl',
-                href: 'https://fonts.googleapis.com/css?family=Open+Sans',
+                to: {
+                  path: '/subfont/',
+                  fileName: /^fallback-[a-f0-9]{10}\.css$/,
+                },
               },
             ],
           },
@@ -756,7 +741,10 @@ describe('subsetFonts', function () {
             outgoingRelations: [
               {
                 type: 'HtmlStyle',
-                href: 'https://fonts.googleapis.com/css?family=Open+Sans',
+                to: {
+                  path: '/subfont/',
+                  fileName: /^fallback-[a-f0-9]{10}\.css$/,
+                },
               },
             ],
           },
@@ -1344,16 +1332,6 @@ describe('subsetFonts', function () {
           },
         },
         {
-          type: 'HtmlPreconnectLink',
-          hrefType: 'absolute',
-          href: 'https://fonts.googleapis.com',
-        },
-        {
-          type: 'HtmlPreconnectLink',
-          hrefType: 'absolute',
-          href: 'https://fonts.gstatic.com',
-        },
-        {
           type: 'HtmlStyle',
           to: {
             isInline: true,
@@ -1370,8 +1348,10 @@ describe('subsetFonts', function () {
             outgoingRelations: [
               {
                 type: 'JavaScriptStaticUrl',
-                href:
-                  'https://fonts.googleapis.com/css?family=Jim+Nightshade|Montserrat|Space+Mono',
+                to: {
+                  path: '/subfont/',
+                  fileName: /^fallback-[a-f0-9]{10}\.css$/,
+                },
               },
             ],
           },
@@ -1385,8 +1365,10 @@ describe('subsetFonts', function () {
             outgoingRelations: [
               {
                 type: 'HtmlStyle',
-                href:
-                  'https://fonts.googleapis.com/css?family=Jim+Nightshade|Montserrat|Space+Mono',
+                to: {
+                  path: '/subfont/',
+                  fileName: /^fallback-[a-f0-9]{10}\.css$/,
+                },
               },
             ],
           },
@@ -1764,16 +1746,6 @@ describe('subsetFonts', function () {
           },
         },
         {
-          type: 'HtmlPreconnectLink',
-          hrefType: 'absolute',
-          href: 'https://fonts.googleapis.com',
-        },
-        {
-          type: 'HtmlPreconnectLink',
-          hrefType: 'absolute',
-          href: 'https://fonts.gstatic.com',
-        },
-        {
           type: 'HtmlStyle',
           to: {
             isInline: true,
@@ -1787,8 +1759,10 @@ describe('subsetFonts', function () {
             outgoingRelations: [
               {
                 type: 'JavaScriptStaticUrl',
-                href:
-                  'https://fonts.googleapis.com/css?family=Roboto:300i,400,500',
+                to: {
+                  path: '/subfont/',
+                  fileName: /^fallback-[a-f0-9]{10}\.css$/,
+                },
               },
             ],
           },
@@ -1802,8 +1776,10 @@ describe('subsetFonts', function () {
             outgoingRelations: [
               {
                 type: 'HtmlStyle',
-                href:
-                  'https://fonts.googleapis.com/css?family=Roboto:300i,400,500',
+                to: {
+                  path: '/subfont/',
+                  fileName: /^fallback-[a-f0-9]{10}\.css$/,
+                },
               },
             ],
           },
@@ -2011,6 +1987,20 @@ describe('subsetFonts', function () {
                 ],
               },
             },
+            {
+              type: 'HtmlStyle',
+              to: {
+                path: '/subfont/',
+                fileName: /^fallback-[a-f0-9]{10}\.css$/,
+              },
+            },
+            {
+              type: 'HtmlStyle',
+              to: {
+                path: '/subfont/',
+                fileName: /^fallback-[a-f0-9]{10}\.css$/,
+              },
+            },
           ]
         );
 
@@ -2064,16 +2054,6 @@ describe('subsetFonts', function () {
             },
           },
           {
-            type: 'HtmlPreconnectLink',
-            hrefType: 'absolute',
-            href: 'https://fonts.googleapis.com',
-          },
-          {
-            type: 'HtmlPreconnectLink',
-            hrefType: 'absolute',
-            href: 'https://fonts.gstatic.com',
-          },
-          {
             type: 'HtmlStyle',
             to: { isInline: true },
           },
@@ -2088,7 +2068,10 @@ describe('subsetFonts', function () {
               outgoingRelations: [
                 {
                   type: 'JavaScriptStaticUrl',
-                  href: 'https://fonts.googleapis.com/css?family=Open+Sans',
+                  to: {
+                    path: '/subfont/',
+                    fileName: /^fallback-[a-f0-9]{10}\.css$/,
+                  },
                 },
               ],
             },
@@ -2102,7 +2085,10 @@ describe('subsetFonts', function () {
               outgoingRelations: [
                 {
                   type: 'HtmlStyle',
-                  href: 'https://fonts.googleapis.com/css?family=Open+Sans',
+                  to: {
+                    path: '/subfont/',
+                    fileName: /^fallback-[a-f0-9]{10}\.css$/,
+                  },
                 },
               ],
             },
@@ -2158,16 +2144,6 @@ describe('subsetFonts', function () {
             to: expect.it('not to be', indexFontStyle),
           },
           {
-            type: 'HtmlPreconnectLink',
-            hrefType: 'absolute',
-            href: 'https://fonts.googleapis.com',
-          },
-          {
-            type: 'HtmlPreconnectLink',
-            hrefType: 'absolute',
-            href: 'https://fonts.gstatic.com',
-          },
-          {
             type: 'HtmlStyle',
             to: { isInline: true },
           },
@@ -2182,7 +2158,10 @@ describe('subsetFonts', function () {
               outgoingRelations: [
                 {
                   type: 'JavaScriptStaticUrl',
-                  href: 'https://fonts.googleapis.com/css?family=Open+Sans',
+                  to: {
+                    path: '/subfont/',
+                    fileName: /^fallback-[a-f0-9]{10}\.css$/,
+                  },
                 },
               ],
             },
@@ -2196,7 +2175,10 @@ describe('subsetFonts', function () {
               outgoingRelations: [
                 {
                   type: 'HtmlStyle',
-                  href: 'https://fonts.googleapis.com/css?family=Open+Sans',
+                  to: {
+                    path: '/subfont/',
+                    fileName: /^fallback-[a-f0-9]{10}\.css$/,
+                  },
                 },
               ],
             },
@@ -2351,16 +2333,6 @@ describe('subsetFonts', function () {
             },
           },
           {
-            type: 'HtmlPreconnectLink',
-            hrefType: 'absolute',
-            href: 'https://fonts.googleapis.com',
-          },
-          {
-            type: 'HtmlPreconnectLink',
-            hrefType: 'absolute',
-            href: 'https://fonts.gstatic.com',
-          },
-          {
             type: 'HtmlStyle',
             to: { isInline: true },
           },
@@ -2375,7 +2347,10 @@ describe('subsetFonts', function () {
               outgoingRelations: [
                 {
                   type: 'JavaScriptStaticUrl',
-                  href: 'https://fonts.googleapis.com/css?family=Open+Sans',
+                  to: {
+                    path: '/subfont/',
+                    fileName: /^fallback-[a-f0-9]{10}\.css$/,
+                  },
                 },
               ],
             },
@@ -2389,7 +2364,10 @@ describe('subsetFonts', function () {
               outgoingRelations: [
                 {
                   type: 'HtmlStyle',
-                  href: 'https://fonts.googleapis.com/css?family=Open+Sans',
+                  to: {
+                    path: '/subfont/',
+                    fileName: /^fallback-[a-f0-9]{10}\.css$/,
+                  },
                 },
               ],
             },
@@ -2442,16 +2420,6 @@ describe('subsetFonts', function () {
             to: sharedFontStyles,
           },
           {
-            type: 'HtmlPreconnectLink',
-            hrefType: 'absolute',
-            href: 'https://fonts.googleapis.com',
-          },
-          {
-            type: 'HtmlPreconnectLink',
-            hrefType: 'absolute',
-            href: 'https://fonts.gstatic.com',
-          },
-          {
             type: 'HtmlStyle',
             to: { isInline: true },
           },
@@ -2466,7 +2434,10 @@ describe('subsetFonts', function () {
               outgoingRelations: [
                 {
                   type: 'JavaScriptStaticUrl',
-                  href: 'https://fonts.googleapis.com/css?family=Open+Sans',
+                  to: {
+                    path: '/subfont/',
+                    fileName: /^fallback-[a-f0-9]{10}\.css$/,
+                  },
                 },
               ],
             },
@@ -2480,7 +2451,10 @@ describe('subsetFonts', function () {
               outgoingRelations: [
                 {
                   type: 'HtmlStyle',
-                  href: 'https://fonts.googleapis.com/css?family=Open+Sans',
+                  to: {
+                    path: '/subfont/',
+                    fileName: /^fallback-[a-f0-9]{10}\.css$/,
+                  },
                 },
               ],
             },
@@ -3649,16 +3623,6 @@ describe('subsetFonts', function () {
           },
         },
         {
-          type: 'HtmlPreconnectLink',
-          hrefType: 'absolute',
-          href: 'https://fonts.googleapis.com',
-        },
-        {
-          type: 'HtmlPreconnectLink',
-          hrefType: 'absolute',
-          href: 'https://fonts.gstatic.com',
-        },
-        {
           type: 'HtmlStyle',
           to: {
             isInline: true,
@@ -3672,7 +3636,10 @@ describe('subsetFonts', function () {
             outgoingRelations: [
               {
                 type: 'JavaScriptStaticUrl',
-                href: 'https://fonts.googleapis.com/css?family=Open+Sans',
+                to: {
+                  path: '/subfont/',
+                  fileName: /^fallback-[a-f0-9]{10}\.css$/,
+                },
               },
             ],
           },
@@ -3686,7 +3653,10 @@ describe('subsetFonts', function () {
             outgoingRelations: [
               {
                 type: 'HtmlStyle',
-                href: 'https://fonts.googleapis.com/css?family=Open+Sans',
+                to: {
+                  path: '/subfont/',
+                  fileName: /^fallback-[a-f0-9]{10}\.css$/,
+                },
               },
             ],
           },
@@ -3937,16 +3907,6 @@ describe('subsetFonts', function () {
           },
         },
         {
-          type: 'HtmlPreconnectLink',
-          hrefType: 'absolute',
-          href: 'https://fonts.googleapis.com',
-        },
-        {
-          type: 'HtmlPreconnectLink',
-          hrefType: 'absolute',
-          href: 'https://fonts.gstatic.com',
-        },
-        {
           type: 'HtmlStyle',
           to: {
             isInline: true,
@@ -3970,7 +3930,10 @@ describe('subsetFonts', function () {
             outgoingRelations: [
               {
                 type: 'JavaScriptStaticUrl',
-                href: 'https://fonts.googleapis.com/css?family=Open+Sans',
+                to: {
+                  path: '/subfont/',
+                  fileName: /^fallback-[a-f0-9]{10}\.css$/,
+                },
               },
             ],
           },
@@ -3984,7 +3947,10 @@ describe('subsetFonts', function () {
             outgoingRelations: [
               {
                 type: 'HtmlStyle',
-                href: 'https://fonts.googleapis.com/css?family=Open+Sans',
+                to: {
+                  path: '/subfont/',
+                  fileName: /^fallback-[a-f0-9]{10}\.css$/,
+                },
               },
             ],
           },
