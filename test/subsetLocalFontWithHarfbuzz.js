@@ -153,7 +153,11 @@ describe('subsetLocalFontWithHarfbuzz', function () {
 
       expect(result, 'to be a', 'Buffer');
       expect(result.length, 'to be less than', openSansWoff.length);
-      // TODO: Check for truetype signature/magic?
+      expect(
+        result.slice(0, 4).toString('ascii'),
+        'to equal',
+        '\x00\x01\x00\x00'
+      );
     });
 
     it('should produce a subset as woff', async function () {
