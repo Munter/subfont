@@ -1,4 +1,16 @@
-### v5.0.6 (2020-07-05)
+### v5.0.7 (2020-07-12)
+
+#### Pull requests
+
+- [#105](https://github.com/munter/subfont/pull/105) Expand test setup ([Andreas Lind](mailto:andreaslindpetersen@gmail.com))
+- [#110](https://github.com/munter/subfont/pull/110) Don't break CSS source maps when updating the existing CSS ([Andreas Lind](mailto:andreaslindpetersen@gmail.com))
+- [#107](https://github.com/munter/subfont/pull/107) Sort the code points numerically before converting to unicode ranges ([Andreas Lind](mailto:andreas.lind@peakon.com))
+
+#### Commits to master
+
+- [Fix testdata dir name](https://github.com/munter/subfont/commit/3d11aacb8f81d8e6f14f9747fafc5aa347c05daf) ([Andreas Lind](mailto:andreaslindpetersen@gmail.com))
+
+### v5.0.6 (2020-07-06)
 
 #### Pull requests
 

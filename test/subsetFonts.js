@@ -5,6 +5,7 @@ const expect = require('unexpected')
 
 const AssetGraph = require('assetgraph');
 const pathModule = require('path');
+const LinesAndColumns = require('lines-and-columns').default;
 
 const proxyquire = require('proxyquire');
 const httpception = require('httpception');
@@ -3172,17 +3173,17 @@ describe('subsetFonts', function () {
     });
 
     describe('when the highest prioritized font-family is missing glyphs', function () {
-      it('should emit a warning', async function () {
+      it('should emit an info event', async function () {
         httpception();
 
-        const warnSpy = sinon.spy().named('warn');
+        const infoSpy = sinon.spy().named('warn');
         const assetGraph = new AssetGraph({
           root: pathModule.resolve(
             __dirname,
             '../testdata/subsetFonts/missing-glyphs/'
           ),
         });
-        assetGraph.on('warn', warnSpy);
+        assetGraph.on('info', infoSpy);
         await assetGraph.loadAssets('index.html');
         await assetGraph.populate({
           followRelations: {
@@ -3193,8 +3194,8 @@ describe('subsetFonts', function () {
           inlineFonts: false,
         });
 
-        expect(warnSpy, 'to have calls satisfying', function () {
-          warnSpy({
+        expect(infoSpy, 'to have calls satisfying', function () {
+          infoSpy({
             message: expect
               .it('to contain', 'Missing glyph fallback detected')
               .and('to contain', '\\u{4e2d} (中)')
@@ -3334,14 +3335,14 @@ describe('subsetFonts', function () {
       it('should check for missing glyphs in any subset format', async function () {
         httpception();
 
-        const warnSpy = sinon.spy().named('warn');
+        const infoSpy = sinon.spy().named('info');
         const assetGraph = new AssetGraph({
           root: pathModule.resolve(
             __dirname,
             '../testdata/subsetFonts/missing-glyphs/'
           ),
         });
-        assetGraph.on('warn', warnSpy);
+        assetGraph.on('info', infoSpy);
         await assetGraph.loadAssets('index.html');
         await assetGraph.populate({
           followRelations: {
@@ -3353,8 +3354,8 @@ describe('subsetFonts', function () {
           formats: [`woff2`],
         });
 
-        expect(warnSpy, 'to have calls satisfying', function () {
-          warnSpy({
+        expect(infoSpy, 'to have calls satisfying', function () {
+          infoSpy({
             message: expect
               .it('to contain', 'Missing glyph fallback detected')
               .and('to contain', '\\u{4e2d} (中)')
@@ -3363,18 +3364,18 @@ describe('subsetFonts', function () {
         });
       });
 
-      // Some fonts don't contain these, but browsers don't seem to mind, so the warnings would just be noise
+      // Some fonts don't contain these, but browsers don't seem to mind, so the messages would just be noise
       it('should not warn about tab and newline missing from the font being subset', async function () {
         httpception();
 
-        const warnSpy = sinon.spy().named('warn');
+        const infoSpy = sinon.spy().named('info');
         const assetGraph = new AssetGraph({
           root: pathModule.resolve(
             __dirname,
             '../testdata/subsetFonts/missing-tab-and-newline-glyphs/'
           ),
         });
-        assetGraph.on('warn', warnSpy);
+        assetGraph.on('warn', infoSpy);
         await assetGraph.loadAssets('index.html');
         await assetGraph.populate({
           followRelations: {
@@ -3385,7 +3386,7 @@ describe('subsetFonts', function () {
           inlineFonts: false,
         });
 
-        expect(warnSpy, 'was not called');
+        expect(infoSpy, 'was not called');
       });
     });
 
@@ -4643,6 +4644,60 @@ describe('subsetFonts', function () {
           },
         ]);
       });
+    });
+
+    describe('with a CSS source map for a file that gets updated', function () {
+      for (const testCase of ['external', 'inline']) {
+        describe(testCase, function () {
+          it('should update the source map', async function () {
+            // lessc --source-map testdata/subsetFonts/css-source-map-${testCase}/styles.{less,css}
+            const assetGraph = new AssetGraph({
+              root: pathModule.resolve(
+                __dirname,
+                `../testdata/subsetFonts/css-source-map-${testCase}/`
+              ),
+            });
+            await assetGraph.loadAssets('index.html');
+            await assetGraph.populate();
+            function checkSourceMap() {
+              const [sourceMap] = assetGraph.findAssets({ type: 'SourceMap' });
+              expect(sourceMap.parseTree.sources, 'to satisfy', {
+                0: expect
+                  .it('to equal', 'styles.less')
+                  .or('to equal', '/styles.less'),
+              });
+              const cssAsset = sourceMap.incomingRelations[0].from;
+              const generatedPosition = new LinesAndColumns(
+                cssAsset.text
+              ).locationForIndex(
+                cssAsset.text.indexOf('border: 1px solid black')
+              );
+              const originalPosition = sourceMap.originalPositionFor({
+                line: generatedPosition.line + 1, // source-map's line numbers are 1-based, lines-and-column's are 0-based
+                column: generatedPosition.column,
+              });
+              const lessAsset = sourceMap.outgoingRelations.find(
+                (relation) => relation.type === 'SourceMapSource'
+              ).to;
+              const lessText = lessAsset.rawSrc.toString('utf-8');
+              const originalIndex = new LinesAndColumns(
+                lessText
+              ).indexForLocation({
+                line: originalPosition.line - 1,
+                column: originalPosition.column,
+              });
+              expect(
+                lessText.slice(originalIndex),
+                'to begin with',
+                'border: 1px solid black'
+              );
+            }
+            checkSourceMap();
+            await subsetFonts(assetGraph);
+            checkSourceMap();
+          });
+        });
+      }
     });
   });
 

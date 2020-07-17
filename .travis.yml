@@ -2,8 +2,10 @@ services:
   - docker
 language: node_js
 cache:
-  directories:
-    - node_modules
+  npm: true
+  apt: true
+  pip: true
+
 node_js:
   - 10
   - 12
@@ -14,10 +16,18 @@ addons:
     packages:
       - gcc-4.8
       - g++-4.8
+
 env: CXX="g++-4.8" CC="gcc-4.8"
 
-before_script:
-  - sudo pip install fonttools brotli zopfli
+before_install:
+  - sudo pip install -r requirements.txt
 
-script: 'npm install && npm run-script travis'
+script: 'npm run-script travis'
 after_success: '<coverage/lcov.info ./node_modules/coveralls/bin/coveralls.js'
+
+jobs:
+  include:
+    - os: osx
+      node_js: 14
+      before_cache:
+        - brew cleanup

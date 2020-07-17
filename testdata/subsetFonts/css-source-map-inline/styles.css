@@ -1,0 +1,9 @@
+@font-face {
+  font-family: Open Sans;
+  src: url(OpenSans.ttf);
+}
+body div {
+  font-family: Open Sans, sans-serif;
+  border: 1px solid black;
+}
+/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInN0eWxlcy5sZXNzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBO0VBQ0Usc0JBQUE7RUFDQSxzQkFBQTs7QUFHRixJQUNFO0VBQ0Usa0NBQUE7RUFDQSx1QkFBQSIsImZpbGUiOiJzdHlsZXMuY3NzIn0= */
