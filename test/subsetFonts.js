@@ -4699,6 +4699,19 @@ describe('subsetFonts', function () {
         });
       }
     });
+
+    // Regression test: Used to break with Cannot read property 'toLowerCase' of undefined
+    it('should not break when a @font-face declaration is missing font-family', async function () {
+      const assetGraph = new AssetGraph({
+        root: pathModule.resolve(
+          __dirname,
+          '../testdata/subsetFonts/missing-font-family/'
+        ),
+      });
+      await assetGraph.loadAssets('index.html');
+      await assetGraph.populate();
+      await subsetFonts(assetGraph);
+    });
   });
 
   describe('with non-truetype fonts in the mix', function () {
