@@ -116,7 +116,7 @@ describe('generated html', function () {
               'progress',
             ]),
           }),
-          stylesheet,
+          stylesheet(),
         ],
       }
     );
