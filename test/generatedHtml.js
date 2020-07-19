@@ -6,20 +6,6 @@ const pathModule = require('path');
 const stringify = require('html-generators/src/stringify');
 const expect = require('./expect');
 
-function fixupUnsupportedHtmlConstructs(obj) {
-  if (obj.type === 'tag') {
-    if (obj.tag === 'object') {
-      delete obj.attributes.data;
-    }
-    if ('src' in obj.attributes) {
-      delete obj.attributes.src;
-    }
-    for (const child of obj.children) {
-      fixupUnsupportedHtmlConstructs(child);
-    }
-  }
-}
-
 describe('generated html', function () {
   let smileySvgBase64;
 
@@ -31,13 +17,36 @@ describe('generated html', function () {
       .toString('base64')}`;
   });
 
+  function fixBogusUrls(text) {
+    return text.replace(/url\([^)]*\)/g, `url(${smileySvgBase64})`);
+  }
+
+  function fixupUnsupportedHtmlConstructs(obj) {
+    if (obj.text) {
+      obj.text = fixBogusUrls(obj.text);
+    }
+    if (obj.type === 'tag') {
+      if (obj.tag === 'object') {
+        delete obj.attributes.data;
+      }
+      if ('src' in obj.attributes) {
+        delete obj.attributes.src;
+      }
+      for (const child of obj.children) {
+        fixupUnsupportedHtmlConstructs(child);
+      }
+    }
+    if (obj.attributes && obj.attributes.style) {
+      obj.attributes.style = fixBogusUrls(obj.attributes.style);
+    }
+  }
+
   it('should render the same before and after subsetting', async function () {
     return expect(
       async (htmlObjectTree, stylesheet) => {
         fixupUnsupportedHtmlConstructs(htmlObjectTree);
 
-        stylesheet = stylesheet
-          .replace(/url\([^)]*\)/g, `url(${smileySvgBase64})`)
+        stylesheet = fixBogusUrls(stylesheet)
           .replace(/all: (?:initial|unset);/g, '') // Makes the contents of stylesheets visible
           .replace(/font-variant-caps: [^;]+;/, '') // See build #260.3 failure
           .replace(/oblique [0-9.]+\w+/, 'oblique'); // oblique with an angle is not yet fully standardized or implemented in font-snapper
@@ -97,7 +106,7 @@ describe('generated html', function () {
       },
       'to be valid for all',
       {
-        maxIterations: 1,
+        maxIterations: 5,
         generators: [
           html({
             excludedDescendants: new Set([
