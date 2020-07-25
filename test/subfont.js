@@ -431,6 +431,78 @@ describe('subfont', function () {
     );
   });
 
+  describe('when subsetPerPage is false', function () {
+    it('should report how many codepoints are used on the page as well as globally', async function () {
+      const root = encodeURI(
+        `file://${pathModule.resolve(
+          __dirname,
+          '..',
+          'testdata',
+          'differentCodepointsOnDifferentPages'
+        )}`
+      );
+
+      await subfont(
+        {
+          subsetPerPage: false,
+          silent: true,
+          dryRun: true,
+          root,
+          inputFiles: [`${root}/first.html`, `${root}/second.html`],
+        },
+        mockConsole
+      );
+      expect(mockConsole.log, 'to have a call satisfying', () => {
+        mockConsole.log(
+          expect.it(
+            'to contain',
+            '400 : 6/214 codepoints used (3 on this page),'
+          )
+        );
+      }).and('to have a call satisfying', () => {
+        mockConsole.log(
+          expect.it(
+            'to contain',
+            '400 : 6/214 codepoints used (4 on this page),'
+          )
+        );
+      });
+    });
+  });
+
+  describe('when subsetPerPage is true', function () {
+    it('should report how many codepoints are used on the page as well as globally', async function () {
+      const root = encodeURI(
+        `file://${pathModule.resolve(
+          __dirname,
+          '..',
+          'testdata',
+          'differentCodepointsOnDifferentPages'
+        )}`
+      );
+
+      await subfont(
+        {
+          subsetPerPage: true,
+          silent: true,
+          dryRun: true,
+          root,
+          inputFiles: [`${root}/first.html`, `${root}/second.html`],
+        },
+        mockConsole
+      );
+      expect(mockConsole.log, 'to have a call satisfying', () => {
+        mockConsole.log(
+          expect.it('to contain', '400 : 3/214 codepoints used,')
+        );
+      }).and('to have a call satisfying', () => {
+        mockConsole.log(
+          expect.it('to contain', '400 : 4/214 codepoints used,')
+        );
+      });
+    });
+  });
+
   describe('with --dynamic', function () {
     it('should find glyphs added to the page via JavaScript', async function () {
       const root = encodeURI(
