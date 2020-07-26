@@ -4,3 +4,6 @@
 
 # Don't battle npm i --save
 /package.json
+
+# Generated
+/CHANGELOG.md
