@@ -6,6 +6,7 @@ const httpception = require('httpception');
 const AssetGraph = require('assetgraph');
 const proxyquire = require('proxyquire');
 const pathModule = require('path');
+
 const openSansBold = require('fs').readFileSync(
   pathModule.resolve(
     __dirname,
@@ -791,6 +792,115 @@ describe('subfont', function () {
           )
         );
       });
+    });
+  });
+
+  describe('configuring via browserslist', function () {
+    // https://github.com/browserslist/browserslist#best-practices
+    it('should default to woff+woff2 when no config is given, due to the browserslist defaults', async function () {
+      const dir = pathModule.resolve(
+        __dirname,
+        '..',
+        'testdata',
+        'pageWithStrictCsp'
+      );
+      const root = encodeURI(`file://${dir}`);
+      const mockSubsetFonts = sinon.stub().resolves({ fontInfo: [] });
+
+      const originalDir = process.cwd();
+      process.chdir(dir);
+
+      try {
+        await proxyquire('../lib/subfont', {
+          '../lib/subsetFonts': mockSubsetFonts,
+        })(
+          {
+            root,
+            inputFiles: [`${root}/index.html`],
+            silent: true,
+            dryRun: true,
+          },
+          mockConsole
+        );
+        expect(mockSubsetFonts, 'to have calls satisfying', () => {
+          mockSubsetFonts(expect.it('to be an object'), {
+            formats: ['woff2', 'woff'],
+          });
+        });
+      } finally {
+        process.chdir(originalDir);
+      }
+    });
+
+    it('should prefer the browsers config option over browserslist configured in package.json', async function () {
+      const dir = pathModule.resolve(
+        __dirname,
+        '..',
+        'testdata',
+        'browserslistInPackageJson'
+      );
+      const root = encodeURI(`file://${dir}`);
+      const mockSubsetFonts = sinon.stub().resolves({ fontInfo: [] });
+
+      const originalDir = process.cwd();
+      process.chdir(dir);
+
+      try {
+        await proxyquire('../lib/subfont', {
+          '../lib/subsetFonts': mockSubsetFonts,
+        })(
+          {
+            root,
+            inputFiles: [`${root}/index.html`],
+            silent: true,
+            dryRun: true,
+            browsers: 'IE 11, Chrome 80',
+          },
+          mockConsole
+        );
+        expect(mockSubsetFonts, 'to have calls satisfying', () => {
+          mockSubsetFonts(expect.it('to be an object'), {
+            formats: ['woff2', 'woff'],
+          });
+        });
+      } finally {
+        process.chdir(originalDir);
+      }
+    });
+
+    it('should pick up the browserslist configuration from package.json', async function () {
+      const dir = pathModule.resolve(
+        __dirname,
+        '..',
+        'testdata',
+        'browserslistInPackageJson'
+      );
+      const root = encodeURI(`file://${dir}`);
+      const mockSubsetFonts = sinon.stub().resolves({ fontInfo: [] });
+
+      const originalDir = process.cwd();
+      process.chdir(dir);
+
+      try {
+        await proxyquire('../lib/subfont', {
+          '../lib/subsetFonts': mockSubsetFonts,
+        })(
+          {
+            root,
+            inputFiles: [`${root}/index.html`],
+            silent: true,
+            dryRun: true,
+          },
+          mockConsole
+        );
+        expect(mockSubsetFonts, 'to have calls satisfying', () => {
+          mockSubsetFonts(expect.it('to be an object'), {
+            formats: ['woff2', 'truetype'],
+          });
+        });
+      } finally {
+        process.chdir(originalDir);
+      }
     });
   });
 });
