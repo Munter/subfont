@@ -468,6 +468,28 @@ describe('subfont', function () {
         );
       });
     });
+
+    // Regression test for https://gitter.im/assetgraph/assetgraph?at=5f1ddc1afe6ecd2888764496
+    it('should not crash in the reporting code when a font has no text on a given page', async function () {
+      const root = encodeURI(
+        `file://${pathModule.resolve(
+          __dirname,
+          '..',
+          'testdata',
+          'noFontUsageOnOnePage'
+        )}`
+      );
+
+      await subfont(
+        {
+          silent: true,
+          dryRun: true,
+          root,
+          inputFiles: [`${root}/first.html`, `${root}/second.html`],
+        },
+        mockConsole
+      );
+    });
   });
 
   describe('when subsetPerPage is true', function () {
