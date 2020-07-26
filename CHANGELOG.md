@@ -1,3 +1,13 @@
+### v5.1.1 (2020-07-26)
+
+#### Pull requests
+
+- [#121](https://github.com/Munter/subfont/pull/121) Don't crash in the reporting code when some pages don't make use of a font that's used on others ([Andreas Lind](mailto:andreaslindpetersen@gmail.com))
+
+#### Commits to master
+
+- [Exclude CHANGELOG.md from being checked with prettier \(generated\)](https://github.com/Munter/subfont/commit/741b050b3ffa2ecc5fa391d49acccd575fdd49ca) ([Andreas Lind](mailto:andreaslindpetersen@gmail.com))
+
 ### v5.1.0 (2020-07-26)
 
 #### Pull requests
