@@ -18,7 +18,7 @@ describe('subsetLocalFontWithHarfbuzz', function () {
       );
       const result = await subsetLocalFontWithHarfbuzz(
         openSansTtf,
-        'ttf',
+        'truetype',
         'abcd'
       );
 
@@ -84,7 +84,7 @@ describe('subsetLocalFontWithHarfbuzz', function () {
       );
       const result = await subsetLocalFontWithHarfbuzz(
         openSansWoff,
-        'ttf',
+        'truetype',
         'abcd'
       );
 
@@ -147,7 +147,7 @@ describe('subsetLocalFontWithHarfbuzz', function () {
       );
       const result = await subsetLocalFontWithHarfbuzz(
         openSansWoff,
-        'ttf',
+        'truetype',
         'abcd'
       );
 
