@@ -229,7 +229,7 @@ describe('subsetFonts', function () {
         },
         {
           message:
-            'Detached <link rel="prefetch" as="font" type="application/x-font-ttf" href="OpenSans.ttf">. Will be replaced with preload with JS fallback.\nIf you feel this is wrong, open an issue at https://github.com/assetgraph/assetgraph/issues',
+            'Detached <link rel="prefetch" as="font" type="application/x-font-ttf" href="OpenSans.ttf">. Will be replaced with preload with JS fallback.\nIf you feel this is wrong, open an issue at https://github.com/Munter/subfont/issues',
           asset: {
             type: 'Html',
           },
@@ -494,6 +494,7 @@ describe('subsetFonts', function () {
                   unused: expect.it('to be an array'),
                   page: [72, 101, 108, 111, 32],
                 },
+                preload: true,
               },
             ],
           },
@@ -2462,6 +2463,153 @@ describe('subsetFonts', function () {
           },
         ]);
       });
+
+      it('should inject all @font-face declarations into every page, but only preload the used ones', async function () {
+        const assetGraph = new AssetGraph({
+          root: pathModule.resolve(
+            __dirname,
+            '../testdata/subsetFonts/multi-entry-points-ssr/'
+          ),
+        });
+        const [firstHtmlAsset, secondHtmlAsset] = await assetGraph.loadAssets([
+          'first.html',
+          'second.html',
+        ]);
+        await assetGraph.populate();
+        await subsetFonts(assetGraph, {
+          inlineFonts: false,
+        });
+        const firstJavaScriptPreloadPolyfill = assetGraph.findRelations({
+          from: firstHtmlAsset,
+          type: 'HtmlScript',
+        })[0].to;
+        expect(
+          firstJavaScriptPreloadPolyfill.text,
+          'to contain',
+          "new FontFace('font1__subset'"
+        ).and('not to contain', "new FontFace('font2__subset'");
+
+        const secondJavaScriptPreloadPolyfill = assetGraph.findRelations({
+          from: secondHtmlAsset,
+          type: 'HtmlScript',
+        })[0].to;
+        expect(
+          secondJavaScriptPreloadPolyfill.text,
+          'to contain',
+          "new FontFace('font2__subset'"
+        ).and('not to contain', "new FontFace('font1__subset'");
+        expect(
+          assetGraph.findRelations({
+            from: firstHtmlAsset,
+            type: 'HtmlPreloadLink',
+          }),
+          'to satisfy',
+          [
+            {
+              href: expect.it('to begin with', '/subfont/font1-400-'),
+            },
+          ]
+        );
+        const firstSubfontCss = assetGraph.findRelations({
+          from: firstHtmlAsset,
+          type: 'HtmlStyle',
+          to: { path: '/subfont/' },
+        })[0].to;
+        expect(
+          firstSubfontCss.text,
+          'to contain',
+          'font-family:font1__subset'
+        ).and('to contain', 'font-family:font2__subset');
+        const secondSubfontCss = assetGraph.findRelations({
+          from: secondHtmlAsset,
+          type: 'HtmlStyle',
+          to: { path: '/subfont/' },
+        })[0].to;
+        expect(firstSubfontCss, 'to be', secondSubfontCss);
+
+        expect(
+          assetGraph.findRelations({
+            from: secondHtmlAsset,
+            type: 'HtmlPreloadLink',
+          }),
+          'to satisfy',
+          [
+            {
+              href: expect.it('to begin with', '/subfont/font2-400-'),
+            },
+          ]
+        );
+      });
+
+      describe('when one of the pages does not use any webfonts, but has the original @font-face declarations', function () {
+        it('should still include the __subset @font-face declarations on that page', async function () {
+          const assetGraph = new AssetGraph({
+            root: pathModule.resolve(
+              __dirname,
+              '../testdata/subsetFonts/one-page-with-no-usage-ssr/'
+            ),
+          });
+          const [
+            firstHtmlAsset,
+            secondHtmlAsset,
+          ] = await assetGraph.loadAssets(['first.html', 'second.html']);
+          await assetGraph.populate();
+          await subsetFonts(assetGraph, {
+            inlineFonts: false,
+          });
+          const firstSubfontCss = assetGraph.findRelations({
+            from: firstHtmlAsset,
+            type: 'HtmlStyle',
+            to: { path: '/subfont/' },
+          })[0].to;
+          expect(
+            firstSubfontCss.text,
+            'to contain',
+            'font-family:font1__subset'
+          );
+          const secondSubfontCss = assetGraph.findRelations({
+            from: secondHtmlAsset,
+            type: 'HtmlStyle',
+            to: { path: '/subfont/' },
+          })[0].to;
+          expect(firstSubfontCss, 'to be', secondSubfontCss);
+        });
+      });
+
+      describe('when one of the pages does not use any webfonts and does not have the @font-face declarations in scope', function () {
+        it('should not include the __subset @font-face declarations on that page', async function () {
+          const assetGraph = new AssetGraph({
+            root: pathModule.resolve(
+              __dirname,
+              '../testdata/subsetFonts/one-page-with-no-font-face-ssr/'
+            ),
+          });
+          const [
+            firstHtmlAsset,
+            secondHtmlAsset,
+          ] = await assetGraph.loadAssets(['first.html', 'second.html']);
+          await assetGraph.populate();
+          await subsetFonts(assetGraph, {
+            inlineFonts: false,
+          });
+          const firstSubfontCss = assetGraph.findRelations({
+            from: firstHtmlAsset,
+            type: 'HtmlStyle',
+            to: { path: '/subfont/' },
+          })[0].to;
+          expect(
+            firstSubfontCss.text,
+            'to contain',
+            'font-family:font1__subset'
+          );
+          const secondSubfontCss = assetGraph.findRelations({
+            from: secondHtmlAsset,
+            type: 'HtmlStyle',
+            to: { path: '/subfont/' },
+          })[0];
+          expect(secondSubfontCss, 'to be undefined');
+        });
+      });
     });
 
     describe('fontDisplay option', function () {
@@ -4158,11 +4306,20 @@ describe('subsetFonts', function () {
         });
 
         expect(fontInfo, 'to satisfy', [
-          { htmlAsset: /\/index-1\.html$/, fontUsages: [] },
+          {
+            htmlAsset: /\/index-1\.html$/,
+            fontUsages: [
+              {
+                pageText: '',
+                text: ' ABCDEFGHIJKLM',
+              },
+            ],
+          },
           {
             htmlAsset: /\/index-2\.html$/,
             fontUsages: [
               {
+                pageText: ' ABCDEFGHIJKLM',
                 text: ' ABCDEFGHIJKLM',
               },
             ],
@@ -4189,11 +4346,22 @@ describe('subsetFonts', function () {
         expect(fontInfo, 'to satisfy', [
           {
             htmlAsset: /\/index\.html$/,
-            fontUsages: [{ text: 'Wdlor' }, { text: ' ,Hbdehilmnosux' }],
+            fontUsages: [
+              { text: 'Wdlor' },
+              { text: ' ,Hbdehilmnosux' },
+              {
+                pageText: '',
+                text: ' abcgko',
+              },
+            ],
           },
           {
             htmlAsset: /\/subindex\.html$/,
-            fontUsages: [{ text: ' abcgko' }, { text: ' ,Hbdehilmnosux' }],
+            fontUsages: [
+              { pageText: '', text: 'Wdlor' },
+              { text: ' ,Hbdehilmnosux' },
+              { text: ' abcgko' },
+            ],
           },
         ]);
       });
