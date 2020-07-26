@@ -1,5 +1,4 @@
-subfont
-=======
+# subfont
 
 [![NPM version](https://badge.fury.io/js/subfont.svg)](http://badge.fury.io/js/subfont)
 [![Build Status](https://travis-ci.org/Munter/subfont.svg?branch=master)](https://travis-ci.org/Munter/subfont)
@@ -30,9 +29,7 @@ Currently supported font services:
 
 **If you know of font services with liberal font usage licenses, open an issue and we'll add support for them**
 
-
-Installation
------
+## Installation
 
 Get the basic CLI tool, which supports subsetting Google Fonts and optimizing all local fonts with preloading instructions:
 
@@ -46,26 +43,19 @@ If you want the ability to run font subsetting locally you'l need Python and ins
 pip install fonttools brotli zopfli
 ```
 
-
-Recommended usage
------------------
+## Recommended usage
 
 Run subfont on the files you are ready to deploy to a static file hosting service. If these are build artifacts from another build system, and not the original files, run `subfont path/to/artifacts/index.html -i` to have `subfont` clobber the dist files in their original location.
 
 If you want to run directly against your raw original files, it is recommended to create a recursive copy of your files which you run `subfont` on. This keeps your original authoring abstraction unchanged.
 
-
-Other usages
-------------
+## Other usages
 
 You can have subfont output a copy of your input files to a new directory. This uses [Assetgraph](https://github.com/assetgraph/assetgraph) to trace a dependency graph of your website and writes it to your specified output directory. Be aware of any errors or warnings that might indicate Assetgraph having problems with your code, and be sure to double check that the expected files are in the output directory. Run `subfont path/to/index.html -o path/to/outputDir`.
 
-
 You can also have subfont scrape a website directly using http and write the output to local disk. This use is likely to fail in a number of ways and should mostly considered a demo feature if you just want to give the tool a quick go to see what it will do to your page. Run `subfont https://yourpage.me -o path/to/outputDir`.
 
-
-Command line options
---------------------
+## Command line options
 
 ```
 $ subfont --help
@@ -110,12 +100,10 @@ Options:
   --dry-run, --dry, --dryrun         Don't write anything to disk       [boolean] [default: false]
 ```
 
-Other great font tools
-----------------------
+## Other great font tools
+
 https://meowni.ca/font-style-matcher/
 
-
-License
--------
+## License
 
 MIT
