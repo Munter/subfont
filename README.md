@@ -95,11 +95,14 @@ Options:
                                      values: auto, block, swap, fallback, optional
              [string] [choices: "auto", "block", "swap", "fallback", "optional"] [default: "swap"]
   --formats                          Font formats to use when subsetting.
-             [array]  [choices: "woff2", "woff", "truetype"] [default: ["woff2","woff"]]
+                        [array] [choices: "woff2", "woff", "truetype"] [default: ["woff2","woff"]]
   --subset-per-page                  Create a unique subset for each page.
                                                                         [boolean] [default: false]
   --recursive, -r                    Crawl all HTML-pages linked with relative and root relative
                                      links. This stays inside your domain
+                                                                        [boolean] [default: false]
+  --harfbuzz                         Experimental: Use the harfbuzz subsetter instead of
+                                     pyftsubset. Requires node.js 10+ for wasm support
                                                                         [boolean] [default: false]
   --silent, -s                       Do not write anything to stdout    [boolean] [default: false]
   --debug, -d                        Verbose insights into font glyph detection
