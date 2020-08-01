@@ -2856,6 +2856,29 @@ describe('subsetFonts', function () {
       expect(warnings, 'to satisfy', []);
     });
 
+    describe('with jsPreload:false', function () {
+      it('should not add the JavaScript-based preload "polyfill"', async function () {
+        const assetGraph = new AssetGraph({
+          root: pathModule.resolve(
+            __dirname,
+            //            '../testdata/subsetFonts/local-single/'
+            '../testdata/subsetFonts/unused-variant/'
+          ),
+        });
+        const [htmlAsset] = await assetGraph.loadAssets('index.html');
+        await assetGraph.populate({
+          followRelations: {
+            crossorigin: false,
+          },
+        });
+        await subsetFonts(assetGraph, {
+          jsPreload: false,
+        });
+
+        expect(htmlAsset.text, 'not to contain', 'new FontFace');
+      });
+    });
+
     it('should error out on multiple @font-face declarations with the same family/weight/style/stretch', async function () {
       httpception();
 
