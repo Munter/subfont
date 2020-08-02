@@ -1,3 +1,7 @@
+### v5.2.0 (2020-08-02)
+
+- [#120](https://github.com/Munter/subfont/pull/120) Use browserslist to configure which font formats to supply subsets and fallbacks in, and whether to add the JS-based preload polyfill ([Andreas Lind](mailto:andreaslindpetersen@gmail.com))
+
 ### v5.1.1 (2020-07-26)
 
 #### Pull requests
