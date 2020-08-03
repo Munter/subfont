@@ -70,6 +70,14 @@ Options:
   --canonical-root, --canonicalroot  URI root where the site will be deployed. Must be either an
                                      absolute, a protocol-relative, or a root-relative url[string]
   --output, -o                       Directory where results should be written to         [string]
+  --browsers                         Override your projects browserslist configuration to specify
+                                     which browsers to support. Controls font formats and
+                                     polyfill. Defaults to browserslist's default query if your
+                                     project has no browserslist configuration            [string]
+  --formats                          Font formats to use when subsetting. The default is to select
+                                     the formats based on the browser capabilities as specified
+                                     via --browsers or the browserslist configuration.
+                                                    [array] [choices: "woff2", "woff", "truetype"]
   --fallbacks                        Include fallbacks so the original font will be loaded when
                                      dynamic content gets injected at runtime. Disable with
                                      --no-fallbacks                      [boolean] [default: true]
@@ -84,8 +92,6 @@ Options:
   --font-display                     Injects a font-display value into the @font-face CSS. Valid
                                      values: auto, block, swap, fallback, optional
              [string] [choices: "auto", "block", "swap", "fallback", "optional"] [default: "swap"]
-  --formats                          Font formats to use when subsetting.
-                        [array] [choices: "woff2", "woff", "truetype"] [default: ["woff2","woff"]]
   --subset-per-page                  Create a unique subset for each page.
                                                                         [boolean] [default: false]
   --recursive, -r                    Crawl all HTML-pages linked with relative and root relative
