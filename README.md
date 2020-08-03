@@ -58,7 +58,6 @@ You can also have subfont scrape a website directly using http and write the out
 ## Command line options
 
 ```
-$ subfont --help
 Create optimal font subsets from your actual font usage.
 subfont [options] <htmlFile(s) | url(s)>
 
@@ -89,8 +88,7 @@ Options:
                                                                         [boolean] [default: false]
   --inline-css                       Inline CSS that declares the @font-face for the subset fonts
                                                                         [boolean] [default: false]
-  --font-display                     Injects a font-display value into the @font-face CSS. Valid
-                                     values: auto, block, swap, fallback, optional
+  --font-display                     Injects a font-display value into the @font-face CSS.
              [string] [choices: "auto", "block", "swap", "fallback", "optional"] [default: "swap"]
   --subset-per-page                  Create a unique subset for each page.
                                                                         [boolean] [default: false]
