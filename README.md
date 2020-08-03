@@ -58,6 +58,7 @@ You can also have subfont scrape a website directly using http and write the out
 ## Command line options
 
 ```
+$ subfont --help
 Create optimal font subsets from your actual font usage.
 subfont [options] <htmlFile(s) | url(s)>
 
