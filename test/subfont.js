@@ -19,7 +19,12 @@ const openSansBold = require('fs').readFileSync(
 describe('subfont', function () {
   let mockConsole;
   beforeEach(async function () {
-    mockConsole = { log: sinon.spy(), warn: sinon.spy(), error: sinon.spy() };
+    mockConsole = {
+      info: sinon.spy(),
+      log: sinon.spy(),
+      warn: sinon.spy(),
+      error: sinon.spy(),
+    };
   });
 
   afterEach(function () {
@@ -75,7 +80,6 @@ describe('subfont', function () {
         {
           root,
           inputFiles: [`${root}/index.html`],
-          silent: true,
           dryRun: true,
         },
         mockConsole
@@ -137,7 +141,6 @@ describe('subfont', function () {
         {
           root,
           inputFiles: [`${root}/index.html`],
-          silent: true,
           dryRun: true,
         },
         mockConsole
@@ -200,7 +203,6 @@ describe('subfont', function () {
           root,
           inputFiles: [root],
           fallbacks: false,
-          silent: true,
           dryRun: true,
         },
         mockConsole
@@ -280,7 +282,6 @@ describe('subfont', function () {
             root,
             inputFiles: [root],
             fallbacks: false,
-            silent: true,
             dryRun: true,
           },
           mockConsole
@@ -314,7 +315,6 @@ describe('subfont', function () {
             root,
             inputFiles: [root],
             fallbacks: false,
-            silent: true,
             dryRun: true,
           },
           mockConsole
@@ -400,7 +400,6 @@ describe('subfont', function () {
             root,
             inputFiles: [root, `${root}page2`],
             fallbacks: false,
-            silent: true,
             dryRun: true,
           },
           mockConsole
@@ -446,7 +445,6 @@ describe('subfont', function () {
       await subfont(
         {
           subsetPerPage: false,
-          silent: true,
           dryRun: true,
           root,
           inputFiles: [`${root}/first.html`, `${root}/second.html`],
@@ -483,7 +481,6 @@ describe('subfont', function () {
 
       await subfont(
         {
-          silent: true,
           dryRun: true,
           root,
           inputFiles: [`${root}/first.html`, `${root}/second.html`],
@@ -507,7 +504,6 @@ describe('subfont', function () {
       await subfont(
         {
           subsetPerPage: true,
-          silent: true,
           dryRun: true,
           root,
           inputFiles: [`${root}/first.html`, `${root}/second.html`],
@@ -539,7 +535,6 @@ describe('subfont', function () {
 
       await subfont(
         {
-          silent: true,
           dryRun: true,
           dynamic: true,
           debug: true,
@@ -567,7 +562,6 @@ describe('subfont', function () {
 
       await subfont(
         {
-          silent: true,
           dryRun: true,
           dynamic: true,
           debug: true,
@@ -595,7 +589,6 @@ describe('subfont', function () {
 
       await subfont(
         {
-          silent: true,
           dryRun: true,
           dynamic: true,
           debug: true,
@@ -624,7 +617,6 @@ describe('subfont', function () {
 
       await subfont(
         {
-          silent: true,
           dryRun: true,
           dynamic: true,
           debug: true,
@@ -653,7 +645,6 @@ describe('subfont', function () {
 
       await subfont(
         {
-          silent: true,
           dryRun: true,
           dynamic: true,
           debug: true,
@@ -687,7 +678,6 @@ describe('subfont', function () {
 
       await subfont(
         {
-          silent: true,
           dryRun: true,
           dynamic: true,
           debug: true,
@@ -737,7 +727,6 @@ describe('subfont', function () {
 
       const assetGraph = await subfont(
         {
-          silent: true,
           dryRun: true,
           debug: true,
           canonicalRoot: 'https://www.netlify.com/',
@@ -779,7 +768,6 @@ describe('subfont', function () {
         {
           root,
           inputFiles: [`${root}/index.html`],
-          silent: true,
           dryRun: true,
         },
         mockConsole
@@ -817,7 +805,6 @@ describe('subfont', function () {
           {
             root,
             inputFiles: [`${root}/index.html`],
-            silent: true,
             dryRun: true,
           },
           mockConsole
@@ -853,7 +840,6 @@ describe('subfont', function () {
           {
             root,
             inputFiles: [`${root}/index.html`],
-            silent: true,
             dryRun: true,
             browsers: 'IE 11, Chrome 80',
           },
@@ -890,7 +876,6 @@ describe('subfont', function () {
           {
             root,
             inputFiles: [`${root}/index.html`],
-            silent: true,
             dryRun: true,
           },
           mockConsole
