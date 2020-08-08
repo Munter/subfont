@@ -91,8 +91,6 @@ Options:
                                                                         [boolean] [default: false]
   --font-display                     Injects a font-display value into the @font-face CSS.
              [string] [choices: "auto", "block", "swap", "fallback", "optional"] [default: "swap"]
-  --subset-per-page                  Create a unique subset for each page.
-                                                                        [boolean] [default: false]
   --recursive, -r                    Crawl all HTML-pages linked with relative and root relative
                                      links. This stays inside your domain
                                                                         [boolean] [default: false]
