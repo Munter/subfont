@@ -4,7 +4,6 @@ const combos = require('combos');
 describe('reference images', function () {
   for (const options of combos({
     inlineCss: [false, true],
-    inlineFonts: [false, true],
     omitFallbacks: [false, true],
     dynamic: [false, true],
     harfbuzz: [false, true],
