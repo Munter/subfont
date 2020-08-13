@@ -921,6 +921,7 @@ describe('subsetFonts', function () {
           },
           {
             type: 'CssFontFaceSrc',
+            hrefType: 'rootRelative',
             to: {
               isInline: false,
               fileName: 'KFOjCnqEu92Fr1Mu51TzBic6CsI.woff',
