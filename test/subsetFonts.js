@@ -887,6 +887,47 @@ describe('subsetFonts', function () {
         // Regression test for https://github.com/Munter/subfont/pull/73
         expect(htmlAsset.text, 'not to contain', '<script>try{new FontFace');
       });
+
+      it('should not inline unused variants', async function () {
+        const assetGraph = new AssetGraph({
+          root: pathModule.resolve(
+            __dirname,
+            '../testdata/subsetFonts/unused-variant/'
+          ),
+        });
+        await assetGraph.loadAssets('index.html');
+        await assetGraph.populate({
+          followRelations: {
+            crossorigin: false,
+          },
+        });
+
+        await subsetFonts(assetGraph, {
+          formats: ['woff'],
+        });
+        const css = assetGraph.findAssets({
+          type: 'Css',
+          fileName: /fonts-/,
+        })[0];
+
+        expect(css.outgoingRelations, 'to satisfy', [
+          {
+            type: 'CssFontFaceSrc',
+            hrefType: 'inline',
+            to: {
+              isInline: true,
+              contentType: 'font/woff',
+            },
+          },
+          {
+            type: 'CssFontFaceSrc',
+            to: {
+              isInline: false,
+              fileName: 'KFOjCnqEu92Fr1Mu51TzBic6CsI.woff',
+            },
+          },
+        ]);
+      });
     });
 
     describe('when more than one font format is requested', function () {
