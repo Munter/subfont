@@ -2861,7 +2861,6 @@ describe('subsetFonts', function () {
         const assetGraph = new AssetGraph({
           root: pathModule.resolve(
             __dirname,
-            //            '../testdata/subsetFonts/local-single/'
             '../testdata/subsetFonts/unused-variant/'
           ),
         });
