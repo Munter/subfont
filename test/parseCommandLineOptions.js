@@ -30,4 +30,22 @@ describe('parseCommandLineOptions', function () {
       }
     );
   });
+
+  it('should allow repeating --formats', function () {
+    expect(
+      parseCommandLineOptions(['--formats', 'truetype', '--formats', 'woff2']),
+      'to satisfy',
+      {
+        formats: ['truetype', 'woff2'],
+      }
+    );
+  });
+
+  it('should allow passing a comma-separated list of formats', function () {
+    const options = parseCommandLineOptions(['--formats', 'truetype,woff2']);
+
+    expect(options, 'to satisfy', {
+      formats: ['truetype', 'woff2'],
+    });
+  });
 });
