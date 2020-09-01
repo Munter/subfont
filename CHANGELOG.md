@@ -1,3 +1,19 @@
+### v5.2.1 (2020-09-01)
+
+#### Pull requests
+
+- [#123](https://github.com/Munter/subfont/pull/123) Respect silent:true wrt. the console output ([Andreas Lind](mailto:andreaslindpetersen@gmail.com))
+- [#126](https://github.com/Munter/subfont/pull/126) Support subfont --formats foo,bar and fix weirdness with --formats consuming further non-option arguments ([Andreas Lind](mailto:andreaslindpetersen@gmail.com))
+
+#### Commits to master
+
+- [Conserve a small bit of whitespace in the generated CSS](https://github.com/Munter/subfont/commit/30217ec7c8929a5a2695bb02f934f9f1ca626022) ([Andreas Lind](mailto:andreaslindpetersen@gmail.com))
+- [Remove commented out code that was accidentally committed](https://github.com/Munter/subfont/commit/492456600511843988c171c84a18c316a9f1de5c) ([Andreas Lind](mailto:andreaslindpetersen@gmail.com))
+- [Reference image tests: Fix wrongly mapped inlineFonts option](https://github.com/Munter/subfont/commit/7609a248b2217105f67f59b28b2f543dcca1f39e) ([Andreas Lind](mailto:andreaslindpetersen@gmail.com))
+- [Whoops, put back the subfont --help line](https://github.com/Munter/subfont/commit/ae9b5938950f12611b8465cf8ac383c17bbbf7a3) ([Andreas Lind](mailto:andreas.lind@peakon.com))
+- [Don't list the --font-display values in prose alongside yargs' identical list](https://github.com/Munter/subfont/commit/19dcfcb0105b908df8dfdf936758ef10b8abef5e) ([Andreas Lind](mailto:andreaslindpetersen@gmail.com))
+- [+1 more](https://github.com/Munter/subfont/compare/v5.2.0...v5.2.1)
+
 ### v5.2.0 (2020-08-02)
 
 - [#120](https://github.com/Munter/subfont/pull/120) Use browserslist to configure which font formats to supply subsets and fallbacks in, and whether to add the JS-based preload polyfill ([Andreas Lind](mailto:andreaslindpetersen@gmail.com))
@@ -223,6 +239,8 @@
 
 #### Pull requests
 
+- [#57](https://github.com/Munter/subfont/pull/57) Add screenshot-based tests of the result of subsetting ([Andreas Lind](mailto:andreas.lind@peakon.com), [Andreas Lind](mailto:andreaslindpetersen@gmail.com))
+- [#59](https://github.com/Munter/subfont/pull/59) Don't memoize getFontFaceForFontUsage, it goes bad when running s… ([Andreas Lind](mailto:andreaslindpetersen@gmail.com))
 - [#55](https://github.com/Munter/subfont/pull/55) Adopt the subsetFonts transform from assetgraph ([Andreas Lind](mailto:andreaslindpetersen@gmail.com))
 
 #### Commits to master
