@@ -851,83 +851,179 @@ describe('subsetFonts', function () {
     });
 
     describe('when only one font format is requested', function () {
-      it('should inline the font subsets', async function () {
-        const assetGraph = new AssetGraph({
-          root: pathModule.resolve(
-            __dirname,
-            '../testdata/subsetFonts/inline-subsets/'
-          ),
-        });
-        const [htmlAsset] = await assetGraph.loadAssets('index.html');
-        await assetGraph.populate({
-          followRelations: {
-            crossorigin: false,
-          },
-        });
-
-        await subsetFonts(assetGraph, {
-          formats: ['woff2'],
-        });
-        const css = assetGraph.findAssets({
-          type: 'Css',
-          fileName: /fonts-/,
-        })[0];
-
-        expect(css.outgoingRelations, 'to satisfy', [
-          {
-            type: 'CssFontFaceSrc',
-            hrefType: `inline`,
-            href: /^data:font\/woff2;base64/,
-            to: {
-              isInline: true,
-              contentType: `font/woff2`,
+      describe('on a single page', function () {
+        it('should inline the font subsets', async function () {
+          const assetGraph = new AssetGraph({
+            root: pathModule.resolve(
+              __dirname,
+              '../testdata/subsetFonts/inline-subsets/'
+            ),
+          });
+          const [htmlAsset] = await assetGraph.loadAssets('index.html');
+          await assetGraph.populate({
+            followRelations: {
+              crossorigin: false,
             },
-          },
-        ]);
-        // Regression test for https://github.com/Munter/subfont/pull/73
-        expect(htmlAsset.text, 'not to contain', '<script>try{new FontFace');
+          });
+
+          await subsetFonts(assetGraph, {
+            formats: ['woff2'],
+          });
+          const css = assetGraph.findAssets({
+            type: 'Css',
+            fileName: /fonts-/,
+          })[0];
+
+          expect(css.outgoingRelations, 'to satisfy', [
+            {
+              type: 'CssFontFaceSrc',
+              hrefType: `inline`,
+              href: /^data:font\/woff2;base64/,
+              to: {
+                isInline: true,
+                contentType: `font/woff2`,
+              },
+            },
+          ]);
+          // Regression test for https://github.com/Munter/subfont/pull/73
+          expect(htmlAsset.text, 'not to contain', '<script>try{new FontFace');
+        });
+
+        it('should not inline unused variants', async function () {
+          const assetGraph = new AssetGraph({
+            root: pathModule.resolve(
+              __dirname,
+              '../testdata/subsetFonts/unused-variant/'
+            ),
+          });
+          await assetGraph.loadAssets('index.html');
+          await assetGraph.populate({
+            followRelations: {
+              crossorigin: false,
+            },
+          });
+
+          await subsetFonts(assetGraph, {
+            formats: ['woff'],
+          });
+          const css = assetGraph.findAssets({
+            type: 'Css',
+            fileName: /fonts-/,
+          })[0];
+
+          expect(css.outgoingRelations, 'to satisfy', [
+            {
+              type: 'CssFontFaceSrc',
+              hrefType: 'inline',
+              to: {
+                isInline: true,
+                contentType: 'font/woff',
+              },
+            },
+            {
+              type: 'CssFontFaceSrc',
+              hrefType: 'rootRelative',
+              to: {
+                isInline: false,
+                fileName: 'KFOjCnqEu92Fr1Mu51TzBic6CsI.woff',
+              },
+            },
+          ]);
+        });
       });
 
-      it('should not inline unused variants', async function () {
-        const assetGraph = new AssetGraph({
-          root: pathModule.resolve(
-            __dirname,
-            '../testdata/subsetFonts/unused-variant/'
-          ),
-        });
-        await assetGraph.loadAssets('index.html');
-        await assetGraph.populate({
-          followRelations: {
-            crossorigin: false,
-          },
+      describe('on multiple pages', function () {
+        describe('when a font is used on all pages', function () {
+          it('should inline the font subsets', async function () {
+            const assetGraph = new AssetGraph({
+              root: pathModule.resolve(
+                __dirname,
+                '../testdata/subsetFonts/inline-subsets-multi-page/'
+              ),
+            });
+            await assetGraph.loadAssets(['index-1.html', 'index-2.html']);
+            await assetGraph.populate({
+              followRelations: {
+                crossorigin: false,
+              },
+            });
+
+            await subsetFonts(assetGraph, {
+              formats: ['woff2'],
+            });
+            const css = assetGraph.findAssets({
+              type: 'Css',
+              fileName: /fonts-/,
+            })[0];
+
+            expect(css.outgoingRelations, 'to satisfy', [
+              {
+                type: 'CssFontFaceSrc',
+                hrefType: `inline`,
+                href: /^data:font\/woff2;base64/,
+                to: {
+                  isInline: true,
+                  contentType: `font/woff2`,
+                },
+              },
+              {
+                type: 'CssFontFaceSrc',
+                hrefType: `inline`,
+                href: /^data:font\/woff2;base64/,
+                to: {
+                  isInline: true,
+                  contentType: `font/woff2`,
+                },
+              },
+            ]);
+          });
         });
 
-        await subsetFonts(assetGraph, {
-          formats: ['woff'],
-        });
-        const css = assetGraph.findAssets({
-          type: 'Css',
-          fileName: /fonts-/,
-        })[0];
+        describe('when a font is not used on all pages', function () {
+          it('should not inline the subset', async function () {
+            const assetGraph = new AssetGraph({
+              root: pathModule.resolve(
+                __dirname,
+                '../testdata/subsetFonts/inline-one-subset-multi-page/'
+              ),
+            });
+            await assetGraph.loadAssets(['index-1.html', 'index-2.html']);
+            await assetGraph.populate({
+              followRelations: {
+                crossorigin: false,
+              },
+            });
 
-        expect(css.outgoingRelations, 'to satisfy', [
-          {
-            type: 'CssFontFaceSrc',
-            hrefType: 'inline',
-            to: {
-              isInline: true,
-              contentType: 'font/woff',
-            },
-          },
-          {
-            type: 'CssFontFaceSrc',
-            hrefType: 'rootRelative',
-            to: {
-              isInline: false,
-              fileName: 'KFOjCnqEu92Fr1Mu51TzBic6CsI.woff',
-            },
-          },
-        ]);
+            await subsetFonts(assetGraph, {
+              formats: ['woff2'],
+            });
+            const css = assetGraph.findAssets({
+              type: 'Css',
+              fileName: /fonts-/,
+            })[0];
+
+            expect(css.outgoingRelations, 'to satisfy', [
+              {
+                type: 'CssFontFaceSrc',
+                hrefType: `inline`,
+                href: /^data:font\/woff2;base64/,
+                to: {
+                  isInline: true,
+                  contentType: `font/woff2`,
+                },
+              },
+              {
+                type: 'CssFontFaceSrc',
+                hrefType: 'rootRelative',
+                to: {
+                  isInline: false,
+                  contentType: `font/woff2`,
+                  fileName: /^IBM_Plex_Sans-400i-[a-f0-9]{10}\.woff2$/,
+                },
+              },
+            ]);
+          });
+        });
       });
     });
 
