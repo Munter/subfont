@@ -442,6 +442,39 @@ describe('subsetFonts', function () {
       ]);
     });
 
+    // Regression test for https://github.com/Munter/subfont/issues/130
+    it('should not mess up the placement of unicode-range in the fallback css', async function () {
+      httpception(defaultGoogleFontSubsetMock);
+
+      const assetGraph = new AssetGraph({
+        root: pathModule.resolve(
+          __dirname,
+          '../testdata/subsetFonts/html-link/'
+        ),
+      });
+      assetGraph.on('warn', (warn) =>
+        expect(warn, 'to satisfy', /Cannot find module/)
+      );
+      await assetGraph.loadAssets('index.html');
+      await assetGraph.populate({
+        followRelations: {
+          crossorigin: false,
+        },
+      });
+      await subsetFontsWithoutFontTools(assetGraph, {
+        inlineFonts: false,
+      });
+
+      const fallbackCss = assetGraph.findAssets({
+        fileName: { $regex: /fallback-.*css$/ },
+      })[0];
+      expect(
+        fallbackCss.text,
+        'to contain',
+        'format("woff");unicode-range:U+20-7e,'
+      );
+    });
+
     it('should return relevant font subsetting information', async function () {
       httpception(defaultGoogleFontSubsetMock);
 
