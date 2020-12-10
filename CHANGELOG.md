@@ -1,4 +1,8 @@
-### v5.2.2 (2020-09-13)
+### v5.2.3 (2020-12-10)
+
+- [Fix \#130](https://github.com/Munter/subfont/commit/8b790bacd29a39681a57a52063f3a637b4860de9) ([Andreas Lind](mailto:andreaslindpetersen@gmail.com))
+
+### v5.2.2 (2020-09-14)
 
 - [Update font-family-papandreou to ^0.2.0-patch2](https://github.com/Munter/subfont/commit/10986a08490ad3ead8f400f0db9307e1aa6047e4) ([Andreas Lind](mailto:andreaslindpetersen@gmail.com))
 
