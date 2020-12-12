@@ -579,7 +579,7 @@ describe('subsetFonts', function () {
               type: 'JavaScript',
               isInline: true,
               text: expect
-                .it('to contain', "new FontFace('Open Sans__subset','url(")
+                .it('to contain', `new FontFace('Open Sans__subset',"url('`)
                 .and('to contain', '__subset'),
             },
           },
@@ -4592,6 +4592,37 @@ describe('subsetFonts', function () {
       ).and(
         'to contain',
         "font: 12px 'Font Awesome 5 Free__subset', 'Font Awesome 5 Free'"
+      );
+    });
+
+    // Regression test for https://github.com/Munter/subfont/issues/131
+    it('should match the right fonts up with the right paths in the JavaScript-based preload polyfill', async function () {
+      const assetGraph = new AssetGraph({
+        root: pathModule.resolve(
+          __dirname,
+          '../testdata/subsetFonts/issue131/'
+        ),
+      });
+      assetGraph.on('warn', () => {});
+      const [indexHtml, aboutHtml] = await assetGraph.loadAssets([
+        'index.html',
+        'about.html',
+      ]);
+      await assetGraph.populate({
+        followRelations: {
+          crossorigin: false,
+        },
+      });
+      await subsetFonts(assetGraph);
+      expect(
+        indexHtml.text,
+        'to contain',
+        `<script>try{new FontFace('Alice__subset',"url('"+'/subfont/Alice-400-ab52a3064c.woff2'.toString('url')+"') format('woff2'),url('"+'/subfont/Alice-400-30322d7f40.woff'.toString('url')+"') format('woff')",{}).load()}catch(e){}</script>`
+      );
+      expect(
+        aboutHtml.text,
+        'to contain',
+        `<script>try{new FontFace('Font Awesome 5 Free__subset',"url('"+'/subfont/Font_Awesome_5_Free-400-8aa620028f.woff2'.toString('url')+"') format('woff2'),url('"+'/subfont/Font_Awesome_5_Free-400-b997107614.woff'.toString('url')+"') format('woff')",{}).load()}catch(e){}</script>`
       );
     });
   });
