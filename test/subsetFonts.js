@@ -1,6 +1,7 @@
 const expect = require('unexpected')
   .clone()
   .use(require('unexpected-sinon'))
+  .use(require('unexpected-set'))
   .use(require('assetgraph/test/unexpectedAssetGraph'));
 
 const AssetGraph = require('assetgraph');
@@ -4569,6 +4570,29 @@ describe('subsetFonts', function () {
       await assetGraph.loadAssets('index.html');
       await assetGraph.populate();
       await subsetFonts(assetGraph);
+    });
+
+    it('should handle escaped characters in font-family', async function () {
+      const assetGraph = new AssetGraph({
+        root: pathModule.resolve(
+          __dirname,
+          '../testdata/subsetFonts/font-family-with-escape/'
+        ),
+      });
+      const [htmlAsset] = await assetGraph.loadAssets('index.html');
+      await assetGraph.populate();
+      const { fontInfo } = await subsetFonts(assetGraph);
+      expect(fontInfo, 'to satisfy', [
+        { fontUsages: [{ fontFamilies: new Set(['Font Awesome 5 Free']) }] },
+      ]);
+      expect(
+        htmlAsset.text,
+        'to contain',
+        "font-family: 'Font Awesome 5 Free__subset', Font Awesome\\ 5 Free;"
+      ).and(
+        'to contain',
+        "font: 12px 'Font Awesome 5 Free__subset', 'Font Awesome 5 Free'"
+      );
     });
   });
 
