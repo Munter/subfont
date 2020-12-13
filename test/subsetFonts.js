@@ -4603,7 +4603,6 @@ describe('subsetFonts', function () {
           '../testdata/subsetFonts/issue131/'
         ),
       });
-      assetGraph.on('warn', () => {});
       const [indexHtml, aboutHtml] = await assetGraph.loadAssets([
         'index.html',
         'about.html',
