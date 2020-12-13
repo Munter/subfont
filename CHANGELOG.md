@@ -1,4 +1,10 @@
-### v5.2.4 (2020-12-12)
+### v5.2.5 (2020-12-13)
+
+- [Fix lint](https://github.com/Munter/subfont/commit/ffd3c7d99e97e801c9d9e05067c78fcdf9e77ac6) ([Andreas Lind](mailto:andreas.lind@peakon.com))
+- [Simplify test case](https://github.com/Munter/subfont/commit/9b9813421b9e9525f2d550fbc006bf7d4a034d18) ([Andreas Lind](mailto:andreas.lind@peakon.com))
+- [Rewrite JavaScript-based preload polyfill to fix \#131](https://github.com/Munter/subfont/commit/7ae214e5a7ab694a2d50fd560c1d4f554b809b1b) ([Andreas Lind](mailto:andreas.lind@peakon.com))
+
+### v5.2.4 (2020-12-13)
 
 - [Use the font-family library to parse font-family property in postcss ast](https://github.com/Munter/subfont/commit/bc193279b26b14a4cf278d46afca07dfd27339c2) ([Andreas Lind](mailto:andreas.lind@peakon.com))
 
