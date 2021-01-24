@@ -8,6 +8,7 @@ describe('reference images', function () {
     omitFallbacks: [false, true],
     dynamic: [false, true],
     harfbuzz: [false, true],
+    hrefType: ['rootRelative', 'relative'],
   })) {
     describe(`with ${Object.keys(options)
       .map((key) => `${key}: ${options[key]}`)
