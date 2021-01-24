@@ -3356,6 +3356,128 @@ describe('subsetFonts', function () {
       ]);
     });
 
+    describe('with hrefType:relative', function () {
+      it('should issue relative urls instead of root-relative ones', async function () {
+        httpception();
+
+        const assetGraph = new AssetGraph({
+          root: pathModule.resolve(
+            __dirname,
+            '../testdata/subsetFonts/local-single/'
+          ),
+        });
+        await assetGraph.loadAssets('index.html');
+        await assetGraph.populate();
+        await subsetFonts(assetGraph, {
+          inlineFonts: false,
+          hrefType: 'relative',
+        });
+
+        expect(assetGraph, 'to contain asset', { fileName: 'index.html' });
+
+        const index = assetGraph.findAssets({ fileName: 'index.html' })[0];
+
+        expect(index.outgoingRelations, 'to satisfy', [
+          {
+            type: 'HtmlPreloadLink',
+            hrefType: 'relative',
+            href: expect
+              .it('to begin with', 'subfont/Open_Sans-400-')
+              .and('to match', /-[0-9a-f]{10}\./)
+              .and('to end with', '.woff2'),
+            to: {
+              isLoaded: true,
+            },
+            as: 'font',
+            contentType: 'font/woff2',
+          },
+          {
+            type: 'HtmlScript',
+            to: {
+              type: 'JavaScript',
+              isInline: true,
+              text: expect.it('to contain', 'Open Sans__subset'),
+              outgoingRelations: [
+                {
+                  type: 'JavaScriptStaticUrl',
+                  hrefType: 'relative',
+                  href: expect
+                    .it('to begin with', 'subfont/Open_Sans-400-')
+                    .and('to match', /-[0-9a-f]{10}\./)
+                    .and('to end with', '.woff2'),
+                  to: {
+                    isLoaded: true,
+                    contentType: 'font/woff2',
+                    extension: '.woff2',
+                  },
+                },
+
+                {
+                  type: 'JavaScriptStaticUrl',
+                  hrefType: 'relative',
+                  to: {
+                    isLoaded: true,
+                    contentType: 'font/woff',
+                    extension: '.woff',
+                  },
+                },
+              ],
+            },
+          },
+
+          {
+            type: 'HtmlStyle',
+            hrefType: 'relative',
+            href: expect
+              .it('to begin with', 'subfont/fonts-')
+              .and('to match', /-[0-9a-f]{10}\./)
+              .and('to end with', '.css'),
+            to: {
+              isLoaded: true,
+              isInline: false,
+              text: expect.it('to contain', 'Open Sans__subset'),
+              outgoingRelations: [
+                {
+                  hrefType: 'relative',
+                  href: expect
+                    .it('to begin with', 'Open_Sans-400-')
+                    .and('to match', /-[0-9a-f]{10}\./)
+                    .and('to end with', '.woff2'),
+                  to: {
+                    isLoaded: true,
+                  },
+                },
+                {
+                  hrefType: 'relative',
+                  href: expect
+                    .it('to begin with', 'Open_Sans-400-')
+                    .and('to match', /-[0-9a-f]{10}\./)
+                    .and('to end with', '.woff'),
+                  to: {
+                    isLoaded: true,
+                  },
+                },
+              ],
+            },
+          },
+          {
+            type: 'HtmlStyle',
+            to: {
+              isLoaded: true,
+              isInline: true,
+            },
+          },
+          // Fallback loaders:
+          {
+            type: 'HtmlScript',
+            hrefType: 'inline',
+            to: { outgoingRelations: [{ type: 'JavaScriptStaticUrl' }] },
+          },
+          { type: 'HtmlNoscript', hrefType: 'inline' },
+        ]);
+      });
+    });
+
     it('should add a script that async loads a CSS with the original @font-face declarations right before </body>', async function () {
       const assetGraph = new AssetGraph({
         root: pathModule.resolve(
