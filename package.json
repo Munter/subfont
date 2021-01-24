@@ -47,7 +47,7 @@
   "homepage": "https://github.com/Munter/subfont#readme",
   "dependencies": {
     "@gustavnikolaj/async-main-wrap": "^3.0.1",
-    "assetgraph": "^6.2.0",
+    "assetgraph": "^6.5.0",
     "browserslist": "^4.13.0",
     "css-font-parser": "^0.3.0",
     "css-font-weight-names": "^0.2.1",
