@@ -56,6 +56,7 @@
     "font-snapper": "^1.2.0",
     "font-tracer": "^2.0.1",
     "fontkit": "^1.8.0",
+    "fontverter": "^1.0.0",
     "gettemporaryfilepath": "^1.0.1",
     "harfbuzzjs": "^0.1.3",
     "lines-and-columns": "^1.1.6",
@@ -68,8 +69,6 @@
     "puppeteer-core": "^3.1.0",
     "specificity": "^0.4.1",
     "urltools": "^0.4.1",
-    "wawoff2": "^1.0.2",
-    "woff2sfnt-sfnt2woff": "^1.0.0",
     "yargs": "^15.4.0"
   },
   "devDependencies": {
