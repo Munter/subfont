@@ -1,5 +1,17 @@
 const expect = require('./expect');
 const combos = require('combos');
+const pathModule = require('path');
+
+function getPathToTestCase(name) {
+  return pathModule.resolve(
+    __dirname,
+    '..',
+    'testdata',
+    'referenceImages',
+    name,
+    'index.html'
+  );
+}
 
 describe('reference images', function () {
   for (const options of combos({
@@ -14,7 +26,7 @@ describe('reference images', function () {
       .join(', ')}`, function () {
       it('should render a simple test case without ligatures', async function () {
         await expect(
-          'withoutLigatures',
+          getPathToTestCase('withoutLigatures'),
           'to render the same after subsetting',
           options
         );
@@ -22,7 +34,7 @@ describe('reference images', function () {
 
       it('should render ligatures correctly', async function () {
         await expect(
-          'ligatures',
+          getPathToTestCase('ligatures'),
           'to render the same after subsetting',
           options
         );
@@ -30,7 +42,7 @@ describe('reference images', function () {
 
       it('should render missing glyphs', async function () {
         await expect(
-          'missingGlyphs',
+          getPathToTestCase('missingGlyphs'),
           'to render the same after subsetting',
           options
         );
@@ -38,7 +50,7 @@ describe('reference images', function () {
 
       it('should render unused variants', async function () {
         await expect(
-          'unusedVariants',
+          getPathToTestCase('unusedVariants'),
           'to render the same after subsetting',
           options
         );
