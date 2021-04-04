@@ -56,9 +56,8 @@
     "font-snapper": "^1.2.0",
     "font-tracer": "^2.0.1",
     "fontkit": "^1.8.0",
-    "fontverter": "^1.0.0",
+    "fontverter": "^1.0.1",
     "gettemporaryfilepath": "^1.0.1",
-    "subset-font": "^1.0.0",
     "lines-and-columns": "^1.1.6",
     "lodash": "^4.17.15",
     "memoizesync": "^1.1.1",
@@ -67,6 +66,7 @@
     "pretty-bytes": "^5.1.0",
     "puppeteer-core": "^3.1.0",
     "specificity": "^0.4.1",
+    "subset-font": "^1.0.0",
     "urltools": "^0.4.1",
     "yargs": "^15.4.0"
   },
