@@ -1,11 +1,13 @@
 const expect = require('unexpected')
   .clone()
+  .use(require('unexpected-sinon'))
   .use(require('unexpected-resemble'))
   .use(require('unexpected-check'))
   .use(require('magicpen-prism'));
 const subsetFonts = require('../lib/subsetFonts');
 const pathModule = require('path');
 const AssetGraph = require('assetgraph');
+const sinon = require('sinon');
 
 let browser;
 async function getBrowser() {
@@ -19,7 +21,7 @@ async function getBrowser() {
   return browser;
 }
 
-async function screenshot(browser, assetGraph, bannedUrls) {
+async function screenshot(browser, assetGraph, fileName, bannedUrls) {
   const page = await browser.newPage();
   await page.setRequestInterception(true);
   const loadedUrls = [];
@@ -46,7 +48,7 @@ async function screenshot(browser, assetGraph, bannedUrls) {
     }
     request.continue();
   });
-  await page.goto('https://example.com/');
+  await page.goto(`https://example.com/${fileName}`);
   if (bannedUrls) {
     const loadedBannedUrls = loadedUrls.filter((url) =>
       bannedUrls.includes(url)
@@ -66,24 +68,26 @@ async function screenshot(browser, assetGraph, bannedUrls) {
 
 expect.addAssertion(
   '<string> to render the same after subsetting <object?>',
-  (expect, path, ...rest) => {
+  async (expect, fileName, options = {}) => {
     const assetGraph = new AssetGraph({
-      root: pathModule.resolve(
-        __dirname,
-        '..',
-        'testdata',
-        'referenceImages',
-        path
-      ),
+      root: pathModule.dirname(fileName),
     });
-    return expect(assetGraph, 'to render the same after subsetting', ...rest);
+    const warnSpy = sinon.spy();
+    assetGraph.on('warn', warnSpy);
+    await expect(
+      assetGraph,
+      'to render the same after subsetting',
+      options,
+      pathModule.basename(fileName)
+    );
+    expect(warnSpy, 'was not called');
   }
 );
 
 expect.addAssertion(
-  '<object> to render the same after subsetting <object?>',
-  async (expect, assetGraph, options = {}) => {
-    const [htmlAsset] = await assetGraph.loadAssets('index.html');
+  '<object> to render the same after subsetting <object> <string?>',
+  async (expect, assetGraph, options, fileName = 'index.html') => {
+    const [htmlAsset] = await assetGraph.loadAssets(fileName);
     const originalText = htmlAsset.text;
     expect.subjectOutput = (output) => {
       output.code(originalText, 'html');
@@ -96,12 +100,13 @@ expect.addAssertion(
       .map((asset) =>
         asset.url.replace(assetGraph.root, 'https://example.com/')
       );
-    const screenshotBefore = await screenshot(browser, assetGraph);
+    const screenshotBefore = await screenshot(browser, assetGraph, fileName);
     const { fontInfo } = await subsetFonts(assetGraph, options);
     if (fontInfo.length > 0) {
       const screenshotAfter = await screenshot(
         browser,
         assetGraph,
+        fileName,
         fontsBefore
       );
       await expect(screenshotAfter, 'to resemble', screenshotBefore, {
