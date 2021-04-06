@@ -1,3 +1,41 @@
+### v5.3.0 (2021-01-25)
+
+- [#136](https://github.com/Munter/subfont/pull/136) Implement --relative-urls switch that makes subfont issue relative urls instead of root-relative ones ([Andreas Lind](mailto:andreaslindpetersen@gmail.com))
+
+### v5.2.5 (2020-12-13)
+
+- [Fix lint](https://github.com/Munter/subfont/commit/ffd3c7d99e97e801c9d9e05067c78fcdf9e77ac6) ([Andreas Lind](mailto:andreas.lind@peakon.com))
+- [Simplify test case](https://github.com/Munter/subfont/commit/9b9813421b9e9525f2d550fbc006bf7d4a034d18) ([Andreas Lind](mailto:andreas.lind@peakon.com))
+- [Rewrite JavaScript-based preload polyfill to fix \#131](https://github.com/Munter/subfont/commit/7ae214e5a7ab694a2d50fd560c1d4f554b809b1b) ([Andreas Lind](mailto:andreas.lind@peakon.com))
+
+### v5.2.4 (2020-12-13)
+
+- [Use the font-family library to parse font-family property in postcss ast](https://github.com/Munter/subfont/commit/bc193279b26b14a4cf278d46afca07dfd27339c2) ([Andreas Lind](mailto:andreas.lind@peakon.com))
+
+### v5.2.3 (2020-12-10)
+
+- [Fix \#130](https://github.com/Munter/subfont/commit/8b790bacd29a39681a57a52063f3a637b4860de9) ([Andreas Lind](mailto:andreaslindpetersen@gmail.com))
+
+### v5.2.2 (2020-09-14)
+
+- [Update font-family-papandreou to ^0.2.0-patch2](https://github.com/Munter/subfont/commit/10986a08490ad3ead8f400f0db9307e1aa6047e4) ([Andreas Lind](mailto:andreaslindpetersen@gmail.com))
+
+### v5.2.1 (2020-09-01)
+
+#### Pull requests
+
+- [#123](https://github.com/Munter/subfont/pull/123) Respect silent:true wrt. the console output ([Andreas Lind](mailto:andreaslindpetersen@gmail.com))
+- [#126](https://github.com/Munter/subfont/pull/126) Support subfont --formats foo,bar and fix weirdness with --formats consuming further non-option arguments ([Andreas Lind](mailto:andreaslindpetersen@gmail.com))
+
+#### Commits to master
+
+- [Conserve a small bit of whitespace in the generated CSS](https://github.com/Munter/subfont/commit/30217ec7c8929a5a2695bb02f934f9f1ca626022) ([Andreas Lind](mailto:andreaslindpetersen@gmail.com))
+- [Remove commented out code that was accidentally committed](https://github.com/Munter/subfont/commit/492456600511843988c171c84a18c316a9f1de5c) ([Andreas Lind](mailto:andreaslindpetersen@gmail.com))
+- [Reference image tests: Fix wrongly mapped inlineFonts option](https://github.com/Munter/subfont/commit/7609a248b2217105f67f59b28b2f543dcca1f39e) ([Andreas Lind](mailto:andreaslindpetersen@gmail.com))
+- [Whoops, put back the subfont --help line](https://github.com/Munter/subfont/commit/ae9b5938950f12611b8465cf8ac383c17bbbf7a3) ([Andreas Lind](mailto:andreas.lind@peakon.com))
+- [Don't list the --font-display values in prose alongside yargs' identical list](https://github.com/Munter/subfont/commit/19dcfcb0105b908df8dfdf936758ef10b8abef5e) ([Andreas Lind](mailto:andreaslindpetersen@gmail.com))
+- [+1 more](https://github.com/Munter/subfont/compare/v5.2.0...v5.2.1)
+
 ### v5.2.0 (2020-08-02)
 
 - [#120](https://github.com/Munter/subfont/pull/120) Use browserslist to configure which font formats to supply subsets and fallbacks in, and whether to add the JS-based preload polyfill ([Andreas Lind](mailto:andreaslindpetersen@gmail.com))
@@ -223,6 +261,8 @@
 
 #### Pull requests
 
+- [#57](https://github.com/Munter/subfont/pull/57) Add screenshot-based tests of the result of subsetting ([Andreas Lind](mailto:andreas.lind@peakon.com), [Andreas Lind](mailto:andreaslindpetersen@gmail.com))
+- [#59](https://github.com/Munter/subfont/pull/59) Don't memoize getFontFaceForFontUsage, it goes bad when running s… ([Andreas Lind](mailto:andreaslindpetersen@gmail.com))
 - [#55](https://github.com/Munter/subfont/pull/55) Adopt the subsetFonts transform from assetgraph ([Andreas Lind](mailto:andreaslindpetersen@gmail.com))
 
 #### Commits to master

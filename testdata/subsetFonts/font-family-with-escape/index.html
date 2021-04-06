@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <style>
+    @font-face {
+      font-family: Font Awesome\ 5 Free;
+      font-style: normal;
+      font-weight: 400;
+      src: url(OpenSans.ttf) format('truetype');
+    }
+
+    .foo {
+      font-family: Font Awesome\ 5 Free;
+    }
+    .bar {
+      /* The bareword version doesn't work due to https://github.com/bramstein/css-font-parser/issues/6 */
+      font: 12px 'Font Awesome 5 Free';
+    }
+  </style>
+</head>
+<body>
+  <div class="foo">Hello!</div>
+  <div class="bar">World!</div>
+</body>
+</html>

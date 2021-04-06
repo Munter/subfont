@@ -92,6 +92,8 @@ Options:
   --recursive, -r                    Crawl all HTML-pages linked with relative and root relative
                                      links. This stays inside your domain
                                                                         [boolean] [default: false]
+  --relative-urls                    Issue relative urls instead of root-relative ones
+                                                                        [boolean] [default: false]
   --harfbuzz                         Experimental: Use the harfbuzz subsetter instead of
                                      pyftsubset. Requires node.js 10+ for wasm support
                                                                         [boolean] [default: false]
