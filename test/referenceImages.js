@@ -55,6 +55,14 @@ describe('reference images', function () {
           options
         );
       });
+
+      it('should render font-variant-*', async function () {
+        await expect(
+          getPathToTestCase('fontVariant'),
+          'to render the same after subsetting',
+          options
+        );
+      });
     });
   }
 });
