@@ -1,6 +1,6 @@
 {
   "name": "subfont",
-  "version": "5.4.0",
+  "version": "5.4.1",
   "description": "Speeds up your pages initial paint by automatically subsetting local or Google fonts and loading them optimally",
   "engines": {
     "node": ">=10.0.0"
