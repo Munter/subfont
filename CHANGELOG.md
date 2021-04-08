@@ -1,16 +1,23 @@
-### v5.4.0 (2021-04-08)
+### v5.4.1 (2021-04-08)
+
+- [#124](https://github.com/Munter/subfont/pull/124) Remove support for subsetPerPage:true ([Andreas Lind](mailto:andreas.lind@peakon.com), [Andreas Lind](mailto:andreaslindpetersen@gmail.com))
+
+### v5.4.0 (2021-04-09)
 
 #### Pull requests
 
-- [#124](https://github.com/Munter/subfont/pull/124) Remove support for subsetPerPage:true ([Andreas Lind](mailto:andreas.lind@peakon.com), [Andreas Lind](mailto:andreaslindpetersen@gmail.com))
 - [#140](https://github.com/Munter/subfont/pull/140) Switch to the subset-font package ([Andreas Lind](mailto:andreas.lind@peakon.com))
 - [#139](https://github.com/Munter/subfont/pull/139) Use the split-out fontverter module for sniffing and converting font buffers ([Andreas Lind](mailto:andreas.lind@peakon.com))
 - [#137](https://github.com/Munter/subfont/pull/137) Fix `--obfuscate-names` argument ([Nico](mailto:nlemoine@users.noreply.github.com))
 
 #### Commits to master
 
-- [Update fontverter to ^1.0.1](https://github.com/Munter/subfont/commit/c00409a5e7a8374f653023b6817a23cbecc4adbb) ([Andreas Lind](mailto:andreas.lind@peakon.com))
-- [Make the reference image assertions more flexible, fix error handling](https://github.com/Munter/subfont/commit/c2daad8bdecba991d0b8f8f573f2b205e0b47b24) ([Andreas Lind](mailto:andreas.lind@peakon.com))
+- [Accept up to a 0.3% difference in the reference image tests to get the missingGlyphs case to pass on CI](https://github.com/Munter/subfont/commit/3546d0289bc80cd5f3ce9ff634dbbed53cd20dfe) ([Andreas Lind](mailto:andreas.lind@workday.com))
+- [Skip the test case for harfbuzz, let's fix that separately](https://github.com/Munter/subfont/commit/378a1228c77279d7be3055eb090b31e498abd925) ([Andreas Lind](mailto:andreas.lind@workday.com))
+- [Add &lt;meta charset="utf-8"&gt; to the test case so the headless browser doesn't interpret it as iso-8859-1](https://github.com/Munter/subfont/commit/e65e74ac3d13e7b0b4a92b1515855f523e10debc) ([Andreas Lind](mailto:andreas.lind@workday.com))
+- [Update puppeteer to ^8.0.0](https://github.com/Munter/subfont/commit/3bfe400255dbeb10812ad208d3e02ef5fb760c1c) ([Andreas Lind](mailto:andreas.lind@workday.com))
+- [Update puppeteer-core to ^8.0.0](https://github.com/Munter/subfont/commit/3b47bed47490157e8a8ae562ae92dfcd8f644df3) ([Andreas Lind](mailto:andreas.lind@workday.com))
+- [+4 more](https://github.com/Munter/subfont/compare/v5.3.0...v5.4.0)
 
 ### v5.3.0 (2021-01-26)
 
