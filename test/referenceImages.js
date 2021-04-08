@@ -57,6 +57,10 @@ describe('reference images', function () {
       });
 
       it('should render font-variant-*', async function () {
+        if (options.harfbuzz) {
+          // TODO: Get the harfbuzz engine to do the equivalent of pyftsubset --layout-features=*
+          this.skip();
+        }
         await expect(
           getPathToTestCase('fontVariant'),
           'to render the same after subsetting',
