@@ -1,6 +1,21 @@
-### v5.4.1 (2021-04-08)
+### v6.0.0 (2021-04-18)
+
+#### Pull requests
 
 - [#124](https://github.com/Munter/subfont/pull/124) Remove support for subsetPerPage:true ([Andreas Lind](mailto:andreas.lind@peakon.com), [Andreas Lind](mailto:andreaslindpetersen@gmail.com))
+
+#### Commits to master
+
+- [Correct version number in error message](https://github.com/Munter/subfont/commit/c81d57cc7c1a192a1cbddf0b5416283470db8dac) ([Andreas Lind](mailto:andreas.lind@workday.com))
+- [Remove more unused stuff](https://github.com/Munter/subfont/commit/98e93cfd6315c2760664aa5c890bc9b192ca362b) ([Andreas Lind](mailto:andreas.lind@workday.com))
+- [Remove downloadGoogleFonts utility](https://github.com/Munter/subfont/commit/c7b4fad82a1385a81a969b95fd9a8e3569687a16) ([Andreas Lind](mailto:andreas.lind@workday.com))
+- [Always use harfbuzz for subsetting, remove fonttools support](https://github.com/Munter/subfont/commit/a8c62f1982241f3a85af2eae8796df6e8321b4ca) ([Andreas Lind](mailto:andreas.lind@workday.com))
+- [Update subset-font to ^1.1.3](https://github.com/Munter/subfont/commit/34bfb79005931aa69fcee63468e0a12a9140e706) ([Andreas Lind](mailto:andreas.lind@workday.com))
+
+### v5.4.1 (2021-04-09)
+
+- [Run the font-variant-\* test with harfbuzz also](https://github.com/Munter/subfont/commit/731f27f38a22cb8637b741db4382130b24db90ed) ([Andreas Lind](mailto:andreas.lind@workday.com))
+- [Update subset-font to ^1.1.0](https://github.com/Munter/subfont/commit/7e42bdefff0f57cf75710a659664adf371c95af7) ([Andreas Lind](mailto:andreas.lind@workday.com))
 
 ### v5.4.0 (2021-04-09)
 
