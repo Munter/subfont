@@ -707,44 +707,6 @@ describe('subfont', function () {
     });
   });
 
-  describe('without fonttools available', function () {
-    const subfontWithoutFontTools = proxyquire('../lib/subfont', {
-      '../lib/subsetFonts': proxyquire('../lib/subsetFonts', {
-        './subsetLocalFont': null,
-      }),
-    });
-
-    // Regression test for pretty-bytes(NaN) error
-    it('should not fail', async function () {
-      const root = encodeURI(
-        `file://${pathModule.resolve(
-          __dirname,
-          '..',
-          'testdata',
-          'subsetFonts',
-          'local-mixed'
-        )}`
-      );
-
-      await subfontWithoutFontTools(
-        {
-          root,
-          inputFiles: [`${root}/index.html`],
-          dryRun: true,
-        },
-        mockConsole
-      );
-      expect(mockConsole.log, 'to have a call satisfying', () => {
-        mockConsole.log(
-          expect.it(
-            'to contain',
-            '400 : 9/214 codepoints used, no subset font created'
-          )
-        );
-      });
-    });
-  });
-
   describe('configuring via browserslist', function () {
     // https://github.com/browserslist/browserslist#best-practices
     it('should default to woff+woff2 and jsPreload:true when no config is given, due to the browserslist defaults', async function () {

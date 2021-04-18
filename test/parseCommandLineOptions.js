@@ -20,7 +20,6 @@ describe('parseCommandLineOptions', function () {
         recursive: true,
         fallbacks: false,
         dynamic: false,
-        harfbuzz: false,
       }
     );
   });
