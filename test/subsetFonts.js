@@ -150,9 +150,7 @@ describe('subsetFonts', function () {
           crossorigin: false,
         },
       });
-      await subsetFontsWithoutFontTools(assetGraph, {
-        inlineFonts: false,
-      });
+      await subsetFontsWithoutFontTools(assetGraph);
 
       expect(infos, 'to satisfy', [
         expect.it(
@@ -251,9 +249,7 @@ describe('subsetFonts', function () {
       );
       await assetGraph.loadAssets('index.html');
       await assetGraph.populate();
-      await subsetFontsWithoutFontTools(assetGraph, {
-        inlineFonts: false,
-      });
+      await subsetFontsWithoutFontTools(assetGraph);
 
       expect(assetGraph, 'to contain asset', { fileName: 'index.html' });
 
@@ -323,9 +319,7 @@ describe('subsetFonts', function () {
           crossorigin: false,
         },
       });
-      await subsetFontsWithoutFontTools(assetGraph, {
-        inlineFonts: false,
-      });
+      await subsetFontsWithoutFontTools(assetGraph);
 
       expect(assetGraph, 'to contain asset', { fileName: 'index.html' });
 
@@ -492,9 +486,7 @@ describe('subsetFonts', function () {
           crossorigin: false,
         },
       });
-      const result = await subsetFontsWithoutFontTools(assetGraph, {
-        inlineFonts: false,
-      });
+      const result = await subsetFontsWithoutFontTools(assetGraph);
 
       expect(result, 'to exhaustively satisfy', {
         fontInfo: [
@@ -554,7 +546,6 @@ describe('subsetFonts', function () {
           },
         });
         await subsetFontsWithoutFontTools(assetGraph, {
-          inlineFonts: false,
           inlineCss: true,
         });
 
@@ -668,9 +659,7 @@ describe('subsetFonts', function () {
           crossorigin: false,
         },
       });
-      await subsetFontsWithoutFontTools(assetGraph, {
-        inlineFonts: false,
-      });
+      await subsetFontsWithoutFontTools(assetGraph);
 
       expect(assetGraph, 'to contain asset', { fileName: 'index.html' });
 
@@ -805,9 +794,7 @@ describe('subsetFonts', function () {
         },
       });
 
-      await subsetFontsWithoutFontTools(assetGraph, {
-        inlineFonts: false,
-      });
+      await subsetFontsWithoutFontTools(assetGraph);
 
       expect(
         assetGraph.findAssets({ fileName: 'index.html' })[0].text,
@@ -851,9 +838,7 @@ describe('subsetFonts', function () {
         },
       });
 
-      await subsetFontsWithoutFontTools(assetGraph, {
-        inlineFonts: false,
-      });
+      await subsetFontsWithoutFontTools(assetGraph);
 
       expect(
         assetGraph.findAssets({ fileName: 'index.html' })[0].text,
@@ -895,20 +880,196 @@ describe('subsetFonts', function () {
         },
       });
       await subsetFonts(assetGraph, {
-        inlineFonts: false,
         inlineCss: true,
       });
     });
 
-    describe('with `inlineFonts: true`', function () {
-      it('should inline the font subset', async function () {
+    describe('when only one font format is requested', function () {
+      describe('on a single page', function () {
+        it('should inline the font subsets', async function () {
+          const assetGraph = new AssetGraph({
+            root: pathModule.resolve(
+              __dirname,
+              '../testdata/subsetFonts/inline-subsets/'
+            ),
+          });
+          const [htmlAsset] = await assetGraph.loadAssets('index.html');
+          await assetGraph.populate({
+            followRelations: {
+              crossorigin: false,
+            },
+          });
+
+          await subsetFonts(assetGraph, {
+            formats: ['woff2'],
+          });
+          const css = assetGraph.findAssets({
+            type: 'Css',
+            fileName: /fonts-/,
+          })[0];
+
+          expect(css.outgoingRelations, 'to satisfy', [
+            {
+              type: 'CssFontFaceSrc',
+              hrefType: `inline`,
+              href: /^data:font\/woff2;base64/,
+              to: {
+                isInline: true,
+                contentType: `font/woff2`,
+              },
+            },
+          ]);
+          // Regression test for https://github.com/Munter/subfont/pull/73
+          expect(htmlAsset.text, 'not to contain', '<script>try{new FontFace');
+        });
+
+        it('should not inline unused variants', async function () {
+          const assetGraph = new AssetGraph({
+            root: pathModule.resolve(
+              __dirname,
+              '../testdata/subsetFonts/unused-variant/'
+            ),
+          });
+          await assetGraph.loadAssets('index.html');
+          await assetGraph.populate({
+            followRelations: {
+              crossorigin: false,
+            },
+          });
+
+          await subsetFonts(assetGraph, {
+            formats: ['woff'],
+          });
+          const css = assetGraph.findAssets({
+            type: 'Css',
+            fileName: /fonts-/,
+          })[0];
+
+          expect(css.outgoingRelations, 'to satisfy', [
+            {
+              type: 'CssFontFaceSrc',
+              hrefType: 'inline',
+              to: {
+                isInline: true,
+                contentType: 'font/woff',
+              },
+            },
+            {
+              type: 'CssFontFaceSrc',
+              hrefType: 'rootRelative',
+              to: {
+                isInline: false,
+                fileName: 'KFOjCnqEu92Fr1Mu51TzBic6CsI.woff',
+              },
+            },
+          ]);
+        });
+      });
+
+      describe('on multiple pages', function () {
+        describe('when a font is used on all pages', function () {
+          it('should inline the font subsets', async function () {
+            const assetGraph = new AssetGraph({
+              root: pathModule.resolve(
+                __dirname,
+                '../testdata/subsetFonts/inline-subsets-multi-page/'
+              ),
+            });
+            await assetGraph.loadAssets(['index-1.html', 'index-2.html']);
+            await assetGraph.populate({
+              followRelations: {
+                crossorigin: false,
+              },
+            });
+
+            await subsetFonts(assetGraph, {
+              formats: ['woff2'],
+            });
+            const css = assetGraph.findAssets({
+              type: 'Css',
+              fileName: /fonts-/,
+            })[0];
+
+            expect(css.outgoingRelations, 'to satisfy', [
+              {
+                type: 'CssFontFaceSrc',
+                hrefType: `inline`,
+                href: /^data:font\/woff2;base64/,
+                to: {
+                  isInline: true,
+                  contentType: `font/woff2`,
+                },
+              },
+              {
+                type: 'CssFontFaceSrc',
+                hrefType: `inline`,
+                href: /^data:font\/woff2;base64/,
+                to: {
+                  isInline: true,
+                  contentType: `font/woff2`,
+                },
+              },
+            ]);
+          });
+        });
+
+        describe('when a font is not used on all pages', function () {
+          it('should not inline the subset', async function () {
+            const assetGraph = new AssetGraph({
+              root: pathModule.resolve(
+                __dirname,
+                '../testdata/subsetFonts/inline-one-subset-multi-page/'
+              ),
+            });
+            await assetGraph.loadAssets(['index-1.html', 'index-2.html']);
+            await assetGraph.populate({
+              followRelations: {
+                crossorigin: false,
+              },
+            });
+
+            await subsetFonts(assetGraph, {
+              formats: ['woff2'],
+            });
+            const css = assetGraph.findAssets({
+              type: 'Css',
+              fileName: /fonts-/,
+            })[0];
+
+            expect(css.outgoingRelations, 'to satisfy', [
+              {
+                type: 'CssFontFaceSrc',
+                hrefType: `inline`,
+                href: /^data:font\/woff2;base64/,
+                to: {
+                  isInline: true,
+                  contentType: `font/woff2`,
+                },
+              },
+              {
+                type: 'CssFontFaceSrc',
+                hrefType: 'rootRelative',
+                to: {
+                  isInline: false,
+                  contentType: `font/woff2`,
+                  fileName: /^IBM_Plex_Sans-400i-[a-f0-9]{10}\.woff2$/,
+                },
+              },
+            ]);
+          });
+        });
+      });
+    });
+
+    describe('when more than one font format is requested', function () {
+      it('should not inline the font subsets', async function () {
         const assetGraph = new AssetGraph({
           root: pathModule.resolve(
             __dirname,
             '../testdata/subsetFonts/inline-subsets/'
           ),
         });
-        const [htmlAsset] = await assetGraph.loadAssets('index.html');
+        await assetGraph.loadAssets('index.html');
         await assetGraph.populate({
           followRelations: {
             crossorigin: false,
@@ -916,7 +1077,7 @@ describe('subsetFonts', function () {
         });
 
         await subsetFonts(assetGraph, {
-          inlineFonts: true,
+          formats: ['woff', 'woff2'],
         });
         const css = assetGraph.findAssets({
           type: 'Css',
@@ -926,25 +1087,19 @@ describe('subsetFonts', function () {
         expect(css.outgoingRelations, 'to satisfy', [
           {
             type: 'CssFontFaceSrc',
-            hrefType: `inline`,
-            href: /^data:font\/woff2;base64/,
+            hrefType: `rootRelative`,
             to: {
-              isInline: true,
               contentType: `font/woff2`,
             },
           },
           {
             type: 'CssFontFaceSrc',
-            hrefType: `inline`,
-            href: /^data:font\/woff;base64/,
+            hrefType: `rootRelative`,
             to: {
-              isInline: true,
               contentType: `font/woff`,
             },
           },
         ]);
-        // Regression test for https://github.com/Munter/subfont/pull/73
-        expect(htmlAsset.text, 'not to contain', '<script>try{new FontFace');
       });
     });
 
@@ -965,9 +1120,7 @@ describe('subsetFonts', function () {
             crossorigin: false,
           },
         });
-        await subsetFontsWithoutFontTools(assetGraph, {
-          inlineFonts: false,
-        });
+        await subsetFontsWithoutFontTools(assetGraph);
 
         expect(assetGraph, 'to contain relation', 'CssImport');
         expect(assetGraph, 'to contain relations', 'HtmlStyle', 3);
@@ -989,9 +1142,7 @@ describe('subsetFonts', function () {
             crossorigin: false,
           },
         });
-        await subsetFontsWithoutFontTools(assetGraph, {
-          inlineFonts: false,
-        });
+        await subsetFontsWithoutFontTools(assetGraph);
 
         expect(assetGraph, 'to contain relation', 'CssImport');
         expect(assetGraph, 'to contain relations', 'HtmlStyle', 4);
@@ -1184,9 +1335,7 @@ describe('subsetFonts', function () {
           crossorigin: false,
         },
       });
-      await subsetFontsWithoutFontTools(assetGraph, {
-        inlineFonts: false,
-      });
+      await subsetFontsWithoutFontTools(assetGraph);
       expect(assetGraph, 'to contain asset', { fileName: 'index.html' });
 
       const index = assetGraph.findAssets({ fileName: 'index.html' })[0];
@@ -1600,9 +1749,7 @@ describe('subsetFonts', function () {
           crossorigin: false,
         },
       });
-      await subsetFontsWithoutFontTools(assetGraph, {
-        inlineFonts: false,
-      });
+      await subsetFontsWithoutFontTools(assetGraph);
 
       expect(assetGraph, 'to contain asset', { fileName: 'index.html' });
 
@@ -1906,9 +2053,7 @@ describe('subsetFonts', function () {
             crossorigin: false,
           },
         });
-        await subsetFontsWithoutFontTools(assetGraph, {
-          inlineFonts: false,
-        });
+        await subsetFontsWithoutFontTools(assetGraph);
 
         expect(assetGraph, 'to contain asset', { fileName: 'index.html' });
         expect(assetGraph, 'to contain asset', { fileName: 'about.html' });
@@ -2107,9 +2252,7 @@ describe('subsetFonts', function () {
           'second.html',
         ]);
         await assetGraph.populate();
-        await subsetFonts(assetGraph, {
-          inlineFonts: false,
-        });
+        await subsetFonts(assetGraph);
         const firstJavaScriptPreloadPolyfill = assetGraph.findRelations({
           from: firstHtmlAsset,
           type: 'HtmlScript',
@@ -2185,9 +2328,7 @@ describe('subsetFonts', function () {
             secondHtmlAsset,
           ] = await assetGraph.loadAssets(['first.html', 'second.html']);
           await assetGraph.populate();
-          await subsetFonts(assetGraph, {
-            inlineFonts: false,
-          });
+          await subsetFonts(assetGraph);
           const firstSubfontCss = assetGraph.findRelations({
             from: firstHtmlAsset,
             type: 'HtmlStyle',
@@ -2220,9 +2361,7 @@ describe('subsetFonts', function () {
             secondHtmlAsset,
           ] = await assetGraph.loadAssets(['first.html', 'second.html']);
           await assetGraph.populate();
-          await subsetFonts(assetGraph, {
-            inlineFonts: false,
-          });
+          await subsetFonts(assetGraph);
           const firstSubfontCss = assetGraph.findRelations({
             from: firstHtmlAsset,
             type: 'HtmlStyle',
@@ -2262,9 +2401,7 @@ describe('subsetFonts', function () {
             crossorigin: false,
           },
         });
-        await subsetFontsWithoutFontTools(assetGraph, {
-          inlineFonts: false,
-        });
+        await subsetFontsWithoutFontTools(assetGraph);
 
         const cssAsset = assetGraph.findAssets({
           type: 'Css',
@@ -2293,7 +2430,6 @@ describe('subsetFonts', function () {
           },
         });
         await subsetFontsWithoutFontTools(assetGraph, {
-          inlineFonts: false,
           fontDisplay: 'foo',
         });
 
@@ -2324,7 +2460,6 @@ describe('subsetFonts', function () {
           },
         });
         await subsetFontsWithoutFontTools(assetGraph, {
-          inlineFonts: false,
           fontDisplay: 'block',
         });
 
@@ -2419,7 +2554,6 @@ describe('subsetFonts', function () {
           },
         });
         await subsetFontsWithoutFontTools(assetGraph, {
-          inlineFonts: false,
           fontDisplay: 'fallback',
         });
 
@@ -2480,9 +2614,7 @@ describe('subsetFonts', function () {
           crossorigin: false,
         },
       });
-      await subsetFonts(assetGraph, {
-        inlineFonts: false,
-      });
+      await subsetFonts(assetGraph);
 
       expect(warnings, 'to satisfy', []);
     });
@@ -2634,9 +2766,7 @@ describe('subsetFonts', function () {
             crossorigin: false,
           },
         });
-        await subsetFonts(assetGraph, {
-          inlineFonts: false,
-        });
+        await subsetFonts(assetGraph);
 
         expect(infoSpy, 'to have calls satisfying', function () {
           infoSpy({
@@ -2665,9 +2795,7 @@ describe('subsetFonts', function () {
               crossorigin: false,
             },
           });
-          await subsetFonts(assetGraph, {
-            inlineFonts: false,
-          });
+          await subsetFonts(assetGraph);
 
           const [originalFontFaceSrcRelation] = assetGraph.findRelations({
             type: 'CssFontFaceSrc',
@@ -2699,9 +2827,7 @@ describe('subsetFonts', function () {
               crossorigin: false,
             },
           });
-          await subsetFonts(assetGraph, {
-            inlineFonts: false,
-          });
+          await subsetFonts(assetGraph);
 
           const [outputSansRegularRelation] = assetGraph.findRelations({
             type: 'CssFontFaceSrc',
@@ -2760,9 +2886,7 @@ describe('subsetFonts', function () {
               crossorigin: false,
             },
           });
-          await subsetFonts(assetGraph, {
-            inlineFonts: false,
-          });
+          await subsetFonts(assetGraph);
 
           const [originalFontFaceSrcRelation] = assetGraph.findRelations({
             type: 'CssFontFaceSrc',
@@ -2794,7 +2918,6 @@ describe('subsetFonts', function () {
           },
         });
         await subsetFonts(assetGraph, {
-          inlineFonts: false,
           formats: [`woff2`],
         });
 
@@ -2826,9 +2949,7 @@ describe('subsetFonts', function () {
             crossorigin: false,
           },
         });
-        await subsetFonts(assetGraph, {
-          inlineFonts: false,
-        });
+        await subsetFonts(assetGraph);
 
         expect(infoSpy, 'was not called');
       });
@@ -2845,9 +2966,7 @@ describe('subsetFonts', function () {
       });
       await assetGraph.loadAssets('index.html');
       await assetGraph.populate();
-      await subsetFonts(assetGraph, {
-        inlineFonts: false,
-      });
+      await subsetFonts(assetGraph);
 
       expect(assetGraph, 'to contain asset', { fileName: 'index.html' });
 
@@ -3084,9 +3203,7 @@ describe('subsetFonts', function () {
       });
       const [htmlAsset] = await assetGraph.loadAssets('index.html');
       await assetGraph.populate();
-      await subsetFonts(assetGraph, {
-        inlineFonts: false,
-      });
+      await subsetFonts(assetGraph);
       const originalInlineStylesheet = assetGraph.findAssets({
         type: 'Css',
         isInline: true,
@@ -3132,9 +3249,7 @@ describe('subsetFonts', function () {
         });
         const [htmlAsset] = await assetGraph.loadAssets('index.html');
         await assetGraph.populate();
-        await subsetFonts(assetGraph, {
-          inlineFonts: false,
-        });
+        await subsetFonts(assetGraph);
         expect(htmlAsset.text, 'not to contain', '<style>');
       });
     });
@@ -3152,7 +3267,6 @@ describe('subsetFonts', function () {
         await assetGraph.loadAssets('index.html');
         await assetGraph.populate();
         await subsetFonts(assetGraph, {
-          inlineFonts: false,
           inlineCss: true,
         });
         const subfontCss = assetGraph.findAssets({
@@ -3187,7 +3301,6 @@ describe('subsetFonts', function () {
           await assetGraph.loadAssets('index.html');
           await assetGraph.populate();
           await subsetFonts(assetGraph, {
-            inlineFonts: false,
             inlineCss: false,
           });
           const subfontCss = assetGraph.findAssets({
@@ -3223,9 +3336,7 @@ describe('subsetFonts', function () {
         });
         await assetGraph.loadAssets('index.html');
         await assetGraph.populate();
-        await subsetFonts(assetGraph, {
-          inlineFonts: false,
-        });
+        await subsetFonts(assetGraph);
 
         const subfontCss = assetGraph.findAssets({
           type: 'Css',
@@ -3250,9 +3361,7 @@ describe('subsetFonts', function () {
         });
         await assetGraph.loadAssets('index*.html');
         await assetGraph.populate();
-        await subsetFonts(assetGraph, {
-          inlineFonts: false,
-        });
+        await subsetFonts(assetGraph);
 
         expect(assetGraph, 'to contain asset', {
           url: `${assetGraph.root}IBMPlexSans-Regular.woff`,
@@ -3274,9 +3383,7 @@ describe('subsetFonts', function () {
             crossorigin: false,
           },
         });
-        await subsetFonts(assetGraph, {
-          inlineFonts: false,
-        });
+        await subsetFonts(assetGraph);
         const [preloadPolyfill] = assetGraph.findAssets({
           type: 'JavaScript',
           text: { $regex: /new FontFace/ },
@@ -3307,9 +3414,7 @@ describe('subsetFonts', function () {
               crossorigin: false,
             },
           });
-          await subsetFonts(assetGraph, {
-            inlineFonts: false,
-          });
+          await subsetFonts(assetGraph);
           const [preloadPolyfill] = assetGraph.findAssets({
             type: 'JavaScript',
             text: { $regex: /new FontFace/ },
@@ -3340,9 +3445,7 @@ describe('subsetFonts', function () {
       });
       await assetGraph.loadAssets('index.html');
       await assetGraph.populate();
-      const { fontInfo } = await subsetFonts(assetGraph, {
-        inlineFonts: false,
-      });
+      const { fontInfo } = await subsetFonts(assetGraph);
 
       expect(fontInfo, 'to satisfy', [
         {
@@ -3383,9 +3486,7 @@ describe('subsetFonts', function () {
       });
       await assetGraph.loadAssets('index.html');
       await assetGraph.populate();
-      const { fontInfo } = await subsetFonts(assetGraph, {
-        inlineFonts: false,
-      });
+      const { fontInfo } = await subsetFonts(assetGraph);
 
       expect(fontInfo, 'to satisfy', [
         {
@@ -3423,9 +3524,7 @@ describe('subsetFonts', function () {
       });
       await assetGraph.loadAssets('index.html');
       await assetGraph.populate();
-      const { fontInfo } = await subsetFonts(assetGraph, {
-        inlineFonts: false,
-      });
+      const { fontInfo } = await subsetFonts(assetGraph);
 
       expect(fontInfo, 'to satisfy', [
         {
@@ -3463,9 +3562,7 @@ describe('subsetFonts', function () {
           crossorigin: false,
         },
       });
-      await subsetFonts(assetGraph, {
-        inlineFonts: false,
-      });
+      await subsetFonts(assetGraph);
 
       expect(assetGraph, 'to contain asset', { fileName: 'index.html' });
 
@@ -3597,9 +3694,7 @@ describe('subsetFonts', function () {
       });
       await assetGraph.loadAssets('index.html');
       await assetGraph.populate();
-      const { fontInfo } = await subsetFonts(assetGraph, {
-        inlineFonts: false,
-      });
+      const { fontInfo } = await subsetFonts(assetGraph);
       expect(fontInfo, 'to satisfy', [
         {
           fontUsages: [
@@ -3634,9 +3729,7 @@ describe('subsetFonts', function () {
             crossorigin: false,
           },
         });
-        await subsetFonts(assetGraph, {
-          inlineFonts: false,
-        });
+        await subsetFonts(assetGraph);
         const preloads1 = htmlAsset1.outgoingRelations.filter(
           (relation) => relation.type === 'HtmlPreloadLink'
         );
@@ -3677,9 +3770,7 @@ describe('subsetFonts', function () {
           crossorigin: false,
         },
       });
-      await subsetFonts(assetGraph, {
-        inlineFonts: false,
-      });
+      await subsetFonts(assetGraph);
 
       expect(assetGraph, 'to contain asset', { fileName: 'index.html' });
 
@@ -3892,9 +3983,7 @@ describe('subsetFonts', function () {
         });
         await assetGraph.loadAssets('index.html');
         await assetGraph.populate();
-        const { fontInfo } = await subsetFonts(assetGraph, {
-          inlineFonts: false,
-        });
+        const { fontInfo } = await subsetFonts(assetGraph);
         expect(fontInfo, 'to satisfy', [
           {
             fontUsages: [
@@ -3938,9 +4027,7 @@ describe('subsetFonts', function () {
         });
         await assetGraph.loadAssets('index.html');
         await assetGraph.populate();
-        const { fontInfo } = await subsetFonts(assetGraph, {
-          inlineFonts: false,
-        });
+        const { fontInfo } = await subsetFonts(assetGraph);
         expect(fontInfo, 'to satisfy', [
           {
             fontUsages: [
@@ -4000,9 +4087,7 @@ describe('subsetFonts', function () {
         });
         await assetGraph.loadAssets('index.html');
         await assetGraph.populate();
-        const { fontInfo } = await subsetFonts(assetGraph, {
-          inlineFonts: false,
-        });
+        const { fontInfo } = await subsetFonts(assetGraph);
         expect(fontInfo, 'to satisfy', [
           {
             fontUsages: [
@@ -4043,7 +4128,6 @@ describe('subsetFonts', function () {
         const [htmlAsset] = await assetGraph.loadAssets('index.html');
         await assetGraph.populate();
         await subsetFonts(assetGraph, {
-          inlineFonts: false,
           omitFallbacks: true,
         });
 
@@ -4076,7 +4160,6 @@ describe('subsetFonts', function () {
         await assetGraph.loadAssets(['index-1.html', 'index-2.html']);
         await assetGraph.populate();
         const { fontInfo } = await subsetFonts(assetGraph, {
-          inlineFonts: false,
           omitFallbacks: true,
         });
 
@@ -4355,9 +4438,7 @@ describe('subsetFonts', function () {
       });
       await assetGraph.loadAssets('index.html');
       await assetGraph.populate();
-      await subsetFonts(assetGraph, {
-        inlineFonts: false,
-      });
+      await subsetFonts(assetGraph);
 
       const html = assetGraph.findAssets({ type: 'Html' })[0];
 
@@ -4400,9 +4481,7 @@ describe('subsetFonts', function () {
           crossorigin: false,
         },
       });
-      await subsetFonts(assetGraph, {
-        inlineFonts: false,
-      });
+      await subsetFonts(assetGraph);
       expect(assetGraph, 'to contain asset', { fileName: 'index.html' });
 
       const index = assetGraph.findAssets({ fileName: 'index.html' })[0];

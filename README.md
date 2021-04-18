@@ -85,8 +85,6 @@ Options:
                                      JavaScript enabled                 [boolean] [default: false]
   --in-place, -i                     Modify HTML-files in-place. Only use on build artifacts
                                                                         [boolean] [default: false]
-  --inline-fonts                     Inline fonts as data-URIs inside the @font-face declaration
-                                                                        [boolean] [default: false]
   --inline-css                       Inline CSS that declares the @font-face for the subset fonts
                                                                         [boolean] [default: false]
   --font-display                     Injects a font-display value into the @font-face CSS.
