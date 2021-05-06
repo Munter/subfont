@@ -1,3 +1,14 @@
+### v6.0.1 (2021-05-06)
+
+#### Pull requests
+
+- [#142](https://github.com/Munter/subfont/pull/142) Update readme ([Björn Rixman](mailto:bjorn.rixman@gmail.com))
+
+#### Commits to master
+
+- [Update subset-font to ^1.2.0](https://github.com/Munter/subfont/commit/9e8256e895ee02095e831ee954fc3aef1dd414fd) ([Andreas Lind](mailto:andreas.lind@workday.com))
+- [Update fontverter to 2.0.0](https://github.com/Munter/subfont/commit/0f65689c716eae92c4b580ab5fead12f2d524ca4) ([Andreas Lind](mailto:andreas.lind@workday.com))
+
 ### v6.0.0 (2021-04-18)
 
 #### Pull requests
