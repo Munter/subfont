@@ -94,9 +94,6 @@ Options:
                                                                         [boolean] [default: false]
   --relative-urls                    Issue relative urls instead of root-relative ones
                                                                         [boolean] [default: false]
-  --harfbuzz                         Experimental: Use the harfbuzz subsetter instead of
-                                     pyftsubset. Requires node.js 10+ for wasm support
-                                                                        [boolean] [default: false]
   --silent, -s                       Do not write anything to stdout    [boolean] [default: false]
   --debug, -d                        Verbose insights into font glyph detection
                                                                         [boolean] [default: false]
