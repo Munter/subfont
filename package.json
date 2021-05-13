@@ -88,7 +88,7 @@
     "mocha": "^8.0.1",
     "nyc": "^15.1.0",
     "offline-github-changelog": "^1.6.1",
-    "prettier": "^2.0.5",
+    "prettier": "~2.3.0",
     "proxyquire": "^2.1.1",
     "puppeteer": "^8.0.0",
     "sinon": "^9.0.2",
