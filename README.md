@@ -37,12 +37,6 @@ Get the basic CLI tool, which supports subsetting Google Fonts and optimizing al
 npm install -g subfont
 ```
 
-If you want the ability to run font subsetting locally you'l need Python and install fonttools with this command line:
-
-```
-pip install fonttools brotli zopfli
-```
-
 ## Recommended usage
 
 Run subfont on the files you are ready to deploy to a static file hosting service. If these are build artifacts from another build system, and not the original files, run `subfont path/to/artifacts/index.html -i` to have `subfont` clobber the dist files in their original location.
