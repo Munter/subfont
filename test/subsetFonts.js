@@ -3670,14 +3670,14 @@ describe('subsetFonts', function () {
     });
     await subsetFonts(assetGraph);
     expect(
-      indexHtml.text,
+      indexHtml.text.replace(/-[a-f0-9]{10}\./g, '-xxxxxxxxxx.'),
       'to contain',
-      `<script>try{new FontFace('Alice__subset',"url('"+'/subfont/Alice-400-f5827e52ee.woff2'.toString('url')+"') format('woff2'),url('"+'/subfont/Alice-400-3b35760549.woff'.toString('url')+"') format('woff')",{}).load()}catch(e){}</script>`
+      `<script>try{new FontFace('Alice__subset',"url('"+'/subfont/Alice-400-xxxxxxxxxx.woff2'.toString('url')+"') format('woff2'),url('"+'/subfont/Alice-400-xxxxxxxxxx.woff'.toString('url')+"') format('woff')",{}).load()}catch(e){}</script>`
     );
     expect(
-      aboutHtml.text,
+      aboutHtml.text.replace(/-[a-f0-9]{10}\./g, '-xxxxxxxxxx.'),
       'to contain',
-      `<script>try{new FontFace('Font Awesome 5 Free__subset',"url('"+'/subfont/Font_Awesome_5_Free-400-ecf46ce47c.woff2'.toString('url')+"') format('woff2'),url('"+'/subfont/Font_Awesome_5_Free-400-0b82ebfc0a.woff'.toString('url')+"') format('woff')",{}).load()}catch(e){}</script>`
+      `<script>try{new FontFace('Font Awesome 5 Free__subset',"url('"+'/subfont/Font_Awesome_5_Free-400-xxxxxxxxxx.woff2'.toString('url')+"') format('woff2'),url('"+'/subfont/Font_Awesome_5_Free-400-xxxxxxxxxx.woff'.toString('url')+"') format('woff')",{}).load()}catch(e){}</script>`
     );
   });
 
