@@ -19,9 +19,6 @@ addons:
 
 env: CXX="g++-4.8" CC="gcc-4.8"
 
-before_install:
-  - sudo pip install -r requirements.txt
-
 script: 'npm run-script travis'
 after_success: '<coverage/lcov.info ./node_modules/coveralls/bin/coveralls.js'
 
