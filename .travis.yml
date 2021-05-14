@@ -3,24 +3,11 @@ services:
 language: node_js
 cache:
   npm: true
-  apt: true
-  pip: true
 
 node_js:
   - 10
   - 12
   - 14
-
-addons:
-  apt:
-    packages:
-      - gcc-4.8
-      - g++-4.8
-
-env: CXX="g++-4.8" CC="gcc-4.8"
-
-before_install:
-  - sudo pip install -r requirements.txt
 
 script: 'npm run-script travis'
 after_success: '<coverage/lcov.info ./node_modules/coveralls/bin/coveralls.js'
