@@ -1,3 +1,17 @@
+### v6.0.2 (2021-05-17)
+
+#### Pull requests
+
+- [#143](https://github.com/Munter/subfont/pull/143) Remove installation instructions for fonttools ([Peter Müller](mailto:munter@fumle.dk))
+- [#144](https://github.com/Munter/subfont/pull/144) Remove more fonttools cruft ([Andreas Lind](mailto:andreas.lind@workday.com))
+
+#### Commits to master
+
+- [Update subset-font to ^1.2.3](https://github.com/Munter/subfont/commit/10b933bab2e36c34dcb74554ad15556e4cf1be2d) ([Andreas Lind](mailto:andreas.lind@workday.com))
+- [prettier --write '\*\*\/\*.js'](https://github.com/Munter/subfont/commit/b32fdf7fbf6571a3cdf349a926bced5a68b5f44d) ([Andreas Lind](mailto:andreas.lind@workday.com))
+- [Lock prettier with a ~ range](https://github.com/Munter/subfont/commit/0faa563eda950fd120b7bdffa0f56a97c34590be) ([Andreas Lind](mailto:andreas.lind@workday.com))
+- [Fix test so it doesn't break if the hash of a subset font changes \(it probably changes because of the recent harfbuzzjs update\)](https://github.com/Munter/subfont/commit/3188b3d1c6cd54daf3fd34c8c32fcedc406a32e9) ([Andreas Lind](mailto:andreas.lind@workday.com))
+
 ### v6.0.1 (2021-05-06)
 
 #### Pull requests
