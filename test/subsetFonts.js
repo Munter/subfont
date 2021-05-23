@@ -148,32 +148,6 @@ describe('subsetFonts', function () {
         as: 'font',
       },
       {
-        type: 'HtmlScript',
-        to: {
-          isInline: true,
-          text: expect.it('to contain', 'Open Sans__subset'),
-          outgoingRelations: [
-            {
-              type: 'JavaScriptStaticUrl',
-              hrefType: 'rootRelative',
-              to: {
-                contentType: 'font/woff2',
-                extension: '.woff2',
-              },
-            },
-
-            {
-              type: 'JavaScriptStaticUrl',
-              hrefType: 'rootRelative',
-              to: {
-                contentType: 'font/woff',
-                extension: '.woff',
-              },
-            },
-          ],
-        },
-      },
-      {
         type: 'HtmlStyle',
         hrefType: 'rootRelative',
         href: expect
@@ -361,16 +335,6 @@ describe('subsetFonts', function () {
           as: 'font',
         },
         {
-          type: 'HtmlScript',
-          to: {
-            type: 'JavaScript',
-            isInline: true,
-            text: expect
-              .it('to contain', `new FontFace('Open Sans__subset',"url('`)
-              .and('to contain', '__subset'),
-          },
-        },
-        {
           type: 'HtmlStyle',
           href: undefined,
           to: {
@@ -473,33 +437,6 @@ describe('subsetFonts', function () {
           isLoaded: true,
         },
         as: 'font',
-      },
-      {
-        type: 'HtmlScript',
-        to: {
-          isInline: true,
-          text: expect.it('to contain', 'Open Sans__subset'),
-          outgoingRelations: [
-            {
-              type: 'JavaScriptStaticUrl',
-              hrefType: 'rootRelative',
-              href: /^\/subfont\/Open_Sans-400-[a-f0-9]{10}\.woff2$/,
-              to: {
-                isLoaded: true,
-              },
-            },
-
-            {
-              type: 'JavaScriptStaticUrl',
-              hrefType: 'rootRelative',
-              to: {
-                isLoaded: true,
-                contentType: 'font/woff',
-                extension: '.woff',
-              },
-            },
-          ],
-        },
       },
       {
         type: 'HtmlStyle',
@@ -914,7 +851,6 @@ describe('subsetFonts', function () {
 
       expect(assetGraph, 'to contain relation', 'CssImport');
       expect(assetGraph, 'to contain relations', 'HtmlStyle', 3);
-      expect(assetGraph, 'to contain relations', 'JavaScriptStaticUrl', 3);
     });
 
     it('should not break for two CSS @imports in different stylesheets', async function () {
@@ -934,7 +870,6 @@ describe('subsetFonts', function () {
 
       expect(assetGraph, 'to contain relation', 'CssImport');
       expect(assetGraph, 'to contain relations', 'HtmlStyle', 4);
-      expect(assetGraph, 'to contain relations', 'JavaScriptStaticUrl', 3);
     });
   });
 
@@ -995,80 +930,6 @@ describe('subsetFonts', function () {
           isLoaded: true,
         },
         as: 'font',
-      },
-      {
-        type: 'HtmlScript',
-        to: {
-          isInline: true,
-          text: expect
-            .it('to contain', 'Jim Nightshade__subset')
-            .and('to contain', 'Montserrat__subset')
-            .and('to contain', 'Space Mono__subset'),
-          outgoingRelations: [
-            {
-              type: 'JavaScriptStaticUrl',
-              hrefType: 'rootRelative',
-              href: /^\/subfont\/Jim_Nightshade-400-[a-f0-9]{10}\.woff2$/,
-              to: {
-                isLoaded: true,
-                contentType: 'font/woff2',
-                extension: '.woff2',
-              },
-            },
-
-            {
-              type: 'JavaScriptStaticUrl',
-              hrefType: 'rootRelative',
-              to: {
-                isLoaded: true,
-                contentType: 'font/woff',
-                extension: '.woff',
-              },
-            },
-
-            {
-              type: 'JavaScriptStaticUrl',
-              hrefType: 'rootRelative',
-              href: /^\/subfont\/Montserrat-400-[a-f0-9]{10}\.woff2$/,
-              to: {
-                isLoaded: true,
-                contentType: 'font/woff2',
-                extension: '.woff2',
-              },
-            },
-
-            {
-              type: 'JavaScriptStaticUrl',
-              hrefType: 'rootRelative',
-              to: {
-                isLoaded: true,
-                contentType: 'font/woff',
-                extension: '.woff',
-              },
-            },
-
-            {
-              type: 'JavaScriptStaticUrl',
-              hrefType: 'rootRelative',
-              href: /^\/subfont\/Space_Mono-400-[a-f0-9]{10}\.woff2$/,
-              to: {
-                isLoaded: true,
-                contentType: 'font/woff2',
-                extension: '.woff2',
-              },
-            },
-
-            {
-              type: 'JavaScriptStaticUrl',
-              hrefType: 'rootRelative',
-              to: {
-                isLoaded: true,
-                contentType: 'font/woff',
-                extension: '.woff',
-              },
-            },
-          ],
-        },
       },
       {
         type: 'HtmlStyle',
@@ -1238,80 +1099,6 @@ describe('subsetFonts', function () {
         as: 'font',
       },
       {
-        type: 'HtmlScript',
-        to: {
-          isInline: true,
-          text: expect
-            .it('to contain', 'Roboto__subset')
-            .and('to contain', "'font-weight':500")
-            .and('to contain', "'font-style':'italic','font-weight':300"),
-          outgoingRelations: [
-            {
-              type: 'JavaScriptStaticUrl',
-              hrefType: 'rootRelative',
-              href: /^\/subfont\/Roboto-500-[a-f0-9]{10}\.woff2$/,
-              to: {
-                isLoaded: true,
-                contentType: 'font/woff2',
-                extension: '.woff2',
-              },
-            },
-
-            {
-              type: 'JavaScriptStaticUrl',
-              hrefType: 'rootRelative',
-              to: {
-                isLoaded: true,
-                contentType: 'font/woff',
-                extension: '.woff',
-              },
-            },
-
-            {
-              type: 'JavaScriptStaticUrl',
-              hrefType: 'rootRelative',
-              href: /^\/subfont\/Roboto-400-[a-f0-9]{10}\.woff2$/,
-              to: {
-                isLoaded: true,
-                contentType: 'font/woff2',
-                extension: '.woff2',
-              },
-            },
-
-            {
-              type: 'JavaScriptStaticUrl',
-              hrefType: 'rootRelative',
-              to: {
-                isLoaded: true,
-                contentType: 'font/woff',
-                extension: '.woff',
-              },
-            },
-
-            {
-              type: 'JavaScriptStaticUrl',
-              hrefType: 'rootRelative',
-              href: /^\/subfont\/Roboto-300i-[a-f0-9]{10}\.woff2$/,
-              to: {
-                isLoaded: true,
-                contentType: 'font/woff2',
-                extension: '.woff2',
-              },
-            },
-
-            {
-              type: 'JavaScriptStaticUrl',
-              hrefType: 'rootRelative',
-              to: {
-                isLoaded: true,
-                contentType: 'font/woff',
-                extension: '.woff',
-              },
-            },
-          ],
-        },
-      },
-      {
         type: 'HtmlStyle',
         href: expect
           .it('to begin with', '/subfont/fonts-')
@@ -1451,35 +1238,6 @@ describe('subsetFonts', function () {
           as: 'font',
         },
         {
-          type: 'HtmlScript',
-          to: {
-            isInline: true,
-            text: expect.it('to contain', 'Open Sans__subset'),
-            outgoingRelations: [
-              {
-                type: 'JavaScriptStaticUrl',
-                hrefType: 'rootRelative',
-                href: /^\/subfont\/Open_Sans-400-[a-f0-9]{10}\.woff2$/,
-                to: {
-                  isLoaded: true,
-                  contentType: 'font/woff2',
-                  extension: '.woff2',
-                },
-              },
-
-              {
-                type: 'JavaScriptStaticUrl',
-                hrefType: 'rootRelative',
-                to: {
-                  isLoaded: true,
-                  contentType: 'font/woff',
-                  extension: '.woff',
-                },
-              },
-            ],
-          },
-        },
-        {
           type: 'HtmlStyle',
           href: expect
             .it('to begin with', '/subfont/fonts-')
@@ -1541,32 +1299,6 @@ describe('subsetFonts', function () {
           href: /^\/subfont\/Open_Sans-400-[a-f0-9]{10}\.woff2$/,
           to: sharedFont,
           as: 'font',
-        },
-        {
-          type: 'HtmlScript',
-          to: {
-            type: 'JavaScript',
-            isInline: true,
-            text: expect.it('to contain', 'Open Sans__subset'),
-            outgoingRelations: [
-              {
-                type: 'JavaScriptStaticUrl',
-                hrefType: 'rootRelative',
-                href: /^\/subfont\/Open_Sans-400-[a-f0-9]{10}\.woff2$/,
-                to: sharedFont,
-              },
-
-              {
-                type: 'JavaScriptStaticUrl',
-                hrefType: 'rootRelative',
-                to: {
-                  isLoaded: true,
-                  contentType: 'font/woff',
-                  extension: '.woff',
-                },
-              },
-            ],
-          },
         },
         {
           type: 'HtmlStyle',
@@ -1632,25 +1364,6 @@ describe('subsetFonts', function () {
       ]);
       await assetGraph.populate();
       await subsetFonts(assetGraph);
-      const firstJavaScriptPreloadPolyfill = assetGraph.findRelations({
-        from: firstHtmlAsset,
-        type: 'HtmlScript',
-      })[0].to;
-      expect(
-        firstJavaScriptPreloadPolyfill.text,
-        'to contain',
-        "new FontFace('font1__subset'"
-      ).and('not to contain', "new FontFace('font2__subset'");
-
-      const secondJavaScriptPreloadPolyfill = assetGraph.findRelations({
-        from: secondHtmlAsset,
-        type: 'HtmlScript',
-      })[0].to;
-      expect(
-        secondJavaScriptPreloadPolyfill.text,
-        'to contain',
-        "new FontFace('font2__subset'"
-      ).and('not to contain', "new FontFace('font1__subset'");
       expect(
         assetGraph.findRelations({
           from: firstHtmlAsset,
@@ -1980,22 +1693,6 @@ describe('subsetFonts', function () {
         contentType: 'font/ttf',
       },
       {
-        type: 'HtmlScript',
-        to: {
-          type: 'JavaScript',
-          isInline: true,
-          outgoingRelations: [
-            {
-              type: 'JavaScriptStaticUrl',
-              href: '/OpenSans.ttf',
-              to: {
-                isLoaded: true,
-              },
-            },
-          ],
-        },
-      },
-      {
         type: 'HtmlStyle',
         to: {
           isLoaded: true,
@@ -2254,40 +1951,6 @@ describe('subsetFonts', function () {
         contentType: 'font/woff2',
       },
       {
-        type: 'HtmlScript',
-        to: {
-          type: 'JavaScript',
-          isInline: true,
-          text: expect.it('to contain', 'Open Sans__subset'),
-          outgoingRelations: [
-            {
-              type: 'JavaScriptStaticUrl',
-              hrefType: 'rootRelative',
-              href: expect
-                .it('to begin with', '/subfont/Open_Sans-400-')
-                .and('to match', /-[0-9a-f]{10}\./)
-                .and('to end with', '.woff2'),
-              to: {
-                isLoaded: true,
-                contentType: 'font/woff2',
-                extension: '.woff2',
-              },
-            },
-
-            {
-              type: 'JavaScriptStaticUrl',
-              hrefType: 'rootRelative',
-              to: {
-                isLoaded: true,
-                contentType: 'font/woff',
-                extension: '.woff',
-              },
-            },
-          ],
-        },
-      },
-
-      {
         type: 'HtmlStyle',
         hrefType: 'rootRelative',
         href: expect
@@ -2375,40 +2038,6 @@ describe('subsetFonts', function () {
           contentType: 'font/woff2',
         },
         {
-          type: 'HtmlScript',
-          to: {
-            type: 'JavaScript',
-            isInline: true,
-            text: expect.it('to contain', 'Open Sans__subset'),
-            outgoingRelations: [
-              {
-                type: 'JavaScriptStaticUrl',
-                hrefType: 'relative',
-                href: expect
-                  .it('to begin with', 'subfont/Open_Sans-400-')
-                  .and('to match', /-[0-9a-f]{10}\./)
-                  .and('to end with', '.woff2'),
-                to: {
-                  isLoaded: true,
-                  contentType: 'font/woff2',
-                  extension: '.woff2',
-                },
-              },
-
-              {
-                type: 'JavaScriptStaticUrl',
-                hrefType: 'relative',
-                to: {
-                  isLoaded: true,
-                  contentType: 'font/woff',
-                  extension: '.woff',
-                },
-              },
-            ],
-          },
-        },
-
-        {
           type: 'HtmlStyle',
           hrefType: 'relative',
           href: expect
@@ -2458,51 +2087,6 @@ describe('subsetFonts', function () {
         },
         { type: 'HtmlNoscript', hrefType: 'inline' },
       ]);
-    });
-  });
-
-  it('should add a script that async loads a CSS with the original @font-face declarations right before </body>', async function () {
-    const assetGraph = new AssetGraph({
-      root: pathModule.resolve(
-        __dirname,
-        '../testdata/subsetFonts/local-single/'
-      ),
-    });
-    const [htmlAsset] = await assetGraph.loadAssets('index.html');
-    await assetGraph.populate();
-    await subsetFonts(assetGraph);
-    const originalInlineStylesheet = assetGraph.findAssets({
-      type: 'Css',
-      isInline: true,
-    })[0];
-    // Check that the original @font-face was removed from the inline stylesheet:
-    expect(originalInlineStylesheet.text, 'not to contain', '@font-face');
-    const fallbackCss = assetGraph.findAssets({
-      fileName: { $regex: /^fallback-.*\.css/ },
-    })[0];
-    expect(
-      htmlAsset.text,
-      'to contain',
-      `<script>(function(){var el=document.createElement('link');el.href='/subfont/${fallbackCss.fileName}'.toString('url');el.rel='stylesheet';document.body.appendChild(el)}())</script><noscript><link rel="stylesheet" href="/subfont/${fallbackCss.fileName}"></noscript></body></html>`
-    );
-    expect(
-      fallbackCss.text,
-      'to equal',
-      '@font-face{font-family:Open Sans;font-style:normal;font-weight:400;src:local("Open Sans Regular"),local("OpenSans-Regular"),url(/OpenSans.ttf) format("truetype")}'
-    );
-    const originalFontFaceLoadingScript = assetGraph.findAssets({
-      type: 'JavaScript',
-      isInline: true,
-      text: { $regex: /createElement/ },
-    })[0];
-    expect(
-      originalFontFaceLoadingScript.text,
-      'to contain',
-      `el.href='/subfont/${fallbackCss.fileName}'`
-    );
-    expect(assetGraph, 'to contain relation', {
-      from: originalFontFaceLoadingScript,
-      to: { type: 'Css' },
     });
   });
 
@@ -2651,13 +2235,6 @@ describe('subsetFonts', function () {
         },
       });
       await subsetFonts(assetGraph);
-      const [preloadPolyfill] = assetGraph.findAssets({
-        type: 'JavaScript',
-        text: { $regex: /new FontFace/ },
-      });
-      expect(preloadPolyfill.text, 'to contain', ".woff2'")
-        .and('to contain', 'Input_Mono-400')
-        .and('not to contain', 'Input_Mono-700');
       const preloadLinks = assetGraph.findRelations({
         from: htmlAsset,
         type: 'HtmlPreloadLink',
@@ -2682,14 +2259,6 @@ describe('subsetFonts', function () {
           },
         });
         await subsetFonts(assetGraph);
-        const [preloadPolyfill] = assetGraph.findAssets({
-          type: 'JavaScript',
-          text: { $regex: /new FontFace/ },
-        });
-        expect(preloadPolyfill.text, 'to contain', ".woff2'")
-          .and('to contain', ".woff'")
-          .and('not to contain', ".ttf'")
-          .and('not to contain', 'fonts.gstatic.com');
         const preloadLinks = assetGraph.findRelations({
           from: htmlAsset,
           type: 'HtmlPreloadLink',
@@ -2840,39 +2409,6 @@ describe('subsetFonts', function () {
           isLoaded: true,
         },
         as: 'font',
-      },
-      {
-        type: 'HtmlScript',
-        to: {
-          type: 'JavaScript',
-          isInline: true,
-          text: expect.it('to contain', 'Open Sans__subset'),
-          outgoingRelations: [
-            {
-              type: 'JavaScriptStaticUrl',
-              hrefType: 'rootRelative',
-              href: expect
-                .it('to begin with', '/subfont/Open_Sans-400-')
-                .and('to match', /-[0-9a-f]{10}\./)
-                .and('to end with', '.woff2'),
-              to: {
-                isLoaded: true,
-                contentType: 'font/woff2',
-                extension: '.woff2',
-              },
-            },
-
-            {
-              type: 'JavaScriptStaticUrl',
-              hrefType: 'rootRelative',
-              to: {
-                isLoaded: true,
-                contentType: 'font/woff',
-                extension: '.woff',
-              },
-            },
-          ],
-        },
       },
       {
         type: 'HtmlStyle',
@@ -3060,71 +2596,6 @@ describe('subsetFonts', function () {
           isLoaded: true,
         },
         as: 'font',
-      },
-      {
-        type: 'HtmlScript',
-        to: {
-          type: 'JavaScript',
-          isInline: true,
-          text: expect.it('to contain', 'Open Sans__subset'),
-          outgoingRelations: [
-            {
-              type: 'JavaScriptStaticUrl',
-              hrefType: 'rootRelative',
-              href: expect
-                .it('to begin with', '/subfont/Local_Sans-400-')
-                .and('to match', /-[0-9a-f]{10}\./)
-                .and('to end with', '.woff2'),
-              to: {
-                isLoaded: true,
-                contentType: 'font/woff2',
-                extension: '.woff2',
-              },
-            },
-
-            {
-              type: 'JavaScriptStaticUrl',
-              hrefType: 'rootRelative',
-              href: expect
-                .it('to begin with', '/subfont/Local_Sans-400-')
-                .and('to match', /-[0-9a-f]{10}\./)
-                .and('to end with', '.woff'),
-              to: {
-                isLoaded: true,
-                contentType: 'font/woff',
-                extension: '.woff',
-              },
-            },
-
-            {
-              type: 'JavaScriptStaticUrl',
-              hrefType: 'rootRelative',
-              href: expect
-                .it('to begin with', '/subfont/Open_Sans-400-')
-                .and('to match', /-[0-9a-f]{10}\./)
-                .and('to end with', '.woff2'),
-              to: {
-                isLoaded: true,
-                contentType: 'font/woff2',
-                extension: '.woff2',
-              },
-            },
-
-            {
-              type: 'JavaScriptStaticUrl',
-              hrefType: 'rootRelative',
-              href: expect
-                .it('to begin with', '/subfont/Open_Sans-400-')
-                .and('to match', /-[0-9a-f]{10}\./)
-                .and('to end with', '.woff'),
-              to: {
-                isLoaded: true,
-                contentType: 'font/woff',
-                extension: '.woff',
-              },
-            },
-          ],
-        },
       },
       {
         type: 'HtmlStyle',
@@ -3321,14 +2792,6 @@ describe('subsetFonts', function () {
           ],
         },
       ]);
-      const preloadFallbackJavaScript = assetGraph.findAssets({
-        type: 'JavaScript',
-      })[0];
-      expect(
-        preloadFallbackJavaScript.text,
-        'to contain',
-        "{'font-weight':'300 800'}"
-      );
       expect(assetGraph, 'to contain asset', {
         fileName: {
           $regex: '^Venn_VF-300_800-[a-f0-9]+.woff2',
@@ -3654,33 +3117,6 @@ describe('subsetFonts', function () {
     );
   });
 
-  // Regression test for https://github.com/Munter/subfont/issues/131
-  it('should match the right fonts up with the right paths in the JavaScript-based preload polyfill', async function () {
-    const assetGraph = new AssetGraph({
-      root: pathModule.resolve(__dirname, '../testdata/subsetFonts/issue131/'),
-    });
-    const [indexHtml, aboutHtml] = await assetGraph.loadAssets([
-      'index.html',
-      'about.html',
-    ]);
-    await assetGraph.populate({
-      followRelations: {
-        crossorigin: false,
-      },
-    });
-    await subsetFonts(assetGraph);
-    expect(
-      indexHtml.text.replace(/-[a-f0-9]{10}\./g, '-xxxxxxxxxx.'),
-      'to contain',
-      `<script>try{new FontFace('Alice__subset',"url('"+'/subfont/Alice-400-xxxxxxxxxx.woff2'.toString('url')+"') format('woff2'),url('"+'/subfont/Alice-400-xxxxxxxxxx.woff'.toString('url')+"') format('woff')",{}).load()}catch(e){}</script>`
-    );
-    expect(
-      aboutHtml.text.replace(/-[a-f0-9]{10}\./g, '-xxxxxxxxxx.'),
-      'to contain',
-      `<script>try{new FontFace('Font Awesome 5 Free__subset',"url('"+'/subfont/Font_Awesome_5_Free-400-xxxxxxxxxx.woff2'.toString('url')+"') format('woff2'),url('"+'/subfont/Font_Awesome_5_Free-400-xxxxxxxxxx.woff'.toString('url')+"') format('woff')",{}).load()}catch(e){}</script>`
-    );
-  });
-
   describe('with non-truetype fonts in the mix', function () {
     it('should not attempt to subset non-truetype fonts', async function () {
       const assetGraph = new AssetGraph({
@@ -3751,39 +3187,6 @@ describe('subsetFonts', function () {
           },
           as: 'font',
           contentType: 'font/woff2',
-        },
-        {
-          type: 'HtmlScript',
-          to: {
-            type: 'JavaScript',
-            isInline: true,
-            text: expect.it('to contain', 'icomoon__subset'),
-            outgoingRelations: [
-              {
-                type: 'JavaScriptStaticUrl',
-                hrefType: 'rootRelative',
-                href: expect
-                  .it('to begin with', '/subfont/icomoon-400-')
-                  .and('to match', /-[0-9a-f]{10}\./)
-                  .and('to end with', '.woff2'),
-                to: {
-                  isLoaded: true,
-                  contentType: 'font/woff2',
-                  extension: '.woff2',
-                },
-              },
-
-              {
-                type: 'JavaScriptStaticUrl',
-                hrefType: 'rootRelative',
-                to: {
-                  isLoaded: true,
-                  contentType: 'font/woff',
-                  extension: '.woff',
-                },
-              },
-            ],
-          },
         },
         {
           type: 'HtmlStyle',
