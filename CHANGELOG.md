@@ -1,4 +1,10 @@
-### v6.0.2 (2021-05-17)
+### v6.1.0 (2021-05-23)
+
+- [Remove the JavaScript-based preload polyfill](https://github.com/Munter/subfont/commit/b58bc351d8002d2aae1f4f9cf82126a3efcb997e) ([Andreas Lind](mailto:andreas.lind@workday.com))
+- [Fix assertion name](https://github.com/Munter/subfont/commit/f3838a8ab6edef0db84ba17552e8c42967d8e6dc) ([Andreas Lind](mailto:andreas.lind@workday.com))
+- [Add some fuzziness to a Google Web Fonts test so it doesn't break when they return a slightly smaller font](https://github.com/Munter/subfont/commit/b7889e4855704f08cc47cf14794a43bdb4f75aed) ([Andreas Lind](mailto:andreas.lind@workday.com))
+
+### v6.0.2 (2021-05-18)
 
 #### Pull requests
 
