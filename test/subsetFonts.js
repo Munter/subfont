@@ -293,9 +293,9 @@ describe('subsetFonts', function () {
           htmlAsset: 'testdata/subsetFonts/html-link/index.html',
           fontUsages: [
             {
-              smallestOriginalSize: 27088,
+              smallestOriginalSize: expect.it('to be greater than', 20000),
               smallestOriginalFormat: 'ttf',
-              smallestSubsetSize: 2360,
+              smallestSubsetSize: expect.it('to be smaller than', 3000),
               smallestSubsetFormat: 'woff2',
               texts: ['Hello'],
               pageText: 'Helo',
