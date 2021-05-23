@@ -652,64 +652,9 @@ describe('subfont', function () {
     });
   });
 
-  describe('with a canonical root and loading the page from a remote server', function () {
-    // Regression test for https://gitter.im/assetgraph/assetgraph?at=5ece5da89da05a060a3417fc
-    it('should refer to the fallback CSS with a root-relative url', async function () {
-      httpception([
-        {
-          request: 'GET https://www.netlify.com/index.html',
-          response: {
-            headers: {
-              'Content-Type': 'text/html',
-            },
-            body: `<!DOCTYPE html>
-            <html>
-              <head>
-                <style>
-                  @font-face{font-family: Open Sans; src:url(OpenSans.woff) format("woff")}
-                </style>
-              </head>
-              <body>
-                <div style="font-family: Open Sans">Hello</div>
-              </body>
-            </html>
-          `,
-          },
-        },
-        {
-          request: 'GET https://www.netlify.com/OpenSans.woff',
-          response: {
-            headers: {
-              'Content-Type': 'font/woff',
-            },
-            body: openSansBold,
-          },
-        },
-      ]);
-
-      const assetGraph = await subfont(
-        {
-          dryRun: true,
-          debug: true,
-          canonicalRoot: 'https://www.netlify.com/',
-          inputFiles: ['https://www.netlify.com/index.html'],
-        },
-        mockConsole
-      );
-      const [, asyncLoadJavaScriptAsset] = assetGraph.findAssets({
-        type: 'JavaScript',
-      });
-      expect(
-        asyncLoadJavaScriptAsset.text,
-        'to contain',
-        `el.href='/subfont/fallback-`
-      );
-    });
-  });
-
   describe('configuring via browserslist', function () {
     // https://github.com/browserslist/browserslist#best-practices
-    it('should default to woff+woff2 and jsPreload:true when no config is given, due to the browserslist defaults', async function () {
+    it('should default to woff+woff2 when no config is given, due to the browserslist defaults', async function () {
       const dir = pathModule.resolve(
         __dirname,
         '..',
@@ -736,7 +681,6 @@ describe('subfont', function () {
         expect(mockSubsetFonts, 'to have calls satisfying', () => {
           mockSubsetFonts(expect.it('to be an object'), {
             formats: ['woff2', 'woff'],
-            jsPreload: true,
           });
         });
       } finally {
@@ -772,7 +716,6 @@ describe('subfont', function () {
         expect(mockSubsetFonts, 'to have calls satisfying', () => {
           mockSubsetFonts(expect.it('to be an object'), {
             formats: ['woff2', 'woff'],
-            jsPreload: false,
           });
         });
       } finally {
@@ -807,7 +750,6 @@ describe('subfont', function () {
         expect(mockSubsetFonts, 'to have calls satisfying', () => {
           mockSubsetFonts(expect.it('to be an object'), {
             formats: ['woff2', 'truetype'],
-            jsPreload: true,
           });
         });
       } finally {
