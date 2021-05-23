@@ -295,7 +295,7 @@ describe('subsetFonts', function () {
             {
               smallestOriginalSize: expect.it('to be greater than', 20000),
               smallestOriginalFormat: 'ttf',
-              smallestSubsetSize: expect.it('to be smaller than', 3000),
+              smallestSubsetSize: expect.it('to be less than', 3000),
               smallestSubsetFormat: 'woff2',
               texts: ['Hello'],
               pageText: 'Helo',
