@@ -18,7 +18,6 @@ describe('reference images', function () {
     inlineCss: [false, true],
     omitFallbacks: [false, true],
     dynamic: [false, true],
-    harfbuzz: [false, true],
   })) {
     describe(`with ${Object.keys(options)
       .map((key) => `${key}: ${options[key]}`)
