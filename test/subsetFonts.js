@@ -3276,4 +3276,154 @@ describe('subsetFonts', function () {
       ]);
     });
   });
+
+  describe('with SVG using webfonts', function () {
+    describe('in a standalone SVG', function () {
+      it('should trace the correct characters and patch up the stylesheet', async function () {
+        const assetGraph = new AssetGraph({
+          root: pathModule.resolve(
+            __dirname,
+            '../testdata/subsetFonts/svg/img-element/'
+          ),
+        });
+        await assetGraph.loadAssets('index.html');
+        await assetGraph.populate({
+          followRelations: {
+            crossorigin: false,
+          },
+        });
+        const result = await subsetFonts(assetGraph);
+
+        expect(result, 'to satisfy', {
+          fontInfo: [
+            {
+              fontUsages: [
+                {
+                  text: ' !,Hdelorw',
+                  props: {
+                    'font-stretch': 'normal',
+                    'font-weight': '400',
+                    'font-style': 'normal',
+                    'font-family': 'Roboto',
+                    src: expect.it('to contain', "format('woff')"),
+                  },
+                },
+              ],
+            },
+          ],
+        });
+
+        const svgAsset = assetGraph.findAssets({ type: 'Svg' })[0];
+        expect(
+          svgAsset.text,
+          'to contain',
+          '<text x="20" y="50" font-family="Roboto__subset, Roboto">Hello, world!</text>'
+        );
+
+        const svgStyle = assetGraph.findRelations({ type: 'SvgStyle' })[0];
+        expect(svgStyle, 'to be defined');
+        expect(
+          svgStyle.to.text,
+          'to contain',
+          '@font-face{font-family:Roboto__subset;'
+        );
+      });
+    });
+
+    describe('within HTML', function () {
+      describe('using webfonts defined in a stylesheet in the HTML', function () {
+        it('should trace the correct characters and patch up the font-family attribute', async function () {
+          const assetGraph = new AssetGraph({
+            root: pathModule.resolve(
+              __dirname,
+              '../testdata/subsetFonts/svg/inline-in-html-with-html-font-face/'
+            ),
+          });
+          const [htmlAsset] = await assetGraph.loadAssets('index.html');
+          await assetGraph.populate({
+            followRelations: {
+              crossorigin: false,
+            },
+          });
+          const result = await subsetFonts(assetGraph);
+
+          expect(result, 'to satisfy', {
+            fontInfo: [
+              {
+                fontUsages: [
+                  {
+                    text: ' !,Hdelorw',
+                    props: {
+                      'font-stretch': 'normal',
+                      'font-weight': '400',
+                      'font-style': 'normal',
+                      'font-family': 'Roboto',
+                      src: expect.it('to contain', "format('woff')"),
+                    },
+                  },
+                ],
+              },
+            ],
+          });
+
+          expect(
+            htmlAsset.text,
+            'to contain',
+            '<text x="20" y="50" font-family="Roboto__subset, Roboto">Hello, world!</text>'
+          );
+        });
+      });
+
+      describe('using webfonts defined in a stylesheet defined in the SVG', function () {
+        it('should trace the correct characters and patch up the SVG stylesheet', async function () {
+          const assetGraph = new AssetGraph({
+            root: pathModule.resolve(
+              __dirname,
+              '../testdata/subsetFonts/svg/inline-in-html-with-own-font-face/'
+            ),
+          });
+          const [htmlAsset] = await assetGraph.loadAssets('index.html');
+          await assetGraph.populate({
+            followRelations: {
+              crossorigin: false,
+            },
+          });
+          const result = await subsetFonts(assetGraph);
+
+          expect(result, 'to satisfy', {
+            fontInfo: [
+              {
+                fontUsages: [
+                  {
+                    text: ' !,Hdelorw',
+                    props: {
+                      'font-stretch': 'normal',
+                      'font-weight': '400',
+                      'font-style': 'normal',
+                      'font-family': 'Roboto',
+                      src: expect.it('to contain', "format('woff')"),
+                    },
+                  },
+                ],
+              },
+            ],
+          });
+
+          expect(
+            htmlAsset.text,
+            'to contain',
+            '<text x="20" y="50" font-family="Roboto__subset, Roboto">Hello, world!</text>'
+          );
+
+          const svgStyle = assetGraph.findRelations({ type: 'SvgStyle' })[0];
+          expect(svgStyle, 'to be defined');
+          expect(
+            svgStyle.to.text,
+            'to contain',
+            '@font-face{font-family:Roboto__subset;'
+          );
+        });
+      });
+    });
+  });
 });

@@ -45,7 +45,7 @@ describe('getCssRulesByProperty', function () {
           {
             selector: 'h1',
             predicates: {},
-            namespaceURI: 'http://www.w3.org/1999/xhtml',
+            namespaceURI: undefined,
             specificityArray: [0, 0, 0, 1],
             prop: 'color',
             value: 'red',
@@ -54,7 +54,7 @@ describe('getCssRulesByProperty', function () {
           {
             selector: 'h2',
             predicates: {},
-            namespaceURI: 'http://www.w3.org/1999/xhtml',
+            namespaceURI: undefined,
             specificityArray: [0, 0, 0, 1],
             prop: 'color',
             value: 'blue',
@@ -76,7 +76,7 @@ describe('getCssRulesByProperty', function () {
           {
             selector: undefined,
             predicates: {},
-            namespaceURI: 'http://www.w3.org/1999/xhtml',
+            namespaceURI: undefined,
             specificityArray: [1, 0, 0, 0],
             prop: 'color',
             value: 'red',
@@ -99,7 +99,7 @@ describe('getCssRulesByProperty', function () {
             {
               selector: 'h1',
               predicates: {},
-              namespaceURI: 'http://www.w3.org/1999/xhtml',
+              namespaceURI: undefined,
               specificityArray: [0, 0, 0, 1],
               prop: 'color',
               value: 'red',
@@ -108,7 +108,7 @@ describe('getCssRulesByProperty', function () {
             {
               selector: 'h1',
               predicates: {},
-              namespaceURI: 'http://www.w3.org/1999/xhtml',
+              namespaceURI: undefined,
               specificityArray: [0, 0, 0, 1],
               prop: 'color',
               value: 'blue',
@@ -135,7 +135,7 @@ describe('getCssRulesByProperty', function () {
           {
             selector: 'h1',
             predicates: {},
-            namespaceURI: 'http://www.w3.org/1999/xhtml',
+            namespaceURI: undefined,
             specificityArray: [0, 0, 0, 1],
             prop: 'font',
             value: '15px serif',
@@ -146,7 +146,7 @@ describe('getCssRulesByProperty', function () {
           {
             selector: 'h1',
             predicates: {},
-            namespaceURI: 'http://www.w3.org/1999/xhtml',
+            namespaceURI: undefined,
             specificityArray: [0, 0, 0, 1],
             prop: 'font',
             value: '15px serif',
@@ -170,7 +170,7 @@ describe('getCssRulesByProperty', function () {
           {
             selector: 'h1',
             predicates: {},
-            namespaceURI: 'http://www.w3.org/1999/xhtml',
+            namespaceURI: undefined,
             specificityArray: [0, 0, 0, 1],
             prop: 'font',
             value: '15px serif',
@@ -181,7 +181,7 @@ describe('getCssRulesByProperty', function () {
           {
             selector: 'h1',
             predicates: {},
-            namespaceURI: 'http://www.w3.org/1999/xhtml',
+            namespaceURI: undefined,
             specificityArray: [0, 0, 0, 1],
             prop: 'font',
             value: '15px serif',
@@ -192,7 +192,7 @@ describe('getCssRulesByProperty', function () {
           {
             selector: 'h1',
             predicates: {},
-            namespaceURI: 'http://www.w3.org/1999/xhtml',
+            namespaceURI: undefined,
             specificityArray: [0, 0, 0, 1],
             prop: 'font',
             value: '15px serif',
@@ -203,7 +203,7 @@ describe('getCssRulesByProperty', function () {
           {
             selector: 'h1',
             predicates: {},
-            namespaceURI: 'http://www.w3.org/1999/xhtml',
+            namespaceURI: undefined,
             specificityArray: [0, 0, 0, 1],
             prop: 'font',
             value: '15px serif',
@@ -227,7 +227,7 @@ describe('getCssRulesByProperty', function () {
           {
             selector: 'h1',
             predicates: {},
-            namespaceURI: 'http://www.w3.org/1999/xhtml',
+            namespaceURI: undefined,
             specificityArray: [0, 0, 0, 1],
             prop: 'font',
             value: '15px serif',
@@ -238,7 +238,7 @@ describe('getCssRulesByProperty', function () {
           {
             selector: 'h1',
             predicates: {},
-            namespaceURI: 'http://www.w3.org/1999/xhtml',
+            namespaceURI: undefined,
             specificityArray: [0, 0, 0, 1],
             prop: 'font-size',
             value: '10px',
@@ -247,7 +247,7 @@ describe('getCssRulesByProperty', function () {
           {
             selector: 'h1',
             predicates: {},
-            namespaceURI: 'http://www.w3.org/1999/xhtml',
+            namespaceURI: undefined,
             specificityArray: [0, 0, 0, 1],
             prop: 'font',
             value: '15px serif',
@@ -256,7 +256,7 @@ describe('getCssRulesByProperty', function () {
           {
             selector: 'h1',
             predicates: {},
-            namespaceURI: 'http://www.w3.org/1999/xhtml',
+            namespaceURI: undefined,
             specificityArray: [0, 0, 0, 1],
             prop: 'font-size',
             value: '20px',
