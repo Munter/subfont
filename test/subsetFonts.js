@@ -264,7 +264,7 @@ describe('subsetFonts', function () {
     expect(result, 'to exhaustively satisfy', {
       fontInfo: [
         {
-          htmlAsset: 'testdata/subsetFonts/html-link/index.html',
+          assetFileName: 'testdata/subsetFonts/html-link/index.html',
           fontUsages: [
             {
               smallestOriginalSize: expect.it('to be greater than', 20000),
@@ -2888,7 +2888,7 @@ describe('subsetFonts', function () {
 
       expect(fontInfo, 'to satisfy', [
         {
-          htmlAsset: /\/index-1\.html$/,
+          assetFileName: /\/index-1\.html$/,
           fontUsages: [
             {
               pageText: '',
@@ -2897,7 +2897,7 @@ describe('subsetFonts', function () {
           ],
         },
         {
-          htmlAsset: /\/index-2\.html$/,
+          assetFileName: /\/index-2\.html$/,
           fontUsages: [
             {
               pageText: ' ABCDEFGHIJKLM',
@@ -2926,7 +2926,7 @@ describe('subsetFonts', function () {
       expect(fontInfo, 'to have length', 2);
       expect(fontInfo, 'to satisfy', [
         {
-          htmlAsset: /\/index\.html$/,
+          assetFileName: /\/index\.html$/,
           fontUsages: [
             { text: 'Wdlor' },
             { text: ' ,Hbdehilmnosux' },
@@ -2937,7 +2937,7 @@ describe('subsetFonts', function () {
           ],
         },
         {
-          htmlAsset: /\/subindex\.html$/,
+          assetFileName: /\/subindex\.html$/,
           fontUsages: [
             { pageText: '', text: 'Wdlor' },
             { text: ' ,Hbdehilmnosux' },
@@ -2960,11 +2960,11 @@ describe('subsetFonts', function () {
       expect(fontInfo, 'to have length', 2);
       expect(fontInfo, 'to satisfy', [
         {
-          htmlAsset: /\/index-1.html$/,
+          assetFileName: /\/index-1.html$/,
           fontUsages: [{ pageText: ' 🤗🤞', text: ' 👊🤗🤞' }],
         },
         {
-          htmlAsset: /\/index-2\.html$/,
+          assetFileName: /\/index-2\.html$/,
           fontUsages: [{ pageText: ' 👊🤗', text: ' 👊🤗🤞' }],
         },
       ]);
@@ -2986,7 +2986,7 @@ describe('subsetFonts', function () {
       const { fontInfo } = await subsetFonts(assetGraph);
       expect(fontInfo, 'to satisfy', [
         {
-          htmlAsset: /\/index.html$/,
+          assetFileName: /\/index.html$/,
           fontUsages: [{ pageText: 'Helo', text: 'Helo' }],
         },
       ]);
@@ -3016,11 +3016,11 @@ describe('subsetFonts', function () {
       const { fontInfo } = await subsetFonts(assetGraph);
       expect(fontInfo, 'to satisfy', [
         {
-          htmlAsset: /\/index1.html$/,
+          assetFileName: /\/index1.html$/,
           fontUsages: [{ pageText: 'fo', text: 'fo' }],
         },
         {
-          htmlAsset: /\/index2.html$/,
+          assetFileName: /\/index2.html$/,
           fontUsages: [{ pageText: 'fo', text: 'fo' }],
         },
       ]);
