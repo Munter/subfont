@@ -1,3 +1,12 @@
+### v6.2.0 (2021-09-04)
+
+- [Update to font-tracer 3.0.0](https://github.com/Munter/subfont/commit/5236fecd7a3c9387098fcd3f3b5c1ec5c73093fe) ([Andreas Lind](mailto:andreaslindpetersen@gmail.com))
+- [Rename htmlAsset vars\/params\/props for clarity](https://github.com/Munter/subfont/commit/0906ef4b70e45337c8008357d242bfdb237b9ca9) ([Andreas Lind](mailto:andreaslindpetersen@gmail.com))
+- [Handle inline SVGs correctly](https://github.com/Munter/subfont/commit/7920755e75130d89636239b6700ae048dc1c5ef7) ([Andreas Lind](mailto:andreaslindpetersen@gmail.com))
+- [Support tracing text in inline and external SVGs](https://github.com/Munter/subfont/commit/7852e82048c160a50406df9ee3fecf606d11cba0) ([Andreas Lind](mailto:andreaslindpetersen@gmail.com))
+- [Remove preload polyfill cruft](https://github.com/Munter/subfont/commit/9bfd5663a4d5bc77a27f68dec9c784835c6e27c9) ([Andreas Lind](mailto:andreaslindpetersen@gmail.com))
+- [+3 more](https://github.com/Munter/subfont/compare/v6.1.0...v6.2.0)
+
 ### v6.1.0 (2021-05-23)
 
 - [Remove the JavaScript-based preload polyfill](https://github.com/Munter/subfont/commit/b58bc351d8002d2aae1f4f9cf82126a3efcb997e) ([Andreas Lind](mailto:andreas.lind@workday.com))
@@ -230,15 +239,12 @@
 #### Pull requests
 
 - [#76](https://github.com/Munter/subfont/pull/76) Fix the prettier setup ([Andreas Lind](mailto:andreas.lind@peakon.com))
+- [#75](https://github.com/Munter/subfont/pull/75) Fix omitFallbacks with Google Web Fonts ([Andreas Lind](mailto:andreas.lind@peakon.com))
 
 #### Commits to master
 
 - [Switch to the official css-font-parser now that bramstein\/css-font-parser\#7 has been merged and released](https://github.com/Munter/subfont/commit/457c7f0e4cef0a8c1bd8f816c23ace64c9987424) ([Andreas Lind](mailto:andreaslindpetersen@gmail.com))
 - [Don't populate source map relations](https://github.com/Munter/subfont/commit/5c07218b6f1dcc6fad88702a3bcb7b33bf9df54e) ([Andreas Lind](mailto:andreaslindpetersen@gmail.com))
-
-### v4.1.2 (2020-01-09)
-
-- [#75](https://github.com/Munter/subfont/pull/75) Fix omitFallbacks with Google Web Fonts ([Andreas Lind](mailto:andreas.lind@peakon.com))
 
 ### v4.1.1 (2020-01-04)
 
@@ -270,8 +276,7 @@
 - [Add vscode debugger launch configuration for the test suite](https://github.com/Munter/subfont/commit/f8f9abc42909c556765555cc49f44eb40a9194db) ([Andreas Lind](mailto:andreaslindpetersen@gmail.com))
 - [Guard against an already detached relation when cleaning up](https://github.com/Munter/subfont/commit/6392fc359222772c9033a58a9020e3b35487d019) ([Andreas Lind](mailto:andreaslindpetersen@gmail.com))
 
-### v4.0.3 (2019-11-02)
-
+### v4.0.3
 #### Pull requests
 
 - [#67](https://github.com/Munter/subfont/pull/67) Only warn about missing fonttools install if we are actually trying t… ([Peter Müller](mailto:munter@fumle.dk))
