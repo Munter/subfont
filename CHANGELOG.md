@@ -1,4 +1,9 @@
-### v6.2.0 (2021-09-04)
+### v6.2.1 (2021-09-05)
+
+- [Add test case where the same font-family is defined in an SVG island and the surrounding HTML](https://github.com/Munter/subfont/commit/ea6709648141efcc24177e0461fc2eb5c72c6714) ([Andreas Lind](mailto:andreaslindpetersen@gmail.com))
+- [Avoid "inline SVG in ..." in assetFileName in fontInfo for SVG islands](https://github.com/Munter/subfont/commit/8fa6bfeb41a5e9addda4904810e630e81b4f79e9) ([Andreas Lind](mailto:andreaslindpetersen@gmail.com))
+
+### v6.2.0 (2021-09-05)
 
 - [Update to font-tracer 3.0.0](https://github.com/Munter/subfont/commit/5236fecd7a3c9387098fcd3f3b5c1ec5c73093fe) ([Andreas Lind](mailto:andreaslindpetersen@gmail.com))
 - [Rename htmlAsset vars\/params\/props for clarity](https://github.com/Munter/subfont/commit/0906ef4b70e45337c8008357d242bfdb237b9ca9) ([Andreas Lind](mailto:andreaslindpetersen@gmail.com))
