@@ -3424,6 +3424,85 @@ describe('subsetFonts', function () {
           );
         });
       });
+
+      describe('using a webfont defined both in the HTML and the SVG', function () {
+        it('should trace the correct characters in both contexts and patch up both stylesheets', async function () {
+          const assetGraph = new AssetGraph({
+            root: pathModule.resolve(
+              __dirname,
+              '../testdata/subsetFonts/svg/inline-in-html-font-face-in-both-places/'
+            ),
+          });
+          const [htmlAsset] = await assetGraph.loadAssets('index.html');
+          await assetGraph.populate({
+            followRelations: {
+              crossorigin: false,
+            },
+          });
+          const result = await subsetFonts(assetGraph);
+
+          expect(result, 'to satisfy', {
+            fontInfo: [
+              {
+                assetFileName:
+                  'testdata/subsetFonts/svg/inline-in-html-font-face-in-both-places/index.html',
+                fontUsages: [
+                  {
+                    pageText: ' !,HYadelorwy', // Also includes the "Yay" in the HTML
+                    text: ' !,HYadelorwy',
+                    props: {
+                      'font-stretch': 'normal',
+                      'font-weight': '400',
+                      'font-style': 'normal',
+                      'font-family': 'Roboto',
+                      src: expect.it('to contain', "format('woff')"),
+                    },
+                  },
+                ],
+              },
+              {
+                assetFileName:
+                  'testdata/subsetFonts/svg/inline-in-html-font-face-in-both-places/index.html', // The SVG island
+                fontUsages: [
+                  {
+                    pageText: ' !,Hdelorw', // Does not include the "Yay" in the HTML
+                    text: ' !,HYadelorwy',
+                    props: {
+                      'font-stretch': 'normal',
+                      'font-weight': '400',
+                      'font-style': 'normal',
+                      'font-family': 'Roboto',
+                      src: expect.it('to contain', "format('woff')"),
+                    },
+                  },
+                ],
+              },
+            ],
+          });
+
+          expect(
+            htmlAsset.text,
+            'to contain',
+            '<text x="20" y="50" font-family="Roboto__subset, Roboto">Hello, world!</text>'
+          );
+
+          const htmlStyle = assetGraph.findRelations({ type: 'HtmlStyle' })[0];
+          expect(htmlStyle, 'to be defined');
+          expect(
+            htmlStyle.to.text,
+            'to contain',
+            '@font-face{font-family:Roboto__subset;'
+          );
+
+          const svgStyle = assetGraph.findRelations({ type: 'SvgStyle' })[0];
+          expect(svgStyle, 'to be defined');
+          expect(
+            svgStyle.to.text,
+            'to contain',
+            '@font-face{font-family:Roboto__subset;'
+          );
+        });
+      });
     });
   });
 });
