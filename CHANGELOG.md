@@ -1,3 +1,7 @@
+### v6.3.0 (2021-09-16)
+
+- [Update assetgraph to ^7.2.0, fixes \#152](https://github.com/Munter/subfont/commit/485e333202b935260e41f7996bbd96fca50d028a) ([Andreas Lind](mailto:andreas.lind@workday.com))
+
 ### v6.2.1 (2021-09-05)
 
 - [Add test case where the same font-family is defined in an SVG island and the surrounding HTML](https://github.com/Munter/subfont/commit/ea6709648141efcc24177e0461fc2eb5c72c6714) ([Andreas Lind](mailto:andreaslindpetersen@gmail.com))
@@ -244,12 +248,15 @@
 #### Pull requests
 
 - [#76](https://github.com/Munter/subfont/pull/76) Fix the prettier setup ([Andreas Lind](mailto:andreas.lind@peakon.com))
-- [#75](https://github.com/Munter/subfont/pull/75) Fix omitFallbacks with Google Web Fonts ([Andreas Lind](mailto:andreas.lind@peakon.com))
 
 #### Commits to master
 
 - [Switch to the official css-font-parser now that bramstein\/css-font-parser\#7 has been merged and released](https://github.com/Munter/subfont/commit/457c7f0e4cef0a8c1bd8f816c23ace64c9987424) ([Andreas Lind](mailto:andreaslindpetersen@gmail.com))
 - [Don't populate source map relations](https://github.com/Munter/subfont/commit/5c07218b6f1dcc6fad88702a3bcb7b33bf9df54e) ([Andreas Lind](mailto:andreaslindpetersen@gmail.com))
+
+### v4.1.2 (2020-01-09)
+
+- [#75](https://github.com/Munter/subfont/pull/75) Fix omitFallbacks with Google Web Fonts ([Andreas Lind](mailto:andreas.lind@peakon.com))
 
 ### v4.1.1 (2020-01-04)
 
@@ -281,7 +288,8 @@
 - [Add vscode debugger launch configuration for the test suite](https://github.com/Munter/subfont/commit/f8f9abc42909c556765555cc49f44eb40a9194db) ([Andreas Lind](mailto:andreaslindpetersen@gmail.com))
 - [Guard against an already detached relation when cleaning up](https://github.com/Munter/subfont/commit/6392fc359222772c9033a58a9020e3b35487d019) ([Andreas Lind](mailto:andreaslindpetersen@gmail.com))
 
-### v4.0.3
+### v4.0.3 (2019-11-02)
+
 #### Pull requests
 
 - [#67](https://github.com/Munter/subfont/pull/67) Only warn about missing fonttools install if we are actually trying t… ([Peter Müller](mailto:munter@fumle.dk))
