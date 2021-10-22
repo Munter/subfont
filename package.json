@@ -61,7 +61,7 @@
     "lines-and-columns": "^1.1.6",
     "lodash": "^4.17.15",
     "memoizesync": "^1.1.1",
-    "postcss": "^7.0.32",
+    "postcss": "^8.3.11",
     "postcss-value-parser": "^4.0.2",
     "pretty-bytes": "^5.1.0",
     "puppeteer-core": "^8.0.0",
