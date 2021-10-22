@@ -1,3 +1,11 @@
+### v6.3.1 (2021-10-22)
+
+- [Fix tests](https://github.com/Munter/subfont/commit/4f7ab7011220457bab087a7533dbcfd5f8c8020b) ([Andreas Lind](mailto:andreaslindpetersen@gmail.com))
+- [Update postcss to ^8.3.11](https://github.com/Munter/subfont/commit/2b63273784f89f5c1e2944eec238a1d3ab2a96db) ([Andreas Lind](mailto:andreaslindpetersen@gmail.com))
+- [Update font-tracer to ^3.0.1](https://github.com/Munter/subfont/commit/1f3ce78a64c995eee5c49f5ace0ff7a6f6a1f22c) ([Andreas Lind](mailto:andreaslindpetersen@gmail.com))
+- [Drop node.js 16 for the time being because of prebuilt canvas](https://github.com/Munter/subfont/commit/2b45d966c42f7391402dc79df85d2514c71eeee3) ([Andreas Lind](mailto:andreaslindpetersen@gmail.com))
+- [Replace Travis with Github Actions](https://github.com/Munter/subfont/commit/a3851f0ac60f1205977fc2616728c94bcf6dbab8) ([Andreas Lind](mailto:andreaslindpetersen@gmail.com))
+
 ### v6.3.0 (2021-09-16)
 
 - [Update assetgraph to ^7.2.0, fixes \#152](https://github.com/Munter/subfont/commit/485e333202b935260e41f7996bbd96fca50d028a) ([Andreas Lind](mailto:andreas.lind@workday.com))
@@ -248,15 +256,12 @@
 #### Pull requests
 
 - [#76](https://github.com/Munter/subfont/pull/76) Fix the prettier setup ([Andreas Lind](mailto:andreas.lind@peakon.com))
+- [#75](https://github.com/Munter/subfont/pull/75) Fix omitFallbacks with Google Web Fonts ([Andreas Lind](mailto:andreas.lind@peakon.com))
 
 #### Commits to master
 
 - [Switch to the official css-font-parser now that bramstein\/css-font-parser\#7 has been merged and released](https://github.com/Munter/subfont/commit/457c7f0e4cef0a8c1bd8f816c23ace64c9987424) ([Andreas Lind](mailto:andreaslindpetersen@gmail.com))
 - [Don't populate source map relations](https://github.com/Munter/subfont/commit/5c07218b6f1dcc6fad88702a3bcb7b33bf9df54e) ([Andreas Lind](mailto:andreaslindpetersen@gmail.com))
-
-### v4.1.2 (2020-01-09)
-
-- [#75](https://github.com/Munter/subfont/pull/75) Fix omitFallbacks with Google Web Fonts ([Andreas Lind](mailto:andreas.lind@peakon.com))
 
 ### v4.1.1 (2020-01-04)
 
@@ -288,8 +293,7 @@
 - [Add vscode debugger launch configuration for the test suite](https://github.com/Munter/subfont/commit/f8f9abc42909c556765555cc49f44eb40a9194db) ([Andreas Lind](mailto:andreaslindpetersen@gmail.com))
 - [Guard against an already detached relation when cleaning up](https://github.com/Munter/subfont/commit/6392fc359222772c9033a58a9020e3b35487d019) ([Andreas Lind](mailto:andreaslindpetersen@gmail.com))
 
-### v4.0.3 (2019-11-02)
-
+### v4.0.3
 #### Pull requests
 
 - [#67](https://github.com/Munter/subfont/pull/67) Only warn about missing fonttools install if we are actually trying t… ([Peter Müller](mailto:munter@fumle.dk))
