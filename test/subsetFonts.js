@@ -242,7 +242,7 @@ describe('subsetFonts', function () {
     expect(
       fallbackCss.text,
       'to contain',
-      'format("woff");unicode-range:U+20-7e,'
+      'format("woff");unicode-range:U+0,U+d,U+20-7e,'
     );
   });
 
@@ -269,7 +269,7 @@ describe('subsetFonts', function () {
             {
               smallestOriginalSize: expect.it('to be greater than', 20000),
               smallestOriginalFormat: 'ttf',
-              smallestSubsetSize: expect.it('to be less than', 3000),
+              smallestSubsetSize: expect.it('to be less than', 4000),
               smallestSubsetFormat: 'woff2',
               texts: ['Hello'],
               pageText: 'Helo',
