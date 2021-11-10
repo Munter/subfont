@@ -1,3 +1,7 @@
+### v6.4.0 (2021-11-10)
+
+- [Update subset-font to ^1.4.0](https://github.com/Munter/subfont/commit/3b04abbaa33d47a0fb8df315aa23ec4f47c0e673) ([Andreas Lind](mailto:andreaslindpetersen@gmail.com))
+
 ### v6.3.1 (2021-10-22)
 
 - [Fix tests](https://github.com/Munter/subfont/commit/4f7ab7011220457bab087a7533dbcfd5f8c8020b) ([Andreas Lind](mailto:andreaslindpetersen@gmail.com))
