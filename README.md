@@ -72,6 +72,8 @@ Options:
                                      the formats based on the browser capabilities as specified
                                      via --browsers or the browserslist configuration.
                                                     [array] [choices: "woff2", "woff", "truetype"]
+  --text                             Additional characters to include in the subset for every
+                                     @font-face found on the page                         [string]
   --fallbacks                        Include fallbacks so the original font will be loaded when
                                      dynamic content gets injected at runtime. Disable with
                                      --no-fallbacks                      [boolean] [default: true]

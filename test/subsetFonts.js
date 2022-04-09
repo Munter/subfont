@@ -3339,6 +3339,62 @@ describe('subsetFonts', function () {
     });
   });
 
+  describe('with text explicitly passed to be included in all fonts', function () {
+    describe('with a @font-face that is unused', function () {
+      it('should make a subset with the specified characters', async function () {
+        const assetGraph = new AssetGraph({
+          root: pathModule.resolve(
+            __dirname,
+            '../testdata/subsetFonts/local-unused/'
+          ),
+        });
+        await assetGraph.loadAssets('index.html');
+        await assetGraph.populate();
+        const { fontInfo } = await subsetFonts(assetGraph, {
+          text: '0123456789',
+        });
+
+        expect(fontInfo, 'to satisfy', {
+          0: {
+            fontUsages: [
+              {
+                texts: ['0123456789'],
+                text: '0123456789',
+              },
+            ],
+          },
+        });
+      });
+    });
+
+    describe('with a @font-face that is used', function () {
+      it('should add the specified characters to the subset', async function () {
+        const assetGraph = new AssetGraph({
+          root: pathModule.resolve(
+            __dirname,
+            '../testdata/subsetFonts/local-used/'
+          ),
+        });
+        await assetGraph.loadAssets('index.html');
+        await assetGraph.populate();
+        const { fontInfo } = await subsetFonts(assetGraph, {
+          text: '0123456789',
+        });
+
+        expect(fontInfo, 'to satisfy', {
+          0: {
+            fontUsages: [
+              {
+                texts: ['0123456789', 'Hello, world!'],
+                text: ' !,0123456789Hdelorw',
+              },
+            ],
+          },
+        });
+      });
+    });
+  });
+
   describe('with SVG using webfonts', function () {
     describe('in a standalone SVG', function () {
       it('should trace the correct characters and patch up the stylesheet', async function () {
