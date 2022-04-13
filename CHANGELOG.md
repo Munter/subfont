@@ -1,4 +1,8 @@
-### v6.4.1 (2022-01-10)
+### v6.4.2 (2022-04-13)
+
+- [Handle escape sequences in CSS strings](https://github.com/Munter/subfont/commit/6c0493b3e0a96e2651e4c37cdf4e45fdb090acc4) ([Andreas Lind](mailto:andreaslindpetersen@gmail.com))
+
+### v6.4.1 (2022-01-11)
 
 - [Update font-tracer to ^3.1.0, fixes \#157](https://github.com/Munter/subfont/commit/c98c0d8a2723c2f68b11dadb6c33c34c708355f4) ([Andreas Lind](mailto:andreas.lind@workday.com))
 
@@ -264,15 +268,12 @@
 #### Pull requests
 
 - [#76](https://github.com/Munter/subfont/pull/76) Fix the prettier setup ([Andreas Lind](mailto:andreas.lind@peakon.com))
+- [#75](https://github.com/Munter/subfont/pull/75) Fix omitFallbacks with Google Web Fonts ([Andreas Lind](mailto:andreas.lind@peakon.com))
 
 #### Commits to master
 
 - [Switch to the official css-font-parser now that bramstein\/css-font-parser\#7 has been merged and released](https://github.com/Munter/subfont/commit/457c7f0e4cef0a8c1bd8f816c23ace64c9987424) ([Andreas Lind](mailto:andreaslindpetersen@gmail.com))
 - [Don't populate source map relations](https://github.com/Munter/subfont/commit/5c07218b6f1dcc6fad88702a3bcb7b33bf9df54e) ([Andreas Lind](mailto:andreaslindpetersen@gmail.com))
-
-### v4.1.2 (2020-01-09)
-
-- [#75](https://github.com/Munter/subfont/pull/75) Fix omitFallbacks with Google Web Fonts ([Andreas Lind](mailto:andreas.lind@peakon.com))
 
 ### v4.1.1 (2020-01-04)
 
@@ -304,8 +305,7 @@
 - [Add vscode debugger launch configuration for the test suite](https://github.com/Munter/subfont/commit/f8f9abc42909c556765555cc49f44eb40a9194db) ([Andreas Lind](mailto:andreaslindpetersen@gmail.com))
 - [Guard against an already detached relation when cleaning up](https://github.com/Munter/subfont/commit/6392fc359222772c9033a58a9020e3b35487d019) ([Andreas Lind](mailto:andreaslindpetersen@gmail.com))
 
-### v4.0.3 (2019-11-02)
-
+### v4.0.3
 #### Pull requests
 
 - [#67](https://github.com/Munter/subfont/pull/67) Only warn about missing fonttools install if we are actually trying t… ([Peter Müller](mailto:munter@fumle.dk))
