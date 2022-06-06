@@ -3309,32 +3309,72 @@ describe('subsetFonts', function () {
     });
 
     describe('with a @font-face that is also used', function () {
-      it('should add the specified characters to the subset', async function () {
-        const assetGraph = new AssetGraph({
-          root: pathModule.resolve(
-            __dirname,
-            '../testdata/subsetFonts/local-used-with-subfont-text/'
-          ),
-        });
-        await assetGraph.loadAssets('index.html');
-        await assetGraph.populate();
-        const { fontInfo } = await subsetFonts(assetGraph);
+      describe('on a single page', function () {
+        it('should add the specified characters to the subset', async function () {
+          const assetGraph = new AssetGraph({
+            root: pathModule.resolve(
+              __dirname,
+              '../testdata/subsetFonts/local-used-with-subfont-text/'
+            ),
+          });
+          await assetGraph.loadAssets('index.html');
+          await assetGraph.populate();
+          const { fontInfo } = await subsetFonts(assetGraph);
 
-        expect(fontInfo, 'to satisfy', {
-          0: {
-            fontUsages: [
-              {
-                texts: ['0123456789', 'Hello, world!'],
-                text: ' !,0123456789Hdelorw',
-              },
-            ],
-          },
-        });
+          expect(fontInfo, 'to satisfy', {
+            0: {
+              fontUsages: [
+                {
+                  texts: ['0123456789', 'Hello, world!'],
+                  text: ' !,0123456789Hdelorw',
+                },
+              ],
+            },
+          });
 
-        // Make sure that the annotation gets stripped from the output:
-        for (const cssAsset of assetGraph.findAssets({ type: 'Css' })) {
-          expect(cssAsset.text, 'not to contain', '-subfont-text');
-        }
+          // Make sure that the annotation gets stripped from the output:
+          for (const cssAsset of assetGraph.findAssets({ type: 'Css' })) {
+            expect(cssAsset.text, 'not to contain', '-subfont-text');
+          }
+        });
+      });
+
+      describe('when the CSS is shared between multiple pages', function () {
+        it('should add the specified characters to the subset', async function () {
+          const assetGraph = new AssetGraph({
+            root: pathModule.resolve(
+              __dirname,
+              '../testdata/subsetFonts/local-used-multipage-with-subfont-text/'
+            ),
+          });
+          await assetGraph.loadAssets('page*.html');
+          await assetGraph.populate();
+          const { fontInfo } = await subsetFonts(assetGraph);
+
+          expect(fontInfo, 'to satisfy', {
+            0: {
+              fontUsages: [
+                {
+                  texts: ['0123456789', 'Hello, world!', 'Aloha, world!'],
+                  text: ' !,0123456789AHadehlorw',
+                },
+              ],
+            },
+            1: {
+              fontUsages: [
+                {
+                  texts: ['0123456789', 'Hello, world!', 'Aloha, world!'],
+                  text: ' !,0123456789AHadehlorw',
+                },
+              ],
+            },
+          });
+
+          // Make sure that the annotation gets stripped from the output:
+          for (const cssAsset of assetGraph.findAssets({ type: 'Css' })) {
+            expect(cssAsset.text, 'not to contain', '-subfont-text');
+          }
+        });
       });
     });
   });
