@@ -43,6 +43,24 @@ Run subfont on the files you are ready to deploy to a static file hosting servic
 
 If you want to run directly against your raw original files, it is recommended to create a recursive copy of your files which you run `subfont` on. This keeps your original authoring abstraction unchanged.
 
+## Including additional characters in the subsets
+
+If you have a use case where the automatic tracing doesn't find all the characters you need, you can tell subfont to include specific characters in the subsets by adding a custom `-subfont-text` property to the respective `@font-face` declarations.
+
+Example where all numerical digits are added to the bold italic Roboto variant:
+
+```css
+@font-face {
+  font-family: Roboto;
+  font-style: italic;
+  font-weight: 700;
+  src: url(roboto.woff) format('woff');
+  -subfont-text: '0123456789';
+}
+```
+
+An easier, but less fine-grained option is to use the `--text` switch to include a set of characters in all created subsets.
+
 ## Other usages
 
 You can have subfont output a copy of your input files to a new directory. This uses [Assetgraph](https://github.com/assetgraph/assetgraph) to trace a dependency graph of your website and writes it to your specified output directory. Be aware of any errors or warnings that might indicate Assetgraph having problems with your code, and be sure to double check that the expected files are in the output directory. Run `subfont path/to/index.html -o path/to/outputDir`.
@@ -72,6 +90,8 @@ Options:
                                      the formats based on the browser capabilities as specified
                                      via --browsers or the browserslist configuration.
                                                     [array] [choices: "woff2", "woff", "truetype"]
+  --text                             Additional characters to include in the subset for every
+                                     @font-face found on the page                         [string]
   --fallbacks                        Include fallbacks so the original font will be loaded when
                                      dynamic content gets injected at runtime. Disable with
                                      --no-fallbacks                      [boolean] [default: true]
