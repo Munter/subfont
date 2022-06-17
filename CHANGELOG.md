@@ -1,4 +1,4 @@
-### v6.4.2 (2022-06-13)
+### v6.5.0 (2022-06-13)
 
 - [#161](https://github.com/Munter/subfont/pull/161) Add support for specifying additional characters to include in the subsets ([Andreas Lind](mailto:andreas.lind@workday.com), [Andreas Lind](mailto:andreaslindpetersen@gmail.com))
 
