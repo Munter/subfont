@@ -241,8 +241,8 @@ describe('subsetFonts', function () {
     })[0];
     expect(
       fallbackCss.text,
-      'to contain',
-      'format("woff");unicode-range:U+0,U+d,U+20-7e,'
+      'to match',
+      /format\("woff"\);unicode-range:U\+0,U\+d,U\+20-7e,/i
     );
   });
 
@@ -1767,8 +1767,8 @@ describe('subsetFonts', function () {
         });
         expect(
           originalFontFaceSrcRelation.from.text,
-          'to contain',
-          'unicode-range:U+20-7e,U+a0-ff,'
+          'to match',
+          /unicode-range:U\+20-7e,U\+a0-ff,/i
         );
       });
     });
@@ -1818,8 +1818,8 @@ describe('subsetFonts', function () {
         });
         expect(
           inputMonoRegularRelation.node.toString(),
-          'to contain',
-          'unicode-range:U+'
+          'to match',
+          /unicode-range:U\+/i
         );
         const [inputMonoBoldRelation] = assetGraph.findRelations({
           type: 'CssFontFaceSrc',
@@ -1827,8 +1827,8 @@ describe('subsetFonts', function () {
         });
         expect(
           inputMonoBoldRelation.node.toString(),
-          'to contain',
-          'unicode-range:U+'
+          'to match',
+          /unicode-range:U\+/i
         );
       });
     });
