@@ -19,6 +19,16 @@ describe('extractReferencedCustomPropertyNames', function () {
     );
   });
 
+  it('should return the name of a referenced custom property with a default value', function () {
+    expect(
+      extractReferencedCustomPropertyNames(
+        "foo(bar), var(--abc, 'the default'), bla-bla"
+      ),
+      'to equal',
+      new Set(['--abc'])
+    );
+  });
+
   it('should return the names of multiple referenced custom properties', function () {
     expect(
       extractReferencedCustomPropertyNames(
