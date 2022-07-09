@@ -1,3 +1,14 @@
+### v6.5.0 (2022-07-09)
+
+#### Pull requests
+
+- [#162](https://github.com/Munter/subfont/pull/162) update changelog with proper version for 6.5.0 ([Jacob Lamont](mailto:cob@jacoblamont.com))
+
+#### Commits to master
+
+- [Fix extractReferencedCustomPropertyNames when there's a default value](https://github.com/Munter/subfont/commit/506375504384c1c292348427e98213482aadcae0) ([Andreas Lind](mailto:andreaslindpetersen@gmail.com))
+- [Update font-tracer to ^3.2.0](https://github.com/Munter/subfont/commit/5028f72482be20a72a1301c4218820f89a950bdf) ([Andreas Lind](mailto:andreaslindpetersen@gmail.com))
+
 ### v6.5.0 (2022-06-13)
 
 - [#161](https://github.com/Munter/subfont/pull/161) Add support for specifying additional characters to include in the subsets ([Andreas Lind](mailto:andreas.lind@workday.com), [Andreas Lind](mailto:andreaslindpetersen@gmail.com))
