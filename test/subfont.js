@@ -654,7 +654,7 @@ describe('subfont', function () {
 
   describe('configuring via browserslist', function () {
     // https://github.com/browserslist/browserslist#best-practices
-    it('should default to woff+woff2 when no config is given, due to the browserslist defaults', async function () {
+    it('should default to woff2 when no config is given, due to the browserslist defaults', async function () {
       const dir = pathModule.resolve(
         __dirname,
         '..',
@@ -680,7 +680,7 @@ describe('subfont', function () {
         );
         expect(mockSubsetFonts, 'to have calls satisfying', () => {
           mockSubsetFonts(expect.it('to be an object'), {
-            formats: ['woff2', 'woff'],
+            formats: ['woff2'],
           });
         });
       } finally {
