@@ -10,7 +10,7 @@
     "test": "mocha && npm run lint",
     "travis": "npm run coverage && npm run lint",
     "coverage": "nyc --reporter=lcov --reporter=text -- mocha",
-    "preversion": "offline-github-changelog --next=${npm_package_version} > CHANGELOG.md && git add CHANGELOG.md"
+    "preversion": "offline-github-changelog --next=${npm_new_version} > CHANGELOG.md && git add CHANGELOG.md"
   },
   "bin": {
     "subfont": "lib/cli.js"
