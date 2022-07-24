@@ -1,3 +1,16 @@
+### v6.7.0 (2022-07-24)
+
+- [Update subset-font to ^1.5.0](https://github.com/Munter/subfont/commit/ba79ef6db81cedfd0e52672b530ca3afddd68a94) ([Andreas Lind](mailto:andreaslindpetersen@gmail.com))
+- [Fix warning about missing glyphs for BMP chars](https://github.com/Munter/subfont/commit/5ba0168f35bfef33f9bb9cc8a6d64de8fa1d5585) ([Andreas Lind](mailto:andreaslindpetersen@gmail.com))
+- [Fix CHANGELOG generation in preversion script](https://github.com/Munter/subfont/commit/3ea696f8c336c6072411c9817c0c2f5b8d8d61b9) ([Andreas Lind](mailto:andreaslindpetersen@gmail.com))
+
+### v6.6.1 (2022-07-09)
+
+- [ugrvw](https://github.com/Munter/subfont/commit/5ccb873025f9790faf65641551df1a7e65fbfdbf) ([Andreas Lind](mailto:andreaslindpetersen@gmail.com))
+- [Fix CHANGELOG https:\/\/github.com\/Munter\/subfont\/commit\/5365689a5a925304a158fddef2b6af702857371c\#r78084394](https://github.com/Munter/subfont/commit/d42c7a2cffd33662d42d4532c45cb8b90080f128) ([Andreas Lind](mailto:andreaslindpetersen@gmail.com))
+- [Expect browserslist to only prescribe woff I guess the browser features + usage statistics finally changed so woff isn't needed](https://github.com/Munter/subfont/commit/b70db9b769955cabbda2f2a76f2e7758f9968ec7) ([Andreas Lind](mailto:andreaslindpetersen@gmail.com))
+- [Tests: Tolerate u+ in unicode-range \(I guess an in-range dep changed\)](https://github.com/Munter/subfont/commit/92a7871457246b64a997c0bffd9bb2766655d811) ([Andreas Lind](mailto:andreaslindpetersen@gmail.com))
+
 ### v6.6.0 (2022-07-09)
 
 #### Pull requests
