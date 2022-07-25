@@ -2105,6 +2105,40 @@ describe('subsetFonts', function () {
     });
   });
 
+  describe('when the stylesheet containing the original @font-face declarations did not contain anything else but a comment', function () {
+    it('should be removed', async function () {
+      const assetGraph = new AssetGraph({
+        root: pathModule.resolve(
+          __dirname,
+          '../testdata/subsetFonts/local-with-no-css-rules-in-font-face-stylesheet-only-comment/'
+        ),
+      });
+      const [htmlAsset] = await assetGraph.loadAssets('index.html');
+      await assetGraph.populate();
+      await subsetFonts(assetGraph);
+      expect(htmlAsset.text, 'not to contain', '<style>');
+    });
+  });
+
+  describe('when the stylesheet containing the original @font-face declarations did not contain anything else but a license comment', function () {
+    it('should be preserved', async function () {
+      const assetGraph = new AssetGraph({
+        root: pathModule.resolve(
+          __dirname,
+          '../testdata/subsetFonts/local-with-no-css-rules-in-font-face-stylesheet-only-license-comment/'
+        ),
+      });
+      const [htmlAsset] = await assetGraph.loadAssets('index.html');
+      await assetGraph.populate();
+      await subsetFonts(assetGraph);
+      expect(
+        htmlAsset.text,
+        'to contain',
+        '<style>/*! preserve me because of the exclamation mark */'
+      );
+    });
+  });
+
   describe('with unused variants', function () {
     it('should provide a @font-face declaration for the __subset version of an unused variant', async function () {
       httpception();
