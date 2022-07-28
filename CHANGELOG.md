@@ -1,3 +1,8 @@
+### v6.8.0 (2022-07-28)
+
+- [Update assetgraph to ^7.8.1](https://github.com/Munter/subfont/commit/888a97912f98bd937a53b7bec0f39d50ddc96023) ([Andreas Lind](mailto:andreaslindpetersen@gmail.com))
+- [Don't leave stylesheets behind that only contain comments after removing @font-face rules from them https:\/\/github.com\/Munter\/subfont\/issues\/160\#issuecomment-1194672752](https://github.com/Munter/subfont/commit/3dfd9dfbbe5071b94eb52ac216796bc7c0554078) ([Andreas Lind](mailto:andreaslindpetersen@gmail.com))
+
 ### v6.7.0 (2022-07-24)
 
 - [Update subset-font to ^1.5.0](https://github.com/Munter/subfont/commit/ba79ef6db81cedfd0e52672b530ca3afddd68a94) ([Andreas Lind](mailto:andreaslindpetersen@gmail.com))
