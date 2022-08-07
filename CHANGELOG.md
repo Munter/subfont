@@ -1,3 +1,11 @@
+### v6.9.0 (2022-08-07)
+
+- [Update font-tracer to ^3.3.0 Adds support for tracing ::marker, fixes \#166](https://github.com/Munter/subfont/commit/e46c79bac9cb3e62c70deb357823b7963114863b) ([Andreas Lind](mailto:andreaslindpetersen@gmail.com))
+- [Move some code into a collectTextsByPage function](https://github.com/Munter/subfont/commit/1dff3819fb80793f23a3cc37f9ff58bafffa4efc) ([Andreas Lind](mailto:andreaslindpetersen@gmail.com))
+- [Move the missing glyph detection to a function](https://github.com/Munter/subfont/commit/38bf36eba4370ecdbc777cb2457696b9bc7c7d1c) ([Andreas Lind](mailto:andreaslindpetersen@gmail.com))
+- [Fix typo causing regexp to not be matched correctly](https://github.com/Munter/subfont/commit/05137708b5c48af305f3119deb836b1cd9fed683) ([Andreas Lind](mailto:andreaslindpetersen@gmail.com))
+- [Remove delayed minification of CSS, seems like it's no longer necessary](https://github.com/Munter/subfont/commit/b98976b24c3a859ffbdd2a43f9f05e5048175f5a) ([Andreas Lind](mailto:andreaslindpetersen@gmail.com))
+
 ### v6.8.0 (2022-07-28)
 
 - [Update assetgraph to ^7.8.1](https://github.com/Munter/subfont/commit/888a97912f98bd937a53b7bec0f39d50ddc96023) ([Andreas Lind](mailto:andreaslindpetersen@gmail.com))
