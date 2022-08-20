@@ -286,6 +286,7 @@ describe('subsetFonts', function () {
                 'https://fonts.gstatic.com/s/opensans/'
               ),
               fontFamilies: expect.it('to be a', Set),
+              fontVariationSettings: expect.it('to be a', Set),
               codepoints: {
                 original: expect.it('to be an array'),
                 used: [32, 72, 101, 108, 111],
@@ -2869,6 +2870,32 @@ describe('subsetFonts', function () {
           ],
         },
       ]);
+    });
+  });
+
+  describe('with a variable font that has unused custom axes', function () {
+    it('should emit an info event', async function () {
+      const assetGraph = new AssetGraph({
+        root: pathModule.resolve(
+          __dirname,
+          '../testdata/subsetFonts/variable-font-unused-axes/'
+        ),
+      });
+      await assetGraph.loadAssets('index.html');
+      await assetGraph.populate();
+      const infoSpy = sinon.spy().named('info');
+      assetGraph.on('info', infoSpy);
+
+      await subsetFonts(assetGraph);
+
+      expect(infoSpy, 'to have calls satisfying', function () {
+        infoSpy({
+          message: expect.it(
+            'to contain',
+            'RobotoFlex-VariableFont_GRAD,XTRA,YOPQ,YTAS,YTDE,YTFI,YTLC,YTUC,opsz,slnt,wdth,wght.ttf: WDTH, GRAD, XOPQ, YOPQ, YTLC, YTUC, YTDE, YTFI'
+          ),
+        });
+      });
     });
   });
 
