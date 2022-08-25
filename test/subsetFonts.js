@@ -287,6 +287,7 @@ describe('subsetFonts', function () {
               ),
               fontFamilies: expect.it('to be a', Set),
               fontVariationSettings: expect.it('to be a', Set),
+              hasOutOfBoundsAnimationTimingFunction: false,
               codepoints: {
                 original: expect.it('to be an array'),
                 used: [32, 72, 101, 108, 111],
@@ -2873,7 +2874,7 @@ describe('subsetFonts', function () {
     });
   });
 
-  describe('with a variable font that has unused custom axes', function () {
+  describe('with a variable font that has unused custom axis ranges', function () {
     it('should emit an info event', async function () {
       const assetGraph = new AssetGraph({
         root: pathModule.resolve(
@@ -2894,6 +2895,57 @@ describe('subsetFonts', function () {
             'to contain',
             'RobotoFlex-VariableFont_GRAD,XTRA,YOPQ,YTAS,YTDE,YTFI,YTLC,YTUC,opsz,slnt,wdth,wght.ttf:\n  Unused axes: WDTH, GRAD, XOPQ, YOPQ, YTLC, YTUC, YTDE, YTFI\n  Underutilized axes:\n    YTAS: 400-750 used (649-854 available)'
           ),
+        });
+      });
+    });
+
+    describe('being animated with a cubic-bezier timing function', function () {
+      describe('that stays within bounds', function () {
+        it('should inform about the axis being underutilized', async function () {
+          const assetGraph = new AssetGraph({
+            root: pathModule.resolve(
+              __dirname,
+              '../testdata/subsetFonts/variable-font-underutilized-axis-with-bezier/'
+            ),
+          });
+          await assetGraph.loadAssets('index.html');
+          await assetGraph.populate();
+          const infoSpy = sinon.spy().named('info');
+          assetGraph.on('info', infoSpy);
+
+          await subsetFonts(assetGraph);
+
+          expect(infoSpy, 'to have calls satisfying', function () {
+            infoSpy({
+              message: expect.it(
+                'to contain',
+                'Underutilized axes:\n    YTAS: 400-750 used (649-854 available)'
+              ),
+            });
+          });
+        });
+      });
+
+      describe('that goes out of bounds', function () {
+        it('should not inform about the axis being underutilized', async function () {
+          const assetGraph = new AssetGraph({
+            root: pathModule.resolve(
+              __dirname,
+              '../testdata/subsetFonts/variable-font-underutilized-axis-with-bezier-out-of-bounds/'
+            ),
+          });
+          await assetGraph.loadAssets('index.html');
+          await assetGraph.populate();
+          const infoSpy = sinon.spy().named('info');
+          assetGraph.on('info', infoSpy);
+
+          await subsetFonts(assetGraph);
+
+          expect(infoSpy, 'to have calls satisfying', function () {
+            infoSpy({
+              message: expect.it('not to contain', 'YTAS:'),
+            });
+          });
         });
       });
     });
