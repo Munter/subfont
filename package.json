@@ -47,7 +47,7 @@
   "homepage": "https://github.com/Munter/subfont#readme",
   "dependencies": {
     "@gustavnikolaj/async-main-wrap": "^3.0.1",
-    "@hookun/parse-animation-shorthand": "^0.1.2",
+    "@hookun/parse-animation-shorthand": "^0.1.4",
     "assetgraph": "^7.8.1",
     "browserslist": "^4.13.0",
     "css-font-parser": "^2.0.0",
