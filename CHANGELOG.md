@@ -1,3 +1,12 @@
+### v6.10.0 (2022-08-29)
+
+- [Update @hookun\/parse-animation-shorthand to ^0.1.4 to make sure we get the fix for hookhookun\/parse-animation-shorthand\#16](https://github.com/Munter/subfont/commit/4db17826245e289e987c6dc02d3f67ebf5891e6f) ([Andreas Lind](mailto:andreas.lind@workday.com))
+- [Disable notice about unused variation axis ranges when there's an out-of-bounds cubic-bezier animation timing function in play](https://github.com/Munter/subfont/commit/1cf4ff46bb6099f8df8602968c7dc0fefb1c1f21) ([Andreas Lind](mailto:andreaslindpetersen@gmail.com))
+- [Update font-tracer to ^3.6.0](https://github.com/Munter/subfont/commit/2a47adc03122aad50ba2a01f116a2d1fe0f2b29e) ([Andreas Lind](mailto:andreaslindpetersen@gmail.com))
+- [Remove accidentally committed commented out code](https://github.com/Munter/subfont/commit/e0c677f9b2c7a9af123045cf29bc78a4f9a56550) ([Andreas Lind](mailto:andreaslindpetersen@gmail.com))
+- [Warn about unused variation axis ranges, not just fully unused axes](https://github.com/Munter/subfont/commit/32fc472327b1c8fc87090d4c1e5f1085533ad8fa) ([Andreas Lind](mailto:andreaslindpetersen@gmail.com))
+- [+13 more](https://github.com/Munter/subfont/compare/v6.9.0...v6.10.0)
+
 ### v6.9.0 (2022-08-07)
 
 - [Update font-tracer to ^3.3.0 Adds support for tracing ::marker, fixes \#166](https://github.com/Munter/subfont/commit/e46c79bac9cb3e62c70deb357823b7963114863b) ([Andreas Lind](mailto:andreaslindpetersen@gmail.com))
