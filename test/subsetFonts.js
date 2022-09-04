@@ -2895,7 +2895,7 @@ describe('subsetFonts', function () {
         infoSpy({
           message: expect.it(
             'to contain',
-            'RobotoFlex-VariableFont_GRAD,XTRA,YOPQ,YTAS,YTDE,YTFI,YTLC,YTUC,opsz,slnt,wdth,wght.ttf:\n  Unused axes: wdth, GRAD, XOPQ, YOPQ, YTLC, YTUC, YTDE, YTFI\n  Underutilized axes:\n    wght: 400 used (100-1000 available)\n    YTAS: 400-750 used (649-854 available)'
+            'RobotoFlex-VariableFont_GRAD,XTRA,YOPQ,YTAS,YTDE,YTFI,YTLC,YTUC,opsz,slnt,wdth,wght.ttf:\n  Unused axes: GRAD, XOPQ, YOPQ, YTLC, YTUC, YTDE, YTFI\n  Underutilized axes:\n    wght: 400 used (100-1000 available)\n    YTAS: 400-750 used (649-854 available)'
           ),
         });
       });
