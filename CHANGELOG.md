@@ -1,3 +1,10 @@
+### v6.11.0 (2022-09-04)
+
+- [Treat wdth as a standard axis \(but unsupported for now\)](https://github.com/Munter/subfont/commit/20d539750448134cca0a82f2cc98f85d9a6be068) ([Andreas Lind](mailto:andreaslindpetersen@gmail.com))
+- [Detect unused ital variation axis ranges](https://github.com/Munter/subfont/commit/b848b21b66cdbcd0ff313690ba49a4bc9b9f90a4) ([Andreas Lind](mailto:andreaslindpetersen@gmail.com))
+- [Don't assume that the display name of a variation axis equals its name](https://github.com/Munter/subfont/commit/4fcf7df801de01b2d3aef3d5f1ea3d697779ffda) ([Andreas Lind](mailto:andreaslindpetersen@gmail.com))
+- [Detect unused wght variation axis ranges](https://github.com/Munter/subfont/commit/6a964d609f21bf2c9dad96da1d16d9c32c28dbfd) ([Andreas Lind](mailto:andreaslindpetersen@gmail.com))
+
 ### v6.10.0 (2022-08-29)
 
 - [Update @hookun\/parse-animation-shorthand to ^0.1.4 to make sure we get the fix for hookhookun\/parse-animation-shorthand\#16](https://github.com/Munter/subfont/commit/4db17826245e289e987c6dc02d3f67ebf5891e6f) ([Andreas Lind](mailto:andreas.lind@workday.com))
