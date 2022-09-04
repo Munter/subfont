@@ -286,6 +286,7 @@ describe('subsetFonts', function () {
                 'https://fonts.gstatic.com/s/opensans/'
               ),
               fontFamilies: expect.it('to be a', Set),
+              fontWeights: expect.it('to be a', Set),
               fontVariationSettings: expect.it('to be a', Set),
               hasOutOfBoundsAnimationTimingFunction: false,
               codepoints: {
@@ -2874,7 +2875,7 @@ describe('subsetFonts', function () {
     });
   });
 
-  describe('with a variable font that has unused custom axis ranges', function () {
+  describe('with a variable font that has unused axis ranges', function () {
     it('should emit an info event', async function () {
       const assetGraph = new AssetGraph({
         root: pathModule.resolve(
@@ -2893,8 +2894,34 @@ describe('subsetFonts', function () {
         infoSpy({
           message: expect.it(
             'to contain',
-            'RobotoFlex-VariableFont_GRAD,XTRA,YOPQ,YTAS,YTDE,YTFI,YTLC,YTUC,opsz,slnt,wdth,wght.ttf:\n  Unused axes: WDTH, GRAD, XOPQ, YOPQ, YTLC, YTUC, YTDE, YTFI\n  Underutilized axes:\n    YTAS: 400-750 used (649-854 available)'
+            'RobotoFlex-VariableFont_GRAD,XTRA,YOPQ,YTAS,YTDE,YTFI,YTLC,YTUC,opsz,slnt,wdth,wght.ttf:\n  Unused axes: wdth, GRAD, XOPQ, YOPQ, YTLC, YTUC, YTDE, YTFI\n  Underutilized axes:\n    wght: 400 used (100-1000 available)\n    YTAS: 400-750 used (649-854 available)'
           ),
+        });
+      });
+    });
+
+    describe('for the wght axis', function () {
+      it('should emit an info event', async function () {
+        const assetGraph = new AssetGraph({
+          root: pathModule.resolve(
+            __dirname,
+            '../testdata/subsetFonts/variable-font-unused-wght-axis/'
+          ),
+        });
+        await assetGraph.loadAssets('index.html');
+        await assetGraph.populate();
+        const infoSpy = sinon.spy().named('info');
+        assetGraph.on('info', infoSpy);
+
+        await subsetFonts(assetGraph);
+
+        expect(infoSpy, 'to have calls satisfying', function () {
+          infoSpy({
+            message: expect.it(
+              'to contain',
+              'Underutilized axes:\n    wght: 350-820 used (100-1000 available)'
+            ),
+          });
         });
       });
     });
@@ -2919,7 +2946,7 @@ describe('subsetFonts', function () {
             infoSpy({
               message: expect.it(
                 'to contain',
-                'Underutilized axes:\n    YTAS: 400-750 used (649-854 available)'
+                'Underutilized axes:\n    wght: 400 used (100-1000 available)\n    YTAS: 400-750 used (649-854 available)'
               ),
             });
           });

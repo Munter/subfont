@@ -11,13 +11,6 @@ describe('parseFontVariationSettings', function () {
       }
     );
 
-  it('should uppercase axis names', function () {
-    expect('"foob" 200, "quux" 400', 'to come out as', [
-      ['FOOB', 200],
-      ['QUUX', 400],
-    ]);
-  });
-
   it('should ignore extra whitespace', function () {
     expect(' "FOOB" 200 , "QUUX" 400', 'to come out as', [
       ['FOOB', 200],
