@@ -288,6 +288,7 @@ describe('subsetFonts', function () {
               fontFamilies: expect.it('to be a', Set),
               fontStyles: expect.it('to be a', Set),
               fontWeights: expect.it('to be a', Set),
+              fontStretches: expect.it('to be a', Set),
               fontVariationSettings: expect.it('to be a', Set),
               hasOutOfBoundsAnimationTimingFunction: false,
               codepoints: {
@@ -2895,7 +2896,7 @@ describe('subsetFonts', function () {
         infoSpy({
           message: expect.it(
             'to contain',
-            'RobotoFlex-VariableFont_GRAD,XTRA,YOPQ,YTAS,YTDE,YTFI,YTLC,YTUC,opsz,slnt,wdth,wght.ttf:\n  Unused axes: GRAD, XOPQ, YOPQ, YTLC, YTUC, YTDE, YTFI\n  Underutilized axes:\n    wght: 400 used (100-1000 available)\n    YTAS: 400-750 used (649-854 available)'
+            'RobotoFlex-VariableFont_GRAD,XTRA,YOPQ,YTAS,YTDE,YTFI,YTLC,YTUC,opsz,slnt,wdth,wght.ttf:\n  Unused axes: wght, wdth, GRAD, XOPQ, YOPQ, YTLC, YTUC, YTDE, YTFI\n  Underutilized axes:\n    YTAS: 400-750 used (649-854 available)'
           ),
         });
       });
@@ -2971,10 +2972,7 @@ describe('subsetFonts', function () {
 
           expect(infoSpy, 'to have calls satisfying', function () {
             infoSpy({
-              message: expect.it(
-                'to contain',
-                'Underutilized axes:\n    ital: 0 used (0-1 available)'
-              ),
+              message: expect.it('to contain', 'Unused axes: ital'),
             });
           });
         });
@@ -3046,7 +3044,7 @@ describe('subsetFonts', function () {
             infoSpy({
               message: expect.it(
                 'to contain',
-                'Underutilized axes:\n    wght: 400 used (100-1000 available)\n    YTAS: 400-750 used (649-854 available)'
+                'Underutilized axes:\n    YTAS: 400-750 used (649-854 available)'
               ),
             });
           });
