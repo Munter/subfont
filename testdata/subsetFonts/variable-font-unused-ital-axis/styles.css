@@ -1,0 +1,4 @@
+@font-face {
+  font-family: MyFontFamily;
+  src: url('FontStyleTest-ital-VF.woff2') format('woff2-variations');
+}

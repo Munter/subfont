@@ -286,6 +286,7 @@ describe('subsetFonts', function () {
                 'https://fonts.gstatic.com/s/opensans/'
               ),
               fontFamilies: expect.it('to be a', Set),
+              fontStyles: expect.it('to be a', Set),
               fontWeights: expect.it('to be a', Set),
               fontVariationSettings: expect.it('to be a', Set),
               hasOutOfBoundsAnimationTimingFunction: false,
@@ -2922,6 +2923,79 @@ describe('subsetFonts', function () {
               'Underutilized axes:\n    wght: 350-820 used (100-1000 available)'
             ),
           });
+        });
+      });
+    });
+
+    describe('for the ital axis', function () {
+      describe('when only font-style: normal is used', function () {
+        it('should emit an info event', async function () {
+          const assetGraph = new AssetGraph({
+            root: pathModule.resolve(
+              __dirname,
+              '../testdata/subsetFonts/variable-font-unused-ital-axis/'
+            ),
+          });
+          await assetGraph.loadAssets('normal.html');
+          await assetGraph.populate();
+          const infoSpy = sinon.spy().named('info');
+          assetGraph.on('info', infoSpy);
+
+          await subsetFonts(assetGraph);
+
+          expect(infoSpy, 'to have calls satisfying', function () {
+            infoSpy({
+              message: expect.it(
+                'to contain',
+                'Underutilized axes:\n    ital: 0 used (0-1 available)'
+              ),
+            });
+          });
+        });
+      });
+
+      describe('when only font-style: italic is used', function () {
+        it('should emit an info event', async function () {
+          const assetGraph = new AssetGraph({
+            root: pathModule.resolve(
+              __dirname,
+              '../testdata/subsetFonts/variable-font-unused-ital-axis/'
+            ),
+          });
+          await assetGraph.loadAssets('italic.html');
+          await assetGraph.populate();
+          const infoSpy = sinon.spy().named('info');
+          assetGraph.on('info', infoSpy);
+
+          await subsetFonts(assetGraph);
+
+          expect(infoSpy, 'to have calls satisfying', function () {
+            infoSpy({
+              message: expect.it(
+                'to contain',
+                'Underutilized axes:\n    ital: 1 used (0-1 available)'
+              ),
+            });
+          });
+        });
+      });
+
+      describe('when both font-style: normal and font-style: italic are used', function () {
+        it('should not emit an info event', async function () {
+          const assetGraph = new AssetGraph({
+            root: pathModule.resolve(
+              __dirname,
+              '../testdata/subsetFonts/variable-font-unused-ital-axis/'
+            ),
+          });
+          await assetGraph.loadAssets('normal_and_italic.html');
+          await assetGraph.populate();
+          const infoSpy = sinon.spy().named('info');
+          assetGraph.on('info', infoSpy);
+
+          await subsetFonts(assetGraph);
+
+          expect(infoSpy, 'was not called');
         });
       });
     });
