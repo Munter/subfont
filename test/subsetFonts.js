@@ -2927,6 +2927,32 @@ describe('subsetFonts', function () {
       });
     });
 
+    describe('for the wdth axis', function () {
+      it('should emit an info event', async function () {
+        const assetGraph = new AssetGraph({
+          root: pathModule.resolve(
+            __dirname,
+            '../testdata/subsetFonts/variable-font-unused-wdth-axis/'
+          ),
+        });
+        await assetGraph.loadAssets('index.html');
+        await assetGraph.populate();
+        const infoSpy = sinon.spy().named('info');
+        assetGraph.on('info', infoSpy);
+
+        await subsetFonts(assetGraph);
+
+        expect(infoSpy, 'to have calls satisfying', function () {
+          infoSpy({
+            message: expect.it(
+              'to contain',
+              'wdth: 87.5-147 used (25-151 available)'
+            ),
+          });
+        });
+      });
+    });
+
     describe('for the ital axis', function () {
       describe('when only font-style: normal is used', function () {
         it('should emit an info event', async function () {
