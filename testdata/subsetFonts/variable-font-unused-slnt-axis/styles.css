@@ -1,0 +1,5 @@
+@font-face {
+  font-family: MyFontFamily;
+  src: url('RobotoFlex-VariableFont_GRAD,XTRA,YOPQ,YTAS,YTDE,YTFI,YTLC,YTUC,opsz,slnt,wdth,wght.ttf')
+    format('woff2-variations');
+}

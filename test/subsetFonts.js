@@ -2896,7 +2896,7 @@ describe('subsetFonts', function () {
         infoSpy({
           message: expect.it(
             'to contain',
-            'RobotoFlex-VariableFont_GRAD,XTRA,YOPQ,YTAS,YTDE,YTFI,YTLC,YTUC,opsz,slnt,wdth,wght.ttf:\n  Unused axes: wght, wdth, GRAD, XOPQ, YOPQ, YTLC, YTUC, YTDE, YTFI\n  Underutilized axes:\n    YTAS: 400-750 used (649-854 available)'
+            'RobotoFlex-VariableFont_GRAD,XTRA,YOPQ,YTAS,YTDE,YTFI,YTLC,YTUC,opsz,slnt,wdth,wght.ttf:\n  Unused axes: wght, wdth, GRAD, slnt, XOPQ, YOPQ, YTLC, YTUC, YTDE, YTFI\n  Underutilized axes:\n    YTAS: 400-750 used (649-854 available)'
           ),
         });
       });
@@ -3020,6 +3020,86 @@ describe('subsetFonts', function () {
           await subsetFonts(assetGraph);
 
           expect(infoSpy, 'was not called');
+        });
+      });
+    });
+
+    describe('for the slnt axis', function () {
+      describe('when only font-style: normal is used', function () {
+        it('should emit an info event', async function () {
+          const assetGraph = new AssetGraph({
+            root: pathModule.resolve(
+              __dirname,
+              '../testdata/subsetFonts/variable-font-unused-slnt-axis/'
+            ),
+          });
+          await assetGraph.loadAssets('normal.html');
+          await assetGraph.populate();
+          const infoSpy = sinon.spy().named('info');
+          assetGraph.on('info', infoSpy);
+
+          await subsetFonts(assetGraph);
+
+          expect(infoSpy, 'to have calls satisfying', function () {
+            infoSpy({
+              message: expect.it(
+                'to contain',
+                'Unused axes: wght, wdth, GRAD, slnt, XTRA, XOPQ, YOPQ, YTLC, YTUC, YTAS, YTDE, YTFI'
+              ),
+            });
+          });
+        });
+      });
+
+      describe('when only font-style: oblique is used', function () {
+        it('should emit an info event', async function () {
+          const assetGraph = new AssetGraph({
+            root: pathModule.resolve(
+              __dirname,
+              '../testdata/subsetFonts/variable-font-unused-slnt-axis/'
+            ),
+          });
+          await assetGraph.loadAssets('oblique.html');
+          await assetGraph.populate();
+          const infoSpy = sinon.spy().named('info');
+          assetGraph.on('info', infoSpy);
+
+          await subsetFonts(assetGraph);
+
+          expect(infoSpy, 'to have calls satisfying', function () {
+            infoSpy({
+              message: expect.it(
+                'to contain',
+                'Underutilized axes:\n    slnt: 14 used (-10-0 available)'
+              ),
+            });
+          });
+        });
+      });
+
+      describe('when both font-style: normal and font-style: oblique are used', function () {
+        it('should emit an info event', async function () {
+          const assetGraph = new AssetGraph({
+            root: pathModule.resolve(
+              __dirname,
+              '../testdata/subsetFonts/variable-font-unused-slnt-axis/'
+            ),
+          });
+          await assetGraph.loadAssets('normal_and_oblique.html');
+          await assetGraph.populate();
+          const infoSpy = sinon.spy().named('info');
+          assetGraph.on('info', infoSpy);
+
+          await subsetFonts(assetGraph);
+
+          expect(infoSpy, 'to have calls satisfying', function () {
+            infoSpy({
+              message: expect.it(
+                'to contain',
+                'Underutilized axes:\n    slnt: 0-14 used (-10-0 available)'
+              ),
+            });
+          });
         });
       });
     });
