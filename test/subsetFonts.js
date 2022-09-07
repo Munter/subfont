@@ -2896,7 +2896,7 @@ describe('subsetFonts', function () {
         infoSpy({
           message: expect.it(
             'to contain',
-            'RobotoFlex-VariableFont_GRAD,XTRA,YOPQ,YTAS,YTDE,YTFI,YTLC,YTUC,opsz,slnt,wdth,wght.ttf:\n  Unused axes: wght, wdth, GRAD, slnt, XOPQ, YOPQ, YTLC, YTUC, YTDE, YTFI\n  Underutilized axes:\n    YTAS: 400-750 used (649-854 available)'
+            'RobotoFlex-VariableFont_GRAD,XTRA,YOPQ,YTAS,YTDE,YTFI,YTLC,YTUC,opsz,slnt,wdth,wght.ttf:\n  Unused axes: wght, wdth, GRAD, slnt, XOPQ, YOPQ, YTLC, YTUC, YTDE, YTFI\n  Underutilized axes:\n    YTAS: 649-750 used (649-854 available)'
           ),
         });
       });
@@ -3070,7 +3070,9 @@ describe('subsetFonts', function () {
             infoSpy({
               message: expect.it(
                 'to contain',
-                'Underutilized axes:\n    slnt: 14 used (-10-0 available)'
+                'Unused axes: wght, wdth, GRAD, slnt,'
+                // FIXME: Find a liberally licensed variable font that actually includes a slnt value of 14 so we can test that the output is:
+                // 'Underutilized axes:\n    slnt: 14 used (-100-100 available)'
               ),
             });
           });
@@ -3096,7 +3098,9 @@ describe('subsetFonts', function () {
             infoSpy({
               message: expect.it(
                 'to contain',
-                'Underutilized axes:\n    slnt: 0-14 used (-10-0 available)'
+                'Unused axes: wght, wdth, GRAD, slnt,'
+                // FIXME: Find a liberally licensed variable font that actually includes a slnt value of 14 so we can test that the output is:
+                // 'Underutilized axes:\n    slnt: 0-14 used (-100-100 available)'
               ),
             });
           });
@@ -3124,7 +3128,7 @@ describe('subsetFonts', function () {
             infoSpy({
               message: expect.it(
                 'to contain',
-                'Underutilized axes:\n    YTAS: 400-750 used (649-854 available)'
+                'Underutilized axes:\n    YTAS: 649-750 used (649-854 available)'
               ),
             });
           });
