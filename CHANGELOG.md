@@ -1,3 +1,11 @@
+### v6.12.0 (2022-09-07)
+
+- [Refactor repeated code into helper function](https://github.com/Munter/subfont/commit/5335d931957cadc150fed1c5d548ee6b6e245636) ([Andreas Lind](mailto:andreaslindpetersen@gmail.com))
+- [Clamp the used variation axis values to the available interval](https://github.com/Munter/subfont/commit/1429c0f35720ee8dadb691138eb4cfa3c1c86150) ([Andreas Lind](mailto:andreaslindpetersen@gmail.com))
+- [Detech unused slnt variation axis ranges](https://github.com/Munter/subfont/commit/dc4be1598ba1ba0e65d8269d0fa2d25aa528357d) ([Andreas Lind](mailto:andreaslindpetersen@gmail.com))
+- [Report variation axes that only use the default value as unused rather than underutilized](https://github.com/Munter/subfont/commit/12082590898407f558d9540347778272ddb9d197) ([Andreas Lind](mailto:andreaslindpetersen@gmail.com))
+- [Detect unused wdth variation axis ranges](https://github.com/Munter/subfont/commit/d7758eb3c9a45a49768aac12c36ed897a0c4b467) ([Andreas Lind](mailto:andreaslindpetersen@gmail.com))
+
 ### v6.11.0 (2022-09-04)
 
 - [Treat wdth as a standard axis \(but unsupported for now\)](https://github.com/Munter/subfont/commit/20d539750448134cca0a82f2cc98f85d9a6be068) ([Andreas Lind](mailto:andreaslindpetersen@gmail.com))
