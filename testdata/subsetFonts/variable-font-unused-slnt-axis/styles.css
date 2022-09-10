@@ -1,5 +1,6 @@
 @font-face {
-  font-family: MyFontFamily;
-  src: url('RobotoFlex-VariableFont_GRAD,XTRA,YOPQ,YTAS,YTDE,YTFI,YTLC,YTUC,opsz,slnt,wdth,wght.ttf')
+  font-family: Extendomatic;
+  /* LICENSE: 2021-05-Extendomatic/LICENSE.txt */
+  src: url('2021-05-Extendomatic/ExtendomaticVariable-VF.woff2')
     format('woff2-variations');
 }

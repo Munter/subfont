@@ -3042,10 +3042,7 @@ describe('subsetFonts', function () {
 
           expect(infoSpy, 'to have calls satisfying', function () {
             infoSpy({
-              message: expect.it(
-                'to contain',
-                'Unused axes: wght, wdth, GRAD, slnt, XTRA, XOPQ, YOPQ, YTLC, YTUC, YTAS, YTDE, YTFI'
-              ),
+              message: expect.it('to contain', 'Unused axes: slnt, TRAK, wght'),
             });
           });
         });
@@ -3070,9 +3067,7 @@ describe('subsetFonts', function () {
             infoSpy({
               message: expect.it(
                 'to contain',
-                'Unused axes: wght, wdth, GRAD, slnt,'
-                // FIXME: Find a liberally licensed variable font that actually includes a slnt value of 14 so we can test that the output is:
-                // 'Underutilized axes:\n    slnt: 14 used (-100-100 available)'
+                'Underutilized axes:\n    slnt: 14 used (-20-20 available)'
               ),
             });
           });
@@ -3098,9 +3093,7 @@ describe('subsetFonts', function () {
             infoSpy({
               message: expect.it(
                 'to contain',
-                'Unused axes: wght, wdth, GRAD, slnt,'
-                // FIXME: Find a liberally licensed variable font that actually includes a slnt value of 14 so we can test that the output is:
-                // 'Underutilized axes:\n    slnt: 0-14 used (-100-100 available)'
+                'Underutilized axes:\n    slnt: 0-14 used (-20-20 available)'
               ),
             });
           });
