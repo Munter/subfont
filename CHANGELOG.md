@@ -1,3 +1,9 @@
+### v6.12.1 (2022-09-11)
+
+- [Map font-style: oblique to font-variation-settings: slnt -14](https://github.com/Munter/subfont/commit/ea96284729e0d100fcb87d09c63979641439b169) ([Andreas Lind](mailto:andreaslindpetersen@gmail.com))
+- [Fix typo in test case](https://github.com/Munter/subfont/commit/b07273ff0daff38a23ef9b0ce77d5a114c4e2154) ([Andreas Lind](mailto:andreaslindpetersen@gmail.com))
+- [Improve slnt axis test case with a copy of the Extendomatic font Should be OK according to the license: https:\/\/djr.com\/license\/\#server https:\/\/twitter.com\/djrrb\/status\/1568539078416539654?s=20&t=P3w5SKI\_UHV3zzrBMj47lQ](https://github.com/Munter/subfont/commit/f6692fc3ad17a745bda13d1eb78ccd5fb340b369) ([Andreas Lind](mailto:andreaslindpetersen@gmail.com))
+
 ### v6.12.0 (2022-09-07)
 
 - [Refactor repeated code into helper function](https://github.com/Munter/subfont/commit/5335d931957cadc150fed1c5d548ee6b6e245636) ([Andreas Lind](mailto:andreaslindpetersen@gmail.com))
