@@ -3067,7 +3067,7 @@ describe('subsetFonts', function () {
             infoSpy({
               message: expect.it(
                 'to contain',
-                'Underutilized axes:\n    slnt: 14 used (-20-20 available)'
+                'Underutilized axes:\n    slnt: -14 used (-20-20 available)'
               ),
             });
           });
@@ -3093,7 +3093,7 @@ describe('subsetFonts', function () {
             infoSpy({
               message: expect.it(
                 'to contain',
-                'Underutilized axes:\n    slnt: 0-14 used (-20-20 available)'
+                'Underutilized axes:\n    slnt: -14-0 used (-20-20 available)'
               ),
             });
           });
