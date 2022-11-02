@@ -1,3 +1,7 @@
+### v6.12.2 (2022-11-02)
+
+- [Be resilient when an insertion point cannot be found for subfont's preloads and stylesheets Fixes assetgraph\/assetgraph\#1251](https://github.com/Munter/subfont/commit/75beca70fb6cf696cf958326d8ea65b31d125b71) ([Andreas Lind](mailto:andreaslindpetersen@gmail.com))
+
 ### v6.12.1 (2022-09-11)
 
 - [Map font-style: oblique to font-variation-settings: slnt -14](https://github.com/Munter/subfont/commit/ea96284729e0d100fcb87d09c63979641439b169) ([Andreas Lind](mailto:andreaslindpetersen@gmail.com))
