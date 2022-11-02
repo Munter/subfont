@@ -2007,6 +2007,40 @@ describe('subsetFonts', function () {
     ]);
   });
 
+  it('should foo', async function () {
+    httpception();
+
+    const assetGraph = new AssetGraph({
+      root: pathModule.resolve(
+        __dirname,
+        '../testdata/subsetFonts/local-with-noscript/'
+      ),
+    });
+    await assetGraph.loadAssets('index.html');
+    await assetGraph.populate();
+    await subsetFonts(assetGraph);
+
+    expect(assetGraph, 'to contain asset', { fileName: 'index.html' });
+
+    const index = assetGraph.findAssets({ fileName: 'index.html' })[0];
+    expect(index.outgoingRelations, 'to satisfy', [
+      {
+        type: 'HtmlPreloadLink',
+      },
+      {
+        type: 'HtmlStyle',
+      },
+      {
+        type: 'HtmlNoscript',
+      },
+      // Fallback loaders:
+      {
+        type: 'HtmlScript',
+      },
+      { type: 'HtmlNoscript' },
+    ]);
+  });
+
   describe('with hrefType:relative', function () {
     it('should issue relative urls instead of root-relative ones', async function () {
       httpception();
