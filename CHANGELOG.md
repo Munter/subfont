@@ -1,3 +1,7 @@
+### v6.12.3 (2023-01-06)
+
+- [Update @hookun\/parse-animation-shorthand to ^0.1.5, fixes \#168](https://github.com/Munter/subfont/commit/ec19b28392e02c2a4cc42e0124cca5fce4c2ba32) ([Andreas Lind](mailto:andreas.lind@workday.com))
+
 ### v6.12.2 (2022-11-02)
 
 - [Be resilient when an insertion point cannot be found for subfont's preloads and stylesheets Fixes assetgraph\/assetgraph\#1251](https://github.com/Munter/subfont/commit/75beca70fb6cf696cf958326d8ea65b31d125b71) ([Andreas Lind](mailto:andreaslindpetersen@gmail.com))
@@ -50,13 +54,9 @@
 - [Update subset-font to ^1.5.0](https://github.com/Munter/subfont/commit/ba79ef6db81cedfd0e52672b530ca3afddd68a94) ([Andreas Lind](mailto:andreaslindpetersen@gmail.com))
 - [Fix warning about missing glyphs for BMP chars](https://github.com/Munter/subfont/commit/5ba0168f35bfef33f9bb9cc8a6d64de8fa1d5585) ([Andreas Lind](mailto:andreaslindpetersen@gmail.com))
 - [Fix CHANGELOG generation in preversion script](https://github.com/Munter/subfont/commit/3ea696f8c336c6072411c9817c0c2f5b8d8d61b9) ([Andreas Lind](mailto:andreaslindpetersen@gmail.com))
-
-### v6.6.1 (2022-07-09)
-
-- [ugrvw](https://github.com/Munter/subfont/commit/5ccb873025f9790faf65641551df1a7e65fbfdbf) ([Andreas Lind](mailto:andreaslindpetersen@gmail.com))
 - [Fix CHANGELOG https:\/\/github.com\/Munter\/subfont\/commit\/5365689a5a925304a158fddef2b6af702857371c\#r78084394](https://github.com/Munter/subfont/commit/d42c7a2cffd33662d42d4532c45cb8b90080f128) ([Andreas Lind](mailto:andreaslindpetersen@gmail.com))
 - [Expect browserslist to only prescribe woff I guess the browser features + usage statistics finally changed so woff isn't needed](https://github.com/Munter/subfont/commit/b70db9b769955cabbda2f2a76f2e7758f9968ec7) ([Andreas Lind](mailto:andreaslindpetersen@gmail.com))
-- [Tests: Tolerate u+ in unicode-range \(I guess an in-range dep changed\)](https://github.com/Munter/subfont/commit/92a7871457246b64a997c0bffd9bb2766655d811) ([Andreas Lind](mailto:andreaslindpetersen@gmail.com))
+- [+1 more](https://github.com/Munter/subfont/compare/v6.6.0...v6.7.0)
 
 ### v6.6.0 (2022-07-09)
 
@@ -343,12 +343,15 @@
 #### Pull requests
 
 - [#76](https://github.com/Munter/subfont/pull/76) Fix the prettier setup ([Andreas Lind](mailto:andreas.lind@peakon.com))
-- [#75](https://github.com/Munter/subfont/pull/75) Fix omitFallbacks with Google Web Fonts ([Andreas Lind](mailto:andreas.lind@peakon.com))
 
 #### Commits to master
 
 - [Switch to the official css-font-parser now that bramstein\/css-font-parser\#7 has been merged and released](https://github.com/Munter/subfont/commit/457c7f0e4cef0a8c1bd8f816c23ace64c9987424) ([Andreas Lind](mailto:andreaslindpetersen@gmail.com))
 - [Don't populate source map relations](https://github.com/Munter/subfont/commit/5c07218b6f1dcc6fad88702a3bcb7b33bf9df54e) ([Andreas Lind](mailto:andreaslindpetersen@gmail.com))
+
+### v4.1.2 (2020-01-09)
+
+- [#75](https://github.com/Munter/subfont/pull/75) Fix omitFallbacks with Google Web Fonts ([Andreas Lind](mailto:andreas.lind@peakon.com))
 
 ### v4.1.1 (2020-01-04)
 
@@ -380,7 +383,8 @@
 - [Add vscode debugger launch configuration for the test suite](https://github.com/Munter/subfont/commit/f8f9abc42909c556765555cc49f44eb40a9194db) ([Andreas Lind](mailto:andreaslindpetersen@gmail.com))
 - [Guard against an already detached relation when cleaning up](https://github.com/Munter/subfont/commit/6392fc359222772c9033a58a9020e3b35487d019) ([Andreas Lind](mailto:andreaslindpetersen@gmail.com))
 
-### v4.0.3
+### v4.0.3 (2019-11-02)
+
 #### Pull requests
 
 - [#67](https://github.com/Munter/subfont/pull/67) Only warn about missing fonttools install if we are actually trying t… ([Peter Müller](mailto:munter@fumle.dk))
