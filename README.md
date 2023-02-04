@@ -3,7 +3,6 @@
 [![NPM version](https://badge.fury.io/js/subfont.svg)](http://badge.fury.io/js/subfont)
 [![Build Status](https://travis-ci.org/Munter/subfont.svg?branch=master)](https://travis-ci.org/Munter/subfont)
 [![Coverage Status](https://img.shields.io/coveralls/Munter/subfont.svg)](https://coveralls.io/r/Munter/subfont?branch=master)
-[![Dependency Status](https://david-dm.org/Munter/subfont.svg)](https://david-dm.org/Munter/subfont) [![Greenkeeper badge](https://badges.greenkeeper.io/Munter/subfont.svg)](https://greenkeeper.io/)
 
 A command line tool to statically analyse your page in order to generate the most optimal web font subsets, then inject them into your page.
 
