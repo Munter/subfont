@@ -24,7 +24,7 @@ Subfont will:
 Currently supported font services:
 
 - Google fonts
-- Local fonts (with [fonttools](https://github.com/fonttools/fonttools))
+- Local fonts
 
 **If you know of font services with liberal font usage licenses, open an issue and we'll add support for them**
 
