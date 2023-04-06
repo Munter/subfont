@@ -61,6 +61,14 @@ describe('reference images', function () {
           options
         );
       });
+
+      it('should render a variable font that can be fully instanced', async function () {
+        await expect(
+          getPathToTestCase('fullyInstancedVariableFont'),
+          'to render the same after subsetting',
+          options
+        );
+      });
     });
   }
 });
