@@ -94,7 +94,7 @@
     "sinon": "^9.0.2",
     "unexpected": "^11.8.1",
     "unexpected-check": "^2.3.1",
-    "unexpected-resemble": "^4.3.0",
+    "unexpected-resemble": "^5.0.1",
     "unexpected-set": "^2.0.1",
     "unexpected-sinon": "^10.11.2"
   }
