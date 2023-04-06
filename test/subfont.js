@@ -615,17 +615,15 @@ describe('subfont', function () {
         },
         mockConsole
       );
-      expect(mockConsole.error, 'to have calls satisfying', () => {
-        mockConsole.error(
-          'GET https://domainthatdoesnotexist12873621321312.com/blablabla.js failed: net::ERR_NAME_NOT_RESOLVED'
-        );
-        mockConsole.error(
-          'ReferenceError: iAmNotAFunction is not defined\n    at https://example.com/index.html:20:7'
-        );
-        mockConsole.error(
-          'GET https://assetgraph.org/nonexistent12345.js returned 404'
-        );
-      });
+      expect(mockConsole.error, 'to have a call satisfying', [
+        'GET https://domainthatdoesnotexist12873621321312.com/blablabla.js failed: net::ERR_NAME_NOT_RESOLVED',
+      ])
+        .and('to have a call satisfying', [
+          'ReferenceError: iAmNotAFunction is not defined\n    at https://example.com/index.html:20:7',
+        ])
+        .and('to have a call satisfying', [
+          'GET https://assetgraph.org/nonexistent12345.js returned 404',
+        ]);
     });
 
     it('should not fail to inject the font-tracer script on a page that has a strict CSP', async function () {
