@@ -5,7 +5,7 @@ name: Tests
 
 jobs:
   test:
-    runs-on: ubuntu-18.04
+    runs-on: ubuntu-latest
     name: Node ${{ matrix.node }}
     strategy:
       matrix:
@@ -22,7 +22,7 @@ jobs:
       - run: npm test
 
   test-targets:
-    runs-on: ubuntu-18.04
+    runs-on: ubuntu-latest
     name: ${{ matrix.targets.name }}
     strategy:
       matrix:
