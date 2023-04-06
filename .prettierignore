@@ -1,6 +1,7 @@
 /node_modules/
 /coverage/
 /.nyc_output/
+/puppeteer-browsers/
 
 # Don't battle npm i --save
 /package.json
