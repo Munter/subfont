@@ -451,11 +451,11 @@ describe('subfont', function () {
     );
     expect(mockConsole.log, 'to have a call satisfying', () => {
       mockConsole.log(
-        expect.it('to contain', '400 : 6/214 codepoints used (3 on this page),')
+        expect.it('to contain', '400 : 6/213 codepoints used (3 on this page),')
       );
     }).and('to have a call satisfying', () => {
       mockConsole.log(
-        expect.it('to contain', '400 : 6/214 codepoints used (4 on this page),')
+        expect.it('to contain', '400 : 6/213 codepoints used (4 on this page),')
       );
     });
   });
@@ -480,7 +480,7 @@ describe('subfont', function () {
       mockConsole
     );
     expect(mockConsole.log, 'to have a call satisfying', () => {
-      mockConsole.log(expect.it('to contain', '400 : 3/214 codepoints used,'));
+      mockConsole.log(expect.it('to contain', '400 : 3/213 codepoints used,'));
     });
   });
 
@@ -507,7 +507,7 @@ describe('subfont', function () {
       );
       expect(mockConsole.log, 'to have a call satisfying', () => {
         mockConsole.log(
-          expect.it('to contain', '400 : 14/214 codepoints used')
+          expect.it('to contain', '400 : 14/213 codepoints used')
         );
       });
     });
@@ -534,7 +534,7 @@ describe('subfont', function () {
       );
       expect(mockConsole.log, 'to have a call satisfying', () => {
         mockConsole.log(
-          expect.it('to contain', '400 : 16/214 codepoints used,')
+          expect.it('to contain', '400 : 16/213 codepoints used,')
         );
       });
     });
@@ -562,7 +562,7 @@ describe('subfont', function () {
       );
       expect(mockConsole.log, 'to have a call satisfying', () => {
         mockConsole.log(
-          expect.it('to contain', '400 : 14/214 codepoints used')
+          expect.it('to contain', '400 : 14/213 codepoints used')
         );
       });
     });
@@ -590,7 +590,7 @@ describe('subfont', function () {
       );
       expect(mockConsole.log, 'to have a call satisfying', () => {
         mockConsole.log(
-          expect.it('to contain', '400 : 14/214 codepoints used')
+          expect.it('to contain', '400 : 14/213 codepoints used')
         );
       });
     });

@@ -7,12 +7,12 @@ const expect = require('unexpected')
 const AssetGraph = require('assetgraph');
 const pathModule = require('path');
 const LinesAndColumns = require('lines-and-columns').default;
-const fontkit = require('fontkit');
 
 const httpception = require('httpception');
 const sinon = require('sinon');
 const fs = require('fs');
 const subsetFonts = require('../lib/subsetFonts');
+const getFontInfo = require('../lib/getFontInfo');
 
 const defaultLocalSubsetMock = [
   {
@@ -3206,11 +3206,8 @@ describe('subsetFonts', function () {
 
         const subsetFontAssets = assetGraph.findAssets({ type: 'Woff2' });
         expect(subsetFontAssets, 'to have length', 1);
-        expect(
-          fontkit.create(subsetFontAssets[0].rawSrc).variationAxes,
-          'to equal',
-          {}
-        );
+        const { variationAxes } = await getFontInfo(subsetFontAssets[0].rawSrc);
+        expect(variationAxes, 'to equal', {});
       });
     });
 
