@@ -7,12 +7,12 @@ const expect = require('unexpected')
 const AssetGraph = require('assetgraph');
 const pathModule = require('path');
 const LinesAndColumns = require('lines-and-columns').default;
-const fontkit = require('fontkit');
 
 const httpception = require('httpception');
 const sinon = require('sinon');
 const fs = require('fs');
 const subsetFonts = require('../lib/subsetFonts');
+const getFontInfo = require('../lib/getFontInfo');
 
 const defaultLocalSubsetMock = [
   {
@@ -3206,11 +3206,8 @@ describe('subsetFonts', function () {
 
         const subsetFontAssets = assetGraph.findAssets({ type: 'Woff2' });
         expect(subsetFontAssets, 'to have length', 1);
-        expect(
-          fontkit.create(subsetFontAssets[0].rawSrc).variationAxes,
-          'to equal',
-          {}
-        );
+        const { variationAxes } = await getFontInfo(subsetFontAssets[0].rawSrc);
+        expect(variationAxes, 'to equal', {});
       });
     });
 
@@ -3231,25 +3228,24 @@ describe('subsetFonts', function () {
 
         const subsetFontAssets = assetGraph.findAssets({ type: 'Woff2' });
         expect(subsetFontAssets, 'to have length', 1);
-        expect(
-          fontkit.create(subsetFontAssets[0].rawSrc).variationAxes,
-          'to equal',
-          {
-            wght: { name: 'wght', min: 100, default: 400, max: 1000 },
-            wdth: { name: 'wdth', min: 25, default: 100, max: 151 },
-            opsz: { name: 'opsz', min: 8, default: 14, max: 144 },
-            GRAD: { name: 'GRAD', min: -200, default: 0, max: 150 },
-            slnt: { name: 'slnt', min: -10, default: 0, max: 0 },
-            XTRA: { name: 'XTRA', min: 323, default: 468, max: 603 },
-            XOPQ: { name: 'XOPQ', min: 27, default: 96, max: 175 },
-            YOPQ: { name: 'YOPQ', min: 25, default: 79, max: 135 },
-            YTLC: { name: 'YTLC', min: 416, default: 514, max: 570 },
-            YTUC: { name: 'YTUC', min: 528, default: 712, max: 760 },
-            YTAS: { name: 'YTAS', min: 649, default: 750, max: 854 },
-            YTDE: { name: 'YTDE', min: -305, default: -203, max: -98 },
-            YTFI: { name: 'YTFI', min: 560, default: 738, max: 788 },
-          }
-        );
+
+        const { variationAxes } = await getFontInfo(subsetFontAssets[0].rawSrc);
+
+        expect(variationAxes, 'to equal', {
+          wght: { min: 100, default: 400, max: 1000 },
+          wdth: { min: 25, default: 100, max: 151 },
+          opsz: { min: 8, default: 14, max: 144 },
+          GRAD: { min: -200, default: 0, max: 150 },
+          slnt: { min: -10, default: 0, max: 0 },
+          XTRA: { min: 323, default: 468, max: 603 },
+          XOPQ: { min: 27, default: 96, max: 175 },
+          YOPQ: { min: 25, default: 79, max: 135 },
+          YTLC: { min: 416, default: 514, max: 570 },
+          YTUC: { min: 528, default: 712, max: 760 },
+          YTAS: { min: 649, default: 750, max: 854 },
+          YTDE: { min: -305, default: -203, max: -98 },
+          YTFI: { min: 560, default: 738, max: 788 },
+        });
       });
     });
   });
