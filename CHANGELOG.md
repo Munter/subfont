@@ -1,3 +1,7 @@
+### v7.1.0 (2023-04-15)
+
+- [#170](https://github.com/Munter/subfont/pull/170) Use harfbuzzjs instead of fontkit ([Andreas Lind](mailto:andreaslindpetersen@gmail.com))
+
 ### v7.0.0 (2023-04-08)
 
 #### Pull requests
