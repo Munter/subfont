@@ -1,3 +1,7 @@
+### v7.1.1 (2023-05-07)
+
+- [Fix file name generation when the font-family contains backslash Fixes \#171](https://github.com/Munter/subfont/commit/1cff3c4095680569ecf50d017035730eb4bd0cc0) ([Andreas Lind](mailto:andreaslindpetersen@gmail.com))
+
 ### v7.1.0 (2023-04-15)
 
 - [#170](https://github.com/Munter/subfont/pull/170) Use harfbuzzjs instead of fontkit ([Andreas Lind](mailto:andreaslindpetersen@gmail.com))
