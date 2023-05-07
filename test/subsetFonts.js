@@ -3443,27 +3443,59 @@ describe('subsetFonts', function () {
     await subsetFonts(assetGraph);
   });
 
-  it('should handle escaped characters in font-family', async function () {
-    const assetGraph = new AssetGraph({
-      root: pathModule.resolve(
-        __dirname,
-        '../testdata/subsetFonts/font-family-with-escape/'
-      ),
+  describe('with escaped characters in font-family', function () {
+    it('should issue a correct subset font family and subset font file name', async function () {
+      const assetGraph = new AssetGraph({
+        root: pathModule.resolve(
+          __dirname,
+          '../testdata/subsetFonts/font-family-with-escape/'
+        ),
+      });
+      const [htmlAsset] = await assetGraph.loadAssets('index.html');
+      await assetGraph.populate();
+      const { fontInfo } = await subsetFonts(assetGraph);
+      expect(fontInfo, 'to satisfy', [
+        { fontUsages: [{ fontFamilies: new Set(['Font Awesome 5 Free']) }] },
+      ]);
+      expect(
+        htmlAsset.text,
+        'to contain',
+        "font-family: 'Font Awesome 5 Free__subset', Font Awesome\\ 5 Free;"
+      ).and(
+        'to contain',
+        "font: 12px 'Font Awesome 5 Free__subset', 'Font Awesome 5 Free'"
+      );
     });
-    const [htmlAsset] = await assetGraph.loadAssets('index.html');
-    await assetGraph.populate();
-    const { fontInfo } = await subsetFonts(assetGraph);
-    expect(fontInfo, 'to satisfy', [
-      { fontUsages: [{ fontFamilies: new Set(['Font Awesome 5 Free']) }] },
-    ]);
-    expect(
-      htmlAsset.text,
-      'to contain',
-      "font-family: 'Font Awesome 5 Free__subset', Font Awesome\\ 5 Free;"
-    ).and(
-      'to contain',
-      "font: 12px 'Font Awesome 5 Free__subset', 'Font Awesome 5 Free'"
-    );
+
+    describe('with inlineCss:true', function () {
+      it('should handle escaped characters in font-family', async function () {
+        const assetGraph = new AssetGraph({
+          root: pathModule.resolve(
+            __dirname,
+            '../testdata/subsetFonts/font-family-with-escape/'
+          ),
+        });
+        const [htmlAsset] = await assetGraph.loadAssets('index.html');
+        await assetGraph.populate();
+        const { fontInfo } = await subsetFonts(assetGraph, { inlineCss: true });
+        expect(fontInfo, 'to satisfy', [
+          { fontUsages: [{ fontFamilies: new Set(['Font Awesome 5 Free']) }] },
+        ]);
+        expect(
+          htmlAsset.text,
+          'to contain',
+          "font-family: 'Font Awesome 5 Free__subset', Font Awesome\\ 5 Free;"
+        )
+          .and(
+            'to contain',
+            "font: 12px 'Font Awesome 5 Free__subset', 'Font Awesome 5 Free'"
+          )
+          .and(
+            'to contain',
+            'url(/subfont/Font_Awesome_5_Free-400-ba155ca153.woff)'
+          );
+      });
+    });
   });
 
   describe('with non-truetype fonts in the mix', function () {
