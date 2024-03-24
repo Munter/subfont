@@ -107,6 +107,8 @@ Options:
                                                                         [boolean] [default: false]
   --relative-urls                    Issue relative urls instead of root-relative ones
                                                                         [boolean] [default: false]
+  --instance                         Experimentally instance variable fonts when the variation
+                                     space isn't fully used             [boolean] [default: false]
   --silent, -s                       Do not write anything to stdout    [boolean] [default: false]
   --debug, -d                        Verbose insights into font glyph detection
                                                                         [boolean] [default: false]

@@ -299,6 +299,10 @@ describe('subsetFonts', function () {
                 page: [72, 101, 108, 111, 32],
               },
               preload: true,
+              variationAxes: undefined,
+              fullyInstanced: false,
+              numAxesPinned: 0,
+              numAxesReduced: 0,
             },
           ],
         },
@@ -3211,8 +3215,8 @@ describe('subsetFonts', function () {
       });
     });
 
-    describe('with a variable font that can only be partially instanced', function () {
-      it('should keep the variation axes', async function () {
+    describe('with a variable font that can be partially instanced', function () {
+      it('should perform a partial instancing', async function () {
         const assetGraph = new AssetGraph({
           root: pathModule.resolve(
             __dirname,
@@ -3232,19 +3236,7 @@ describe('subsetFonts', function () {
         const { variationAxes } = await getFontInfo(subsetFontAssets[0].rawSrc);
 
         expect(variationAxes, 'to equal', {
-          wght: { min: 100, default: 400, max: 1000 },
-          wdth: { min: 25, default: 100, max: 151 },
-          opsz: { min: 8, default: 14, max: 144 },
-          GRAD: { min: -200, default: 0, max: 150 },
-          slnt: { min: -10, default: 0, max: 0 },
-          XTRA: { min: 323, default: 468, max: 603 },
-          XOPQ: { min: 27, default: 96, max: 175 },
-          YOPQ: { min: 25, default: 79, max: 135 },
-          YTLC: { min: 416, default: 514, max: 570 },
-          YTUC: { min: 528, default: 712, max: 760 },
-          YTAS: { min: 649, default: 750, max: 854 },
-          YTDE: { min: -305, default: -203, max: -98 },
-          YTFI: { min: 560, default: 738, max: 788 },
+          wght: { min: 100, default: 400, max: 405 },
         });
       });
     });
