@@ -1,4 +1,14 @@
-### v7.1.1 (2023-05-07)
+### v7.2.0 (2024-03-24)
+
+#### Pull requests
+
+- [#172](https://github.com/Munter/subfont/pull/172) Support partial instancing of variable fonts ([Andreas Lind](mailto:andreaslindpetersen@gmail.com))
+
+#### Commits to master
+
+- [Update subset-font to ^2.2.0](https://github.com/Munter/subfont/commit/1cf16cb1769c65e3a5b34d440b619b238a27141b) ([Andreas Lind](mailto:andreaslindpetersen@gmail.com))
+
+### v7.1.1 (2023-05-08)
 
 - [Fix file name generation when the font-family contains backslash Fixes \#171](https://github.com/Munter/subfont/commit/1cff3c4095680569ecf50d017035730eb4bd0cc0) ([Andreas Lind](mailto:andreaslindpetersen@gmail.com))
 
@@ -19,7 +29,11 @@
 - [Tell eslint to ignore the puppeteer-browsers dir](https://github.com/Munter/subfont/commit/99bca776a0bd7fab4c3e9c1084c23ae5f7c4e18b) ([Andreas Lind](mailto:andreaslindpetersen@gmail.com))
 - [Drop node.js 14](https://github.com/Munter/subfont/commit/0dcf1ed53fa20f7eb4585e6e3813fa8d97aefae5) ([Andreas Lind](mailto:andreaslindpetersen@gmail.com))
 - [Tolerate different moch console call orders](https://github.com/Munter/subfont/commit/046971fa1b9fb4096b108cd777f18c34bb938438) ([Andreas Lind](mailto:andreaslindpetersen@gmail.com))
-- [+10 more](https://github.com/Munter/subfont/compare/v6.12.4...v7.0.0)
+- [+10 more](https://github.com/Munter/subfont/compare/v6.12.5...v7.0.0)
+
+### v6.12.5 (2023-05-08)
+
+- [Fix file name generation when the font-family contains backslash Fixes \#171](https://github.com/Munter/subfont/commit/5619db3bbbcffa41871b2bc04d4cafa15d409bde) ([Andreas Lind](mailto:andreaslindpetersen@gmail.com))
 
 ### v6.12.4 (2023-01-06)
 
