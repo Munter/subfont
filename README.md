@@ -13,9 +13,9 @@ Subfont will:
 - Automatically figure out what characters are used from each font
 - Warn you about usage of characters that don't exist as glyphs in your webfonts
 - Create an exact subset of used characters of each font
+- Reduce the variation space of variable fonts based on the actual usage (when the `--instance` switch is used)
 - Generate web fonts in both `woff2` and `woff` formats
 - Add preload hints for the subsets to reduce time to first meaningful paint
-- Add JS font loading for browsers without preload support
 - Give the subsetted fonts new names and prepend them in front of the original fonts in your `font-family` definitions (enables missing glyph fallback)
 - Async load your original `@font-face` declaring CSS at the bottom of your page, moving it off the critical path
 
