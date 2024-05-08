@@ -1,3 +1,9 @@
+### v7.2.1 (2024-05-08)
+
+- [Update font-tracer to ^3.7.0, fixes \#173](https://github.com/Munter/subfont/commit/0fae200fe8156ab5ccbf632c765e75d65a240210) ([Andreas Lind](mailto:andreaslindpetersen@gmail.com))
+- [Update subset-font to ^2.3.0](https://github.com/Munter/subfont/commit/b5cd91e1a6d1baa92900f586c184b9501de4fe08) ([Andreas Lind](mailto:andreaslindpetersen@gmail.com))
+- [Update the "Subfont will" list](https://github.com/Munter/subfont/commit/277b500d1cf65e40975660666a8769dbf1f9cee0) ([Andreas Lind](mailto:andreaslindpetersen@gmail.com))
+
 ### v7.2.0 (2024-03-24)
 
 #### Pull requests
