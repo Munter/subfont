@@ -2553,9 +2553,8 @@ describe('subsetFonts', function () {
           '../testdata/subsetFonts/multi-page-same-subset/'
         ),
       });
-      const [htmlAsset1, htmlAsset2] = await assetGraph.loadAssets(
-        'index*.html'
-      );
+      const [htmlAsset1, htmlAsset2] =
+        await assetGraph.loadAssets('index*.html');
       await assetGraph.populate({
         followRelations: {
           crossorigin: false,
