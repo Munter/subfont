@@ -7,7 +7,7 @@ describe('extractReferencedCustomPropertyNames', function () {
     expect(
       extractReferencedCustomPropertyNames('foo(bar), local(abc), bla-bla'),
       'to equal',
-      new Set()
+      new Set(),
     );
   });
 
@@ -15,27 +15,27 @@ describe('extractReferencedCustomPropertyNames', function () {
     expect(
       extractReferencedCustomPropertyNames('foo(bar), var(--abc), bla-bla'),
       'to equal',
-      new Set(['--abc'])
+      new Set(['--abc']),
     );
   });
 
   it('should return the name of a referenced custom property with a default value', function () {
     expect(
       extractReferencedCustomPropertyNames(
-        "foo(bar), var(--abc, 'the default'), bla-bla"
+        "foo(bar), var(--abc, 'the default'), bla-bla",
       ),
       'to equal',
-      new Set(['--abc'])
+      new Set(['--abc']),
     );
   });
 
   it('should return the names of multiple referenced custom properties', function () {
     expect(
       extractReferencedCustomPropertyNames(
-        'foo(bar), var(--abc), bla-bla, var(--def)'
+        'foo(bar), var(--abc), bla-bla, var(--def)',
       ),
       'to equal',
-      new Set(['--abc', '--def'])
+      new Set(['--abc', '--def']),
     );
   });
 });

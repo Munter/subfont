@@ -12,7 +12,7 @@ describe('getCssRulesByProperty', function () {
         getRules(['padding']);
       },
       'to throw',
-      'cssSource argument must be a string containing valid CSS'
+      'cssSource argument must be a string containing valid CSS',
     );
   });
 
@@ -30,7 +30,7 @@ describe('getCssRulesByProperty', function () {
         counterStyles: [],
         keyframes: [],
         padding: [],
-      }
+      },
     );
   });
 
@@ -61,7 +61,7 @@ describe('getCssRulesByProperty', function () {
             important: false,
           },
         ],
-      }
+      },
     );
   });
 
@@ -83,7 +83,7 @@ describe('getCssRulesByProperty', function () {
             important: false,
           },
         ],
-      }
+      },
     );
   });
 
@@ -115,7 +115,7 @@ describe('getCssRulesByProperty', function () {
               important: false,
             },
           ],
-        }
+        },
       );
     });
   });
@@ -125,7 +125,7 @@ describe('getCssRulesByProperty', function () {
       var result = getRules(
         ['font-family', 'font-size'],
         'h1 { font: 15px serif; }',
-        []
+        [],
       );
 
       expect(result, 'to exhaustively satisfy', {
@@ -160,7 +160,7 @@ describe('getCssRulesByProperty', function () {
       var result = getRules(
         ['font-family', 'font-size', 'font-style', 'font-weight'],
         'h1 { font: 15px serif; }',
-        []
+        [],
       );
 
       expect(result, 'to exhaustively satisfy', {
@@ -217,7 +217,7 @@ describe('getCssRulesByProperty', function () {
       var result = getRules(
         ['font-family', 'font-size'],
         'h1 { font-size: 10px; font: 15px serif; font-size: 20px }',
-        []
+        [],
       );
 
       expect(result, 'to exhaustively satisfy', {
@@ -273,7 +273,7 @@ describe('getCssRulesByProperty', function () {
         const result = getRules(
           ['font-size'],
           '@namespace "foo"; h1 { font-size: 20px }',
-          []
+          [],
         );
 
         expect(result, 'to satisfy', {
@@ -293,7 +293,7 @@ describe('getCssRulesByProperty', function () {
         const result = getRules(
           ['font-size'],
           '@namespace url(foo); h1 { font-size: 20px }',
-          []
+          [],
         );
 
         expect(result, 'to satisfy', {
@@ -313,7 +313,7 @@ describe('getCssRulesByProperty', function () {
         const result = getRules(
           ['font-size'],
           '@namespace url("foo"); h1 { font-size: 20px }',
-          []
+          [],
         );
 
         expect(result, 'to satisfy', {

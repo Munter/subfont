@@ -12,7 +12,7 @@ describe('generated html', function () {
   before(async function () {
     smileySvgBase64 = `data:image/svg+xml;base64,${fs
       .readFileSync(
-        pathModule.resolve(__dirname, '..', 'testdata', 'smiley.svg')
+        pathModule.resolve(__dirname, '..', 'testdata', 'smiley.svg'),
       )
       .toString('base64')}`;
   });
@@ -90,7 +90,7 @@ describe('generated html', function () {
             '..',
             'testdata',
             'subsetFonts',
-            'unused-variant-on-one-page'
+            'unused-variant-on-one-page',
           ),
         });
         const text = stringify(htmlObjectTree);
@@ -118,7 +118,7 @@ describe('generated html', function () {
           }),
           stylesheet(),
         ],
-      }
+      },
     );
   });
 });

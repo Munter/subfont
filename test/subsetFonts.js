@@ -20,11 +20,11 @@ describe('subsetFonts', function () {
     const assetGraph = new AssetGraph({
       root: pathModule.resolve(
         __dirname,
-        '../testdata/subsetFonts/existing-preload/'
+        '../testdata/subsetFonts/existing-preload/',
       ),
     });
     assetGraph.on('warn', (warn) =>
-      expect(warn, 'to satisfy', /Cannot find module/)
+      expect(warn, 'to satisfy', /Cannot find module/),
     );
     await assetGraph.loadAssets('index.html');
     await assetGraph.populate({
@@ -45,7 +45,7 @@ describe('subsetFonts', function () {
     const assetGraph = new AssetGraph({
       root: pathModule.resolve(
         __dirname,
-        '../testdata/subsetFonts/existing-prefetch/'
+        '../testdata/subsetFonts/existing-prefetch/',
       ),
     });
     assetGraph.on('info', function (info) {
@@ -81,7 +81,7 @@ describe('subsetFonts', function () {
       root: pathModule.resolve(__dirname, '../testdata/subsetFonts/html-link/'),
     });
     assetGraph.on('warn', (warn) =>
-      expect(warn, 'to satisfy', /Cannot find module/)
+      expect(warn, 'to satisfy', /Cannot find module/),
     );
     await assetGraph.loadAssets('index.html');
     await assetGraph.populate({
@@ -185,7 +185,7 @@ describe('subsetFonts', function () {
       root: pathModule.resolve(__dirname, '../testdata/subsetFonts/html-link/'),
     });
     assetGraph.on('warn', (warn) =>
-      expect(warn, 'to satisfy', /Cannot find module/)
+      expect(warn, 'to satisfy', /Cannot find module/),
     );
     await assetGraph.loadAssets('index.html');
     await assetGraph.populate({
@@ -203,7 +203,7 @@ describe('subsetFonts', function () {
     expect(
       fallbackCss.text,
       'to match',
-      /format\("woff"\);unicode-range:U\+0,U\+d,U\+20-7e,/i
+      /format\("woff"\);unicode-range:U\+0,U\+d,U\+20-7e,/i,
     );
   });
 
@@ -212,7 +212,7 @@ describe('subsetFonts', function () {
       root: pathModule.resolve(__dirname, '../testdata/subsetFonts/html-link/'),
     });
     assetGraph.on('warn', (warn) =>
-      expect(warn, 'to satisfy', /Cannot find module/)
+      expect(warn, 'to satisfy', /Cannot find module/),
     );
     await assetGraph.loadAssets('index.html');
     await assetGraph.populate({
@@ -244,7 +244,7 @@ describe('subsetFonts', function () {
               },
               fontUrl: expect.it(
                 'to start with',
-                'https://fonts.gstatic.com/s/opensans/'
+                'https://fonts.gstatic.com/s/opensans/',
               ),
               fontFamilies: expect.it('to be a', Set),
               fontStyles: expect.it('to be a', Set),
@@ -275,11 +275,11 @@ describe('subsetFonts', function () {
       const assetGraph = new AssetGraph({
         root: pathModule.resolve(
           __dirname,
-          '../testdata/subsetFonts/html-link/'
+          '../testdata/subsetFonts/html-link/',
         ),
       });
       assetGraph.on('warn', (warn) =>
-        expect(warn, 'to satisfy', /Cannot find module/)
+        expect(warn, 'to satisfy', /Cannot find module/),
       );
       await assetGraph.loadAssets('index.html');
       await assetGraph.populate({
@@ -377,11 +377,11 @@ describe('subsetFonts', function () {
     const assetGraph = new AssetGraph({
       root: pathModule.resolve(
         __dirname,
-        '../testdata/subsetFonts/css-import/'
+        '../testdata/subsetFonts/css-import/',
       ),
     });
     assetGraph.on('warn', (warn) =>
-      expect(warn, 'to satisfy', /Cannot find module/)
+      expect(warn, 'to satisfy', /Cannot find module/),
     );
     await assetGraph.loadAssets('index.html');
     await assetGraph.populate({
@@ -482,11 +482,11 @@ describe('subsetFonts', function () {
     const assetGraph = new AssetGraph({
       root: pathModule.resolve(
         __dirname,
-        '../testdata/subsetFonts/font-shorthand/'
+        '../testdata/subsetFonts/font-shorthand/',
       ),
     });
     assetGraph.on('warn', (warn) =>
-      expect(warn, 'to satisfy', /Cannot find module/)
+      expect(warn, 'to satisfy', /Cannot find module/),
     );
     await assetGraph.loadAssets('index.html');
     await assetGraph.populate({
@@ -500,19 +500,19 @@ describe('subsetFonts', function () {
     expect(
       assetGraph.findAssets({ fileName: 'index.html' })[0].text,
       'to contain',
-      "font: 12px/18px 'Open Sans__subset', 'Open Sans', Helvetica;"
+      "font: 12px/18px 'Open Sans__subset', 'Open Sans', Helvetica;",
     )
       .and(
         'to contain',
-        ".with-weight-and-style { font: italic 700 12px/18px 'Open Sans__subset', 'Open Sans', Helvetica; }"
+        ".with-weight-and-style { font: italic 700 12px/18px 'Open Sans__subset', 'Open Sans', Helvetica; }",
       )
       .and(
         'to contain',
-        ".with-style-and-weight { font: italic 700 12px/18px 'Open Sans__subset', 'Open Sans', Helvetica; }"
+        ".with-style-and-weight { font: italic 700 12px/18px 'Open Sans__subset', 'Open Sans', Helvetica; }",
       )
       .and(
         'to contain',
-        ".with-weight { font: 700 12px/18px 'Open Sans__subset', 'Open Sans', Helvetica; }"
+        ".with-weight { font: 700 12px/18px 'Open Sans__subset', 'Open Sans', Helvetica; }",
       );
   });
 
@@ -520,11 +520,11 @@ describe('subsetFonts', function () {
     const assetGraph = new AssetGraph({
       root: pathModule.resolve(
         __dirname,
-        '../testdata/subsetFonts/font-shorthand-with-custom-property/'
+        '../testdata/subsetFonts/font-shorthand-with-custom-property/',
       ),
     });
     assetGraph.on('warn', (warn) =>
-      expect(warn, 'to satisfy', /Cannot find module/)
+      expect(warn, 'to satisfy', /Cannot find module/),
     );
     const [htmlAsset] = await assetGraph.loadAssets('index.html');
 
@@ -542,25 +542,25 @@ describe('subsetFonts', function () {
     expect(
       assetGraph.findAssets({ fileName: 'index.html' })[0].text,
       'to contain',
-      "--unrelated-property: 'Open Sans', Helvetica;"
+      "--unrelated-property: 'Open Sans', Helvetica;",
     )
       .and(
         'to contain',
-        "--the-font: 'Open Sans__subset', 'Open Sans', Helvetica;"
+        "--the-font: 'Open Sans__subset', 'Open Sans', Helvetica;",
       )
       .and(
         'to contain',
-        "--the-font-family: 'Open Sans__subset', 'Open Sans', Helvetica;"
+        "--the-font-family: 'Open Sans__subset', 'Open Sans', Helvetica;",
       )
       .and('to contain', 'foNT: 12px/18px var(--the-font)')
       .and('to contain', '--fallback-font: sans-serif')
       .and(
         'to contain',
-        "foNT: 12px 'Open Sans__subset', 'Open Sans', var(--fallback-font);"
+        "foNT: 12px 'Open Sans__subset', 'Open Sans', var(--fallback-font);",
       )
       .and(
         'to contain',
-        "font-FAMILY: 'Open Sans__subset', 'Open Sans', var(--fallback-font);"
+        "font-FAMILY: 'Open Sans__subset', 'Open Sans', var(--fallback-font);",
       );
   });
 
@@ -568,7 +568,7 @@ describe('subsetFonts', function () {
     const assetGraph = new AssetGraph({
       root: pathModule.resolve(
         __dirname,
-        '../testdata/subsetFonts/google-webfont-ref-in-javascript/'
+        '../testdata/subsetFonts/google-webfont-ref-in-javascript/',
       ),
     });
     assetGraph.on('warn', console.log);
@@ -589,7 +589,7 @@ describe('subsetFonts', function () {
         const assetGraph = new AssetGraph({
           root: pathModule.resolve(
             __dirname,
-            '../testdata/subsetFonts/inline-subsets/'
+            '../testdata/subsetFonts/inline-subsets/',
           ),
         });
         const [htmlAsset] = await assetGraph.loadAssets('index.html');
@@ -626,7 +626,7 @@ describe('subsetFonts', function () {
         const assetGraph = new AssetGraph({
           root: pathModule.resolve(
             __dirname,
-            '../testdata/subsetFonts/unused-variant/'
+            '../testdata/subsetFonts/unused-variant/',
           ),
         });
         await assetGraph.loadAssets('index.html');
@@ -671,7 +671,7 @@ describe('subsetFonts', function () {
           const assetGraph = new AssetGraph({
             root: pathModule.resolve(
               __dirname,
-              '../testdata/subsetFonts/inline-subsets-multi-page/'
+              '../testdata/subsetFonts/inline-subsets-multi-page/',
             ),
           });
           await assetGraph.loadAssets(['index-1.html', 'index-2.html']);
@@ -717,7 +717,7 @@ describe('subsetFonts', function () {
           const assetGraph = new AssetGraph({
             root: pathModule.resolve(
               __dirname,
-              '../testdata/subsetFonts/inline-one-subset-multi-page/'
+              '../testdata/subsetFonts/inline-one-subset-multi-page/',
             ),
           });
           await assetGraph.loadAssets(['index-1.html', 'index-2.html']);
@@ -765,7 +765,7 @@ describe('subsetFonts', function () {
       const assetGraph = new AssetGraph({
         root: pathModule.resolve(
           __dirname,
-          '../testdata/subsetFonts/inline-subsets/'
+          '../testdata/subsetFonts/inline-subsets/',
         ),
       });
       await assetGraph.loadAssets('index.html');
@@ -808,7 +808,7 @@ describe('subsetFonts', function () {
       const assetGraph = new AssetGraph({
         root: pathModule.resolve(
           __dirname,
-          '../testdata/subsetFonts/css-import-twice/'
+          '../testdata/subsetFonts/css-import-twice/',
         ),
       });
 
@@ -827,7 +827,7 @@ describe('subsetFonts', function () {
       const assetGraph = new AssetGraph({
         root: pathModule.resolve(
           __dirname,
-          '../testdata/subsetFonts/css-import-twice-different-css/'
+          '../testdata/subsetFonts/css-import-twice-different-css/',
         ),
       });
 
@@ -847,11 +847,11 @@ describe('subsetFonts', function () {
     const assetGraph = new AssetGraph({
       root: pathModule.resolve(
         __dirname,
-        '../testdata/subsetFonts/multi-family/'
+        '../testdata/subsetFonts/multi-family/',
       ),
     });
     assetGraph.on('warn', (warn) =>
-      expect(warn, 'to satisfy', /Cannot find module/)
+      expect(warn, 'to satisfy', /Cannot find module/),
     );
     await assetGraph.loadAssets('index.html');
     await assetGraph.populate({
@@ -1013,11 +1013,11 @@ describe('subsetFonts', function () {
     const assetGraph = new AssetGraph({
       root: pathModule.resolve(
         __dirname,
-        '../testdata/subsetFonts/multi-weight/'
+        '../testdata/subsetFonts/multi-weight/',
       ),
     });
     assetGraph.on('warn', (warn) =>
-      expect(warn, 'to satisfy', /Cannot find module/)
+      expect(warn, 'to satisfy', /Cannot find module/),
     );
     await assetGraph.loadAssets('index.html');
     await assetGraph.populate({
@@ -1175,13 +1175,13 @@ describe('subsetFonts', function () {
       const assetGraph = new AssetGraph({
         root: pathModule.resolve(
           __dirname,
-          '../testdata/subsetFonts/multi-page/'
+          '../testdata/subsetFonts/multi-page/',
         ),
       });
       assetGraph.on('warn', (warn) =>
         // FIXME: The mocked out woff and woff2 fonts from Google don't contain space.
         // Redo the mocks so we don't have to allow 'Missing glyph' here:
-        expect(warn, 'to satisfy', /Missing glyph|Cannot find module/)
+        expect(warn, 'to satisfy', /Missing glyph|Cannot find module/),
       );
       await assetGraph.loadAssets('index.html');
       await assetGraph.populate({
@@ -1325,7 +1325,7 @@ describe('subsetFonts', function () {
       const assetGraph = new AssetGraph({
         root: pathModule.resolve(
           __dirname,
-          '../testdata/subsetFonts/multi-entry-points-ssr/'
+          '../testdata/subsetFonts/multi-entry-points-ssr/',
         ),
       });
       const [firstHtmlAsset, secondHtmlAsset] = await assetGraph.loadAssets([
@@ -1344,7 +1344,7 @@ describe('subsetFonts', function () {
           {
             href: expect.it('to begin with', '/subfont/font1-400-'),
           },
-        ]
+        ],
       );
       const firstSubfontCss = assetGraph.findRelations({
         from: firstHtmlAsset,
@@ -1354,7 +1354,7 @@ describe('subsetFonts', function () {
       expect(
         firstSubfontCss.text,
         'to contain',
-        'font-family:font1__subset'
+        'font-family:font1__subset',
       ).and('to contain', 'font-family:font2__subset');
       const secondSubfontCss = assetGraph.findRelations({
         from: secondHtmlAsset,
@@ -1373,7 +1373,7 @@ describe('subsetFonts', function () {
           {
             href: expect.it('to begin with', '/subfont/font2-400-'),
           },
-        ]
+        ],
       );
     });
 
@@ -1382,7 +1382,7 @@ describe('subsetFonts', function () {
         const assetGraph = new AssetGraph({
           root: pathModule.resolve(
             __dirname,
-            '../testdata/subsetFonts/one-page-with-no-usage-ssr/'
+            '../testdata/subsetFonts/one-page-with-no-usage-ssr/',
           ),
         });
         const [firstHtmlAsset, secondHtmlAsset] = await assetGraph.loadAssets([
@@ -1411,7 +1411,7 @@ describe('subsetFonts', function () {
         const assetGraph = new AssetGraph({
           root: pathModule.resolve(
             __dirname,
-            '../testdata/subsetFonts/one-page-with-no-font-face-ssr/'
+            '../testdata/subsetFonts/one-page-with-no-font-face-ssr/',
           ),
         });
         const [firstHtmlAsset, secondHtmlAsset] = await assetGraph.loadAssets([
@@ -1441,11 +1441,11 @@ describe('subsetFonts', function () {
       const assetGraph = new AssetGraph({
         root: pathModule.resolve(
           __dirname,
-          '../testdata/subsetFonts/html-link/'
+          '../testdata/subsetFonts/html-link/',
         ),
       });
       assetGraph.on('warn', (warn) =>
-        expect(warn, 'to satisfy', /Cannot find module/)
+        expect(warn, 'to satisfy', /Cannot find module/),
       );
       await assetGraph.loadAssets('index.html');
       await assetGraph.populate({
@@ -1467,11 +1467,11 @@ describe('subsetFonts', function () {
       const assetGraph = new AssetGraph({
         root: pathModule.resolve(
           __dirname,
-          '../testdata/subsetFonts/html-link/'
+          '../testdata/subsetFonts/html-link/',
         ),
       });
       assetGraph.on('warn', (warn) =>
-        expect(warn, 'to satisfy', /Cannot find module/)
+        expect(warn, 'to satisfy', /Cannot find module/),
       );
       await assetGraph.loadAssets('index.html');
       await assetGraph.populate({
@@ -1495,11 +1495,11 @@ describe('subsetFonts', function () {
       const assetGraph = new AssetGraph({
         root: pathModule.resolve(
           __dirname,
-          '../testdata/subsetFonts/html-link/'
+          '../testdata/subsetFonts/html-link/',
         ),
       });
       assetGraph.on('warn', (warn) =>
-        expect(warn, 'to satisfy', /Cannot find module/)
+        expect(warn, 'to satisfy', /Cannot find module/),
       );
       await assetGraph.loadAssets('index.html');
       await assetGraph.populate({
@@ -1523,11 +1523,11 @@ describe('subsetFonts', function () {
       const assetGraph = new AssetGraph({
         root: pathModule.resolve(
           __dirname,
-          '../testdata/subsetFonts/html-link/'
+          '../testdata/subsetFonts/html-link/',
         ),
       });
       assetGraph.on('warn', (warn) =>
-        expect(warn, 'to satisfy', /Cannot find module/)
+        expect(warn, 'to satisfy', /Cannot find module/),
       );
       await assetGraph.loadAssets('index.html');
       await assetGraph.populate({
@@ -1565,7 +1565,7 @@ describe('subsetFonts', function () {
     expect(
       htmlAsset.text,
       'not to contain',
-      '<link href="https://fonts.googleapis.com'
+      '<link href="https://fonts.googleapis.com',
     );
   });
 
@@ -1574,7 +1574,7 @@ describe('subsetFonts', function () {
       const assetGraph = new AssetGraph({
         root: pathModule.resolve(
           __dirname,
-          '../testdata/subsetFonts/unused-variant/'
+          '../testdata/subsetFonts/unused-variant/',
         ),
       });
       const [htmlAsset] = await assetGraph.loadAssets('index.html');
@@ -1597,7 +1597,7 @@ describe('subsetFonts', function () {
     const assetGraph = new AssetGraph({
       root: pathModule.resolve(
         __dirname,
-        '../testdata/subsetFonts/woff2-original/'
+        '../testdata/subsetFonts/woff2-original/',
       ),
     });
     await assetGraph.loadAssets('index.html');
@@ -1609,7 +1609,7 @@ describe('subsetFonts', function () {
     await expect(
       subsetFonts(assetGraph),
       'to be rejected with',
-      'Multiple @font-face with the same font-family/font-style/font-weight (maybe with different unicode-range?) is not supported yet: Roboto Slab/normal/300'
+      'Multiple @font-face with the same font-family/font-style/font-weight (maybe with different unicode-range?) is not supported yet: Roboto Slab/normal/300',
     );
   });
 
@@ -1621,7 +1621,7 @@ describe('subsetFonts', function () {
     const assetGraph = new AssetGraph({
       root: pathModule.resolve(
         __dirname,
-        '../testdata/subsetFonts/local-invalid/'
+        '../testdata/subsetFonts/local-invalid/',
       ),
     });
     assetGraph.on('warn', function (warning) {
@@ -1690,7 +1690,7 @@ describe('subsetFonts', function () {
       const assetGraph = new AssetGraph({
         root: pathModule.resolve(
           __dirname,
-          '../testdata/subsetFonts/missing-glyphs/'
+          '../testdata/subsetFonts/missing-glyphs/',
         ),
       });
       assetGraph.on('info', infoSpy);
@@ -1719,7 +1719,7 @@ describe('subsetFonts', function () {
         const assetGraph = new AssetGraph({
           root: pathModule.resolve(
             __dirname,
-            '../testdata/subsetFonts/missing-glyphs/'
+            '../testdata/subsetFonts/missing-glyphs/',
           ),
         });
         assetGraph.on('warn', () => {}); // Don't fail due to the missing glyphs warning
@@ -1738,7 +1738,7 @@ describe('subsetFonts', function () {
         expect(
           originalFontFaceSrcRelation.from.text,
           'to match',
-          /unicode-range:U\+20-7e,U\+a0-ff,/i
+          /unicode-range:U\+20-7e,U\+a0-ff,/i,
         );
       });
     });
@@ -1750,7 +1750,7 @@ describe('subsetFonts', function () {
         const assetGraph = new AssetGraph({
           root: pathModule.resolve(
             __dirname,
-            '../testdata/subsetFonts/missing-glyphs-multiple-variants/'
+            '../testdata/subsetFonts/missing-glyphs-multiple-variants/',
           ),
         });
         assetGraph.on('warn', () => {}); // Don't fail due to the missing glyphs warning
@@ -1770,7 +1770,7 @@ describe('subsetFonts', function () {
         expect(
           outputSansRegularRelation.node.toString(),
           'not to contain',
-          'unicode-range:'
+          'unicode-range:',
         );
         const [outputSansBoldRelation] = assetGraph.findRelations({
           type: 'CssFontFaceSrc',
@@ -1779,7 +1779,7 @@ describe('subsetFonts', function () {
         expect(
           outputSansBoldRelation.node.toString(),
           'not to contain',
-          'unicode-range:'
+          'unicode-range:',
         );
 
         const [inputMonoRegularRelation] = assetGraph.findRelations({
@@ -1789,7 +1789,7 @@ describe('subsetFonts', function () {
         expect(
           inputMonoRegularRelation.node.toString(),
           'to match',
-          /unicode-range:U\+/i
+          /unicode-range:U\+/i,
         );
         const [inputMonoBoldRelation] = assetGraph.findRelations({
           type: 'CssFontFaceSrc',
@@ -1798,7 +1798,7 @@ describe('subsetFonts', function () {
         expect(
           inputMonoBoldRelation.node.toString(),
           'to match',
-          /unicode-range:U\+/i
+          /unicode-range:U\+/i,
         );
       });
     });
@@ -1810,7 +1810,7 @@ describe('subsetFonts', function () {
         const assetGraph = new AssetGraph({
           root: pathModule.resolve(
             __dirname,
-            '../testdata/subsetFonts/missing-glyphs-unicode-range/'
+            '../testdata/subsetFonts/missing-glyphs-unicode-range/',
           ),
         });
         assetGraph.on('warn', () => {}); // Don't fail due to the missing glyphs warning
@@ -1829,7 +1829,7 @@ describe('subsetFonts', function () {
         expect(
           originalFontFaceSrcRelation.from.text,
           'to contain',
-          'unicode-range:foobar'
+          'unicode-range:foobar',
         ).and('not to contain', 'unicode-range:U+64-7e,U+a0-ff,');
       });
     });
@@ -1841,7 +1841,7 @@ describe('subsetFonts', function () {
       const assetGraph = new AssetGraph({
         root: pathModule.resolve(
           __dirname,
-          '../testdata/subsetFonts/missing-glyphs/'
+          '../testdata/subsetFonts/missing-glyphs/',
         ),
       });
       assetGraph.on('info', infoSpy);
@@ -1873,7 +1873,7 @@ describe('subsetFonts', function () {
       const assetGraph = new AssetGraph({
         root: pathModule.resolve(
           __dirname,
-          '../testdata/subsetFonts/missing-tab-and-newline-glyphs/'
+          '../testdata/subsetFonts/missing-tab-and-newline-glyphs/',
         ),
       });
       assetGraph.on('warn', infoSpy);
@@ -1895,7 +1895,7 @@ describe('subsetFonts', function () {
     const assetGraph = new AssetGraph({
       root: pathModule.resolve(
         __dirname,
-        '../testdata/subsetFonts/local-single/'
+        '../testdata/subsetFonts/local-single/',
       ),
     });
     await assetGraph.loadAssets('index.html');
@@ -1978,7 +1978,7 @@ describe('subsetFonts', function () {
     const assetGraph = new AssetGraph({
       root: pathModule.resolve(
         __dirname,
-        '../testdata/subsetFonts/local-with-noscript/'
+        '../testdata/subsetFonts/local-with-noscript/',
       ),
     });
     await assetGraph.loadAssets('index.html');
@@ -2013,7 +2013,7 @@ describe('subsetFonts', function () {
       const assetGraph = new AssetGraph({
         root: pathModule.resolve(
           __dirname,
-          '../testdata/subsetFonts/local-single/'
+          '../testdata/subsetFonts/local-single/',
         ),
       });
       await assetGraph.loadAssets('index.html');
@@ -2099,7 +2099,7 @@ describe('subsetFonts', function () {
       const assetGraph = new AssetGraph({
         root: pathModule.resolve(
           __dirname,
-          '../testdata/subsetFonts/local-with-no-css-rules-in-font-face-stylesheet/'
+          '../testdata/subsetFonts/local-with-no-css-rules-in-font-face-stylesheet/',
         ),
       });
       const [htmlAsset] = await assetGraph.loadAssets('index.html');
@@ -2114,7 +2114,7 @@ describe('subsetFonts', function () {
       const assetGraph = new AssetGraph({
         root: pathModule.resolve(
           __dirname,
-          '../testdata/subsetFonts/local-with-no-css-rules-in-font-face-stylesheet-only-comment/'
+          '../testdata/subsetFonts/local-with-no-css-rules-in-font-face-stylesheet-only-comment/',
         ),
       });
       const [htmlAsset] = await assetGraph.loadAssets('index.html');
@@ -2129,7 +2129,7 @@ describe('subsetFonts', function () {
       const assetGraph = new AssetGraph({
         root: pathModule.resolve(
           __dirname,
-          '../testdata/subsetFonts/local-with-no-css-rules-in-font-face-stylesheet-only-license-comment/'
+          '../testdata/subsetFonts/local-with-no-css-rules-in-font-face-stylesheet-only-license-comment/',
         ),
       });
       const [htmlAsset] = await assetGraph.loadAssets('index.html');
@@ -2138,7 +2138,7 @@ describe('subsetFonts', function () {
       expect(
         htmlAsset.text,
         'to contain',
-        '<style>/*! preserve me because of the exclamation mark */'
+        '<style>/*! preserve me because of the exclamation mark */',
       );
     });
   });
@@ -2150,7 +2150,7 @@ describe('subsetFonts', function () {
       const assetGraph = new AssetGraph({
         root: pathModule.resolve(
           __dirname,
-          '../testdata/subsetFonts/unused-variant/'
+          '../testdata/subsetFonts/unused-variant/',
         ),
       });
       await assetGraph.loadAssets('index.html');
@@ -2167,7 +2167,7 @@ describe('subsetFonts', function () {
       expect(
         subfontCss.text,
         'to contain',
-        "font-family:Roboto__subset;font-stretch:normal;font-style:italic;font-weight:700;src:url(/KFOjCnqEu92Fr1Mu51TzBic6CsI.woff) format('woff')"
+        "font-family:Roboto__subset;font-stretch:normal;font-style:italic;font-weight:700;src:url(/KFOjCnqEu92Fr1Mu51TzBic6CsI.woff) format('woff')",
       );
       expect(assetGraph, 'to contain relation', {
         from: subfontCss,
@@ -2184,7 +2184,7 @@ describe('subsetFonts', function () {
         const assetGraph = new AssetGraph({
           root: pathModule.resolve(
             __dirname,
-            '../testdata/subsetFonts/unused-variant/'
+            '../testdata/subsetFonts/unused-variant/',
           ),
         });
         await assetGraph.loadAssets('index.html');
@@ -2200,7 +2200,7 @@ describe('subsetFonts', function () {
         expect(
           subfontCss.text,
           'to contain',
-          'font-family:Roboto__subset;font-stretch:normal;font-style:italic;font-weight:700;src:url(/KFOjCnqEu92Fr1Mu51TzBic6CsI.woff) format("woff")'
+          'font-family:Roboto__subset;font-stretch:normal;font-style:italic;font-weight:700;src:url(/KFOjCnqEu92Fr1Mu51TzBic6CsI.woff) format("woff")',
         );
         expect(assetGraph, 'to contain relation', {
           from: subfontCss,
@@ -2220,7 +2220,7 @@ describe('subsetFonts', function () {
       const assetGraph = new AssetGraph({
         root: pathModule.resolve(
           __dirname,
-          '../testdata/subsetFonts/unused-font/'
+          '../testdata/subsetFonts/unused-font/',
         ),
       });
       await assetGraph.loadAssets('index.html');
@@ -2245,7 +2245,7 @@ describe('subsetFonts', function () {
       const assetGraph = new AssetGraph({
         root: pathModule.resolve(
           __dirname,
-          '../testdata/subsetFonts/unused-variant-on-one-page/'
+          '../testdata/subsetFonts/unused-variant-on-one-page/',
         ),
       });
       await assetGraph.loadAssets('index*.html');
@@ -2263,7 +2263,7 @@ describe('subsetFonts', function () {
       const assetGraph = new AssetGraph({
         root: pathModule.resolve(
           __dirname,
-          '../testdata/subsetFonts/unused-variant-preload/'
+          '../testdata/subsetFonts/unused-variant-preload/',
         ),
       });
       const [htmlAsset] = await assetGraph.loadAssets('index.html');
@@ -2287,7 +2287,7 @@ describe('subsetFonts', function () {
         const assetGraph = new AssetGraph({
           root: pathModule.resolve(
             __dirname,
-            '../testdata/subsetFonts/unused-variant-preload-google/'
+            '../testdata/subsetFonts/unused-variant-preload-google/',
           ),
         });
         const [htmlAsset] = await assetGraph.loadAssets('index.html');
@@ -2314,7 +2314,7 @@ describe('subsetFonts', function () {
     const assetGraph = new AssetGraph({
       root: pathModule.resolve(
         __dirname,
-        '../testdata/subsetFonts/font-face-defaults-and-casing/'
+        '../testdata/subsetFonts/font-face-defaults-and-casing/',
       ),
     });
     await assetGraph.loadAssets('index.html');
@@ -2355,7 +2355,7 @@ describe('subsetFonts', function () {
     const assetGraph = new AssetGraph({
       root: pathModule.resolve(
         __dirname,
-        '../testdata/subsetFonts/multiple-font-face-with-same-src/'
+        '../testdata/subsetFonts/multiple-font-face-with-same-src/',
       ),
     });
     await assetGraph.loadAssets('index.html');
@@ -2379,7 +2379,7 @@ describe('subsetFonts', function () {
 
     expect(htmlAsset.text, 'to contain', "font-family: foo__subset, 'foo'").and(
       'to contain',
-      '<p style="font-family: foo__subset, bar">Hello, yourself!</p>'
+      '<p style="font-family: foo__subset, bar">Hello, yourself!</p>',
     );
   });
 
@@ -2389,7 +2389,7 @@ describe('subsetFonts', function () {
     const assetGraph = new AssetGraph({
       root: pathModule.resolve(
         __dirname,
-        '../testdata/subsetFonts/local-font-family-case-difference/'
+        '../testdata/subsetFonts/local-font-family-case-difference/',
       ),
     });
     await assetGraph.loadAssets('index.html');
@@ -2409,7 +2409,7 @@ describe('subsetFonts', function () {
     expect(
       assetGraph.findAssets({ type: 'Css' })[0].text,
       'to contain',
-      "font-family: 'Open Sans__subset', oPeN sAnS;"
+      "font-family: 'Open Sans__subset', oPeN sAnS;",
     ).and('to contain', "--the-font: 'Open Sans__subset', OpEn SaNs;");
   });
 
@@ -2419,7 +2419,7 @@ describe('subsetFonts', function () {
     });
     // FIXME: Maybe use a font that's not missing any chars?
     assetGraph.on('warn', (warn) =>
-      expect(warn, 'to satisfy', /is missing these characters/)
+      expect(warn, 'to satisfy', /is missing these characters/),
     );
     await assetGraph.loadAssets('index.html');
     await assetGraph.populate({
@@ -2521,7 +2521,7 @@ describe('subsetFonts', function () {
     const assetGraph = new AssetGraph({
       root: pathModule.resolve(
         __dirname,
-        '../testdata/subsetFonts/font-weight-and-style-omitted/'
+        '../testdata/subsetFonts/font-weight-and-style-omitted/',
       ),
     });
     await assetGraph.loadAssets('index.html');
@@ -2550,7 +2550,7 @@ describe('subsetFonts', function () {
       const assetGraph = new AssetGraph({
         root: pathModule.resolve(
           __dirname,
-          '../testdata/subsetFonts/multi-page-same-subset/'
+          '../testdata/subsetFonts/multi-page-same-subset/',
         ),
       });
       const [htmlAsset1, htmlAsset2] =
@@ -2562,10 +2562,10 @@ describe('subsetFonts', function () {
       });
       await subsetFonts(assetGraph);
       const preloads1 = htmlAsset1.outgoingRelations.filter(
-        (relation) => relation.type === 'HtmlPreloadLink'
+        (relation) => relation.type === 'HtmlPreloadLink',
       );
       const preloads2 = htmlAsset2.outgoingRelations.filter(
-        (relation) => relation.type === 'HtmlPreloadLink'
+        (relation) => relation.type === 'HtmlPreloadLink',
       );
       expect(preloads1, 'to have length', 1);
       expect(preloads2, 'to have length', 1);
@@ -2586,12 +2586,12 @@ describe('subsetFonts', function () {
     const assetGraph = new AssetGraph({
       root: pathModule.resolve(
         __dirname,
-        '../testdata/subsetFonts/local-mixed/'
+        '../testdata/subsetFonts/local-mixed/',
       ),
     });
     // FIXME: Maybe use a font that's not missing any chars?
     assetGraph.on('warn', (warn) =>
-      expect(warn, 'to satisfy', /is missing these characters/)
+      expect(warn, 'to satisfy', /is missing these characters/),
     );
     await assetGraph.loadAssets('index.html');
     await assetGraph.populate({
@@ -2742,7 +2742,7 @@ describe('subsetFonts', function () {
       const assetGraph = new AssetGraph({
         root: pathModule.resolve(
           __dirname,
-          '../testdata/subsetFonts/variable-font-in-supports-block-with-fallback/'
+          '../testdata/subsetFonts/variable-font-in-supports-block-with-fallback/',
         ),
       });
       await assetGraph.loadAssets('index.html');
@@ -2776,7 +2776,7 @@ describe('subsetFonts', function () {
       expect(
         assetGraph.findAssets({ type: 'Css' })[0].text,
         'to contain',
-        `font-family: 'Venn VF__subset', 'Venn VF', Venn__subset, 'Venn', sans-serif;`
+        `font-family: 'Venn VF__subset', 'Venn VF', Venn__subset, 'Venn', sans-serif;`,
       );
     });
   });
@@ -2786,7 +2786,7 @@ describe('subsetFonts', function () {
       const assetGraph = new AssetGraph({
         root: pathModule.resolve(
           __dirname,
-          '../testdata/subsetFonts/variable-font-in-supports-block-with-two-fallback-variants/'
+          '../testdata/subsetFonts/variable-font-in-supports-block-with-two-fallback-variants/',
         ),
       });
       await assetGraph.loadAssets('index.html');
@@ -2838,7 +2838,7 @@ describe('subsetFonts', function () {
       const assetGraph = new AssetGraph({
         root: pathModule.resolve(
           __dirname,
-          '../testdata/subsetFonts/two-variable-fonts-animated/'
+          '../testdata/subsetFonts/two-variable-fonts-animated/',
         ),
       });
       await assetGraph.loadAssets('index.html');
@@ -2876,7 +2876,7 @@ describe('subsetFonts', function () {
       const assetGraph = new AssetGraph({
         root: pathModule.resolve(
           __dirname,
-          '../testdata/subsetFonts/variable-font-unused-axes/'
+          '../testdata/subsetFonts/variable-font-unused-axes/',
         ),
       });
       await assetGraph.loadAssets('index.html');
@@ -2890,7 +2890,7 @@ describe('subsetFonts', function () {
         infoSpy({
           message: expect.it(
             'to contain',
-            'RobotoFlex-VariableFont_GRAD,XTRA,YOPQ,YTAS,YTDE,YTFI,YTLC,YTUC,opsz,slnt,wdth,wght.ttf:\n  Unused axes: wght, wdth, GRAD, slnt, XOPQ, YOPQ, YTLC, YTUC, YTDE, YTFI\n  Underutilized axes:\n    YTAS: 649-750 used (649-854 available)'
+            'RobotoFlex-VariableFont_GRAD,XTRA,YOPQ,YTAS,YTDE,YTFI,YTLC,YTUC,opsz,slnt,wdth,wght.ttf:\n  Unused axes: wght, wdth, GRAD, slnt, XOPQ, YOPQ, YTLC, YTUC, YTDE, YTFI\n  Underutilized axes:\n    YTAS: 649-750 used (649-854 available)',
           ),
         });
       });
@@ -2901,7 +2901,7 @@ describe('subsetFonts', function () {
         const assetGraph = new AssetGraph({
           root: pathModule.resolve(
             __dirname,
-            '../testdata/subsetFonts/variable-font-unused-wght-axis/'
+            '../testdata/subsetFonts/variable-font-unused-wght-axis/',
           ),
         });
         await assetGraph.loadAssets('index.html');
@@ -2915,7 +2915,7 @@ describe('subsetFonts', function () {
           infoSpy({
             message: expect.it(
               'to contain',
-              'Underutilized axes:\n    wght: 350-820 used (100-1000 available)'
+              'Underutilized axes:\n    wght: 350-820 used (100-1000 available)',
             ),
           });
         });
@@ -2927,7 +2927,7 @@ describe('subsetFonts', function () {
         const assetGraph = new AssetGraph({
           root: pathModule.resolve(
             __dirname,
-            '../testdata/subsetFonts/variable-font-unused-wdth-axis/'
+            '../testdata/subsetFonts/variable-font-unused-wdth-axis/',
           ),
         });
         await assetGraph.loadAssets('index.html');
@@ -2941,7 +2941,7 @@ describe('subsetFonts', function () {
           infoSpy({
             message: expect.it(
               'to contain',
-              'wdth: 87.5-147 used (25-151 available)'
+              'wdth: 87.5-147 used (25-151 available)',
             ),
           });
         });
@@ -2954,7 +2954,7 @@ describe('subsetFonts', function () {
           const assetGraph = new AssetGraph({
             root: pathModule.resolve(
               __dirname,
-              '../testdata/subsetFonts/variable-font-unused-ital-axis/'
+              '../testdata/subsetFonts/variable-font-unused-ital-axis/',
             ),
           });
           await assetGraph.loadAssets('normal.html');
@@ -2977,7 +2977,7 @@ describe('subsetFonts', function () {
           const assetGraph = new AssetGraph({
             root: pathModule.resolve(
               __dirname,
-              '../testdata/subsetFonts/variable-font-unused-ital-axis/'
+              '../testdata/subsetFonts/variable-font-unused-ital-axis/',
             ),
           });
           await assetGraph.loadAssets('italic.html');
@@ -2991,7 +2991,7 @@ describe('subsetFonts', function () {
             infoSpy({
               message: expect.it(
                 'to contain',
-                'Underutilized axes:\n    ital: 1 used (0-1 available)'
+                'Underutilized axes:\n    ital: 1 used (0-1 available)',
               ),
             });
           });
@@ -3003,7 +3003,7 @@ describe('subsetFonts', function () {
           const assetGraph = new AssetGraph({
             root: pathModule.resolve(
               __dirname,
-              '../testdata/subsetFonts/variable-font-unused-ital-axis/'
+              '../testdata/subsetFonts/variable-font-unused-ital-axis/',
             ),
           });
           await assetGraph.loadAssets('normal_and_italic.html');
@@ -3024,7 +3024,7 @@ describe('subsetFonts', function () {
           const assetGraph = new AssetGraph({
             root: pathModule.resolve(
               __dirname,
-              '../testdata/subsetFonts/variable-font-unused-slnt-axis/'
+              '../testdata/subsetFonts/variable-font-unused-slnt-axis/',
             ),
           });
           await assetGraph.loadAssets('normal.html');
@@ -3047,7 +3047,7 @@ describe('subsetFonts', function () {
           const assetGraph = new AssetGraph({
             root: pathModule.resolve(
               __dirname,
-              '../testdata/subsetFonts/variable-font-unused-slnt-axis/'
+              '../testdata/subsetFonts/variable-font-unused-slnt-axis/',
             ),
           });
           await assetGraph.loadAssets('oblique.html');
@@ -3061,7 +3061,7 @@ describe('subsetFonts', function () {
             infoSpy({
               message: expect.it(
                 'to contain',
-                'Underutilized axes:\n    slnt: -14 used (-20-20 available)'
+                'Underutilized axes:\n    slnt: -14 used (-20-20 available)',
               ),
             });
           });
@@ -3073,7 +3073,7 @@ describe('subsetFonts', function () {
           const assetGraph = new AssetGraph({
             root: pathModule.resolve(
               __dirname,
-              '../testdata/subsetFonts/variable-font-unused-slnt-axis/'
+              '../testdata/subsetFonts/variable-font-unused-slnt-axis/',
             ),
           });
           await assetGraph.loadAssets('normal_and_oblique.html');
@@ -3087,7 +3087,7 @@ describe('subsetFonts', function () {
             infoSpy({
               message: expect.it(
                 'to contain',
-                'Underutilized axes:\n    slnt: -14-0 used (-20-20 available)'
+                'Underutilized axes:\n    slnt: -14-0 used (-20-20 available)',
               ),
             });
           });
@@ -3101,7 +3101,7 @@ describe('subsetFonts', function () {
           const assetGraph = new AssetGraph({
             root: pathModule.resolve(
               __dirname,
-              '../testdata/subsetFonts/variable-font-underutilized-axis-with-bezier/'
+              '../testdata/subsetFonts/variable-font-underutilized-axis-with-bezier/',
             ),
           });
           await assetGraph.loadAssets('index.html');
@@ -3115,7 +3115,7 @@ describe('subsetFonts', function () {
             infoSpy({
               message: expect.it(
                 'to contain',
-                'Underutilized axes:\n    YTAS: 649-750 used (649-854 available)'
+                'Underutilized axes:\n    YTAS: 649-750 used (649-854 available)',
               ),
             });
           });
@@ -3127,7 +3127,7 @@ describe('subsetFonts', function () {
           const assetGraph = new AssetGraph({
             root: pathModule.resolve(
               __dirname,
-              '../testdata/subsetFonts/variable-font-underutilized-axis-with-bezier-out-of-bounds/'
+              '../testdata/subsetFonts/variable-font-underutilized-axis-with-bezier-out-of-bounds/',
             ),
           });
           await assetGraph.loadAssets('index.html');
@@ -3153,7 +3153,7 @@ describe('subsetFonts', function () {
         const assetGraph = new AssetGraph({
           root: pathModule.resolve(
             __dirname,
-            '../testdata/subsetFonts/variable-font-that-can-be-fully-instanced/'
+            '../testdata/subsetFonts/variable-font-that-can-be-fully-instanced/',
           ),
         });
         await assetGraph.loadAssets('index.html');
@@ -3175,7 +3175,7 @@ describe('subsetFonts', function () {
         const assetGraph = new AssetGraph({
           root: pathModule.resolve(
             __dirname,
-            '../testdata/subsetFonts/variable-font-that-can-be-partially-instanced/'
+            '../testdata/subsetFonts/variable-font-that-can-be-partially-instanced/',
           ),
         });
         await assetGraph.loadAssets('index.html');
@@ -3204,7 +3204,7 @@ describe('subsetFonts', function () {
       const assetGraph = new AssetGraph({
         root: pathModule.resolve(
           __dirname,
-          '../testdata/subsetFonts/no-fallbacks/'
+          '../testdata/subsetFonts/no-fallbacks/',
         ),
       });
       const [htmlAsset] = await assetGraph.loadAssets('index.html');
@@ -3236,7 +3236,7 @@ describe('subsetFonts', function () {
       const assetGraph = new AssetGraph({
         root: pathModule.resolve(
           __dirname,
-          '../testdata/subsetFonts/firstPageNoSubset/'
+          '../testdata/subsetFonts/firstPageNoSubset/',
         ),
       });
       await assetGraph.loadAssets(['index-1.html', 'index-2.html']);
@@ -3274,7 +3274,7 @@ describe('subsetFonts', function () {
       const assetGraph = new AssetGraph({
         root: pathModule.resolve(
           __dirname,
-          '../testdata/subsetFonts/multi-page-with-same-local-style-file/'
+          '../testdata/subsetFonts/multi-page-with-same-local-style-file/',
         ),
       });
       await assetGraph.loadAssets(['index.html', 'subindex.html']);
@@ -3335,7 +3335,7 @@ describe('subsetFonts', function () {
       const assetGraph = new AssetGraph({
         root: pathModule.resolve(
           __dirname,
-          '../testdata/subsetFonts/nonExistentFont/'
+          '../testdata/subsetFonts/nonExistentFont/',
         ),
       });
       await assetGraph.loadAssets(['index.html']);
@@ -3356,7 +3356,7 @@ describe('subsetFonts', function () {
       expect(
         subfontCss.text,
         'to contain',
-        'src:url(/Roboto-400-not-found-italic.woff2) format("woff2")'
+        'src:url(/Roboto-400-not-found-italic.woff2) format("woff2")',
       );
     });
   });
@@ -3367,7 +3367,7 @@ describe('subsetFonts', function () {
       const assetGraph = new AssetGraph({
         root: pathModule.resolve(
           __dirname,
-          '../testdata/subsetFonts/two-pages-import-css/'
+          '../testdata/subsetFonts/two-pages-import-css/',
         ),
       });
       await assetGraph.loadAssets(['index1.html', 'index2.html']);
@@ -3394,7 +3394,7 @@ describe('subsetFonts', function () {
           const assetGraph = new AssetGraph({
             root: pathModule.resolve(
               __dirname,
-              `../testdata/subsetFonts/css-source-map-${testCase}/`
+              `../testdata/subsetFonts/css-source-map-${testCase}/`,
             ),
           });
           await assetGraph.loadAssets('index.html');
@@ -3408,20 +3408,20 @@ describe('subsetFonts', function () {
             });
             const cssAsset = sourceMap.incomingRelations[0].from;
             const generatedPosition = new LinesAndColumns(
-              cssAsset.text
+              cssAsset.text,
             ).locationForIndex(
-              cssAsset.text.indexOf('border: 1px solid black')
+              cssAsset.text.indexOf('border: 1px solid black'),
             );
             const originalPosition = sourceMap.originalPositionFor({
               line: generatedPosition.line + 1, // source-map's line numbers are 1-based, lines-and-column's are 0-based
               column: generatedPosition.column,
             });
             const lessAsset = sourceMap.outgoingRelations.find(
-              (relation) => relation.type === 'SourceMapSource'
+              (relation) => relation.type === 'SourceMapSource',
             ).to;
             const lessText = lessAsset.rawSrc.toString('utf-8');
             const originalIndex = new LinesAndColumns(
-              lessText
+              lessText,
             ).indexForLocation({
               line: originalPosition.line - 1,
               column: originalPosition.column,
@@ -3429,7 +3429,7 @@ describe('subsetFonts', function () {
             expect(
               lessText.slice(originalIndex),
               'to begin with',
-              'border: 1px solid black'
+              'border: 1px solid black',
             );
           }
           checkSourceMap();
@@ -3445,7 +3445,7 @@ describe('subsetFonts', function () {
     const assetGraph = new AssetGraph({
       root: pathModule.resolve(
         __dirname,
-        '../testdata/subsetFonts/missing-font-family/'
+        '../testdata/subsetFonts/missing-font-family/',
       ),
     });
     await assetGraph.loadAssets('index.html');
@@ -3458,7 +3458,7 @@ describe('subsetFonts', function () {
       const assetGraph = new AssetGraph({
         root: pathModule.resolve(
           __dirname,
-          '../testdata/subsetFonts/font-family-with-escape/'
+          '../testdata/subsetFonts/font-family-with-escape/',
         ),
       });
       const [htmlAsset] = await assetGraph.loadAssets('index.html');
@@ -3470,10 +3470,10 @@ describe('subsetFonts', function () {
       expect(
         htmlAsset.text,
         'to contain',
-        "font-family: 'Font Awesome 5 Free__subset', Font Awesome\\ 5 Free;"
+        "font-family: 'Font Awesome 5 Free__subset', Font Awesome\\ 5 Free;",
       ).and(
         'to contain',
-        "font: 12px 'Font Awesome 5 Free__subset', 'Font Awesome 5 Free'"
+        "font: 12px 'Font Awesome 5 Free__subset', 'Font Awesome 5 Free'",
       );
     });
 
@@ -3482,7 +3482,7 @@ describe('subsetFonts', function () {
         const assetGraph = new AssetGraph({
           root: pathModule.resolve(
             __dirname,
-            '../testdata/subsetFonts/font-family-with-escape/'
+            '../testdata/subsetFonts/font-family-with-escape/',
           ),
         });
         const [htmlAsset] = await assetGraph.loadAssets('index.html');
@@ -3494,15 +3494,15 @@ describe('subsetFonts', function () {
         expect(
           htmlAsset.text,
           'to contain',
-          "font-family: 'Font Awesome 5 Free__subset', Font Awesome\\ 5 Free;"
+          "font-family: 'Font Awesome 5 Free__subset', Font Awesome\\ 5 Free;",
         )
           .and(
             'to contain',
-            "font: 12px 'Font Awesome 5 Free__subset', 'Font Awesome 5 Free'"
+            "font: 12px 'Font Awesome 5 Free__subset', 'Font Awesome 5 Free'",
           )
           .and(
             'to contain',
-            'url(/subfont/Font_Awesome_5_Free-400-ba155ca153.woff)'
+            'url(/subfont/Font_Awesome_5_Free-400-ba155ca153.woff)',
           );
       });
     });
@@ -3513,7 +3513,7 @@ describe('subsetFonts', function () {
       const assetGraph = new AssetGraph({
         root: pathModule.resolve(
           __dirname,
-          '../testdata/subsetFonts/non-truetype-font/'
+          '../testdata/subsetFonts/non-truetype-font/',
         ),
       });
       await assetGraph.loadAssets('index.html');
@@ -3552,7 +3552,7 @@ describe('subsetFonts', function () {
       const assetGraph = new AssetGraph({
         root: pathModule.resolve(
           __dirname,
-          '../testdata/subsetFonts/non-truetype-and-truetype/'
+          '../testdata/subsetFonts/non-truetype-and-truetype/',
         ),
       });
       await assetGraph.loadAssets('index.html');
@@ -3674,7 +3674,7 @@ describe('subsetFonts', function () {
         const assetGraph = new AssetGraph({
           root: pathModule.resolve(
             __dirname,
-            '../testdata/subsetFonts/local-unused-with-subfont-text/'
+            '../testdata/subsetFonts/local-unused-with-subfont-text/',
           ),
         });
         await assetGraph.loadAssets('index.html');
@@ -3705,7 +3705,7 @@ describe('subsetFonts', function () {
           const assetGraph = new AssetGraph({
             root: pathModule.resolve(
               __dirname,
-              '../testdata/subsetFonts/local-used-with-subfont-text/'
+              '../testdata/subsetFonts/local-used-with-subfont-text/',
             ),
           });
           await assetGraph.loadAssets('index.html');
@@ -3735,7 +3735,7 @@ describe('subsetFonts', function () {
           const assetGraph = new AssetGraph({
             root: pathModule.resolve(
               __dirname,
-              '../testdata/subsetFonts/local-used-multipage-with-subfont-text/'
+              '../testdata/subsetFonts/local-used-multipage-with-subfont-text/',
             ),
           });
           await assetGraph.loadAssets('page*.html');
@@ -3776,7 +3776,7 @@ describe('subsetFonts', function () {
         const assetGraph = new AssetGraph({
           root: pathModule.resolve(
             __dirname,
-            '../testdata/subsetFonts/local-unused/'
+            '../testdata/subsetFonts/local-unused/',
           ),
         });
         await assetGraph.loadAssets('index.html');
@@ -3803,7 +3803,7 @@ describe('subsetFonts', function () {
         const assetGraph = new AssetGraph({
           root: pathModule.resolve(
             __dirname,
-            '../testdata/subsetFonts/local-used/'
+            '../testdata/subsetFonts/local-used/',
           ),
         });
         await assetGraph.loadAssets('index.html');
@@ -3832,7 +3832,7 @@ describe('subsetFonts', function () {
         const assetGraph = new AssetGraph({
           root: pathModule.resolve(
             __dirname,
-            '../testdata/subsetFonts/svg/img-element/'
+            '../testdata/subsetFonts/svg/img-element/',
           ),
         });
         await assetGraph.loadAssets('index.html');
@@ -3866,7 +3866,7 @@ describe('subsetFonts', function () {
         expect(
           svgAsset.text,
           'to contain',
-          '<text x="20" y="50" font-family="Roboto__subset, Roboto">Hello, world!</text>'
+          '<text x="20" y="50" font-family="Roboto__subset, Roboto">Hello, world!</text>',
         );
 
         const svgStyle = assetGraph.findRelations({ type: 'SvgStyle' })[0];
@@ -3874,7 +3874,7 @@ describe('subsetFonts', function () {
         expect(
           svgStyle.to.text,
           'to contain',
-          '@font-face{font-family:Roboto__subset;'
+          '@font-face{font-family:Roboto__subset;',
         );
       });
     });
@@ -3885,7 +3885,7 @@ describe('subsetFonts', function () {
           const assetGraph = new AssetGraph({
             root: pathModule.resolve(
               __dirname,
-              '../testdata/subsetFonts/svg/inline-in-html-with-html-font-face/'
+              '../testdata/subsetFonts/svg/inline-in-html-with-html-font-face/',
             ),
           });
           const [htmlAsset] = await assetGraph.loadAssets('index.html');
@@ -3918,7 +3918,7 @@ describe('subsetFonts', function () {
           expect(
             htmlAsset.text,
             'to contain',
-            '<text x="20" y="50" font-family="Roboto__subset, Roboto">Hello, world!</text>'
+            '<text x="20" y="50" font-family="Roboto__subset, Roboto">Hello, world!</text>',
           );
         });
       });
@@ -3928,7 +3928,7 @@ describe('subsetFonts', function () {
           const assetGraph = new AssetGraph({
             root: pathModule.resolve(
               __dirname,
-              '../testdata/subsetFonts/svg/inline-in-html-with-own-font-face/'
+              '../testdata/subsetFonts/svg/inline-in-html-with-own-font-face/',
             ),
           });
           const [htmlAsset] = await assetGraph.loadAssets('index.html');
@@ -3961,7 +3961,7 @@ describe('subsetFonts', function () {
           expect(
             htmlAsset.text,
             'to contain',
-            '<text x="20" y="50" font-family="Roboto__subset, Roboto">Hello, world!</text>'
+            '<text x="20" y="50" font-family="Roboto__subset, Roboto">Hello, world!</text>',
           );
 
           const svgStyle = assetGraph.findRelations({ type: 'SvgStyle' })[0];
@@ -3969,7 +3969,7 @@ describe('subsetFonts', function () {
           expect(
             svgStyle.to.text,
             'to contain',
-            '@font-face{font-family:Roboto__subset;'
+            '@font-face{font-family:Roboto__subset;',
           );
         });
       });
@@ -3979,7 +3979,7 @@ describe('subsetFonts', function () {
           const assetGraph = new AssetGraph({
             root: pathModule.resolve(
               __dirname,
-              '../testdata/subsetFonts/svg/inline-in-html-font-face-in-both-places/'
+              '../testdata/subsetFonts/svg/inline-in-html-font-face-in-both-places/',
             ),
           });
           const [htmlAsset] = await assetGraph.loadAssets('index.html');
@@ -4032,7 +4032,7 @@ describe('subsetFonts', function () {
           expect(
             htmlAsset.text,
             'to contain',
-            '<text x="20" y="50" font-family="Roboto__subset, Roboto">Hello, world!</text>'
+            '<text x="20" y="50" font-family="Roboto__subset, Roboto">Hello, world!</text>',
           );
 
           const htmlStyle = assetGraph.findRelations({ type: 'HtmlStyle' })[0];
@@ -4040,7 +4040,7 @@ describe('subsetFonts', function () {
           expect(
             htmlStyle.to.text,
             'to contain',
-            '@font-face{font-family:Roboto__subset;'
+            '@font-face{font-family:Roboto__subset;',
           );
 
           const svgStyle = assetGraph.findRelations({ type: 'SvgStyle' })[0];
@@ -4048,7 +4048,7 @@ describe('subsetFonts', function () {
           expect(
             svgStyle.to.text,
             'to contain',
-            '@font-face{font-family:Roboto__subset;'
+            '@font-face{font-family:Roboto__subset;',
           );
         });
       });

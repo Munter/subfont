@@ -5,7 +5,7 @@ expect.addAssertion(
   '<string> to come out as <string>',
   (expect, subject, value) => {
     expect(stripLocalTokens(subject), 'to equal', value);
-  }
+  },
 );
 
 describe('stripLocalTokens', function () {
@@ -21,7 +21,7 @@ describe('stripLocalTokens', function () {
     expect(
       'url(foo), local(bar), url(quux)',
       'to come out as',
-      'url(foo), url(quux)'
+      'url(foo), url(quux)',
     );
   });
 
@@ -29,7 +29,7 @@ describe('stripLocalTokens', function () {
     expect(
       'url(foo), LOCAL(bar), url(quux)',
       'to come out as',
-      'url(foo), url(quux)'
+      'url(foo), url(quux)',
     );
   });
 
@@ -37,7 +37,7 @@ describe('stripLocalTokens', function () {
     expect(
       `url('foo'), local('bar'), url('quux')`,
       'to come out as',
-      "url('foo'), url('quux')"
+      "url('foo'), url('quux')",
     );
   });
 
@@ -45,7 +45,7 @@ describe('stripLocalTokens', function () {
     expect(
       `url("foo"), local("bar"), url("quux")`,
       'to come out as',
-      'url("foo"), url("quux")'
+      'url("foo"), url("quux")',
     );
   });
 
@@ -53,7 +53,7 @@ describe('stripLocalTokens', function () {
     expect(
       `url('foo'), local(bar), local(quux), url('baz')`,
       'to come out as',
-      "url('foo'), url('baz')"
+      "url('foo'), url('baz')",
     );
   });
 
@@ -61,7 +61,7 @@ describe('stripLocalTokens', function () {
     expect(
       `url('foo') , local(bar) , local(quux) , url('baz')`,
       'to come out as',
-      "url('foo') , url('baz')"
+      "url('foo') , url('baz')",
     );
   });
 
@@ -69,7 +69,7 @@ describe('stripLocalTokens', function () {
     expect(
       `local('Roboto Bold Italic'), local('Roboto-BoldItalic'), url(KFOjCnqEu92Fr1Mu51TzBic6CsI.woff) format('woff')`,
       'to come out as',
-      `url(KFOjCnqEu92Fr1Mu51TzBic6CsI.woff) format('woff')`
+      `url(KFOjCnqEu92Fr1Mu51TzBic6CsI.woff) format('woff')`,
     );
   });
 
@@ -77,7 +77,7 @@ describe('stripLocalTokens', function () {
     expect(
       `url('foo'), local(bar),local(quux), url('baz')`,
       'to come out as',
-      "url('foo'), url('baz')"
+      "url('foo'), url('baz')",
     );
   });
 });

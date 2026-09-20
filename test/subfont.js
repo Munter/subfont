@@ -12,8 +12,8 @@ const openSansBold = require('fs').readFileSync(
     __dirname,
     '..',
     'testdata',
-    'k3k702ZOKiLJc3WVjuplzHhCUOGz7vYGh680lGh-uXM.woff'
-  )
+    'k3k702ZOKiLJc3WVjuplzHhCUOGz7vYGh680lGh-uXM.woff',
+  ),
 );
 
 describe('subfont', function () {
@@ -72,8 +72,8 @@ describe('subfont', function () {
           '..',
           'testdata',
           'stylesheetAtOtherOrigin',
-          'referencesFont'
-        )}`
+          'referencesFont',
+        )}`,
       );
 
       const assetGraph = await subfont(
@@ -82,7 +82,7 @@ describe('subfont', function () {
           inputFiles: [`${root}/index.html`],
           dryRun: true,
         },
-        mockConsole
+        mockConsole,
       );
 
       const cssAsset = assetGraph.findAssets({
@@ -91,7 +91,7 @@ describe('subfont', function () {
       expect(
         cssAsset.url,
         'to equal',
-        `${assetGraph.root}subfont/styles-38ce4ca68c.css`
+        `${assetGraph.root}subfont/styles-38ce4ca68c.css`,
       );
     });
   });
@@ -133,8 +133,8 @@ describe('subfont', function () {
           '..',
           'testdata',
           'stylesheetAtOtherOrigin',
-          'referencesFont'
-        )}`
+          'referencesFont',
+        )}`,
       );
 
       const assetGraph = await subfont(
@@ -143,7 +143,7 @@ describe('subfont', function () {
           inputFiles: [`${root}/index.html`],
           dryRun: true,
         },
-        mockConsole
+        mockConsole,
       );
 
       const cssAsset = assetGraph.findAssets({ fileName: 'styles.css' })[0];
@@ -205,7 +205,7 @@ describe('subfont', function () {
           fallbacks: false,
           dryRun: true,
         },
-        mockConsole
+        mockConsole,
       );
 
       const inlineCssAsset = assetGraph.findAssets({
@@ -215,7 +215,7 @@ describe('subfont', function () {
       expect(
         inlineCssAsset.text,
         'to contain',
-        "font-family: 'Open Sans__subset';"
+        "font-family: 'Open Sans__subset';",
       );
     });
   });
@@ -284,7 +284,7 @@ describe('subfont', function () {
             fallbacks: false,
             dryRun: true,
           },
-          mockConsole
+          mockConsole,
         );
 
         const htmlAssets = assetGraph.findAssets({
@@ -295,13 +295,13 @@ describe('subfont', function () {
         expect(
           htmlAssets[0].url,
           'to equal',
-          'https://somewhereelse.com/index.html'
+          'https://somewhereelse.com/index.html',
         );
         expect(assetGraph.info, 'to have a call satisfying', () => {
           assetGraph.info(
             new Error(
-              'http://example.com/ redirected to https://somewhereelse.com/'
-            )
+              'http://example.com/ redirected to https://somewhereelse.com/',
+            ),
           );
         });
       });
@@ -317,7 +317,7 @@ describe('subfont', function () {
             fallbacks: false,
             dryRun: true,
           },
-          mockConsole
+          mockConsole,
         );
 
         expect(assetGraph.root, 'to equal', 'https://somewhereelse.com/');
@@ -325,8 +325,8 @@ describe('subfont', function () {
         expect(assetGraph.info, 'to have a call satisfying', () => {
           assetGraph.info(
             new Error(
-              'All entrypoints redirected, changing root from http://example.com/ to https://somewhereelse.com/'
-            )
+              'All entrypoints redirected, changing root from http://example.com/ to https://somewhereelse.com/',
+            ),
           );
         });
       });
@@ -402,7 +402,7 @@ describe('subfont', function () {
             fallbacks: false,
             dryRun: true,
           },
-          mockConsole
+          mockConsole,
         );
 
         expect(assetGraph.root, 'to equal', 'http://example.com/');
@@ -412,7 +412,7 @@ describe('subfont', function () {
 
   it('should not dive into iframes', async function () {
     const root = encodeURI(
-      `file://${pathModule.resolve(__dirname, '..', 'testdata', 'iframe')}`
+      `file://${pathModule.resolve(__dirname, '..', 'testdata', 'iframe')}`,
     );
 
     const assetGraph = await subfont(
@@ -422,12 +422,12 @@ describe('subfont', function () {
         silent: true,
         dryRun: true,
       },
-      mockConsole
+      mockConsole,
     );
 
     expect(
       assetGraph.findRelations({ type: 'HtmlIFrame' })[0].to.isLoaded,
-      'to be false'
+      'to be false',
     );
   });
 
@@ -437,8 +437,8 @@ describe('subfont', function () {
         __dirname,
         '..',
         'testdata',
-        'differentCodepointsOnDifferentPages'
-      )}`
+        'differentCodepointsOnDifferentPages',
+      )}`,
     );
 
     await subfont(
@@ -447,15 +447,21 @@ describe('subfont', function () {
         root,
         inputFiles: [`${root}/first.html`, `${root}/second.html`],
       },
-      mockConsole
+      mockConsole,
     );
     expect(mockConsole.log, 'to have a call satisfying', () => {
       mockConsole.log(
-        expect.it('to contain', '400 : 6/213 codepoints used (3 on this page),')
+        expect.it(
+          'to contain',
+          '400 : 6/213 codepoints used (3 on this page),',
+        ),
       );
     }).and('to have a call satisfying', () => {
       mockConsole.log(
-        expect.it('to contain', '400 : 6/213 codepoints used (4 on this page),')
+        expect.it(
+          'to contain',
+          '400 : 6/213 codepoints used (4 on this page),',
+        ),
       );
     });
   });
@@ -467,8 +473,8 @@ describe('subfont', function () {
         __dirname,
         '..',
         'testdata',
-        'noFontUsageOnOnePage'
-      )}`
+        'noFontUsageOnOnePage',
+      )}`,
     );
 
     await subfont(
@@ -477,7 +483,7 @@ describe('subfont', function () {
         root,
         inputFiles: [`${root}/first.html`, `${root}/second.html`],
       },
-      mockConsole
+      mockConsole,
     );
     expect(mockConsole.log, 'to have a call satisfying', () => {
       mockConsole.log(expect.it('to contain', '400 : 3/213 codepoints used,'));
@@ -491,8 +497,8 @@ describe('subfont', function () {
           __dirname,
           '..',
           'testdata',
-          'dynamicallyInjectedText'
-        )}`
+          'dynamicallyInjectedText',
+        )}`,
       );
 
       await subfont(
@@ -503,11 +509,11 @@ describe('subfont', function () {
           root,
           inputFiles: [`${root}/index.html`],
         },
-        mockConsole
+        mockConsole,
       );
       expect(mockConsole.log, 'to have a call satisfying', () => {
         mockConsole.log(
-          expect.it('to contain', '400 : 14/213 codepoints used')
+          expect.it('to contain', '400 : 14/213 codepoints used'),
         );
       });
     });
@@ -518,8 +524,8 @@ describe('subfont', function () {
           __dirname,
           '..',
           'testdata',
-          'dynamicallyRemovedText'
-        )}`
+          'dynamicallyRemovedText',
+        )}`,
       );
 
       await subfont(
@@ -530,11 +536,11 @@ describe('subfont', function () {
           root,
           inputFiles: [`${root}/index.html`],
         },
-        mockConsole
+        mockConsole,
       );
       expect(mockConsole.log, 'to have a call satisfying', () => {
         mockConsole.log(
-          expect.it('to contain', '400 : 16/213 codepoints used,')
+          expect.it('to contain', '400 : 16/213 codepoints used,'),
         );
       });
     });
@@ -545,8 +551,8 @@ describe('subfont', function () {
           __dirname,
           '..',
           'testdata',
-          'canonicalUrlWithoutPathComponent'
-        )}`
+          'canonicalUrlWithoutPathComponent',
+        )}`,
       );
 
       await subfont(
@@ -558,11 +564,11 @@ describe('subfont', function () {
           root,
           inputFiles: [`${root}/index.html`],
         },
-        mockConsole
+        mockConsole,
       );
       expect(mockConsole.log, 'to have a call satisfying', () => {
         mockConsole.log(
-          expect.it('to contain', '400 : 14/213 codepoints used')
+          expect.it('to contain', '400 : 14/213 codepoints used'),
         );
       });
     });
@@ -573,8 +579,8 @@ describe('subfont', function () {
           __dirname,
           '..',
           'testdata',
-          'canonicalUrlWithPathComponent'
-        )}`
+          'canonicalUrlWithPathComponent',
+        )}`,
       );
 
       await subfont(
@@ -586,11 +592,11 @@ describe('subfont', function () {
           root,
           inputFiles: [`${root}/index.html`],
         },
-        mockConsole
+        mockConsole,
       );
       expect(mockConsole.log, 'to have a call satisfying', () => {
         mockConsole.log(
-          expect.it('to contain', '400 : 14/213 codepoints used')
+          expect.it('to contain', '400 : 14/213 codepoints used'),
         );
       });
     });
@@ -601,8 +607,8 @@ describe('subfont', function () {
           __dirname,
           '..',
           'testdata',
-          'pageWithErrors'
-        )}`
+          'pageWithErrors',
+        )}`,
       );
 
       await subfont(
@@ -613,7 +619,7 @@ describe('subfont', function () {
           root,
           inputFiles: [`${root}/index.html`],
         },
-        mockConsole
+        mockConsole,
       );
       expect(mockConsole.error, 'to have a call satisfying', [
         'GET https://domainthatdoesnotexist12873621321312.com/blablabla.js failed: net::ERR_NAME_NOT_RESOLVED',
@@ -632,8 +638,8 @@ describe('subfont', function () {
           __dirname,
           '..',
           'testdata',
-          'pageWithStrictCsp'
-        )}`
+          'pageWithStrictCsp',
+        )}`,
       );
 
       await subfont(
@@ -644,7 +650,7 @@ describe('subfont', function () {
           root,
           inputFiles: [`${root}/index.html`],
         },
-        mockConsole
+        mockConsole,
       );
       expect(mockConsole.error, 'was not called');
     });
@@ -657,7 +663,7 @@ describe('subfont', function () {
         __dirname,
         '..',
         'testdata',
-        'pageWithStrictCsp'
+        'pageWithStrictCsp',
       );
       const root = encodeURI(`file://${dir}`);
       const mockSubsetFonts = sinon.stub().resolves({ fontInfo: [] });
@@ -674,7 +680,7 @@ describe('subfont', function () {
             inputFiles: [`${root}/index.html`],
             dryRun: true,
           },
-          mockConsole
+          mockConsole,
         );
         expect(mockSubsetFonts, 'to have calls satisfying', () => {
           mockSubsetFonts(expect.it('to be an object'), {
@@ -691,7 +697,7 @@ describe('subfont', function () {
         __dirname,
         '..',
         'testdata',
-        'browserslistInPackageJson'
+        'browserslistInPackageJson',
       );
       const root = encodeURI(`file://${dir}`);
       const mockSubsetFonts = sinon.stub().resolves({ fontInfo: [] });
@@ -709,7 +715,7 @@ describe('subfont', function () {
             dryRun: true,
             browsers: 'IE 11, Chrome 80',
           },
-          mockConsole
+          mockConsole,
         );
         expect(mockSubsetFonts, 'to have calls satisfying', () => {
           mockSubsetFonts(expect.it('to be an object'), {
@@ -726,7 +732,7 @@ describe('subfont', function () {
         __dirname,
         '..',
         'testdata',
-        'browserslistInPackageJson'
+        'browserslistInPackageJson',
       );
       const root = encodeURI(`file://${dir}`);
       const mockSubsetFonts = sinon.stub().resolves({ fontInfo: [] });
@@ -743,7 +749,7 @@ describe('subfont', function () {
             inputFiles: [`${root}/index.html`],
             dryRun: true,
           },
-          mockConsole
+          mockConsole,
         );
         expect(mockSubsetFonts, 'to have calls satisfying', () => {
           mockSubsetFonts(expect.it('to be an object'), {

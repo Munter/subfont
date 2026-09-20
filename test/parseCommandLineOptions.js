@@ -20,7 +20,7 @@ describe('parseCommandLineOptions', function () {
         recursive: true,
         fallbacks: false,
         dynamic: false,
-      }
+      },
     );
   });
 
@@ -30,7 +30,7 @@ describe('parseCommandLineOptions', function () {
       'to satisfy',
       {
         formats: ['truetype', 'woff2'],
-      }
+      },
     );
   });
 

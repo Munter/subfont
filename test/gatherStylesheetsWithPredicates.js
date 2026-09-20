@@ -10,7 +10,7 @@ const expect = require('unexpected')
         root: pathModule.resolve(
           __dirname,
           '../testdata/gatherStylesheetsWithPredicates',
-          subject
+          subject,
         ),
       });
 
@@ -20,12 +20,12 @@ const expect = require('unexpected')
       return expect(
         gatherStylesheetsWithPredicates(
           assetGraph,
-          assetGraph.findAssets({ type: 'Html' })[0]
+          assetGraph.findAssets({ type: 'Html' })[0],
         ),
         'to satisfy',
-        value
+        value,
       );
-    }
+    },
   );
 const AssetGraph = require('assetgraph');
 const sinon = require('sinon');
@@ -46,7 +46,7 @@ describe('gatherStylesheetsWithIncomingPredicates', function () {
           text: '\n        .a { font-weight: 500; }\n    ',
           predicates: { 'mediaQuery:3d-glasses': true },
         },
-      ]
+      ],
     );
   });
 
@@ -65,7 +65,7 @@ describe('gatherStylesheetsWithIncomingPredicates', function () {
           text: '.a { font-weight: 500; }\n',
           predicates: { 'mediaQuery:3d-glasses': true },
         },
-      ]
+      ],
     );
   });
 
@@ -80,7 +80,7 @@ describe('gatherStylesheetsWithIncomingPredicates', function () {
           text: '.a { font-weight: 600; }\n',
           predicates: { 'mediaQuery:3d-glasses': true },
         },
-      ]
+      ],
     );
   });
 
@@ -110,7 +110,7 @@ describe('gatherStylesheetsWithIncomingPredicates', function () {
           text: '\n        @import "a.css" projection;\n    ',
           predicates: { 'mediaQuery:3d-glasses': true },
         },
-      ]
+      ],
     );
   });
 
@@ -128,7 +128,7 @@ describe('gatherStylesheetsWithIncomingPredicates', function () {
     const assetGraph = new AssetGraph({
       root: pathModule.resolve(
         __dirname,
-        '../testdata/gatherStylesheetsWithPredicates/unloadedCssAssets/'
+        '../testdata/gatherStylesheetsWithPredicates/unloadedCssAssets/',
       ),
     });
     await assetGraph.on('warn', warnSpy);
@@ -137,10 +137,10 @@ describe('gatherStylesheetsWithIncomingPredicates', function () {
     expect(
       gatherStylesheetsWithPredicates(
         assetGraph,
-        assetGraph.findAssets({ type: 'Html' })[0]
+        assetGraph.findAssets({ type: 'Html' })[0],
       ),
       'to satisfy',
-      [{ text: '@import "notfoundeither.css";\n', predicates: {} }]
+      [{ text: '@import "notfoundeither.css";\n', predicates: {} }],
     );
     expect(warnSpy, 'to have calls satisfying', () => {
       warnSpy(/ENOENT.*notFound\.css/);

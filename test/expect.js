@@ -51,13 +51,13 @@ async function screenshot(browser, assetGraph, fileName, bannedUrls) {
   await page.goto(`https://example.com/${fileName}`);
   if (bannedUrls) {
     const loadedBannedUrls = loadedUrls.filter((url) =>
-      bannedUrls.includes(url)
+      bannedUrls.includes(url),
     );
     if (loadedBannedUrls.length > 0) {
       throw new Error(
         `One or more of the original fonts were loaded:\n  ${loadedBannedUrls.join(
-          '\n  '
-        )}`
+          '\n  ',
+        )}`,
       );
     }
   }
@@ -78,10 +78,10 @@ expect.addAssertion(
       assetGraph,
       'to render the same after subsetting',
       options,
-      pathModule.basename(fileName)
+      pathModule.basename(fileName),
     );
     expect(warnSpy, 'was not called');
-  }
+  },
 );
 
 expect.addAssertion(
@@ -98,7 +98,7 @@ expect.addAssertion(
     const fontsBefore = assetGraph
       .findAssets({ type: { $in: ['Ttf', 'Woff', 'Woff2', 'Eot'] } })
       .map((asset) =>
-        asset.url.replace(assetGraph.root, 'https://example.com/')
+        asset.url.replace(assetGraph.root, 'https://example.com/'),
       );
     const screenshotBefore = await screenshot(browser, assetGraph, fileName);
     const { fontInfo } = await subsetFonts(assetGraph, options);
@@ -107,13 +107,13 @@ expect.addAssertion(
         browser,
         assetGraph,
         fileName,
-        fontsBefore
+        fontsBefore,
       );
       await expect(screenshotAfter, 'to resemble', screenshotBefore, {
         mismatchPercentage: expect.it('to be less than', 1.3),
       });
     }
-  }
+  },
 );
 
 module.exports = expect;

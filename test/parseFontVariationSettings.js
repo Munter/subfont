@@ -8,7 +8,7 @@ describe('parseFontVariationSettings', function () {
       (expect, subject, expectedValue) => {
         const parsedValue = [...parseFontVariationSettings(subject)];
         expect(parsedValue, 'to equal', expectedValue);
-      }
+      },
     );
 
   it('should ignore extra whitespace', function () {

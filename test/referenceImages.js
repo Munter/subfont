@@ -9,7 +9,7 @@ function getPathToTestCase(name) {
     'testdata',
     'referenceImages',
     name,
-    'index.html'
+    'index.html',
   );
 }
 
@@ -26,7 +26,7 @@ describe('reference images', function () {
         await expect(
           getPathToTestCase('withoutLigatures'),
           'to render the same after subsetting',
-          options
+          options,
         );
       });
 
@@ -34,7 +34,7 @@ describe('reference images', function () {
         await expect(
           getPathToTestCase('ligatures'),
           'to render the same after subsetting',
-          options
+          options,
         );
       });
 
@@ -42,7 +42,7 @@ describe('reference images', function () {
         await expect(
           getPathToTestCase('missingGlyphs'),
           'to render the same after subsetting',
-          options
+          options,
         );
       });
 
@@ -50,7 +50,7 @@ describe('reference images', function () {
         await expect(
           getPathToTestCase('unusedVariants'),
           'to render the same after subsetting',
-          options
+          options,
         );
       });
 
@@ -58,7 +58,7 @@ describe('reference images', function () {
         await expect(
           getPathToTestCase('fontVariant'),
           'to render the same after subsetting',
-          options
+          options,
         );
       });
 
@@ -66,7 +66,7 @@ describe('reference images', function () {
         await expect(
           getPathToTestCase('fullyInstancedVariableFont'),
           'to render the same after subsetting',
-          options
+          options,
         );
       });
     });

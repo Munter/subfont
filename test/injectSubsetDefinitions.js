@@ -10,7 +10,7 @@ describe('injectSubsetDefinitions', function () {
     expect(
       injectSubsetDefinitions('"times new roman"', webfontNameMap),
       'to equal',
-      '\'times new roman__subset\', "times new roman"'
+      '\'times new roman__subset\', "times new roman"',
     );
   });
 
@@ -18,7 +18,7 @@ describe('injectSubsetDefinitions', function () {
     expect(
       injectSubsetDefinitions("'times new roman'", webfontNameMap),
       'to equal',
-      "'times new roman__subset', 'times new roman'"
+      "'times new roman__subset', 'times new roman'",
     );
   });
 
@@ -26,7 +26,7 @@ describe('injectSubsetDefinitions', function () {
     expect(
       injectSubsetDefinitions('times new roman', webfontNameMap),
       'to equal',
-      "'times new roman__subset', times new roman"
+      "'times new roman__subset', times new roman",
     );
   });
 
@@ -34,7 +34,7 @@ describe('injectSubsetDefinitions', function () {
     expect(
       injectSubsetDefinitions('Times new rOman', webfontNameMap),
       'to equal',
-      "'times new roman__subset', Times new rOman"
+      "'times new roman__subset', Times new rOman",
     );
   });
 
@@ -42,7 +42,7 @@ describe('injectSubsetDefinitions', function () {
     expect(
       injectSubsetDefinitions('times   new   roman', webfontNameMap),
       'to equal',
-      "'times new roman__subset', times   new   roman"
+      "'times new roman__subset', times   new   roman",
     );
   });
 
@@ -50,7 +50,7 @@ describe('injectSubsetDefinitions', function () {
     expect(
       injectSubsetDefinitions('sorry times new roman, other', webfontNameMap),
       'to equal',
-      'sorry times new roman, other'
+      'sorry times new roman, other',
     );
   });
 
@@ -58,7 +58,7 @@ describe('injectSubsetDefinitions', function () {
     expect(
       injectSubsetDefinitions('times new roman yeah', webfontNameMap),
       'to equal',
-      'times new roman yeah'
+      'times new roman yeah',
     );
   });
 
@@ -66,10 +66,10 @@ describe('injectSubsetDefinitions', function () {
     expect(
       injectSubsetDefinitions(
         "'times new roman__subset', times new roman",
-        webfontNameMap
+        webfontNameMap,
       ),
       'to equal',
-      "'times new roman__subset', times new roman"
+      "'times new roman__subset', times new roman",
     );
   });
 
@@ -77,10 +77,10 @@ describe('injectSubsetDefinitions', function () {
     expect(
       injectSubsetDefinitions(
         "'TIMES new roman__subset', times new roman",
-        webfontNameMap
+        webfontNameMap,
       ),
       'to equal',
-      "'TIMES new roman__subset', times new roman"
+      "'TIMES new roman__subset', times new roman",
     );
   });
 
@@ -90,7 +90,7 @@ describe('injectSubsetDefinitions', function () {
         'times new roman': 'TIMES new roman__subset',
       }),
       'to equal',
-      "'times new roman__subset', times new roman"
+      "'times new roman__subset', times new roman",
     );
   });
 
@@ -100,7 +100,7 @@ describe('injectSubsetDefinitions', function () {
         'times new roman': "times'new'roman__subset",
       }),
       'to equal',
-      "'times\\'new\\'roman__subset', \"times new roman\""
+      "'times\\'new\\'roman__subset', \"times new roman\"",
     );
   });
 
@@ -109,7 +109,7 @@ describe('injectSubsetDefinitions', function () {
       expect(
         injectSubsetDefinitions('times new roman', webfontNameMap, true),
         'to equal',
-        "'times new roman__subset'"
+        "'times new roman__subset'",
       );
     });
 
@@ -117,7 +117,7 @@ describe('injectSubsetDefinitions', function () {
       expect(
         injectSubsetDefinitions('times new roman, serif', webfontNameMap, true),
         'to equal',
-        "'times new roman__subset', serif"
+        "'times new roman__subset', serif",
       );
     });
 
@@ -126,10 +126,10 @@ describe('injectSubsetDefinitions', function () {
         injectSubsetDefinitions(
           '"times new roman", serif',
           webfontNameMap,
-          true
+          true,
         ),
         'to equal',
-        "'times new roman__subset', serif"
+        "'times new roman__subset', serif",
       );
     });
   });

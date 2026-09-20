@@ -7,7 +7,7 @@ describe('normalizeFontPropertyValue', function () {
       expect(
         normalizeFontPropertyValue('font-weight', 'normal'),
         'to equal',
-        400
+        400,
       );
     });
 
@@ -15,7 +15,7 @@ describe('normalizeFontPropertyValue', function () {
       expect(
         normalizeFontPropertyValue('font-weight', 'bold'),
         'to equal',
-        700
+        700,
       );
     });
 
@@ -31,7 +31,7 @@ describe('normalizeFontPropertyValue', function () {
       expect(
         normalizeFontPropertyValue('font-weight', '1001'),
         'to equal',
-        '1001'
+        '1001',
       );
     });
 
@@ -39,7 +39,7 @@ describe('normalizeFontPropertyValue', function () {
       expect(
         normalizeFontPropertyValue('font-weight', '0.1'),
         'to equal',
-        '0.1'
+        '0.1',
       );
     });
 
@@ -47,7 +47,7 @@ describe('normalizeFontPropertyValue', function () {
       expect(
         normalizeFontPropertyValue('font-weight', '234.56'),
         'to be close to',
-        234.56
+        234.56,
       );
     });
 
@@ -55,7 +55,7 @@ describe('normalizeFontPropertyValue', function () {
       expect(
         normalizeFontPropertyValue('font-weight', 'bold+lighter+bolder'),
         'to equal',
-        700
+        700,
       );
     });
   });
@@ -65,7 +65,7 @@ describe('normalizeFontPropertyValue', function () {
       expect(
         normalizeFontPropertyValue('foo-bar', 'quux baz'),
         'to equal',
-        'quux baz'
+        'quux baz',
       );
     });
   });

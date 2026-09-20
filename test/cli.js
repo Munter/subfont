@@ -15,7 +15,7 @@ function consumeStream(stream) {
 async function runSubfont(...args) {
   const proc = childProcess.spawn(
     pathModule.resolve(__dirname, '..', 'lib', 'cli.js'),
-    args
+    args,
   );
 
   const promises = {
@@ -72,7 +72,7 @@ describe('cli', function () {
     expect(
       stderr,
       'to contain',
-      '--output has to be specified when using non-file input urls'
+      '--output has to be specified when using non-file input urls',
     );
     expect(stderr, 'not to match', /^\s+at/m);
   });

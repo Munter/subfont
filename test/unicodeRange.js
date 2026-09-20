@@ -11,7 +11,7 @@ describe('unicode range', function () {
     expect(
       unicodeRange(['📋', '🔑', '🫆'].map((c) => c.codePointAt(0))),
       'to equal',
-      'U+1F4CB,U+1F511,U+1FAC6'
+      'U+1F4CB,U+1F511,U+1FAC6',
     );
   });
 });
