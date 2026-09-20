@@ -1,3 +1,18 @@
+### v7.3.0 (2026-09-20)
+
+#### Pull requests
+
+- [#177](https://github.com/Munter/subfont/pull/177) perf: Fix O\(n²\) hot paths and add relation allowlist ([Claude](mailto:noreply@anthropic.com))
+
+#### Commits to master
+
+- [Switch to the default trailingComma setting, reformat all files with prettier](https://github.com/Munter/subfont/commit/98ba28a6583595f68d20b42cea4eeab8dbfbf90e) ([Andreas Lind](mailto:andreas.lind@workday.com))
+- [prettier --write '\*\*\/\*.js'](https://github.com/Munter/subfont/commit/6019f7097587deed0760525db99dc1beca8561e9) ([Andreas Lind](mailto:andreas.lind@workday.com))
+- [Set trailingComma to es5](https://github.com/Munter/subfont/commit/fe33d04908fdae4fb17b5f3bc615bbf399706ea4) ([Andreas Lind](mailto:andreas.lind@workday.com))
+- [Update prettier to ~3.9.8](https://github.com/Munter/subfont/commit/37ef714166e3b91e56526c8471bee1248c541fc8) ([Andreas Lind](mailto:andreas.lind@workday.com))
+- [Fix style nit](https://github.com/Munter/subfont/commit/cd8ee1e2fabbe0208451daf41e799631fb2d4d79) ([Andreas Lind](mailto:andreas.lind@workday.com))
+- [+1 more](https://github.com/Munter/subfont/compare/v7.2.3...v7.3.0)
+
 ### v7.2.3 (2026-03-21)
 
 - [Bump assetgraph to ^7.13.0](https://github.com/Munter/subfont/commit/2963cc38663d00bc115dffcac4942a0e0f94db58) ([Andreas Lind](mailto:andreas.lind@workday.com))
